@@ -1,0 +1,485 @@
+parts {
+
+	   SWALLOWCLIP();
+		
+	  part {
+            name: "background";
+            type: IMAGE;
+            mouse_events: 0;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       image { normal: "background.png"; }                  
+               fill { smooth: 0; } 
+            }
+
+	    description {
+               state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               visible: 0;
+            }
+         }
+
+	SCREEN_TEXT("Configurations","conf_icon.png",0.28);
+	CONF_TEXT("Play",0);
+	CONF_KEY_ICON("play_key",0);
+	CONF_TEXT("Pause",1);
+	CONF_KEY_ICON("pause_key",1);
+	CONF_TEXT("Stop",2);
+	CONF_KEY_ICON("stop_key",2);
+	CONF_TEXT("Forward",3);
+	CONF_KEY_ICON("forward_key",3);
+	CONF_TEXT("Backward",4);
+	CONF_KEY_ICON("backward_key",4);
+	CONF_TEXT("Fullscreen",0);
+	CONF_KEY_ICON("fullscreen_key_m",0);
+	CONF_TEXT("Volume +",1);
+	CONF_KEY_ICON("volume_p_key",1);
+	CONF_TEXT("Volume -",2);
+	CONF_KEY_ICON("volume_m_key",2);
+	CONF_TEXT("No Fullscreen",3);
+	CONF_KEY_ICON("no_fullscreen_key_m",3);
+	SCREEN_NUMBER("1",0);
+	SCREEN_NUMBER("2",1);
+        LOGO();
+	BACK();
+	
+    }
+    programs {
+	//hide_screen 1
+	program {                                                          
+        	name: "hide_Screen_1";
+		signal: "hide_screen_1";                                                                                          
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Play";                                         
+        	after: "hide_play_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_play_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "play_key";                                         
+        	after: "hide_play_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_play_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "play_key_icon";                                         
+        	after: "hide_pause";                                           
+        }
+	program {                                                          
+        	name: "hide_pause";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Pause";                                         
+        	after: "hide_pause_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_pause_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "pause_key";                                         
+        	after: "hide_pause_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_pause_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "pause_key_icon";                                         
+        	after: "hide_stop";                                           
+        }
+	program {                                                          
+        	name: "hide_stop";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Stop";                                         
+        	after: "hide_stop_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_stop_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "stop_key";                                         
+        	after: "hide_stop_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_stop_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "stop_key_icon";                                         
+        	after: "hide_forward";                                           
+        }
+	program {                                                          
+        	name: "hide_forward";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Forward";                                         
+        	after: "hide_forward_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_forward_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "forward_key";                                         
+        	after: "hide_forward_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_forward_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "forward_key_icon";   
+		after: "hide_backward";                                                                             
+        }
+	program {                                                          
+        	name: "hide_backward";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Backward";                                         
+        	after: "hide_backward_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_backward_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "backward_key";                                         
+        	after: "hide_backward_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_backward_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "backward_key_icon";                                                                                  
+        }
+	                                             
+	//hide screen 2
+	program {                                                          
+        	name: "hide_Screen_2";
+		signal: "hide_screen_2";                                                                                          
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Fullscreen";                                         
+        	after: "hide_fullscreen_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_fullscreen_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "fullscreen_key_m";                                         
+        	after: "hide_fullscreen_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_fullscreen_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "fullscreen_key_m_icon";                                         
+        	after: "hide_volume+";                                           
+        }
+	program {                                                          
+        	name: "hide_volume+";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Volume +";                                         
+        	after: "hide_volume+_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_volume+_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_p_key";                                         
+        	after: "hide_volume+_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_volume+_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_p_key_icon";                                         
+        	after: "hide_volume-";                                           
+        }
+	program {                                                          
+        	name: "hide_volume-";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Volume -";                                         
+        	after: "hide_volume-_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_volume-_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_m_key";                                         
+        	after: "hide_volume-_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_volume-_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_m_key_icon";                                         
+        	after: "hide_no_fullscreen";                                           
+        }
+	program {                                                          
+        	name: "hide_no_fullscreen";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "No Fullscreen";                                         
+        	after: "hide_no_fullscreen_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_no_fullscreen_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "no_fullscreen_key_m";                                         
+        	after: "hide_no_fullscreen_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_no_fullscreen_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "no_fullscreen_key_m_icon";                                                                                  
+        }
+	//Show Sceen 1
+	program {                                                          
+        	name: "show_Screen_1";
+		signal: "show_screen_1";                                                                                          
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Play";                                         
+        	after: "show_play_key";                                           
+        }   
+	program {                                                          
+        	name: "show_play_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "play_key";                                         
+        	after: "show_play_icon";                                           
+        }
+	program {                                                          
+        	name: "show_play_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "play_key_icon";                                         
+        	after: "show_pause";                                           
+        }
+	program {                                                          
+        	name: "show_pause";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Pause";                                         
+        	after: "show_pause_key";                                           
+        }   
+	program {                                                          
+        	name: "show_pause_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "pause_key";                                         
+        	after: "show_pause_icon";                                           
+        }
+	program {                                                          
+        	name: "show_pause_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "pause_key_icon";                                         
+        	after: "show_stop";                                           
+        }
+	program {                                                          
+        	name: "show_stop";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Stop";                                         
+        	after: "show_stop_key";                                           
+        }   
+	program {                                                          
+        	name: "show_stop_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "stop_key";                                         
+        	after: "show_stop_icon";                                           
+        }
+	program {                                                          
+        	name: "show_stop_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "stop_key_icon";                                         
+        	after: "show_forward";                                           
+        }
+	program {                                                          
+        	name: "show_forward";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Forward";                                         
+        	after: "show_forward_key";                                           
+        }   
+	program {                                                          
+        	name: "show_forward_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "forward_key";                                         
+        	after: "show_forward_icon";                                           
+        }
+	program {                                                          
+        	name: "show_forward_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "forward_key_icon";   
+		after: "show_backward";                                                                             
+        }
+	program {                                                          
+        	name: "show_backward";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Backward";                                         
+        	after: "show_backward_key";                                           
+        }   
+	program {                                                          
+        	name: "show_backward_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "backward_key";                                         
+        	after: "show_backward_icon";                                           
+        }
+	program {                                                          
+        	name: "show_backward_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "backward_key_icon";    
+		after: "button1_clicked";                                                                              
+        }
+	program {
+		name: "button1_clicked";
+		action: STATE_SET "clicked" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "1";
+		after: "button2_default" ;
+	}
+	program {
+		name: "button2_default";
+		action: STATE_SET "default" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "2";
+		
+	}
+
+	//show screen 2
+	program {                                                          
+        	name: "show_Screen_2";
+		signal: "show_screen_2";                                                                                          
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Fullscreen";                                         
+        	after: "show_fullscreen_key";                                           
+        }   
+	program {                                                          
+        	name: "show_fullscreen_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "fullscreen_key_m";                                         
+        	after: "show_fullscreen_icon";                                           
+        }
+	program {                                                          
+        	name: "show_fullscreen_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "fullscreen_key_m_icon";                                         
+        	after: "show_volume+";                                           
+        }
+	program {                                                          
+        	name: "show_volume+";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Volume +";                                         
+        	after: "show_volume+_key";                                           
+        }   
+	program {                                                          
+        	name: "show_volume+_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_p_key";                                         
+        	after: "show_volume+_icon";                                           
+        }
+	program {                                                          
+        	name: "show_volume+_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_p_key_icon";                                         
+        	after: "show_volume-";                                           
+        }
+	program {                                                          
+        	name: "show_volume-";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Volume -";                                         
+        	after: "show_volume-_key";                                           
+        }   
+	program {                                                          
+        	name: "show_volume-_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_m_key";                                         
+        	after: "show_volume-_icon";                                           
+        }
+	program {                                                          
+        	name: "show_volume-_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "volume_m_key_icon";                                         
+        	after: "show_no_fullscreen";                                           
+        }
+	program {                                                          
+        	name: "show_no_fullscreen";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "No Fullscreen";                                         
+        	after: "show_no_fullscreen_key";                                           
+        }   
+	program {                                                          
+        	name: "show_no_fullscreen_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "no_fullscreen_key_m";                                         
+        	after: "show_no_fullscreen_icon";                                           
+        }
+	program {                                                          
+        	name: "show_no_fullscreen_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "no_fullscreen_key_m_icon";
+		after: "button2_clicked";                                                                               
+        }
+	program {
+		name: "button2_clicked";
+		action: STATE_SET "clicked" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "2";
+		after: "button1_default";
+	}
+	program {
+		name: "button1_default";
+		action: STATE_SET "default" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "1";
+		
+	}
+	                               
+	                                                       
+	ACTIVATE("back");
+	ACTIVATE("play_key");
+	ACTIVATE("pause_key");
+	ACTIVATE("stop_key");
+	ACTIVATE("forward_key");
+	ACTIVATE("backward_key");
+	ACTIVATE("fullscreen_key_m");
+	ACTIVATE("volume_p_key");
+	ACTIVATE("volume_m_key");
+	ACTIVATE("no_fullscreen_key_m");
+    	TRANSITION();
+    }

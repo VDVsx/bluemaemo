@@ -1,0 +1,449 @@
+parts {
+
+	   SWALLOWCLIP();
+		
+	  part {
+            name: "background";
+            type: IMAGE;
+            mouse_events: 0;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       image { normal: "background.png"; }                  
+               fill { smooth: 0; } 
+            }
+
+	    description {
+               state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               visible: 0;
+            }
+         }
+
+	SCREEN_TEXT("Configurations","conf_icon.png",0.28);
+
+	//Screen 1
+	CONF_TEXT("Up",0);
+	CONF_KEY_ICON("up_key",0);
+	CONF_TEXT("Down",1);
+	CONF_KEY_ICON("down_key",1);
+	CONF_TEXT("Right",2);
+	CONF_KEY_ICON("right_key",2);
+	CONF_TEXT("Left",3);
+	CONF_KEY_ICON("left_key",3);
+	CONF_TEXT("A",4);
+	CONF_KEY_ICON("a_key",4);
+
+	//Screen 2
+	CONF_TEXT("B",0);
+	CONF_KEY_ICON("b_key",0);
+	CONF_TEXT("C",1);
+	CONF_KEY_ICON("c_key",1);
+	CONF_TEXT("D",2);
+	CONF_KEY_ICON("d_key",2);
+	
+	SCREEN_NUMBER("1",0);
+	SCREEN_NUMBER("2",1);
+	
+        LOGO();
+	BACK();
+	
+    }
+
+    programs {
+
+	//hide_screen 1
+	program {                                                          
+        	name: "hide_Screen_1";
+		signal: "hide_screen_1";                                                                                          
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Up";                                         
+        	after: "hide_up_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_up_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "up_key";                                         
+        	after: "hide_up_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_up_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "up_key_icon";                                         
+        	after: "hide_down";                                           
+        }
+	program {                                                          
+        	name: "hide_down";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Down";                                         
+        	after: "hide_down_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_down_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "down_key";                                         
+        	after: "hide_down_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_down_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "down_key_icon";                                         
+        	after: "hide_right";                                           
+        }
+	program {                                                          
+        	name: "hide_right";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Right";                                         
+        	after: "hide_right_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_right_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "right_key";                                         
+        	after: "hide_right_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_right_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "right_key_icon";                                         
+        	after: "hide_left";                                           
+        }
+	program {                                                          
+        	name: "hide_left";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Left";                                         
+        	after: "hide_left_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_left_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "left_key";                                         
+        	after: "hide_right_left_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_right_left_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "left_key_icon";   
+		after: "hide_a";                                                                             
+        }
+	program {                                                          
+        	name: "hide_a";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "A";                                         
+        	after: "hide_a_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_a_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "a_key";                                         
+        	after: "hide_a_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_a_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "a_key_icon";                                                                                  
+        }
+	                                            
+	//hide screen 2
+	program {                                                          
+        	name: "hide_Screen_2";
+		signal: "hide_screen_2";                                                                                          
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "B";                                         
+        	after: "hide_b_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_b_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "b_key";                                         
+        	after: "hide_b_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_b_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "b_key_icon";                                         
+        	after: "hide_c";                                           
+        }
+	program {                                                          
+        	name: "hide_c";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "C";                                         
+        	after: "hide_c_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_c_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "c_key";                                         
+        	after: "hide_c_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_c_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "c_key_icon";                                         
+        	after: "hide_d";                                           
+        }
+	program {                                                          
+        	name: "hide_d";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "D";                                         
+        	after: "hide_d_key";                                           
+        }   
+	program {                                                          
+        	name: "hide_d_key";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "d_key";                                         
+        	after: "hide_d_icon";                                           
+        }
+	program {                                                          
+        	name: "hide_d_icon";                                                                                              
+        	action: STATE_SET "invisible" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "d_key_icon";                                                                                 
+        }
+
+	//Show Sceen 1
+	program {                                                          
+        	name: "show_Screen_1";
+		signal: "show_screen_1";                                                                                          
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Up";                                         
+        	after: "show_up_key";                                           
+        }   
+	program {                                                          
+        	name: "show_up_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "up_key";                                         
+        	after: "show_up_icon";                                           
+        }
+	program {                                                          
+        	name: "show_up_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "up_key_icon";                                         
+        	after: "show_down";                                           
+        }
+	program {                                                          
+        	name: "show_down";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Down";                                         
+        	after: "show_down_key";                                           
+        }   
+	program {                                                          
+        	name: "show_down_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "down_key";                                         
+        	after: "show_down_icon";                                           
+        }
+	program {                                                          
+        	name: "show_down_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "down_key_icon";                                         
+        	after: "show_right";                                           
+        }
+	program {                                                          
+        	name: "show_right";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Right";                                         
+        	after: "show_right_key";                                           
+        }   
+	program {                                                          
+        	name: "show_right_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "right_key";                                         
+        	after: "show_right_icon";                                           
+        }
+	program {                                                          
+        	name: "show_right_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "right_key_icon";                                         
+        	after: "show_left";                                           
+        }
+	program {                                                          
+        	name: "show_left";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "Left";                                         
+        	after: "show_left_key";                                           
+        }   
+	program {                                                          
+        	name: "show_left_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "left_key";                                         
+        	after: "show_left_icon";                                           
+        }
+	program {                                                          
+        	name: "show_left_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "left_key_icon";   
+		after: "show_a";                                                                             
+        }
+	program {                                                          
+        	name: "show_a";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "A";                                         
+        	after: "show_a_key";                                           
+        }   
+	program {                                                          
+        	name: "show_a_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "a_key";                                         
+        	after: "show_a_icon";                                           
+        }
+	program {                                                          
+        	name: "show_a_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "a_key_icon";    
+		after: "button1_clicked";                                                                              
+        }
+	program {
+		name: "button1_clicked";
+		action: STATE_SET "clicked" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "1";
+		after: "button2_default" ;
+	}
+	program {
+		name: "button2_default";
+		action: STATE_SET "default" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "2";
+	}
+
+	//show screen 2
+	program {                                                          
+        	name: "show_Screen_2";
+		signal: "show_screen_2";                                                                                          
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "B";                                         
+        	after: "show_b_key";                                           
+        }   
+	program {                                                          
+        	name: "show_b_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "b_key";                                         
+        	after: "show_b_icon";                                           
+        }
+	program {                                                          
+        	name: "show_b_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "b_key_icon";                                         
+        	after: "show_c";                                           
+        }
+	program {                                                          
+        	name: "show_c";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "C";                                         
+        	after: "show_c_key";                                           
+        }   
+	program {                                                          
+        	name: "show_c_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "c_key";                                         
+        	after: "show_c_icon";                                           
+        }
+	program {                                                          
+        	name: "show_c_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "c_key_icon";                                         
+        	after: "show_d";                                           
+        }
+	program {                                                          
+        	name: "show_d";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "D";                                         
+        	after: "show_d_key";                                           
+        }   
+	program {                                                          
+        	name: "show_d_key";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "d_key";                                         
+        	after: "show_d_icon";                                           
+        }
+	program {                                                          
+        	name: "show_d_icon";                                                                                              
+        	action: STATE_SET "default" 0.0;                              
+        	transition: LINEAR 0.0;                                         
+        	target: "d_key_icon";                                         
+        	after:"button2_clicked";                                         
+        }
+	program {
+		name: "button2_clicked";
+		action: STATE_SET "clicked" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "2";
+		after: "button1_default";
+	}
+	program {
+		name: "button1_default";
+		action: STATE_SET "default" 0.0;
+		transition: LINEAR 0.0;                                         
+        	target: "1";
+	}
+
+       ACTIVATE("back");
+       ACTIVATE("up_key");
+       ACTIVATE("down_key");
+       ACTIVATE("right_key");
+       ACTIVATE("left_key");
+       ACTIVATE("a_key");
+       ACTIVATE("b_key");
+       ACTIVATE("c_key");
+       ACTIVATE("d_key");
+       TRANSITION();
+    }
+    
+	
+

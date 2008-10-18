@@ -1,0 +1,1874 @@
+images {
+  
+  image: "button_background.png" COMP;
+  image: "button_background_active.png" COMP;
+  image: "backdrop.png" COMP;
+  image: "background.png" COMP;
+  image: "back.png" COMP;
+  image: "quit.png" COMP;
+  image: "button_right.png" COMP;
+  image: "button_left.png" COMP;
+  image: "button_middle.png" COMP;
+  image: "button_hold.png" COMP;
+  image: "arrow_up.png" COMP;
+  image: "arrow_down.png" COMP;
+  image: "arrow_left.png" COMP;
+  image: "arrow_right.png" COMP;
+  image: "scroll_area.png" COMP;
+  image: "mouse_icon.png" COMP;
+  image: "keyboard_icon.png" COMP;
+  image: "accelerometer_icon.png" COMP;
+  image: "multimedia_icon.png" COMP;
+  image: "presentation_icon.png" COMP;
+  image: "games_icon.png" COMP;
+  image: "connection_icon.png" COMP;
+  image: "about_icon.png" COMP;
+  image: "conf_icon.png" COMP;
+  image: "icon_accept.png" COMP;
+  image: "icon_left.png" COMP;
+  image: "maemo-logo.png" COMP;
+  image: "error.png" COMP;
+  image: "next_icon.png" COMP;
+  image: "previous_icon.png" COMP;
+  image: "fullscreen_icon.png" COMP;
+  image: "no_fullscreen_icon.png" COMP;
+  image: "play_icon.png" COMP;
+  image: "pause_icon.png" COMP;
+  image: "stop_icon.png" COMP;
+  image: "backward_icon.png" COMP;
+  image: "forward_icon.png" COMP;
+  image: "volume-_icon.png" COMP;
+  image: "volume+_icon.png" COMP;
+  image: "down_icon.png" COMP;
+  image: "up_icon.png" COMP;
+  
+  image: "key-default.png" COMP;
+  image: "key-default-selected.png" COMP;
+  image: "key-special.png" COMP;
+  image: "key-special-selected.png" COMP;
+  image: "backspace.png" COMP;
+  image: "backspace-selected.png" COMP;
+  image: "shift.png" COMP;
+  image: "shift-selected.png" COMP;
+}
+
+styles {
+   style {
+      name: "field_style";
+      base: "font=key font_size=28 align=left valign=top color=#000 wrap=word style=shadow shadow_color=#666";
+      tag: "br" "  \n";
+   }
+}
+
+fonts {
+   font: "VeraBd.ttf" "Sans";
+   font: "VeraBd.ttf" "key";
+}
+
+#define BUTTON_BOTTOM_HEIGHT 0.12;
+#define SWALLOWCLIP()                                                   \
+    part {                                                              \
+        name: "swallow_clip";                                           \
+        mouse_events: 0;                                                \
+        type: RECT;                                                     \
+        description {                                                   \
+            state: "default" 0.0;                                       \
+            visible: 1;                                                 \
+            rel1 {                                                      \
+                relative: 0.0 0.0;                                      \
+                offset: 0 0;                                            \
+            }                                                           \
+            rel2 {                                                      \
+                relative: 1.0 1.0;                                      \
+                offset: -1 -1;                                          \
+            }                                                           \
+            color: 255 255 255 255;                                     \
+        }                                                               \
+        description {                                                   \
+            state: "invisible" 0.0;                                     \
+            inherit: "default" 0.0;                                     \
+            visible: 0;                                                 \
+            color: 255 255 255 0;                                       \
+        }                                                               \
+    }                                                                   \
+									\
+     part {                                                             \
+        name: "swallow_main";                                           \
+        type: RECT;                                                     \
+        mouse_events: 0;                                                \
+        description {                                                   \
+            state: "default" 0.0;                                       \
+            rel1 {                                                      \
+                relative: 0.0 0.0;                                      \
+                offset: 0 0;                                            \
+            }                                                           \
+            rel2 {                                                      \
+                relative: 1.0 1.0-BUTTON_BOTTOM_HEIGHT;                 \
+                offset: -1 -1;                                          \
+            }                                                           \
+            color: 255 255 255 0;                                       \
+        }                                                               \
+    }									
+
+#define CONF_TEXT(part_name,y_pos)					\
+									\
+    part {								\
+                name: part_name;					\
+                type: TEXT;						\
+		effect: OUTLINE_SOFT_SHADOW;				\
+                mouse_events: 0;					\
+                description {						\					
+                    state: "default" 0.0;				\
+                    rel1 {						\
+                        relative: 0.02 0.12+(y_pos*0.15);		\
+                        offset: 0 0;					\
+                        						\
+                    }							\
+                    rel2 {						\
+                        relative: 0.7 0.2+(y_pos*0.15);			\
+                        offset: -1 -1;					\
+                    }							\
+                    text {						\
+                        font: "Sans";					\
+			text: part_name;				\
+                        size: 32;					\
+                        align: 0.0 0.0;					\
+                    }							\	
+	       }							\
+		description {                                           \
+            		state: "invisible" 0.0;                         \
+            		inherit: "default" 0.0;                         \
+            		visible: 0;                                     \
+        	}                                                       \
+	}								\									
+
+#define CONF_KEY_ICON(part_name, ypos)                         	 	 \
+            part {                                                       \
+                name: part_name;                                	 \
+                mouse_events: 1;                                         \
+                type: IMAGE;                                             \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    rel1 {                                               \
+                        relative: 0.71 0.09+(ypos*0.15);	         \
+                        offset: 0 0;                                     \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 0.99 0.22+(ypos*0.15);    		 \
+                        offset: -1 -1;                                   \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    image {                                              \
+                        normal: "button_background.png";                 \
+                        border: 27 27 27 27;                             \
+                    }                                                    \
+                }                                                        \
+                description {                                            \
+                    state: "clicked" 0.0;                                \
+                    inherit: "default" 0.0;                              \
+                    image {normal: "button_background_active.png";}      \
+			 fill { smooth: 0; }                             \
+                }                                                        \
+		description {                                            \
+            		state: "invisible" 0.0;                          \
+            		inherit: "default" 0.0;                          \
+            		visible: 0;                                      \
+        	}                                                        \
+            }    							 \
+	                                                      		 \
+            part {                                                       \
+                name: part_name"_icon";                           	 \
+                mouse_events: 0; 					 \
+		effect: OUTLINE;                                         \
+                type: TEXT;                                              \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    aspect: 1.0 1.0;                                     \
+                    aspect_preference: BOTH;				 \
+		    color: 0 0 0 255;                                    \
+                    color2: 100 100 100 255;                             \
+                    color3: 100 100 100 255;                             \                             
+                    rel1 {                                               \
+                        relative: 0.0 0.0;                               \
+                        offset: 0 0;                                     \
+                        to: part_name;                         		 \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 1.0 1.0;                               \
+                        offset: -1 -1;                                   \
+                        to: part_name;                         		 \
+                    }                                                    \
+                   text {						 \
+                	font: "key";					 \
+                	size: 1;					 \
+                	fit: 1 1;					 \
+			text: "Ctrl+alt+a";				 \
+                	align: 0.6 0.5;					 \
+                  }						         \
+               }                                                         \
+		description {                                            \
+            		state: "invisible" 0.0;                          \
+            		inherit: "default" 0.0;                          \
+            		visible: 0;                                      \
+        	}                                                        \
+            }
+
+#define SCREEN_NUMBER(part_name, xpos)                         	 	 \
+            part {                                                       \
+                name: part_name;                                	 \
+                mouse_events: 1;                                         \
+                type: IMAGE;                                             \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    rel1 {                                               \
+                        relative: 0.4+(xpos*0.13) 0.85;	         	 \
+                        offset: 0 0;                                     \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 0.5+(xpos*0.13) 0.99;		    	 \
+                        offset: -1 -1;                                   \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    image {                                              \
+                        normal: "button_background.png";                 \
+                        border: 27 27 27 27;                             \
+                    }                                                    \
+                }                                                        \
+                description {                                            \
+                    state: "clicked" 0.0;                                \
+                    inherit: "default" 0.0;                              \
+                    image {normal: "button_background_active.png";}      \
+			 fill { smooth: 0; }                             \
+                }                                                        \
+            }    							 \
+	                                                      		 \
+            part {                                                       \
+                name: part_name"_icon";                           	 \
+                mouse_events: 0;                                         \
+                type: TEXT;                                              \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    aspect: 1.0 1.0;                                     \
+                    aspect_preference: BOTH;                             \
+                    rel1 {                                               \
+                        relative: 0.0 0.0;                               \
+                        offset: 0 0;                                     \
+                        to: part_name;                         		 \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 1.0 1.0;                               \
+                        offset: -1 -1;                                   \
+                        to: part_name;                         		 \
+                    }                                                    \
+                   text {						 \
+                	font: "Sans";					 \
+                	size: 1;					 \
+                	fit: 1 1;					 \
+			text: part_name;				 \
+                	align: 0.5 0.5;					 \
+              }								 \
+                }                                                        \
+            }
+									
+#define SCREEN_NUMBER_2(part_name, xpos)                         	 \
+            part {                                                       \
+                name: part_name;                                	 \
+                mouse_events: 1;                                         \
+                type: IMAGE;                                             \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    rel1 {                                               \
+                        relative: 0.3+(xpos*0.13) 0.9;	         	 \
+                        offset: 0 0;                                     \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 0.4+(xpos*0.13) 0.99;		    	 \
+                        offset: -1 -1;                                   \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    image {                                              \
+                        normal: "button_background.png";                 \
+                        border: 27 27 27 27;                             \
+                    }                                                    \
+                }                                                        \
+                description {                                            \
+                    state: "clicked" 0.0;                                \
+                    inherit: "default" 0.0;                              \
+                    image {normal: "button_background_active.png";}      \
+			 fill { smooth: 0; }                             \
+                }							 \
+		description {                                            \
+            		state: "invisible" 0.0;                          \
+            		inherit: "default" 0.0;                          \
+            		visible: 0;                                      \
+        	}                                                        \                                                        
+            }    							 \
+	                                                      		 \
+            part {                                                       \
+                name: part_name"_icon";                           	 \
+                mouse_events: 0;                                         \
+                type: TEXT;                                              \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    aspect: 1.0 1.0;                                     \
+                    aspect_preference: BOTH;                             \
+                    rel1 {                                               \
+                        relative: 0.0 0.0;                               \
+                        offset: 0 0;                                     \
+                        to: part_name;                         		 \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 1.0 1.0;                               \
+                        offset: -1 -1;                                   \
+                        to: part_name;                         		 \
+                    }                                                    \
+                   text {						 \
+                	font: "Sans";					 \
+                	size: 1;					 \
+                	fit: 1 1;					 \
+			text: part_name;				 \
+                	align: 0.5 0.5;					 \
+              }								 \
+                }							 \
+		description {                                            \
+            		state: "invisible" 0.0;                          \
+            		inherit: "default" 0.0;                          \
+            		visible: 0;                                      \
+        	}                                                        \                                                        
+            }
+					
+ 
+#define SCREEN_TEXT(part_label, part_icon,part_comp)			\
+									\
+    part {								\
+                name: part_label"_text";				\
+                type: TEXT;						\
+                mouse_events: 0;					\
+                description {						\
+                    state: "default" 0.0;				\
+                    rel1 {						\
+                        relative: 0.02 0.02;				\
+                        offset: 0 0;					\
+                        						\
+                    }							\
+                    rel2 {						\
+                        relative: part_comp 0.1;			\
+                        offset: -1 -1;					\
+                    }							\
+                    text {						\
+                        font: "Sans";					\
+			text: part_label;				\
+                        size: 1;					\
+                        fit: 1 1;					\
+                        align: 0.0 0.0;					\
+                    }							\
+             }								\
+	}								\									
+									\
+    part {								\
+            name: part_label"_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: (part_comp +0.02) 0.02;			\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: (part_comp + 0.08) 0.09;			\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal:part_icon; }                  		\
+               fill { smooth: 0; } 					\
+            }								\
+         }				
+	
+							
+#define QUIT()								\
+    part {								\
+            name: "quit";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+            clip_to: "swallow_clip";					\   
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.87 0.87;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.99 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal: "button_background.png"; }		\                  
+               fill { smooth: 0; } 					\
+            }								\
+	    description {						\
+               state: "clicked" 0.0;					\
+	       inherit: "default" 0.0;                              	\
+	       image { normal: "button_background_active.png"; }        \          
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "quit_icon";						\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.87 0.87;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.99 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal: "quit.png"; }                  		\
+               fill { smooth: 0; } 					\
+            }								\
+         }								
+	
+#define BACK()								\
+   part {								\
+            name: "back";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.85 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.99 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal: "button_background.png"; }               \   
+               fill { smooth: 0; } 					\
+            }								\
+	    description {						\
+               state: "clicked" 0.0;					\
+	       inherit: "default" 0.0;                             	\
+	       image { normal: "button_background_active.png"; }        \          
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "back_icon";						\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.85 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.99 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal: "back.png"; }                  		\
+               fill { smooth: 0; } 					\
+            }								\
+         }
+
+#define CONF_KEYS()							\
+   part {								\
+            name: "conf_keys";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.67 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.82 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal: "button_background.png"; }               \   
+               fill { smooth: 0; } 					\
+            }								\
+	    description {						\
+               state: "clicked" 0.0;					\
+	       inherit: "default" 0.0;                             	\
+	       image { normal: "button_background_active.png"; }        \          
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "conf_keys_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.67 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.82 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	       image { normal: "keyboard_icon.png"; }                  	\
+               fill { smooth: 0; } 					\
+            }								\
+         }
+	
+#define BT_LEFT()							\
+									\							
+  part {								\
+            name: "bt_left";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.01 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.15 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	      image { normal: "button_background.png"; }                \ 
+              fill { smooth: 0; } 					\
+            }								\
+           description {						\
+              state: "clicked" 0.0;					\
+              inherit: "default" 0.0;                              	\
+	      image { normal: "button_background_active.png"; }         \         
+              fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "bt_left_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.01 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.15 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	      image { normal: "button_left.png"; }                  	\
+              fill { smooth: 0; } 					\
+            }								\
+         }			
+#define BT_MIDDLE()							\
+									\
+   part {								\
+            name: "bt_middle";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.18 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.32 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+               image { normal: "button_background.png"; }               \   
+               fill { smooth: 0; } 					\
+            }								\
+            description {						\
+               state: "clicked" 0.0;					\
+               inherit: "default" 0.0;                              	\
+               image { normal: "button_background_active.png"; }        \          
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "bt_middle_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.18 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.32 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+               image { normal: "button_middle.png"; }                  	\
+               fill { smooth: 0; } 					\
+            }								\
+         }								
+
+
+
+#define BT_RIGHT()							\						
+									\
+  part {								\
+            name: "bt_right";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.35 0.83;					\
+                  offset: 0 0;						\
+		  							\
+               }							\
+               rel2 {							\
+                  relative: 0.49 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+               image { normal: "button_background.png"; }               \  
+               fill { smooth: 0; } 					\
+            }								\
+	    description {						\
+               state: "clicked" 0.0;					\
+               inherit: "default" 0.0;                              	\
+               image { normal: "button_background_active.png"; }        \          
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "bt_right_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\		
+               rel1 {							\
+                  relative: 0.35 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.49 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+               image { normal: "button_right.png"; }                  	\	
+               fill { smooth: 0; } 					\
+            }								\
+         }								
+
+#define BT_HOLD()							\
+									\
+  part {								\
+            name: "bt_hold";						\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.52 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.66 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	      image { normal: "button_background.png"; }                \ 
+              fill { smooth: 0; } 					\
+            }								\
+	    description {						\
+              state: "clicked" 0.0;					\
+              inherit: "default" 0.0;                              	\
+	      image { normal: "button_background_active.png"; }         \         
+              fill { smooth: 0; } 					\
+            }								\
+									\
+         }								\
+									\
+	part {								\
+            name: "bt_hold_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.52 0.83;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.66 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	      image { normal: "button_hold.png"; }                  	\
+              fill { smooth: 0; } 					\
+            }								\
+	}								
+
+#define SCROLL_AREA_ICONS()						\
+									\
+  part {								\
+            name: "scroll_area_up_icon";				\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               rel1 {							\
+                  relative: 0.95 0.0;					\
+                  offset:    0 0 ;					\
+               }							\
+               rel2 {							\
+                  relative: 1.0 0.05;					\
+                  offset:  -1 -1;					\
+               }							\
+	       image { normal: "arrow_up.png"; }                  	\
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+	part {								\
+            name: "scroll_area_down_icon";				\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               rel1 {							\
+                  relative: 0.95 0.77;					\
+                  offset:  0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 1.0 0.82;					\
+                  offset:  -1 -1;					\					
+               }							\
+	       image { normal: "arrow_down.png"; }                  	\
+               fill { smooth: 0; } 					\
+            }								\
+         }														
+
+				
+
+#define LOGO()								\
+									\
+  part {								\
+            name: "bt_left_icon";					\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+            clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               visible: 1;						\
+               rel1 {							\
+                  relative: 0.01 0.89;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.24 0.99;					\
+                  offset: -1 -1;					\
+               }							\
+	      image { normal: "maemo-logo.png"; }                  	\
+              fill { smooth: 0; } 					\
+            }								\
+         }								
+
+#define TRANSITION()                                                    \
+    program {                                                           \
+        name: "fadeout";                                                \
+        signal: "fadeout";                                              \
+        action: STATE_SET "invisible" 0.0;                              \
+        transition: LINEAR 0.0;                                         \
+        target: "swallow_clip";                                         \
+        after: "finish_fade";                                           \
+    }                                                                   \
+    program {                                                           \
+        name: "set_visible";                                            \
+        signal: "visible";                                              \
+        action: STATE_SET "default" 0.0;                                \
+        target: "swallow_clip";                                         \
+    }                                                                   \
+    program {                                                           \
+        name: "set_invisible";                                          \
+        signal: "invisible";                                            \
+        action: STATE_SET "invisible" 0.0;                              \
+        target: "swallow_clip";                                         \
+    }                                                                   \
+    program {                                                           \
+        name: "finish_fade";                                            \
+        action: SIGNAL_EMIT "finished_transition" "main";               \
+    }												
+
+#define ACTIVATE(part_name)                                             \
+    program {                                                           \
+        name: "activate_"part_name;                                     \
+        signal: "mouse,down,1";                                         \
+        source: part_name;                                       	\
+        action: STATE_SET "clicked" 0.0;                                \
+        target: part_name;                                              \
+    }                                                                   \
+    program {                                                           \
+        name: "deactivate_"part_name;                                   \
+        signal: "mouse,up,1";                                           \
+        source: part_name;                                       	\
+        action: STATE_SET "default" 0.0;                                \
+        target: part_name;                                              \
+    }     
+
+
+
+collections {
+
+   group {
+	name: "swallow";
+
+	parts {
+	  part {
+            name: "area1";
+            type: SWALLOW;
+            mouse_events: 1;
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       
+            }
+
+	   
+         }
+	
+      }
+    
+   }
+
+
+  group {
+	name: "main";
+
+	parts {
+
+	   SWALLOWCLIP();
+		
+	  part {
+            name: "background";
+            type: IMAGE;
+            mouse_events: 0;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       image { normal: "background.png"; }                  
+               fill { smooth: 0; } 
+            }
+
+	    description {
+               state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               visible: 0;
+            }
+         }
+
+	part {
+                name: "label_waiting";
+                type: TEXT;
+		effect: SOFT_OUTLINE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    rel1 {
+                        relative: 0.1 0.0;
+                        offset: 0 0;
+                        
+                    }
+                    rel2 {
+                        relative: 0.9 0.9;
+                        offset: -1 -1;
+                    }
+                    text {
+                        font: "Sans";
+                        size: 1;
+                        fit: 1 1;
+                        align: 0.5 0.5;
+                    }
+             }
+	}
+
+	part {
+                name: "label_connect_to";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    rel1 {
+                        relative: 0.2 0.1;
+                        offset: 0 0;
+                        
+                    }
+                    rel2 {
+                        relative: 0.8 0.9;
+                        offset: -1 -1;
+                    }
+                    text {
+                        font: "Sans";
+                        size: 1;
+                        fit: 1 1;
+                        align: 0.1 0.2;
+                    }
+             }
+	}
+
+	part {
+                name: "label_client";
+                type: TEXT;
+		effect: SOFT_OUTLINE;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+                    rel1 {
+                        relative: 0.1 0.1;
+                        offset: 0 0;
+                        
+                    }
+                    rel2 {
+                        relative: 0.9 0.9;
+                        offset: -1 -1;
+                    }
+                    text {
+                        font: "Sans";
+                        size: 1;
+                        fit: 1 1;
+                        align: 0.3 0.4;
+                    }
+             }
+	}
+        LOGO();
+	QUIT();
+	
+    }
+    programs {
+	ACTIVATE("quit");
+        TRANSITION();
+    }
+ }
+
+
+group {
+      name: "numeric";
+
+      min: 168 224;
+
+      parts {
+
+#define CLICK_AREA_W 68
+#define CLICK_AREA_H 58
+#define CLICK_AREA_DX 27
+#define CLICK_AREA_DY 27
+#define SKEY_FULL(key_text, key_name, x, y, lbl_dx, lbl_dy)            \
+         part {                                                        \
+            name: "key-bg-"key_name;                                   \
+            type: RECT;                                                \
+            pointer_mode: NOGRAB;                                      \
+            description {                                              \
+               state: "default" 0.0;                                   \
+               min: CLICK_AREA_W CLICK_AREA_H;                         \
+               max: CLICK_AREA_W CLICK_AREA_H;                         \
+               rel1 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + CLICK_AREA_DX) (y + CLICK_AREA_DY);     \
+               }                                                       \
+               rel2 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + CLICK_AREA_DX) (y + CLICK_AREA_DY);     \
+               }                                                       \
+               color: 0 0 0 0;                                         \
+            }                                                          \
+         }                                                             \
+         part {                                                        \
+            name: "key-img-"key_name;                                  \
+            type: IMAGE;                                               \
+            mouse_events: 0;                                           \
+            description {                                              \
+               state: "default" 0.0;                                   \
+               min: 54 54;                                             \
+               max: 54 54;                                             \
+               rel1 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + 27) (y + 27);                           \
+               }                                                       \
+               rel2 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + 27) (y + 27);                           \
+               }                                                       \
+               image.normal: "key-default.png";                        \
+            }                                                          \
+            description {                                              \
+               state: "down" 0.0;                                      \
+               inherit: "default" 0.0;                                 \
+               visible: 0;                                             \
+            }                                                          \
+         }                                                             \
+         part {                                                        \
+           name: "key-lbl-"key_name;                                   \
+           type: TEXT;                                                 \
+           mouse_events: 0;                                            \
+           effect: OUTLINE;                                            \
+           description {                                               \
+              state: "default" 0.0;                                    \
+              color: 0 0 0 255;                                        \
+              color2: 100 100 100 255;                                 \
+              color3: 100 100 100 255;                                 \
+              rel1 {                                                   \
+                 to: "key-img-"key_name;                               \
+                 relative: 0.0 0.0;                                    \
+                 offset: (8 + lbl_dx) (4 + lbl_dy);                    \
+              }                                                        \
+              rel2 {                                                   \
+                 to: "key-img-"key_name;                               \
+                 relative: 1.0 0.0;                                    \
+                 offset: -1 48;                                        \
+              }                                                        \
+              text {                                                   \
+                 font: "key";                                          \
+                 size: 32;                                             \
+                 text: key_text;                                       \
+              }                                                        \
+            }                                                          \
+            description {                                              \
+               state: "down" 0.0;                                      \
+               inherit: "default" 0.0;                                 \
+               visible: 0;                                             \
+            }                                                          \
+         }                                                             \
+         part {                                                        \
+            name: "key-img-zoom-"key_name;                             \
+            type: IMAGE;                                               \
+            mouse_events: 0;                                           \
+            description {                                              \
+               state: "default" 0.0;                                   \
+               min: 100 150;                                           \
+               max: 100 150;                                           \
+               rel1 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + 26) (y - 21);                           \
+               }                                                       \
+               rel2 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + 26) (y - 21);                           \
+               }                                                       \
+               image.normal: "key-default-selected.png";               \
+               color: 255 255 255 0;                                   \
+               visible: 0;                                             \
+            }                                                          \
+            description {                                              \
+               state: "down" 0.0;                                      \
+               inherit: "default" 0.0;                                 \
+               color: 255 255 255 255;                                 \
+               visible: 1;                                             \
+            }                                                          \
+         }                                                             \
+         part {                                                        \
+            name: "key-lbl-zoom-"key_name;                             \
+            type: TEXT;                                                \
+            mouse_events: 0;                                           \
+            description {                                              \
+               state: "default" 0.0;                                   \
+               color: 0 0 0 0;                                         \
+               rel1 {                                                  \
+                  to: "key-img-zoom-"key_name;                         \
+                  relative: 0.0 0.0;                                   \
+                  offset: 8 24;                                        \
+               }                                                       \
+               rel2 {                                                  \
+                  to: "key-img-zoom-"key_name;                         \
+                  relative: 1.0 0.0;                                   \
+                  offset: -1 48;                                       \
+               }                                                       \
+               text {                                                  \
+                  font: "key";                                         \
+                  size: 48;                                            \
+                  text: key_text;                                      \
+               }                                                       \
+               visible: 0;                                             \
+            }                                                          \
+            description {                                              \
+               state: "down" 0.0;                                      \
+               inherit: "default" 0.0;                                 \
+               color: 0 0 0 255;                                       \
+               visible: 1;                                             \
+            }                                                          \
+         }                                                             \
+         programs {                                                    \
+            program {                                                  \
+               name: "key-down-"key_name;                              \
+               signal: "activated_key";                                \
+               source: "key-bg-"key_name;                              \
+               action: SIGNAL_EMIT "key_down" key_text;                \
+            }                                                          \
+            program {                                                  \
+               name: "key-mouse-in-"key_name;                          \
+               signal: "mouse,in";                                     \
+               source: "key-bg-"key_name;                              \
+               action: SIGNAL_EMIT "mouse_over_key" "key-bg-"key_name; \
+            }                                                          \
+            program {                                                  \
+               name: "key-mouse-out-"key_name;                         \
+               signal: "mouse,out";                                    \
+               source: "key-bg-"key_name;                              \
+               action: SIGNAL_EMIT "mouse_out_key" "key-bg-"key_name;  \
+            }                                                          \
+            program {                                                  \
+               name: "key-press-"key_name;                             \
+               signal: "press_key";                                    \
+               source: "key-bg-"key_name;                              \
+               action: STATE_SET "down" 0.0;                           \
+               target: "key-img-"key_name;                             \
+               target: "key-lbl-"key_name;                             \
+               target: "key-img-zoom-"key_name;                        \
+               target: "key-lbl-zoom-"key_name;                        \
+            }                                                          \
+            program {                                                  \
+               name: "key-release-"key_name;                           \
+               signal: "release_key";                                  \
+               source: "key-bg-"key_name;                              \
+               action: STATE_SET "default" 0.0;                        \
+               transition: LINEAR 0.2;                                 \
+               target: "key-img-"key_name;                             \
+               target: "key-lbl-"key_name;                             \
+               target: "key-img-zoom-"key_name;                        \
+               target: "key-lbl-zoom-"key_name;                        \
+            }                                                          \
+         }
+
+#define KEY_FULL(v, x, y, lbl_dx, lbl_dy) SKEY_FULL(v, v, x, y, lbl_dx, lbl_dy)
+#define SKEY(name, text, x, y) SKEY_FULL(name, text, x, y, 0, 0)
+#define KEY(v, x, y) SKEY(v, v, x, y)
+
+        KEY("1",   0, 0)
+        KEY("2",  56, 0)
+        KEY("3", 112, 0)
+
+        KEY("4",   0, 56)
+        KEY("5",  56, 56)
+        KEY("6", 112, 56)
+
+        KEY("7",   0, 112)
+        KEY("8",  56, 112)
+        KEY("9", 112, 112)
+
+        KEY("0",   0, 168)
+        KEY(".",  56, 168)
+        KEY(",", 112, 168)
+      }
+   }
+
+   group {
+      name: "alpha";
+
+      parts {
+
+#define INIT_HSPACE 0
+#define KEY_HSPACE 70
+#define KEY_HPOS(index)  KEY_HSPACE * index + INIT_HSPACE
+
+#define FIRST_ROW 0
+
+#undef CLICK_AREA_H
+#undef CLICK_AREA_DY
+#define CLICK_AREA_H 70
+#define CLICK_AREA_DY 21
+         KEY_FULL("Q", KEY_HPOS(0), FIRST_ROW, -2, 0)
+         KEY_FULL("W", KEY_HPOS(1), FIRST_ROW, -5, 0)
+         KEY_FULL("E", KEY_HPOS(2), FIRST_ROW, 0, 0)
+         KEY_FULL("R", KEY_HPOS(3), FIRST_ROW, 0, 0)
+         KEY_FULL("T", KEY_HPOS(4), FIRST_ROW, -4, 0)
+         KEY_FULL("Y", KEY_HPOS(5), FIRST_ROW, -6, 0)
+         KEY_FULL("U", KEY_HPOS(6), FIRST_ROW, 0, 0)
+         KEY_FULL("I", KEY_HPOS(7), FIRST_ROW, 2, 0)
+         KEY_FULL("O", KEY_HPOS(8), FIRST_ROW, -2, 0)
+         KEY_FULL("P", KEY_HPOS(9), FIRST_ROW, 0, 0)
+
+#undef INIT_HSPACE
+#define INIT_HSPACE 35
+#define SECOND_ROW 60
+
+#undef CLICK_AREA_H
+#undef CLICK_AREA_DY
+#define CLICK_AREA_H 58
+#define CLICK_AREA_DY 27
+         KEY_FULL("A", KEY_HPOS(0), SECOND_ROW, -8, 0)
+         KEY_FULL("S", KEY_HPOS(1), SECOND_ROW, 0, 0)
+         KEY_FULL("D", KEY_HPOS(2), SECOND_ROW, 0, 0)
+         KEY_FULL("F", KEY_HPOS(3), SECOND_ROW, 0, 0)
+         KEY_FULL("G", KEY_HPOS(4), SECOND_ROW, -2, 2)
+         KEY_FULL("H", KEY_HPOS(5), SECOND_ROW, 2, 0)
+         KEY_FULL("J", KEY_HPOS(6), SECOND_ROW, -6, 0)
+         KEY_FULL("K", KEY_HPOS(7), SECOND_ROW, 0, 0)
+         KEY_FULL("L", KEY_HPOS(8), SECOND_ROW, 0, 0)
+
+#undef INIT_HSPACE
+#define INIT_HSPACE 105
+#define THIRD_ROW 120
+         KEY_FULL("Z", KEY_HPOS(0), THIRD_ROW, 0, 0)
+         KEY_FULL("X", KEY_HPOS(1), THIRD_ROW, -4, 0)
+         KEY_FULL("C", KEY_HPOS(2), THIRD_ROW, -4, 0)
+         KEY_FULL("V", KEY_HPOS(3), THIRD_ROW, -6, 0)
+         KEY_FULL("B", KEY_HPOS(4), THIRD_ROW, 2, 0)
+         KEY_FULL("N", KEY_HPOS(5), THIRD_ROW, 2, 0)
+         KEY_FULL("M", KEY_HPOS(6), THIRD_ROW, 0, 0)
+
+#define FORTH_ROW 190
+#define KEY_SPACE                                                       \
+         part {                                                         \
+            name: "key-bg-space";                                       \
+            type: RECT;                                                 \
+            pointer_mode: NOGRAB;                                       \
+            description {                                               \
+               state: "default" 0.0;                                    \
+               min: 355 68;                                             \
+               max: 355 68;                                             \
+               rel1 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+               }                                                        \
+               rel2 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+               }                                                        \
+               color: 0 0 0 0;                                          \
+            }                                                           \
+         }                                                              \
+         part {                                                         \
+            name: "key-img-space";                                      \
+            type: IMAGE;                                                \
+            mouse_events: 0;                                            \
+            description {                                               \
+               state: "default" 0.0;                                    \
+               min: 335 54;                                             \
+               max: 335 54;                                             \
+               rel1 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+               }                                                        \
+               rel2 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+               }                                                        \
+               image {                                                  \
+                  normal: "key-default.png";                            \
+                  border: 9 9 9 9;                                      \
+               }                                                        \
+            }                                                           \
+            description {                                               \
+               state: "down" 0.0;                                       \
+               inherit: "default" 0.0;                                  \
+               color: 160 160 160 255;                                  \
+            }                                                           \
+         }                                                              \
+         part {                                                         \
+           name: "key-lbl-space";                                       \
+           type: TEXT;                                                  \
+           mouse_events: 0;                                             \
+           effect: OUTLINE;                                             \
+           description {                                                \
+              state: "default" 0.0;                                     \
+              color: 0 0 0 255;                                         \
+              color2: 100 100 100 255;                                  \
+              color3: 100 100 100 255;                                  \
+              rel1 {                                                    \
+                 to: "key-img-space";                                   \
+                 relative: 0.0 0.0;                                     \
+                 offset: 8 4;                                           \
+              }                                                         \
+              rel2 {                                                    \
+                 to: "key-img-space";                                   \
+                 relative: 1.0 1.0;                                     \
+                 offset: -1 -1;                                         \
+              }                                                         \
+              text {                                                    \
+                 font: "key";                                           \
+                 size: 28;                                              \
+                 text: "space";                                         \
+              }                                                         \
+           }                                                            \
+         }                                                              \
+         programs {                                                     \
+            program {                                                   \
+               name: "key-down-space";                                  \
+               signal: "activated_key";                                 \
+               source: "key-bg-space";                                  \
+               action: SIGNAL_EMIT "key_down" "space";                  \
+            }                                                           \
+            program {                                                   \
+               name: "key-mouse-in-space";                              \
+               signal: "mouse,in";                                      \
+               source: "key-bg-space";                                  \
+               action: SIGNAL_EMIT "mouse_over_key" "key-bg-space";     \
+            }                                                           \
+            program {                                                   \
+               name: "key-mouse-out-space";                             \
+               signal: "mouse,out";                                     \
+               source: "key-bg-space";                                  \
+               action: SIGNAL_EMIT "mouse_out_key" "key-bg-space";      \
+            }                                                           \
+            program {                                                   \
+               name: "key-press-space";                                 \
+               signal: "press_key";                                     \
+               source: "key-bg-space";                                  \
+               action: STATE_SET "down" 0.0;                            \
+               target: "key-img-space";                                 \
+            }                                                           \
+            program {                                                   \
+               name: "key-release-space";                               \
+               signal: "release_key";                                   \
+               source: "key-bg-space";                                  \
+               action: STATE_SET "default" 0.0;                         \
+               transition: LINEAR 0.2;                                  \
+               target: "key-img-space";                                 \
+            }                                                           \
+         }
+
+#define KEY_SPECIAL(val, x, y, w)                                      \
+         part {                                                        \
+            name: "key-bg-"val;                                        \
+            type: RECT;                                                \
+            pointer_mode: NOGRAB;                                      \
+            description {                                              \
+               state: "default" 0.0;                                   \
+               min: w 54;                                              \
+               max: w 54;                                              \
+               rel1 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + w/2) (y + 27);                          \
+               }                                                       \
+               rel2 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + w/2) (y + 27);                          \
+               }                                                       \
+               color: 0 0 0 0;                                         \
+            }                                                          \
+         }                                                             \
+         part {                                                        \
+            name: "key-img-"val;                                       \
+            type: IMAGE;                                               \
+            mouse_events: 0;                                           \
+            description {                                              \
+               state: "default" 0.0;                                   \
+               min: w 54;                                              \
+               max: w 54;                                              \
+               rel1 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + w/2) (y + 27);                          \
+               }                                                       \
+               rel2 {                                                  \
+                  relative: 0.0 0.0;                                   \
+                  offset: (x + w/2) (y + 27);                          \
+               }                                                       \
+               image {                                                 \
+                  normal: "key-special.png";                           \
+                  border: 9 9 9 9;                                     \
+               }                                                       \
+            }                                                          \
+            description {                                              \
+               state: "down" 0.0;                                      \
+               inherit: "default" 0.0;                                 \
+               image {                                                 \
+                  normal: "key-special-selected.png";                  \
+                  border: 9 9 9 9;                                     \
+               }                                                       \
+            }                                                          \
+         }                                                             \
+         part {                                                        \
+           name: "key-lbl-"val;                                        \
+           type: TEXT;                                                 \
+           mouse_events: 0;                                            \
+           effect: OUTLINE;                                            \
+           description {                                               \
+              state: "default" 0.0;                                    \
+              color: 240 240 240 255;                                  \
+              color2: 110 110 110 255;                                 \
+              color3: 110 110 110 255;                                 \
+              rel1 {                                                   \
+                 to: "key-bg-"val;                                     \
+                 relative: 0.0 0.0;                                    \
+                 offset: 8 4;                                          \
+              }                                                        \
+              rel2 {                                                   \
+                 to: "key-bg-"val;                                     \
+                 relative: 1.0 1.0;                                    \
+                 offset: -1 -1;                                        \
+              }                                                        \
+              text {                                                   \
+                 font: "key";                                          \
+                 size: 24;                                             \
+                 text: val;                                            \
+              }                                                        \
+           }                                                           \
+           description {                                               \
+              state: "down" 0.0;                                       \
+              inherit: "default" 0.0;                                  \
+              color: 200 200 200 255;                                  \
+              color2: 90 90 90 255;                                    \
+              color3: 90 90 90 255;                                    \
+           }                                                           \
+         }                                                             \
+         programs {                                                    \
+            program {                                                  \
+               name: "key-down-"val;                                   \
+               signal: "activated_key";                                \
+               source: "key-bg-"val;                                   \
+               action: SIGNAL_EMIT "key_down" val;                     \
+            }                                                          \
+            program {                                                  \
+               name: "key-mouse-in-"val;                               \
+               signal: "mouse,in";                                     \
+               source: "key-bg-"val;                                   \
+               action: SIGNAL_EMIT "mouse_over_key" "key-bg-"val;      \
+            }                                                          \
+            program {                                                  \
+               name: "key-mouse-out-"val;                              \
+               signal: "mouse,out";                                    \
+               source: "key-bg-"val;                                   \
+               action: SIGNAL_EMIT "mouse_out_key" "key-bg-"val;       \
+            }                                                          \
+            program {                                                  \
+               name: "key-press-"val;                                  \
+               signal: "press_key";                                    \
+               source: "key-bg-"val;                                   \
+               action: STATE_SET "down" 0.0;                           \
+               target: "key-img-"val;                                  \
+               target: "key-lbl-"val;                                  \
+            }                                                          \
+            program {                                                  \
+               name: "key-release-"val;                                \
+               signal: "release_key";                                  \
+               source: "key-bg-"val;                                   \
+               action: STATE_SET "default" 0.0;                        \
+               transition: LINEAR 0.2;                                 \
+               target: "key-img-"val;                                  \
+               target: "key-lbl-"val;                                  \
+            }                                                          \
+         }
+
+         KEY_SPECIAL(".?123", 0, FORTH_ROW, 158)
+         KEY_SPACE
+         KEY_SPECIAL("enter", 525, FORTH_ROW, 158)
+
+
+#undef INIT_HSPACE
+#define INIT_HSPACE 0
+         part {
+            name: "key-bg-shift";
+            type: RECT;
+            pointer_mode: NOGRAB;
+            description {
+               state: "default" 0.0;
+               min: 87 54;
+               max: 87 54;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+               }
+               rel2 {
+                  relative: 0.0 0.0;
+                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+               }
+               color: 0 0 0 0;
+            }
+         }
+         part {
+            name: "key-img-shift";
+            type: IMAGE;
+            mouse_events: 0;
+            description {
+               state: "default" 0.0;
+               min: 87 54;
+               max: 87 54;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+               }
+               rel2 {
+                  relative: 0.0 0.0;
+                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+               }
+               image {
+                  normal: "key-special.png";
+                  border: 9 9 9 9;
+               }
+            }
+            description {
+               state: "down" 0.0;
+               inherit: "default" 0.0;
+               image {
+                  normal: "key-special-selected.png";
+                  border: 9 9 9 9;
+               }
+            }
+         }
+         part {
+           name: "key-lbl-shift";
+           type: IMAGE;
+           mouse_events: 0;
+           description {
+              state: "default" 0.0;
+              max: 32 32;
+              min: 32 32;
+              rel1 {
+                 to: "key-bg-shift";
+                 relative: 0.5 0.5;
+              }
+              rel2 {
+                 to: "key-bg-shift";
+                 relative: 0.5 0.5;
+              }
+              image.normal: "shift.png";
+            }
+            description {
+               state: "down" 0.0;
+               inherit: "default" 0.0;
+               image.normal: "shift-selected.png";
+            }
+         }
+         programs {
+            program {
+               name: "key-down-shift";
+               signal: "mouse,clicked,1";
+               source: "key-bg-shift";
+               action: SIGNAL_EMIT "key_down" "shift";
+            }
+            program {
+               name: "key-down-shift-enter";
+               signal: "press_shift";
+               action: STATE_SET "down" 0.0;
+               transition: LINEAR 0.1;
+               target: "key-img-shift";
+               target: "key-lbl-shift";
+            }
+            program {
+               name: "key-down-shift-revert";
+               signal: "release_shift";
+               action: STATE_SET "default" 0.0;
+               transition: LINEAR 0.1;
+               target: "key-img-shift";
+               target: "key-lbl-shift";
+            }
+         }
+
+#define KEY_BACKSPACE                                                   \
+         part {                                                         \
+            name: "key-bg-backspace";                                   \
+            type: RECT;                                                 \
+            pointer_mode: NOGRAB;                                       \
+            description {                                               \
+               state: "default" 0.0;                                    \
+               min: 87 54;                                              \
+               max: 87 54;                                              \
+               rel1 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (596 + 87/2) (THIRD_ROW + 27);                \
+               }                                                        \
+               rel2 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (596 + 87/2) (THIRD_ROW + 27);                \
+               }                                                        \
+               color: 0 0 0 0;                                          \
+            }                                                           \
+         }                                                              \
+         part {                                                         \
+            name: "key-img-backspace";                                  \
+            type: IMAGE;                                                \
+            mouse_events: 0;                                            \
+            description {                                               \
+               state: "default" 0.0;                                    \
+               min: 87 54;                                              \
+               max: 87 54;                                              \
+               rel1 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (596 + 87/2) (THIRD_ROW + 27);                \
+               }                                                        \
+               rel2 {                                                   \
+                  relative: 0.0 0.0;                                    \
+                  offset: (596 + 87/2) (THIRD_ROW + 27);                \
+               }                                                        \
+               image {                                                  \
+                  normal: "key-special.png";                            \
+                  border: 9 9 9 9;                                      \
+               }                                                        \
+            }                                                           \
+            description {                                               \
+               state: "down" 0.0;                                       \
+               inherit: "default" 0.0;                                  \
+               image {                                                  \
+                  normal: "key-special-selected.png";                   \
+                  border: 9 9 9 9;                                      \
+               }                                                        \
+            }                                                           \
+         }                                                              \
+         part {                                                         \
+           name: "key-lbl-backspace";                                   \
+           type: IMAGE;                                                 \
+           mouse_events: 0;                                             \
+           description {                                                \
+              state: "default" 0.0;                                     \
+              max: 40 32;                                               \
+              min: 40 32;                                               \
+              rel1 {                                                    \
+                 to: "key-bg-backspace";                                \
+                 relative: 0.5 0.5;                                     \
+              }                                                         \
+              rel2 {                                                    \
+                 to: "key-bg-backspace";                                \
+                 relative: 0.5 0.5;                                     \
+              }                                                         \
+              image.normal: "backspace.png";                            \
+            }                                                           \
+            description {                                               \
+               state: "down" 0.0;                                       \
+               inherit: "default" 0.0;                                  \
+               image.normal: "backspace-selected.png";                  \
+            }                                                           \
+         }                                                              \
+         programs {                                                     \
+            program {                                                   \
+               name: "key-down-backspace";                              \
+               signal: "activated_key";                                 \
+               source: "key-bg-backspace";                              \
+               action: SIGNAL_EMIT "key_down" "backspace";              \
+            }                                                           \
+            program {                                                   \
+               name: "key-mouse-in-backspace";                          \
+               signal: "mouse,in";                                      \
+               source: "key-bg-backspace";                              \
+               action: SIGNAL_EMIT "mouse_over_key" "key-bg-backspace"; \
+            }                                                           \
+            program {                                                   \
+               name: "key-mouse-out-backspace";                         \
+               signal: "mouse,out";                                     \
+               source: "key-bg-backspace";                              \
+               action: SIGNAL_EMIT "mouse_out_key" "key-bg-backspace";  \
+            }                                                           \
+            program {                                                   \
+               name: "key-press-backspace";                             \
+               signal: "press_key";                                     \
+               source: "key-bg-backspace";                              \
+               action: STATE_SET "down" 0.0;                            \
+               target: "key-img-backspace";                             \
+               target: "key-lbl-backspace";                             \
+            }                                                           \
+            program {                                                   \
+               name: "key-release-backspace";                           \
+               signal: "release_key";                                   \
+               source: "key-bg-backspace";                              \
+               action: STATE_SET "default" 0.0;                         \
+               transition: LINEAR 0.1;                                  \
+               target: "key-img-backspace";                             \
+               target: "key-lbl-backspace";                             \
+            }                                                           \
+         }
+
+         KEY_BACKSPACE
+      }
+   }
+
+   group {
+      name: "special-1";
+
+      parts {
+#undef KEY_HSPACE
+#define KEY_HSPACE 70
+#define INIT_HSPACE 0
+         KEY("0", KEY_HPOS(0), FIRST_ROW)
+         KEY("1", KEY_HPOS(1), FIRST_ROW)
+         KEY("2", KEY_HPOS(2), FIRST_ROW)
+         KEY("3", KEY_HPOS(3), FIRST_ROW)
+         KEY("4", KEY_HPOS(4), FIRST_ROW)
+         KEY("5", KEY_HPOS(5), FIRST_ROW)
+         KEY("6", KEY_HPOS(6), FIRST_ROW)
+         KEY("7", KEY_HPOS(7), FIRST_ROW)
+         KEY("8", KEY_HPOS(8), FIRST_ROW)
+         KEY("9", KEY_HPOS(9), FIRST_ROW)
+
+#undef INIT_HSPACE
+#define INIT_HSPACE 35
+         SKEY("-", "dash", KEY_HPOS(0), SECOND_ROW)
+         SKEY("/", "slash", KEY_HPOS(1), SECOND_ROW)
+         SKEY(":", "colon", KEY_HPOS(2), SECOND_ROW)
+         SKEY(";", "semi_colon", KEY_HPOS(3), SECOND_ROW)
+         SKEY("(", "open_par", KEY_HPOS(4), SECOND_ROW)
+         SKEY(")", "close_par", KEY_HPOS(5), SECOND_ROW)
+         SKEY("$", "dollar", KEY_HPOS(6), SECOND_ROW)
+         SKEY("&", "amp", KEY_HPOS(7), SECOND_ROW)
+         SKEY("@", "at", KEY_HPOS(8), SECOND_ROW)
+
+#undef INIT_HSPACE
+#define INIT_HSPACE 105
+         SKEY(".", "dot", KEY_HPOS(0), THIRD_ROW)
+         SKEY(",", "comma", KEY_HPOS(1), THIRD_ROW)
+         SKEY("?", "question", KEY_HPOS(2), THIRD_ROW)
+         SKEY("!", "exclamation", KEY_HPOS(3), THIRD_ROW)
+         SKEY("`", "back_quote", KEY_HPOS(4), THIRD_ROW)
+         SKEY("'", "single_quote", KEY_HPOS(5), THIRD_ROW)
+         SKEY("\"", "double_quote", KEY_HPOS(6), THIRD_ROW)
+
+         KEY_SPECIAL("#+=", 0, THIRD_ROW, 80)
+         KEY_BACKSPACE
+
+         KEY_SPECIAL("ABC", 0, FORTH_ROW, 158)
+         KEY_SPACE
+         KEY_SPECIAL("enter", 525, FORTH_ROW, 158)
+      }
+   }
+
+   group {
+      name: "special-2";
+      parts {
+#undef INIT_HSPACE
+#define INIT_HSPACE 0
+         SKEY("*", "star", KEY_HPOS(0), FIRST_ROW)
+         SKEY("+", "plus", KEY_HPOS(1), FIRST_ROW)
+         SKEY("=", "equal", KEY_HPOS(2), FIRST_ROW)
+         SKEY("_", "underline", KEY_HPOS(3), FIRST_ROW)
+         SKEY("#", "hash", KEY_HPOS(4), FIRST_ROW)
+         SKEY("%", "percent", KEY_HPOS(5), FIRST_ROW)
+         SKEY("~", "tilde", KEY_HPOS(6), FIRST_ROW)
+         SKEY("^", "circumflex", KEY_HPOS(7), FIRST_ROW)
+         SKEY("\\", "backslash", KEY_HPOS(8), FIRST_ROW)
+         SKEY("|", "vert_bar", KEY_HPOS(9), FIRST_ROW)
+
+         SKEY("<", "less", KEY_HPOS(2), SECOND_ROW)
+         SKEY(">", "greater", KEY_HPOS(3), SECOND_ROW)
+         SKEY("[", "open_bracket", KEY_HPOS(4), SECOND_ROW)
+         SKEY("]", "close_bracket", KEY_HPOS(5), SECOND_ROW)
+         SKEY("{", "open_brace", KEY_HPOS(6), SECOND_ROW)
+         SKEY("}", "close_brace", KEY_HPOS(7), SECOND_ROW)
+
+         KEY_SPECIAL(".?12", 0, THIRD_ROW, 80)
+         KEY_BACKSPACE
+
+         KEY_SPECIAL("ABC", 0, FORTH_ROW, 158)
+         KEY_SPACE
+         KEY_SPECIAL("enter", 525, FORTH_ROW, 158)
+      }
+   }
+
+
+	
+	 group {
+		  name: "menu";
+		  #include "menu.edc"
+	 }
+
+	 group {
+		  name: "mouse_ui";
+		  #include "mouse_ui.edc"
+	 }
+	 group {
+		name: "keyboard_ui";
+		#include "keyboard_ui.edc"
+	 }
+	 group {
+		name: "presentation";
+		#include "presentation.edc"
+	 }
+	 group {
+		name: "presentation_conf";
+		#include "presentation_conf.edc"
+	 }
+	 group {
+		name: "multimedia";
+		#include "multimedia.edc"
+	 }
+         group {
+		name: "multimedia_conf";
+		#include "multimedia_conf.edc"
+	 }
+	 group {
+		name: "games";
+		#include "games.edc"
+	 }
+	 group {
+		name: "games_conf";
+		#include "games_conf.edc"
+	 }
+	 group {
+		name: "disconnect";
+		#include "disconnect.edc"
+	 }
+	 group {
+		  name: "connection_status";
+		  #include "connection_status.edc"
+	 }
+	 group {
+		name: "conf_keys";
+		#include "conf_keys.edc"
+	 }
+	 group {
+		name: "about";
+		#include "about.edc"
+	 }
+	 group {
+		name: "bluetooth_off_alert";
+		#include "bluetooth_off_alert.edc"
+	 }
+	 group {
+		name: "settings";
+		#include "settings.edc"
+	 }
+	 
+
+ 

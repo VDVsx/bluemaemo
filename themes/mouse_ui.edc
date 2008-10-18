@@ -1,0 +1,120 @@
+parts {
+
+	SWALLOWCLIP();
+
+         part {
+            name: "background";
+            type: IMAGE;
+            mouse_events: 0;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       image { normal: "background.png"; }                  
+               fill { smooth: 0; } 
+            }
+         } 
+	SCREEN_TEXT("Mouse","mouse_icon.png",0.15);
+	part {
+            name: "mouse_area";
+            type: IMAGE;
+            mouse_events: 1;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+	       //color: 0 0 255 255;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0 ;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset:  -1 -1;
+               }
+	       image { normal: "backdrop.png"; }                  
+               fill { smooth: 0; } 
+            }
+         }
+	part {
+            name: "scroll_area";
+            type: IMAGE;
+            mouse_events: 1;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               rel1 {
+                  relative: 0.95 0.0;
+                  offset: 0 0 ;
+               }
+               rel2 {
+                  relative: 1.0 0.85;
+                  offset:  -1 -1;
+               }
+	       image { normal: "scroll_area.png"; }                  
+               fill { smooth: 0; } 
+            }
+         }
+
+	BT_LEFT();
+	BT_MIDDLE();
+	BT_RIGHT();
+	BT_HOLD();
+	SCROLL_AREA_ICONS();
+	BACK();
+
+     programs {
+
+	program {
+		name: "show_mouse";
+		signal: "show_mouse";
+		action: STATE_SET "clicked" 0.0;
+		target: "bt_left";   
+        }
+	program {
+                name: "mouse_area_entered";
+                signal: "mouse,move";
+                source: "mouse_area";
+		action: SIGNAL_EMIT "mouse_over_area" "mouse_area";       
+        }
+	program {
+                name: "mouse_over_scroll";
+                signal: "mouse,move";
+                source: "scroll_area";
+		action: SIGNAL_EMIT "mouse_over_scroll" "scroll_area";       
+        }
+	program {
+                name: "button_release";
+                signal: "mouse,up,1";
+                source: "mouse_area";
+		action: SIGNAL_EMIT "mouse_area_released" "mouse_area";       
+        }
+	program {
+                name: "button_hold_pressed";
+                signal: "hold_pressed";
+		action: STATE_SET "clicked" 0.0;
+		target: "bt_hold";   
+        }
+        program {
+                name: "button_hold_released";
+                signal: "hold_released";
+		action: STATE_SET "default" 0.0;   
+		target: "bt_hold";       
+        }
+	
+	ACTIVATE("bt_left");
+	ACTIVATE("bt_right");
+	ACTIVATE("bt_middle");
+	ACTIVATE("back");
+	TRANSITION();
+     }
+ 
+}
+   

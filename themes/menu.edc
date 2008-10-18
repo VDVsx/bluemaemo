@@ -1,0 +1,136 @@
+#define ICON(part_name, xpos, ypos)                         		 \
+            part {                                                       \
+                name: part_name;                                	 \
+                mouse_events: 1;                                         \
+                type: IMAGE;                                             \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    rel1 {                                               \
+                        relative: 0.05+(xpos*0.65) 0.15+(ypos*0.25);     \
+                        offset: 0 0;                                     \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 0.32+(xpos*0.65) 0.35+(ypos*0.25);     \
+                        offset: -1 -1;                                   \
+                        to: "swallow_clip";                              \
+                    }                                                    \
+                    image {                                              \
+                        normal: "button_background.png";                 \
+                        border: 27 27 27 27;                             \
+                    }                                                    \
+                }                                                        \
+                description {                                            \
+                    state: "clicked" 0.0;                                 \
+                    inherit: "default" 0.0;                              \
+                    image {normal: "button_background_active.png";}      \
+			 fill { smooth: 0; }                            \
+                }                                                        \
+            }    							\
+	                                                      		 \
+            part {                                                       \
+                name: part_name"_icon";                           	\
+                mouse_events: 0;                                         \
+                type: IMAGE;                                             \
+                clip_to: "swallow_clip";                                 \
+                description {                                            \
+                    state: "default" 0.0;                                \
+                    aspect: 1.0 1.0;                                     \
+                    aspect_preference: BOTH;                             \
+                    rel1 {                                               \
+                        relative: 0.0 0.0;                               \
+                        offset: 0 0;                                     \
+                        to: part_name;                         		 \
+                    }                                                    \
+                    rel2 {                                               \
+                        relative: 1.0 1.0;                               \
+                        offset: -1 -1;                                   \
+                        to: part_name;                         		 \
+                    }                                                    \
+                    image {                                              \
+                        normal: part_name"_icon.png";                	 \
+                    }                                                    \
+                }                                                        \
+            }
+parts {
+
+	SWALLOWCLIP();
+
+         part {
+            name: "background";
+            type: IMAGE;
+            mouse_events: 0;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       image { normal: "background.png"; }                  
+               fill { smooth: 0; } 
+            }
+         }
+
+    part {
+        name: "label_title";
+        type: TEXT;
+        effect: OUTLINE_SOFT_SHADOW;
+        mouse_events: 0;
+        clip_to: "swallow_clip";
+        description {
+            state: "default" 0.0;
+            rel1 {
+                relative: 0.0 0.02;
+                offset: 0 0;
+            }
+            rel2 {
+                relative: 1.0 0.1;
+                offset: -1 -1;
+            }
+            text {
+                font: "Sans";
+                size: 1;
+                fit: 1 1;
+                align: 0.5 0.5;
+            }
+        }
+    }
+	ICON("mouse",0,0);
+	ICON("keyboard",0.5,0);
+	ICON("presentation",1,0);
+	ICON("multimedia",0,1);
+	ICON("games",0.5,1);
+	ICON("accelerometer",1,1);
+	ICON("conf",0,2);
+	ICON("connection",0.5,2);
+	ICON("about",1,2);
+
+	LOGO();
+        QUIT();
+	
+	
+	
+	
+     programs {
+
+	ACTIVATE("quit");
+	ACTIVATE("mouse");
+	ACTIVATE("keyboard");
+	ACTIVATE("presentation");
+	ACTIVATE("multimedia");
+	ACTIVATE("games");
+	ACTIVATE("accelerometer");
+	ACTIVATE("conf");
+	ACTIVATE("connection");
+	ACTIVATE("about");
+	TRANSITION();
+     }
+ 
+}

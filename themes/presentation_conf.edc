@@ -1,0 +1,52 @@
+parts {
+
+	   SWALLOWCLIP();
+		
+	  part {
+            name: "background";
+            type: IMAGE;
+            mouse_events: 0;
+	    clip_to: "swallow_clip";   
+            description {
+               state: "default" 0.0;
+               visible: 1;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: 0 0;
+               }
+               rel2 {
+                  relative: 1.0 1.0;
+                  offset: -1 -1;
+               }
+	       image { normal: "background.png"; }                  
+               fill { smooth: 0; } 
+            }
+
+	    description {
+               state: "hidden" 0.0;
+               inherit: "default" 0.0;
+               visible: 0;
+            }
+         }
+
+	SCREEN_TEXT("Configurations","conf_icon.png",0.28);
+	CONF_TEXT("Previous",0);
+	CONF_KEY_ICON("previous_key",0);
+	CONF_TEXT("Next",1);
+	CONF_KEY_ICON("next_key",1);
+	CONF_TEXT("Fullscreen",2);
+	CONF_KEY_ICON("fullscreen_key",2);
+	CONF_TEXT("No Fullscreen",3);
+	CONF_KEY_ICON("no_fullscreen_key",3);
+        LOGO();
+	BACK();
+	
+    }
+    programs {
+	ACTIVATE("back");
+	ACTIVATE("previous_key");
+	ACTIVATE("next_key");
+	ACTIVATE("fullscreen_key");
+	ACTIVATE("no_fullscreen_key");
+    	TRANSITION();
+    }
