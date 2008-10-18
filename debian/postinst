@@ -1,0 +1,4 @@
+#! /bin/sh
+
+echo "Updating Sudoers"
+update-sudoers || true
