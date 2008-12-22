@@ -6,7 +6,7 @@ import edje.decorators
 import ecore
 import ecore.x
 import ecore.evas
-from bluemaemo import *
+from bluemaemo_edje_group import *
 
 
 

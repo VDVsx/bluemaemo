@@ -40,7 +40,10 @@ from optparse import OptionParser
 from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
+from bluemaemo_edje_group import *
 from bluemaemo_about import *
+from bluemaemo_disconnect import *
+from bluemaemo_connection_status import *
 
 #from bluemaemo.bluemaemo_server import *
 #from bluemaemo.bluemaemo_key_mapper import *
@@ -228,34 +231,6 @@ def translate_key(self,keyname, keystring):
 		return keystring
 
 #----------------------------------------------------------------------------#
-class edje_group(edje.Edje):
-#----------------------------------------------------------------------------#
-    def __init__(self, main, group, parent_name="main"):
-        self.main = main
-        self.parent_name = parent_name
-        global edjepath
-        f = edjepath
-        try:
-            edje.Edje.__init__(self, self.main.evas_canvas.evas_obj.evas, file=f, group=group)
-        except edje.EdjeLoadError, e:
-            raise SystemExit("error loading %s: %s" % (f, e))
-        self.size = self.main.evas_canvas.evas_obj.evas.size
-
-    def onShow( self ):
-        pass
-
-    def onHide( self ):
-        pass
-
-    @edje.decorators.signal_callback("mouse,clicked,1", "button_bottom_right")
-    def on_edje_signal_button_bottom_right_pressed(self, emission, source):
-        self.main.transition_to(self.parent_name)
-
-    @edje.decorators.signal_callback("finished_transition", "*")
-    def on_edje_signal_finished_transition(self, emission, source):
-        self.main.transition_finished()
-
-#----------------------------------------------------------------------------#
 class main(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
@@ -327,43 +302,6 @@ class main(edje_group):
 			ecore.timer_add(3.0,self.main.transition_to,"menu")
 
 
-#----------------------------------------------------------------------------#
-class connection_status(edje_group):
-#----------------------------------------------------------------------------#
-    def __init__(self, main):
-        edje_group.__init__(self, main, "connection_status")
-        
-    def onShow( self ):
-	self.focus = True
-    
-
-    def onHide( self ):
-	self.focus = False
-     
-    @evas.decorators.key_down_callback
-    def key_down_cb( self, event ):
-        key = event.keyname
-
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-	elif key == "Escape":
-		self.main.transition_to("menu")
-		
-    @edje.decorators.signal_callback("mouse,clicked,1", "*")
-    def on_edje_signal_button_pressed(self, emission, source):
-	if source == "back":
-		
-		self.main.transition_to("menu")
 
 #----------------------------------------------------------------------------#
 class bluetooth_off_alert(edje_group):

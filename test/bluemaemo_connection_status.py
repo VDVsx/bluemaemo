@@ -9,15 +9,11 @@ import ecore.evas
 from bluemaemo_edje_group import *
 
 #----------------------------------------------------------------------------#
-class disconnect(edje_group):
+class connection_status(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
-        edje_group.__init__(self, main, "disconnect")
+        edje_group.__init__(self, main, "connection_status")
         
-	self.part_text_set("label_error","Error: Disconnected by remote device")
-	self.part_text_set("label_connect", "Open connection again ?")
-
-
     def onShow( self ):
 	self.focus = True
     
@@ -41,21 +37,12 @@ class disconnect(edje_group):
 			self.main.bluemaemo_conf.fullscreen = "Yes"
 			self.main.window.fullscreen = True
 
+	elif key == "Escape":
+		self.main.transition_to("menu")
+		
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
-	if source == "quit" or source == "no_option" :
+	if source == "back":
 		
-		self.main.connection.terminate_connection()
-		self.main.on_exit()
-		ecore.main_loop_quit()
+		self.main.transition_to("menu")
 
-	if source == "yes_option":
-
-		self.main.connection.terminate_connection()
-		self.main.initialize_bluemaemo_server()
-		self.main.groups["main"].part_text_set("label_connect_to", "")
-		self.main.groups["main"].part_text_set("label_client", "")
-		self.main.groups["main"].part_text_set("label_waiting", "Waiting for connection ... ")
-		ecore.timer_add(1.0,self.main.groups["main"].check_client)
-		self.main.transition_to("main")
-		
