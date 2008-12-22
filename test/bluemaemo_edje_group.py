@@ -33,6 +33,97 @@ def mouse_position(self,x1,y1):
 	return x,y
 
 
+#-------------------------------------------------------------------------#
+def key_dec(self,key):
+#-------------------------------------------------------------------------#
+	self.shift = False
+	self.ctrl = False
+	self.alt = False
+	self.win = False
+	self.fn = False
+	self.sp = False
+	self.modif = ""
+	self.val = ""
+	if len(key) < 4:
+		value = self.main.key_mapper.mapper[str(key)]
+		return "00", value
+
+	else:
+
+		key_split = key.split("+")
+		
+		for i in key_split:
+			
+			if i == "shift":
+				self.shift = True
+			
+			elif i == "ctrl":
+				self.ctrl = True
+			
+			elif i == "alt":
+				self.alt = True
+			elif i == "win":
+				self.win = True
+
+			elif i == "fn_k":
+				self.fn = True
+
+			elif i == "sp":
+				self.sp = True
+			
+			else:
+			
+				if self.shift == True:
+
+					self.modif = "02"
+					self.shift = False
+					self.val = self.main.key_mapper.mapper[str(i)]
+
+				if self.win == True:
+
+					self.modif = "08"
+					self.win = False
+					self.val = self.main.key_mapper.mapper[str(i)]
+
+				elif self.ctrl == True and self.alt == True:
+
+					self.ctrl = False
+					self.alt = False
+					self.modif = "05"
+					self.val = self.main.key_mapper.mapper[str(i)]
+				
+				elif self.ctrl == True:
+
+					
+					self.ctrl = False
+					self.modif = "01"
+					self.val = self.main.key_mapper.mapper[str(i)]
+				
+				elif self.alt == True:
+					
+					self.alt = False
+					self.modif = "04"
+					self.val = self.main.key_mapper.mapper[str(i)]
+
+				elif self.fn == True:
+
+					self.fn = False
+					self.modif = self.main.key_mapper.mapper["fn_m+"+str(i)]
+					self.val = self.main.key_mapper.mapper["fn_k+"+str(i)]
+
+				elif self.sp == True:
+
+					self.sp = False
+					self.val = self.main.key_mapper.mapper[str(i)+ "_k"]
+					self.modif = self.main.key_mapper.mapper[str(i)+ "_m"]
+
+				else:	
+					self.modif = "00"
+					self.val = self.main.key_mapper.mapper[str(i)]
+	
+	return self.modif,self.val
+
+
 #----------------------------------------------------------------------------#
 class edje_group(edje.Edje):
 #----------------------------------------------------------------------------#
