@@ -40,6 +40,7 @@ from optparse import OptionParser
 from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
+from bluemaemo_about import *
 
 #from bluemaemo.bluemaemo_server import *
 #from bluemaemo.bluemaemo_key_mapper import *
@@ -261,9 +262,9 @@ class main(edje_group):
         edje_group.__init__(self, main, "main")
 
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
-	#ecore.timer_add(1.0,self.main.transition_to,"menu")
+	ecore.timer_add(1.0,self.main.transition_to,"menu")
 
-	ecore.timer_add(1.0,self.check_connection)
+	#ecore.timer_add(1.0,self.check_connection)
     
 
     def onShow( self ):
@@ -325,57 +326,7 @@ class main(edje_group):
 			ecore.idle_enterer_add( self.main.check_connection_status)
 			ecore.timer_add(3.0,self.main.transition_to,"menu")
 
-#----------------------------------------------------------------------------#
-class disconnect(edje_group):
-#----------------------------------------------------------------------------#
-    def __init__(self, main):
-        edje_group.__init__(self, main, "disconnect")
-        
-	self.part_text_set("label_error","Error: Disconnected by remote device")
-	self.part_text_set("label_connect", "Open connection again ?")
 
-
-    def onShow( self ):
-	self.focus = True
-    
-
-    def onHide( self ):
-	self.focus = False
-     
-    @evas.decorators.key_down_callback
-    def key_down_cb( self, event ):
-        key = event.keyname
-
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-    @edje.decorators.signal_callback("mouse,clicked,1", "*")
-    def on_edje_signal_button_pressed(self, emission, source):
-	if source == "quit" or source == "no_option" :
-		
-		self.main.connection.terminate_connection()
-		self.main.on_exit()
-		ecore.main_loop_quit()
-
-	if source == "yes_option":
-
-		self.main.connection.terminate_connection()
-		self.main.initialize_bluemaemo_server()
-		self.main.groups["main"].part_text_set("label_connect_to", "")
-		self.main.groups["main"].part_text_set("label_client", "")
-		self.main.groups["main"].part_text_set("label_waiting", "Waiting for connection ... ")
-		ecore.timer_add(1.0,self.main.groups["main"].check_client)
-		self.main.transition_to("main")
-		
 #----------------------------------------------------------------------------#
 class connection_status(edje_group):
 #----------------------------------------------------------------------------#
@@ -459,44 +410,7 @@ class bluetooth_off_alert(edje_group):
 		self.main.bluetooth_obj = True
 		self.main.transition_to("main")
 
-#----------------------------------------------------------------------------#
-class about(edje_group):
-#----------------------------------------------------------------------------#
-    def __init__(self, main):
-        edje_group.__init__(self, main, "about")
 
-    def onShow( self ):
-	self.focus = True
-    
-
-    def onHide( self ):
-	self.focus = False
-     
-    @evas.decorators.key_down_callback
-    def key_down_cb( self, event ):
-        key = event.keyname
-
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-	elif key == "Escape":
-
-		self.main.transition_to("menu")
-
-    @edje.decorators.signal_callback("mouse,clicked,1", "*")
-    def on_edje_signal_button_pressed(self, emission, source):
-	if source == "back":
-		
-		self.main.transition_to("menu")
 
 #----------------------------------------------------------------------------#
 class settings(edje_group):
@@ -2314,7 +2228,7 @@ class GUI(object):
         self.in_transition = False
 	self.current_conf_screen = None
 	self.current_source = None
-	self.initialize_bluemaemo_server()
+	#self.initialize_bluemaemo_server()
 
     def check_connection_status(self):
 	if self.connection.connect == False:

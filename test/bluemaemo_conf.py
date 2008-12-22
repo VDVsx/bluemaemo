@@ -57,7 +57,7 @@ class bluemaemo_conf:
 		self.volume_m_key = self.config.get("multimedia","volume_m_key")
 		self.volume_p_key = self.config.get("multimedia","volume_p_key")
 		self.no_fullscreen_key_m = self.config.get("multimedia", "no_fullscreen_key_m")
-		#agames profile
+		#games profile
 		self.up_key = self.config.get("games","up_key")
 		self.down_key = self.config.get("games","down_key")
 		self.right_key = self.config.get("games","right_key")
