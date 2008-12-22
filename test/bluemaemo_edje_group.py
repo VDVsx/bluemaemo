@@ -19,6 +19,7 @@ for i in edjepaths:
 else:
     raise Exception( "bluemaemo.edj not found. looked in %s" % edjepaths )
 
+#aux functions
 
 #-------------------------------------------------------------------------#
 def mouse_position(self,x1,y1):
