@@ -677,6 +677,7 @@ class GUI(object):
 	self.key_text = ""
 	self.bluetooth_obj = True
 	self.edje_obj = ""
+	self.adapter_on = False
 		
 	self.key_mapper = key_mapper()
 	
@@ -701,6 +702,7 @@ class GUI(object):
         self.in_transition = False
 	self.current_conf_screen = None
 	self.current_source = None
+	self.check_bt_status()
 	self.initialize_bluemaemo_server()
 
     def check_connection_status(self):
@@ -713,45 +715,55 @@ class GUI(object):
 	
 	
     def check_bt_status(self):
+
+	bus_adapter = dbus.SystemBus()
+	adapter = dbus.Interface(bus_adapter.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
+	state = adapter.GetMode()
+
+	if state == "discoverable":
 		
-	file = open("/sys/bus/platform/devices/neo1973-pm-bt.0/power_on")
-	status = file.readline()
-	if status.find('0') > -1:
-		print "off"
-		return "off"
-	else:
-		print "on"
-		return "on"
+		self.adapter_on = True
+
+	elif state == "off":
+
+		self.power_on_bt()
+		self.restore_conditions = "off"
+
+	elif state == "connectable":
 		
-	file.close()
+		self.power_on_bt()
+		self.restore_conditions = "connectable"
+		
+	
 
     def power_on_bt(self):
 	
-	self.restore_conditions = True
-	os.system("echo 1 > /sys/devices/platform/s3c2440-i2c/i2c-adapter/i2c-0/0-0073/neo1973-pm-bt.0/power_on")
-	os.system("echo 0 > /sys/devices/platform/s3c2440-i2c/i2c-adapter/i2c-0/0-0073/neo1973-pm-bt.0/reset")
+	os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:discoverable")
+	self.adapter_on = True
 	
-    def dbus_objectInit( self ):
-        
-	
-	self.bluetooth_obj = True
-	return False
         
     def on_exit(self):
 	
-	if self.restore_conditions == True:
+	if self.restore_conditions == "off":
 
-		os.system("echo 1 > /sys/devices/platform/s3c2440-i2c/i2c-adapter/i2c-0/0-0073/neo1973-pm-bt.0/reset")
+		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:off")
+
+	elif self.restore_conditions == "connectable":
+
+		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:connectable")
+
+	else:
+		pass
 	
         
 
     def initialize_bluemaemo_server(self):
 
-	if self.bluetooth_obj == True:
-
+	if self.adapter_on == True:
 		self.connection = Connect()
 		ecore.timer_add(1.0,self.connection.start_connection)
 		self.connection_processed = True
+
         else:
 		ecore.timer_add(1.0,self.initialize_bluemaemo_server)
 	
