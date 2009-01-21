@@ -138,7 +138,7 @@ class key_mapper:
 		#self.mapper['minus'] = 86
 		
 		#shift user translation
-
+		self.mapper["space_t"] = "space"
 		self.mapper['shift+a'] = "A"
 		self.mapper['shift+b'] = "B"
 		self.mapper['shift+c'] = "C"

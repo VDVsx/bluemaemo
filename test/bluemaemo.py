@@ -3,7 +3,7 @@
 #
 #      bluemaemo.py
 #
-#      Copyright 2008 	Valerio Valerio <vdv100@gmail.com>
+#      Copyright 2008 - 2009 	Valerio Valerio <vdv100@gmail.com>
 #						
 #
 #      This program is free software; you can redistribute it and/or modify
@@ -257,8 +257,15 @@ class conf_keys(edje_group):
 			self.main.transition_to(prev)
 		
 		elif len(self.main.key_text) > 3:
-			#shift translation
-			if self.main.key_text[0] == "s":
+			
+
+			if self.main.key_text == "space":
+				text_value = self.main.key_mapper.mapper["space_t"]
+				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
+				self.main.save_local_conf(local_key,self.main.key_text)	
+
+			#shift translation	
+			elif self.main.key_text[0] == "s":
 				text_value = self.main.key_mapper.mapper[self.main.key_text]
 				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
 				self.main.save_local_conf(local_key,self.main.key_text)	
