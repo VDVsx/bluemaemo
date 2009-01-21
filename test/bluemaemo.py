@@ -146,9 +146,9 @@ class main(edje_group):
         edje_group.__init__(self, main, "main")
 
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
-	ecore.timer_add(1.0,self.main.transition_to,"menu")
+	#ecore.timer_add(1.0,self.main.transition_to,"menu")
 
-	#ecore.timer_add(1.0,self.check_connection)
+	ecore.timer_add(1.0,self.check_connection)
     
 
     def onShow( self ):
@@ -701,7 +701,7 @@ class GUI(object):
         self.in_transition = False
 	self.current_conf_screen = None
 	self.current_source = None
-	#self.initialize_bluemaemo_server()
+	self.initialize_bluemaemo_server()
 
     def check_connection_status(self):
 	if self.connection.connect == False:
