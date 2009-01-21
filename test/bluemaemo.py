@@ -299,6 +299,7 @@ class conf_keys(edje_group):
         key = event.string
 	key_key = event.key
 	key_value = event.keyname
+	print(key_value)
 	self.hit = True
 
 	if key_value == "Shift_L":
