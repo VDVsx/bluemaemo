@@ -22,6 +22,10 @@ class mouse_ui(edje_group):
 	self.scroll_pos = 0
 	self.tape_mouse_area = 0
 	self.main.bluemaemo_conf.fullscreen
+	self.alt = False
+        self.ctrl = False
+	self.fn = False
+	self.shift = False
 
     
     def onShow( self ):
@@ -30,8 +34,8 @@ class mouse_ui(edje_group):
 
     def onHide( self ):
 	self.focus = False
-     
-
+  
+    #mouse
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
         key = event.keyname
@@ -56,7 +60,55 @@ class mouse_ui(edje_group):
 	elif key == "Escape":
 
 		self.main.transition_to("menu")
+
+	else:
 		
+		try:
+			if key == "Shift_L":
+				self.shift = True
+			
+			elif key == "Control_L" or key == "Control_R":
+				self.ctrl = True
+			
+			elif key == "Alt_L":
+				self.alt = True
+
+			elif key == "ISO_Level3_Shift":
+				self.fn = True
+			
+			else:
+			
+				value = self.main.key_mapper.mapper[str(key)]
+			
+				if self.shift == True:
+					self.main.connection.send_keyboard_event("02",value)
+			
+				elif self.alt == True and self.ctrl == True:
+					self.main.connection.send_keyboard_event("05",value)
+					self.ctrl = False
+					self.alt = False
+				
+				elif self.ctrl == True:
+					self.main.connection.send_keyboard_event("01",value)
+					self.ctrl = False
+				
+				elif self.alt == True:
+					self.main.connection.send_keyboard_event("04",value) 	
+					self.alt = False
+			
+				elif str(key) == "plus" and self.fn == False:
+
+					self.main.connection.send_keyboard_event("02",value) 
+			
+				elif self.fn == True:
+					modi = self.main.key_mapper.mapper["fn_m+"+str(key)]
+					value2 = self.main.key_mapper.mapper["fn_k+"+str(key)]
+					self.main.connection.send_keyboard_event(modi,value2) 	
+			
+				else:
+					self.main.connection.send_keyboard_event("00",value)
+		except:
+			print "Key error --->>>"
 				
 
 
@@ -67,6 +119,13 @@ class mouse_ui(edje_group):
 	if key == "F7" or key == "F8":
 		self.button_hold = False
 		self.signal_emit("hold_released", "")
+
+	elif key == "Shift_L":
+		self.shift = False
+
+	elif key == "ISO_Level3_Shift":
+		self.fn = False
+
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_mouse_down(self, emission, source):

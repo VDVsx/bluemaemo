@@ -36,15 +36,11 @@ class keyboard_ui(edje_group):
 
     def onShow( self ):
 	self.focus = True
-     #   self.main.window.x_window_virtual_keyboard_state_set(ecore.x.ECORE_X_VIRTUAL_KEYBOARD_STATE_ON)
-        #if illume:
-            #illume.kbd_show()
+     
 
     def onHide( self ):
 	self.focus = False
-      #  self.main.window.x_window_virtual_keyboard_state_set(ecore.x.ECORE_X_VIRTUAL_KEYBOARD_STATE_OFF)
-        #if illume:
-            #illume.kbd_hide()
+     
 
     @evas.decorators.key_up_callback
     def key_up_cb( self, event ):
