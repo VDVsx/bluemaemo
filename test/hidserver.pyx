@@ -4,8 +4,10 @@ cdef extern from "hidserv.c":
     int send_event(int modifiers, int val)
     int send_mouse_event(int btn, int mov_x, int mov_y, int whell)
     int connection_state()
+    int reconnect(char *src,char *dst)
     int quit_serv()
     void quit_thread()
+
 
 def init_hidserver():
 
@@ -26,6 +28,12 @@ def connec_state():
 
   n = connection_state()
   return n
+
+def reConnect(src,dst):
+
+  n = reconnect(src,dst)
+  return n
+
 
 def quit_server():
   
