@@ -117,8 +117,6 @@ int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
 	bacpy(&addr.l2_bdaddr, dst);
 	addr.l2_psm = htobs(psm);
 
-	printf("ab");
-
 	if (connect(sk, (struct sockaddr *) &addr, sizeof(addr)) < 0) {
 		close(sk);
 		return -1;
@@ -241,6 +239,10 @@ int reconnect(char *src, char *dst)
 		exit(1);
 	}
 
+	ctrl = csk;
+	intr = isk;
+
+	connection = 1;
 	return 1;
 
 }
@@ -315,8 +317,8 @@ void open_sock()
 	
 	is = l2cap_accept(isk, NULL);	
 	
-	csg = cs;
-	isg = is;
+	csg = csk;
+	isg = isk;
 
 	ctrl = cs;
 	intr = is;
