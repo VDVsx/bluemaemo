@@ -50,6 +50,7 @@ images {
   image: "backspace-selected.png" COMP;
   image: "shift.png" COMP;
   image: "shift-selected.png" COMP;
+  image: "listitem.png" COMP;
 }
 
 styles {
@@ -63,6 +64,7 @@ styles {
 fonts {
    font: "VeraBd.ttf" "Sans";
    font: "VeraBd.ttf" "key";
+   font: "VeraBd.ttf" "Font Item";
 }
 
 #define BUTTON_BOTTOM_HEIGHT 0.12;
@@ -1869,6 +1871,10 @@ group {
 		name: "settings";
 		#include "settings.edc"
 	 }
+	group {
+		name: "rec_list";
+		#include "rec_list.edc"
+	}
 	 
 
  

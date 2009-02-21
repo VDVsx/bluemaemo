@@ -52,6 +52,7 @@ from bluemaemo_keyboard import *
 from bluemaemo_presentation import *
 from bluemaemo_multimedia import *
 from bluemaemo_games import *
+from bluemaemo_recon_list import *
 
 #from bluemaemo.bluemaemo_server import *
 #from bluemaemo.bluemaemo_key_mapper import *
@@ -146,9 +147,9 @@ class main(edje_group):
         edje_group.__init__(self, main, "main")
 
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
-	#ecore.timer_add(1.0,self.main.transition_to,"menu")
+	ecore.timer_add(1.0,self.main.transition_to,"rec_list")
 
-	ecore.timer_add(1.0,self.check_connection)
+	#ecore.timer_add(1.0,self.check_connection)
     
 
     def onShow( self ):
@@ -687,7 +688,7 @@ class GUI(object):
         self.groups["swallow"] = edje_group(self, "swallow")
         self.evas_canvas.evas_obj.data["swallow"] = self.groups["swallow"]
 
-        for page in ("main","mouse_ui", "menu", "disconnect", "connection_status", "keyboard_ui","about","bluetooth_off_alert","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys"):
+        for page in ("main","mouse_ui", "menu", "disconnect", "connection_status", "keyboard_ui","about","bluetooth_off_alert","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "rec_list"):
 		ctor = globals().get( page, None )
 		if ctor:
 			self.groups[page] = ctor( self )
@@ -702,8 +703,8 @@ class GUI(object):
         self.in_transition = False
 	self.current_conf_screen = None
 	self.current_source = None
-	self.check_bt_status()
-	self.initialize_bluemaemo_server()
+	#self.check_bt_status()
+	#self.initialize_bluemaemo_server()
 
     def check_connection_status(self):
 	if self.connection.connect == False:

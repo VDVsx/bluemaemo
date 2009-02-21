@@ -4,7 +4,7 @@ bluemaemo 0.2
 
 	* Added space key map to the profiles
 	* Added method to change bluetooth adapter mode
-	* N810 Hardware keyboard support while in mouse profile added
+	* N810 Hardware keyboard support while in mouse profile
 	* Major code refactoring - Separated all profiles
 
 bluemaemo 0.1

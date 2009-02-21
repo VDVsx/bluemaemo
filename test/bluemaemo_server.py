@@ -231,7 +231,8 @@ class start_deamon(Thread):
 		try:
 
 			#hidserver.init_hidserver()
-			hidserver.reConnect("00:1D:6E:9D:42:9C","00:10:60:EB:85:21")
+			#hidserver.reConnect("00:1D:6E:9D:42:9C","00:10:60:EB:85:21")
+			hidserver.reConnect("00:1D:6E:9D:42:9C","00:21:4F:57:93:C8")
 			while self.bluemaemo.connect == False:
 				time.sleep(1)
 				n = hidserver.connec_state()
