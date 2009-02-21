@@ -32,6 +32,8 @@ class rec_list(edje_group):
 
         	edje_group.__init__(self, main, "rec_list")
 
+	def construct(self):
+
 		items = []
 		d = os.path.dirname(sys.argv[0]) #sub pelo image folder
 		for i in xrange(5):
@@ -112,6 +114,7 @@ class KineticList(evas.SmartObject):
         self.is_scrolling = False
         self.do_freeze = False
 
+
     def freeze(self):
         self.do_freeze = True
 
@@ -146,7 +149,7 @@ class KineticList(evas.SmartObject):
             if obj != edje_obj:
                 obj.signal_emit("fadeout", "")
 
-        edje_obj.signal_emit("open", "")
+        edje_obj.signal_emit("select_adap", "")
 
     def __on_mouse_move(self, edje_obj, emission, source, data=None):
         if self.mouse_down:

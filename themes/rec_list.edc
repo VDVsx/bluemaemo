@@ -55,6 +55,14 @@ group {
                    //border: 5 5 5 5;
                }
             }
+	   description {
+               state: "clicked" 0.0;
+	       inherit: "default" 0.0;  
+               image {
+                   normal: "selectitem.png";
+                   //border: 5 5 5 5;
+               }
+            }
          }
          part {
              name: "thumbnail";
@@ -126,4 +134,13 @@ group {
              }
           }
        }
+
+   programs {
+
+	program {
+		name: "select_adap";
+		signal: "select_adap";
+		action: STATE_SET "clicked" 0.0;
+		target: "item_background";   
+        }
 }
