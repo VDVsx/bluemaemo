@@ -1878,6 +1878,10 @@ group {
 		name: "confirm_conn";
 		#include "confirm_conn.edc"
 	}
+	 group {
+		name: "unable_conn";
+		#include "unable_conn.edc"
+	}
 	 
 
  
