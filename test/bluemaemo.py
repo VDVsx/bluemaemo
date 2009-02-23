@@ -148,9 +148,9 @@ class main(edje_group):
         edje_group.__init__(self, main, "main")
 
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
-	ecore.timer_add(1.0,self.main.transition_to,"unable_conn")
+	#ecore.timer_add(1.0,self.main.transition_to,"unable_conn")
 
-	#ecore.timer_add(1.0,self.check_connection)
+	ecore.timer_add(1.0,self.check_connection)
     
 
     def onShow( self ):
@@ -675,11 +675,11 @@ class GUI(object):
 	self.window = self.evas_canvas.evas_obj
 	self.connection_processed = False
 	self.restore_conditions = False
-	self.try_framework = 0
 	self.key_text = ""
 	self.bluetooth_obj = True
 	self.edje_obj = ""
 	self.adapter_on = False
+	
 		
 	self.key_mapper = key_mapper()
 	
@@ -704,8 +704,9 @@ class GUI(object):
         self.in_transition = False
 	self.current_conf_screen = None
 	self.current_source = None
-	#self.check_bt_status()
-	#self.initialize_bluemaemo_server()
+	self.reconnect = True
+	self.check_bt_status()
+	self.initialize_bluemaemo_server()
 
     def check_connection_status(self):
 	if self.connection.connect == False:
@@ -759,12 +760,16 @@ class GUI(object):
 	
         
 
-    def initialize_bluemaemo_server(self):
+    def initialize_bluemaemo_server(self,addr=1):
 
 	if self.adapter_on == True:
-		self.connection = Connect()
-		ecore.timer_add(1.0,self.connection.start_connection)
-		self.connection_processed = True
+		
+			#self.connection.reconnect("00:10:60:EB:85:21")
+
+			self.connection = Connect()
+			self.connection.start_connection(addr)
+			#ecore.timer_add(1.0,self.connection.start_connection)
+			self.connection_processed = True
 
         else:
 		ecore.timer_add(1.0,self.initialize_bluemaemo_server)

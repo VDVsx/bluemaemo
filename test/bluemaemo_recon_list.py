@@ -32,6 +32,27 @@ class rec_list(edje_group):
 
         	edje_group.__init__(self, main, "rec_list")
 
+
+	@evas.decorators.key_down_callback
+    	def key_down_cb( self, event ):
+		key = event.keyname
+
+		if key == "F6":
+
+			if self.main.bluemaemo_conf.fullscreen == "Yes":
+			
+				self.main.bluemaemo_conf.fullscreen = "No"
+				self.main.window.fullscreen = False
+
+			elif self.main.bluemaemo_conf.fullscreen == "No":
+			
+				self.main.bluemaemo_conf.fullscreen = "Yes"
+				self.main.window.fullscreen = True
+	
+		elif key == "Escape":
+			##alterar para ir para o 1 ecra
+			self.main.transition_to("menu")
+
 	def construct(self):
 
 		items = []
@@ -145,10 +166,7 @@ class KineticList(evas.SmartObject):
         self.__update_screen()
 
     def __on_mouse_clicked(self, edje_obj, emission, source, data=None):
-        for obj in self.objects:
-            if obj != edje_obj:
-                obj.signal_emit("fadeout", "")
-
+        
         edje_obj.signal_emit("select_adap", "")
 
     def __on_mouse_move(self, edje_obj, emission, source, data=None):

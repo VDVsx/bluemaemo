@@ -229,14 +229,14 @@ int reconnect(char *src, char *dst)
 	csk = l2cap_connect(&srcaddr, &dstaddr, L2CAP_PSM_HIDP_CTRL);
 	if (csk < 0) {
 		perror("Can't create HID control channel");
-		exit(1);
+		return 0;
 	}
 
 	isk = l2cap_connect(&srcaddr, &dstaddr, L2CAP_PSM_HIDP_INTR);
 	if (isk < 0) {
 		perror("Can't create HID interrupt channel");
 		close(csk);
-		exit(1);
+		return 0;
 	}
 
 	ctrl = csk;
@@ -335,7 +335,6 @@ void init_server()
 	uint8_t* dev_class;
 	uint8_t* dev_class2;
 	
-     	printf("cenas");
 	//Change device class
 	dev_class = get_device_class(0);
 	printf("0x%02x%02x%02x\n", dev_class[2], dev_class[1], dev_class[0]);

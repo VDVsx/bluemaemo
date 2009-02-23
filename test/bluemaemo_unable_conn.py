@@ -45,14 +45,12 @@ class unable_conn(edje_group):
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
-	if source == "quit" or source == "no_option" :
+	if source == "quit":
 
 		ecore.main_loop_quit()
 
-	if source == "yes_option":
+	if source == "ok_option":
 
-		self.main.power_on_bt()
-		self.main.bluetooth_obj = True
 		self.main.transition_to("main")
 
 
