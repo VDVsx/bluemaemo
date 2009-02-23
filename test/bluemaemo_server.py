@@ -44,8 +44,7 @@ class Connect:
 		self.quit_server = False
 		self.known_dev = None
 		self.devices_conf = bluemaemo_known_devices()
-		self.known_dev = self.devices_conf.config.items("known_devices")
-		print self.known_dev
+		
 		
 		bus_input = dbus.SystemBus()
 		self.input = dbus.Interface(bus_input.get_object('org.bluez', '/org/bluez/service_input'), 'org.bluez.Service')
@@ -277,8 +276,11 @@ class start_deamon(Thread):
 				client_name = self.bluemaemo.adapter.GetRemoteName(input_status[-1])
 				self.bluemaemo.client_name = str(client_name)
 				self.bluemaemo.client_addr = str(input_status[-1])
-				self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr,self.bluemaemo.client_name)
-				self.bluemaemo.devices_conf.save_file()
+				if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
+					print "device already existent"
+				else:
+					self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
+					self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
 				print "connected to: " + str(client_name)
 			except:
 			
