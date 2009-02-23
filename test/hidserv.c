@@ -1,6 +1,6 @@
 /*
  *
- *  Copyright (C) 2008  Valerio Valerio <vdv100@gmail.com>
+ *  Copyright (C) 2008 -2009  Valerio Valerio <vdv100@gmail.com>
  *
  *
  *  This program is free software; you can redistribute it and/or modify
