@@ -952,7 +952,7 @@ collections {
 		}
       }
       part {								
-            name: "ok_option";						
+            name: "reconnect";						
             type: IMAGE;						
             mouse_events: 1;						
             clip_to: "swallow_clip";					   
@@ -960,11 +960,11 @@ collections {
                state: "default" 0.0;					
 	       visible: 1;						
                rel1 {							
-                  relative: 0.40 0.45;					
+                  relative: 0.60 0.45;					
                   offset: 0 0;					
                }							
                rel2 {							
-                  relative: 0.60 0.68;					
+                  relative: 0.80 0.68;					
                   offset: -1 -1;					
                }							
 	       image { normal: "button_background.png"; }		                  
@@ -979,7 +979,7 @@ collections {
          }								
 									
      part {                                                              
-        name: "ok_option_icon";                                
+        name: "reconnect_icon";                                
         type: TEXT;                                                     
         effect: SOFT_OUTLINE;                                           
         mouse_events: 0;                                                
@@ -990,12 +990,12 @@ collections {
             rel1 {                                                      
                 relative: 0.1 0.1;                                      
                 offset: 0 0;                                            
-                to: ok_option;                                 
+                to: reconnect;                                 
             }                                                           
             rel2 {                                                      
                 relative: 0.9 0.9;                                      
                 offset: -1 -1;                                          
-                to: ok_option;                                 
+                to: reconnect;                                 
             }                                                           
             text {                                                      
                 font: "Sans";                                           
@@ -1006,7 +1006,7 @@ collections {
         }                                                               
     }
    part {								
-            name: "no_option";						
+            name: "connect";						
             type: IMAGE;						
             mouse_events: 1;						
             clip_to: "swallow_clip";					   
@@ -1014,11 +1014,11 @@ collections {
                state: "default" 0.0;					
 	       visible: 1;						
                rel1 {							
-                  relative: 0.10 0.45;					
+                  relative: 0.30 0.45;					
                   offset: 0 0;					
                }							
                rel2 {							
-                  relative: 0.30 0.68;					
+                  relative: 0.50 0.68;					
                   offset: -1 -1;					
                }							
 	       image { normal: "button_background.png"; }		                  
@@ -1033,7 +1033,7 @@ collections {
          }								
 									
      part {                                                              
-        name: "no_option_icon";                                
+        name: "connect_icon";                                
         type: TEXT;                                                     
         effect: SOFT_OUTLINE;                                           
         mouse_events: 0;                                                
@@ -1044,12 +1044,12 @@ collections {
             rel1 {                                                      
                 relative: 0.1 0.1;                                      
                 offset: 0 0;                                            
-                to: no_option;                                 
+                to: connect;                                 
             }                                                           
             rel2 {                                                      
                 relative: 0.9 0.9;                                      
                 offset: -1 -1;                                          
-                to: no_option;                                 
+                to: connect;                                 
             }                                                           
             text {                                                      
                 font: "Sans";                                           
@@ -1067,7 +1067,8 @@ collections {
     }
     programs {
 	ACTIVATE("quit");
-	ACTIVATE("ok_option")
+	ACTIVATE("reconnect")
+	ACTIVATE("connect")
         TRANSITION();
     }
  }

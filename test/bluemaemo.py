@@ -149,6 +149,7 @@ class main(edje_group):
         edje_group.__init__(self, main, "main")
 
 	self.part_text_set("title", "BlueMaemo")
+	self.main = main
 	
 	#ecore.timer_add(1.0,self.main.transition_to,"rec_list")
     
@@ -181,6 +182,10 @@ class main(edje_group):
 		
 		self.main.on_exit()
 		ecore.main_loop_quit()
+	elif source == "connect":
+		self.main.transition_to("wait_conn")
+	elif source == "reconnect":
+		self.main.transition_to("rec_list")
 		
 
 #----------------------------------------------------------------------------#
@@ -190,6 +195,7 @@ class wait_conn(edje_group):
         edje_group.__init__(self, main, "wait_conn")
 
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
+	self.main = main
 	#ecore.timer_add(7.0,self.main.transition_to,"menu")
 	#ecore.timer_add(1.0,self.main.transition_to,"rec_list")
 
@@ -198,6 +204,8 @@ class wait_conn(edje_group):
 
     def onShow( self ):
 	self.focus = True
+	self.main.initialize_bluemaemo_server()
+	ecore.timer_add(1.0,self.check_connection)
     
 
     def onHide( self ):
@@ -724,7 +732,6 @@ class GUI(object):
 	self.adapter_on = False
 	self.current_adapter_name = None
 	self.current_adapter_addr = None
-	
 		
 	self.key_mapper = key_mapper()
 	
@@ -750,10 +757,8 @@ class GUI(object):
 	self.current_conf_screen = None
 	self.current_source = None
 	self.reconnect = True
-	#ecore.timer_add(1.0,self.transition_to,"rec_list")
-	#self.groups["rec_list"].construct(self.canvas)
-	#self.check_bt_status()
-	#self.initialize_bluemaemo_server()
+	self.check_bt_status()
+	
 
     def check_connection_status(self):
 	if self.connection.connect == False:

@@ -32,6 +32,7 @@ import time
 import sys
 import os
 from bluemaemo_edje_group import *
+from bluemaemo_known_devices_conf import *
 
 
 (SCROLL_PAGE_FORWARD,
@@ -54,18 +55,23 @@ class rec_list(edje_group):
 
         	edje_group.__init__(self, main, "rec_list")
 		items = []
-		d = os.path.dirname(sys.argv[0]) #sub pelo image folder
+		self.directory = os.path.dirname(sys.argv[0]) #sub pelo image folder
 		self.main = main
-
-		for i in xrange(5):
-			c = (i % 8) + 1
-			items.append(("Item %d" % i,"00:1D:6E:9D:42:9C", os.path.join(d, "connection_icon.png")))
+		self.devices_conf = bluemaemo_known_devices()
 		
-		#if
-		#items.append(("Known devices list empty","", os.path.join(d, "connection_icon.png")))
-		self.list_empty = False
-		self.evas_obj = main.canvas
-		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,main,item_height=150)
+		if self.devices_conf.empty:
+			
+			items.append(("Known devices list empty","", os.path.join(self.directory, "connection_icon.png")))
+		else:
+			
+			for addr,name in self.devices_conf.known_devices_list.iteritems():
+				items.append((name,addr, os.path.join(self.directory, "connection_icon.png")))
+		
+		
+		
+		
+		self.evas_obj = self.main.canvas
+		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
 		self.list_obj.freeze()
 		for i in items:
 	    		self.list_obj.row_add(i[0], i[1], i[2])
@@ -83,8 +89,28 @@ class rec_list(edje_group):
 
 	def onShow( self ):
 		self.focus = True
-		if self.list_empty:
-			ecore.timer_add(2.0,self.main.transition_to,"menu") #mudar aqui isto	
+		items = []
+		if self.devices_conf.empty:
+			
+			items.append(("Known devices list empty","", os.path.join(self.directory, "connection_icon.png")))
+		else:
+			
+			for addr,name in self.devices_conf.known_devices_list.iteritems():
+				items.append((name,addr, os.path.join(self.directory, "connection_icon.png")))
+		
+		
+		
+		
+		self.evas_obj = self.main.canvas
+		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
+		self.list_obj.freeze()
+		for i in items:
+	    		self.list_obj.row_add(i[0], i[1], i[2])
+		self.list_obj.thaw()
+
+		self.part_swallow("list", self.list_obj);
+		if self.devices_conf.empty:
+			ecore.timer_add(2.0,self.main.transition_to,"main") #mudar aqui isto	
     
 
     	def onHide( self ):
@@ -109,8 +135,7 @@ class rec_list(edje_group):
 				self.main.window.fullscreen = True
 	
 		elif key == "Escape":
-			##alterar para ir para o 1 ecra
-			self.main.transition_to("menu")
+			self.main.transition_to("main")
 
 	#def construct(self,evas):
 
@@ -135,7 +160,7 @@ class ResizableImage(evas.SmartObject):
         self.image_object.color_set(r, g, b, a)
 
     def show(self):
-	pass
+	self.image_object.show()
 	
     def hide(self):
 	self.image_object.hide()
@@ -186,6 +211,9 @@ class KineticList(evas.SmartObject):
         self.do_freeze = False
 
     def onShow(self):
+	self.edje_class.show()
+	for i in self.image_objects:
+		i.show()
 	self.focus = True
     
 
@@ -231,7 +259,7 @@ class KineticList(evas.SmartObject):
         
         edje_obj.signal_emit("select_adap", "")
 	if edje_obj.part_text_get("adap_addr") == "":
-		ecore.timer_add(1.0,self.main.transition_to,"menu") #mudar aqui isto
+		ecore.timer_add(1.0,self.main.transition_to,"main") #mudar aqui isto
 	else:
 		self.main.current_adapter_name = edje_obj.part_text_get("adap_name")
 		self.main.current_adapter_addr =  edje_obj.part_text_get("adap_addr")

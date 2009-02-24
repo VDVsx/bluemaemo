@@ -35,6 +35,7 @@ class bluemaemo_known_devices:
 		try:
 			f = open(configfile)
 			self.known_devices_list = {}
+			self.empty = True
 			for line in f:
 				b = line.split('=')
 				if b[0] == '\n':
@@ -42,6 +43,7 @@ class bluemaemo_known_devices:
 				else:
 					name = b[1].split('\n')
 					self.known_devices_list[b[0]] = name[0]
+					self.empty = False
 			f.close()
 		except:
 			print "Error: Non such file or \'" + configfile + "\'"
