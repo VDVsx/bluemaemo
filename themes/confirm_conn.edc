@@ -42,7 +42,7 @@ parts {
                   offset: 0 0;					
                }							
                rel2 {							
-                  relative: 0.60 0.28;					
+                  relative: 0.55 0.24;					
                   offset: -1 -1;					
                }							
 	      image { normal: "info_icon.png"; }                  	
@@ -58,12 +58,12 @@ parts {
                 description {
                     state: "default" 0.0;
                     rel1 {
-                        relative: 0.25 0.24;
+                        relative: 0.32 0.24;
                         offset: 0 0;
                         
                     }
                     rel2 {
-                        relative: 0.75 0.84;
+                        relative: 0.73 0.84;
                         offset: -1 -1;
                     }
                     text {

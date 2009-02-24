@@ -105,13 +105,7 @@ group {
                      to: "item_background";
                      relative: 0 0.5;
                  }
-             }
-	   description {                                                   
-            	state: "invisible" 0.0;                                     
-            	inherit: "default" 0.0;                                     
-            	visible: 0;                                                 
-            	color: 255 255 255 0;                                       
-        }                   
+             }    
 	    
          }
          part {
@@ -176,11 +170,5 @@ group {
 		signal: "select_adap";
 		action: STATE_SET "clicked" 0.0;
 		target: "item_background";   
-        }
-	program {
-		name: "hide_thumbnail";
-		signal: "hide_thumbnail";
-		action: STATE_SET "invisible" 0.0;
-		target: "thumbnail";   
         }
 }

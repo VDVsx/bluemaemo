@@ -1,5 +1,5 @@
 #
-#      bluemaemo_confirm_conn.py
+#      bluemaemo_process_conn.py
 #
 #      Copyright 2008 -2009 	Valerio Valerio <vdv100@gmail.com>
 #						
@@ -34,17 +34,18 @@ from bluemaemo_edje_group import *
 
 
 #----------------------------------------------------------------------------#
-class confirm_conn(edje_group):
+class process_conn(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
-        edje_group.__init__(self, main, "confirm_conn")
+        edje_group.__init__(self, main, "process_conn")
         
-	self.part_text_set("label_connect","Connect to")
+	self.part_text_set("label_connect","Trying to connect to")
 	self.part_text_set("label_name", "")
 	self.main = main
 
     def onShow( self ):
-	self.part_text_set("label_name", self.main.current_adapter_name + " ?")
+	self.part_text_set("label_name", self.main.current_adapter_name)
+	self.process_connection_status()
 	self.focus = True
     
 
@@ -70,12 +71,15 @@ class confirm_conn(edje_group):
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
-	if source == "quit" or source == "no_option" :
+	if source == "quit":
 
 		ecore.main_loop_quit()
 
 	if source == "yes_option":
 	
-		self.main.transition_to("process_conn")
+		self.main.transition_to("menu")
 
-
+    
+    def process_connection_status(self):
+	print "pass"
+	

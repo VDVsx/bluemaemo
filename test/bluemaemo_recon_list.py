@@ -55,12 +55,17 @@ class rec_list(edje_group):
         	edje_group.__init__(self, main, "rec_list")
 		items = []
 		d = os.path.dirname(sys.argv[0]) #sub pelo image folder
+		self.main = main
+
 		for i in xrange(5):
 			c = (i % 8) + 1
 			items.append(("Item %d" % i,"00:1D:6E:9D:42:9C", os.path.join(d, "connection_icon.png")))
-
+		
+		#if
+		#items.append(("Known devices list empty","", os.path.join(d, "connection_icon.png")))
+		self.list_empty = False
 		self.evas_obj = main.canvas
-		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,item_height=150)
+		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,main,item_height=150)
 		self.list_obj.freeze()
 		for i in items:
 	    		self.list_obj.row_add(i[0], i[1], i[2])
@@ -78,6 +83,8 @@ class rec_list(edje_group):
 
 	def onShow( self ):
 		self.focus = True
+		if self.list_empty:
+			ecore.timer_add(2.0,self.main.transition_to,"menu") #mudar aqui isto	
     
 
     	def onHide( self ):
@@ -145,13 +152,11 @@ class KineticList(evas.SmartObject):
     ) = range(6)
 
 
-    def __init__(self, ecanvas, file,edje_class, item_width=-1, item_height=-1):
-        '''
-        if item_width or item_height is left out the width (resp. height)
-        of the List element is used.
-        '''
+    def __init__(self, ecanvas, file, edje_class, main, item_width=-1, item_height=-1):
+        
         evas.SmartObject.__init__(self, ecanvas)
 	self.edje_class = edje_class
+	self.main = main
         self.elements = []
         self.objects = []
         self.image_objects = []
@@ -190,7 +195,6 @@ class KineticList(evas.SmartObject):
     def hide(self):
 	self.edje_class.hide()
 	for i in self.image_objects:
-		print i
 		i.hide()
 
 
@@ -226,7 +230,12 @@ class KineticList(evas.SmartObject):
     def __on_mouse_clicked(self, edje_obj, emission, source, data=None):
         
         edje_obj.signal_emit("select_adap", "")
-	print source
+	if edje_obj.part_text_get("adap_addr") == "":
+		ecore.timer_add(1.0,self.main.transition_to,"menu") #mudar aqui isto
+	else:
+		self.main.current_adapter_name = edje_obj.part_text_get("adap_name")
+		self.main.current_adapter_addr =  edje_obj.part_text_get("adap_addr")
+		ecore.timer_add(1.0,self.main.transition_to,"confirm_conn")
 
     def __on_mouse_move(self, edje_obj, emission, source, data=None):
         if self.mouse_down:

@@ -1882,6 +1882,10 @@ group {
 		name: "unable_conn";
 		#include "unable_conn.edc"
 	}
+	 group {
+		name: "process_conn";
+		#include "process_conn.edc"
+	 }
 	 
 
  
