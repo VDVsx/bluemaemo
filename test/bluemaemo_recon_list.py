@@ -53,6 +53,36 @@ class rec_list(edje_group):
 	def __init__(self,main):
 
         	edje_group.__init__(self, main, "rec_list")
+		items = []
+		d = os.path.dirname(sys.argv[0]) #sub pelo image folder
+		for i in xrange(5):
+			c = (i % 8) + 1
+			items.append(("Item %d" % i,"00:1D:6E:9D:42:9C", os.path.join(d, "connection_icon.png")))
+
+		self.evas_obj = main.canvas
+		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,item_height=150)
+		self.list_obj.freeze()
+		for i in items:
+	    		self.list_obj.row_add(i[0], i[1], i[2])
+		self.list_obj.thaw()
+
+		self.part_swallow("list", self.list_obj);
+
+	def visible(self):
+		
+		self.signal_emit("show_list","")
+
+	def invisible(self):
+
+		self.signal_emit("hide_list","")
+
+	def onShow( self ):
+		self.focus = True
+    
+
+    	def onHide( self ):
+		self.focus = False
+
 
 
 	@evas.decorators.key_down_callback
@@ -75,23 +105,9 @@ class rec_list(edje_group):
 			##alterar para ir para o 1 ecra
 			self.main.transition_to("menu")
 
-	def construct(self):
+	#def construct(self,evas):
 
-		items = []
-		d = os.path.dirname(sys.argv[0]) #sub pelo image folder
-		for i in xrange(5):
-			c = (i % 8) + 1
-			items.append(("Item %d" % i,"00:1D:6E:9D:42:9C", os.path.join(d, "connection_icon.png")))
-
-		self.evas_obj = main.evas_canvas.evas_obj
-		self.list_obj = KineticList(self.evas_obj.evas, file="bluemaemo.edj", item_height=150)
-        	self.list_obj.freeze()
-        	for i in items:
-            		self.list_obj.row_add(i[0], i[1], i[2])
-        	self.list_obj.thaw()
-
-        	self.part_swallow("list", self.list_obj);
-
+	
 
 
 class ResizableImage(evas.SmartObject):
@@ -111,6 +127,12 @@ class ResizableImage(evas.SmartObject):
     def color_set(self, r, g, b, a):
         self.image_object.color_set(r, g, b, a)
 
+    def show(self):
+	pass
+	
+    def hide(self):
+	self.image_object.hide()
+
 
 class KineticList(evas.SmartObject):
     (
@@ -123,12 +145,13 @@ class KineticList(evas.SmartObject):
     ) = range(6)
 
 
-    def __init__(self, ecanvas, file, item_width=-1, item_height=-1):
+    def __init__(self, ecanvas, file,edje_class, item_width=-1, item_height=-1):
         '''
         if item_width or item_height is left out the width (resp. height)
         of the List element is used.
         '''
         evas.SmartObject.__init__(self, ecanvas)
+	self.edje_class = edje_class
         self.elements = []
         self.objects = []
         self.image_objects = []
@@ -156,6 +179,19 @@ class KineticList(evas.SmartObject):
         self.continue_scrolling = False
         self.is_scrolling = False
         self.do_freeze = False
+
+    def onShow(self):
+	self.focus = True
+    
+
+    def onHide(self):
+	self.focus = False
+
+    def hide(self):
+	self.edje_class.hide()
+	for i in self.image_objects:
+		print i
+		i.hide()
 
 
     def freeze(self):
@@ -190,6 +226,7 @@ class KineticList(evas.SmartObject):
     def __on_mouse_clicked(self, edje_obj, emission, source, data=None):
         
         edje_obj.signal_emit("select_adap", "")
+	print source
 
     def __on_mouse_move(self, edje_obj, emission, source, data=None):
         if self.mouse_down:
@@ -464,6 +501,8 @@ class KineticList(evas.SmartObject):
         self.__update_variables_after_resize()
         self.__update_screen()
 
+    def show(self):
+	pass
 
 
 

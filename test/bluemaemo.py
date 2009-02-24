@@ -148,9 +148,10 @@ class main(edje_group):
         edje_group.__init__(self, main, "main")
 
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
-	#ecore.timer_add(1.0,self.main.transition_to,"unable_conn")
+	ecore.timer_add(7.0,self.main.transition_to,"menu")
+	ecore.timer_add(1.0,self.main.transition_to,"rec_list")
 
-	ecore.timer_add(1.0,self.check_connection)
+	#ecore.timer_add(1.0,self.check_connection)
     
 
     def onShow( self ):
@@ -705,8 +706,10 @@ class GUI(object):
 	self.current_conf_screen = None
 	self.current_source = None
 	self.reconnect = True
-	self.check_bt_status()
-	self.initialize_bluemaemo_server()
+	#ecore.timer_add(1.0,self.transition_to,"rec_list")
+	#self.groups["rec_list"].construct(self.canvas)
+	#self.check_bt_status()
+	#self.initialize_bluemaemo_server()
 
     def check_connection_status(self):
 	if self.connection.connect == False:
@@ -930,7 +933,13 @@ class GUI(object):
         self.current_group.onShow()
         self.current_group.signal_emit("visible", "")
         self.groups["swallow"].part_swallow("area1", self.current_group)
-        self.previous_group.signal_emit("fadeout", "")
+	if self.previous_group == self.groups["rec_list"]:
+		self.groups["rec_list"].invisible()
+	else:
+        	self.previous_group.signal_emit("fadeout", "")
+
+	if target == "rec_list":
+		self.groups[target].visible()
 
     def transition_finished(self):
         print "finished"
