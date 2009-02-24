@@ -148,9 +148,50 @@ class main(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "main")
 
+	self.part_text_set("title", "BlueMaemo")
+	
+	#ecore.timer_add(1.0,self.main.transition_to,"rec_list")
+    
+    def onShow( self ):
+	self.focus = True
+    
+
+    def onHide( self ):
+	self.focus = False
+     
+    @evas.decorators.key_down_callback
+    def key_down_cb( self, event ):
+        key = event.keyname
+
+	if key == "F6":
+
+		if self.main.bluemaemo_conf.fullscreen == "Yes":
+			
+			self.main.bluemaemo_conf.fullscreen = "No"
+			self.main.window.fullscreen = False
+
+		elif self.main.bluemaemo_conf.fullscreen == "No":
+			
+			self.main.bluemaemo_conf.fullscreen = "Yes"
+			self.main.window.fullscreen = True
+
+    @edje.decorators.signal_callback("mouse,clicked,1", "*")
+    def on_edje_signal_button_pressed(self, emission, source):
+	if source == "quit":
+		
+		self.main.on_exit()
+		ecore.main_loop_quit()
+		
+
+#----------------------------------------------------------------------------#
+class wait_conn(edje_group):
+#----------------------------------------------------------------------------#
+    def __init__(self, main):
+        edje_group.__init__(self, main, "wait_conn")
+
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
 	#ecore.timer_add(7.0,self.main.transition_to,"menu")
-	ecore.timer_add(1.0,self.main.transition_to,"rec_list")
+	#ecore.timer_add(1.0,self.main.transition_to,"rec_list")
 
 	#ecore.timer_add(1.0,self.check_connection)
     
@@ -693,7 +734,7 @@ class GUI(object):
         self.groups["swallow"] = edje_group(self, "swallow")
         self.evas_canvas.evas_obj.data["swallow"] = self.groups["swallow"]
 
-        for page in ("main","mouse_ui", "menu", "disconnect", "connection_status", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "rec_list","confirm_conn","unable_conn","process_conn"):
+        for page in ("main","mouse_ui", "menu", "disconnect", "connection_status", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "rec_list","confirm_conn","unable_conn","process_conn","wait_conn"):
 		ctor = globals().get( page, None )
 		if ctor:
 			self.groups[page] = ctor( self )
