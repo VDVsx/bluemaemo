@@ -282,7 +282,6 @@ parts {
                     }
                     text {
                         font: "Sans";
-			text: "Yes";
                         size: 1;
                         fit: 1 1;
                         align: 0.0 0.0;

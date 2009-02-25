@@ -42,6 +42,8 @@ class bluemaemo_conf:
 		#settings
 		self.fullscreen = self.config.get("user","fullscreen")
 		self.scroll = self.config.get("user","scroll")
+		self.firsttime = self.config.get("user","firsttime")
+		self.autoconnect = self.config.get("user","autoconnect")
 		#presentation profile
 		self.previous_key = self.config.get("presentation","previous_key")
 		self.next_key = self.config.get("presentation","next_key")
@@ -66,6 +68,9 @@ class bluemaemo_conf:
 		self.b_key = self.config.get("games","b_key")
 		self.c_key = self.config.get("games","c_key")
 		self.d_key = self.config.get("games", "d_key")
+		#autoconnect options
+		self.name = self.config.get("autoconnect","name")
+		self.addr = self.config.get("autoconnect", "addr")
 
 	def set_option(self,seccion,opt,value):
 		

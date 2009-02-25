@@ -261,6 +261,9 @@ class wait_conn(edje_group):
 			self.part_text_set("label_connect_to", "Connected to: ")
 			self.part_text_set("label_client", self.main.connection.client_name)
 			ecore.idle_enterer_add( self.main.check_connection_status)
+			self.main.current_adapter_name = self.main.connection.client_name
+			self.main.current_adapter_addr = self.main.connection.client_addr
+			self.main.check_first_time()
 			ecore.timer_add(3.0,self.main.transition_to,"menu")
 	
 #----------------------------------------------------------------------------#
@@ -760,6 +763,7 @@ class GUI(object):
 	self.error = False
 	self.connected = False
 	self.check_bt_status()
+	self.check_autoconnect()
 	
 
     def check_connection_status(self):
@@ -783,7 +787,13 @@ class GUI(object):
 			self.connected = True
 		
 	
-
+    def check_autoconnect(self):
+	if self.autoconnect == "Yes":
+		self.current_adapter_name = self.auto_name
+		self.current_adapter_addr = self.auto_addr
+		self.transition_to("process_conn")
+	else:
+		pass
 	
     def check_bt_status(self):
 
@@ -804,6 +814,20 @@ class GUI(object):
 		
 		self.power_on_bt()
 		self.restore_conditions = "connectable"
+
+    def check_first_time(self):
+
+	if self.firsttime == 0:
+		self.firsttime = 1
+		self.auto_name = self.current_adapter_name
+		self.auto_addr = self.current_adapter_addr
+		self.bluemaemo_conf.set_option("user","firsttime",self.firsttime)
+		self.bluemaemo_conf.set_option("autoconnect","name",self.auto_name)
+		self.bluemaemo_conf.set_option("autoconnect","addr",self.auto_addr)
+		self.bluemaemo_conf.save_options()
+
+	else:
+		pass	
 		
 	
 
@@ -843,6 +867,8 @@ class GUI(object):
 	#settings
 	self.fullscreen = self.bluemaemo_conf.fullscreen
 	self.scroll = int(self.bluemaemo_conf.scroll)
+	self.firsttime = int(self.bluemaemo_conf.firsttime)
+	self.autoconnect = self.bluemaemo_conf.autoconnect
 	#presentation
 	self.previous_key = self.bluemaemo_conf.previous_key
 	self.next_key = self.bluemaemo_conf.next_key
@@ -867,6 +893,9 @@ class GUI(object):
 	self.b_key = self.bluemaemo_conf.b_key
 	self.c_key = self.bluemaemo_conf.c_key
 	self.d_key = self.bluemaemo_conf.d_key
+	#autoconnect options
+	self.auto_name = self.bluemaemo_conf.name
+	self.auto_addr = self.bluemaemo_conf.addr
 	
 
     def save_local_conf(self, button_name, key):

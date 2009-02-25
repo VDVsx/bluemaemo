@@ -38,8 +38,10 @@ class settings(edje_group):
         edje_group.__init__(self, main, "settings")
         self.part_text_set("fullscreen_option",str(self.main.bluemaemo_conf.fullscreen))
 	self.part_text_set("scroll_option", str(self.main.bluemaemo_conf.scroll))
+	self.part_text_set("auto_connect_option",str(self.main.bluemaemo_conf.autoconnect))
 	self.scroll_value = int(self.main.bluemaemo_conf.scroll)
 	self.fscreen_option = str(self.main.bluemaemo_conf.fullscreen)
+	self.autoconnect_option = str(self.main.bluemaemo_conf.autoconnect)
 
     def onShow( self ):
 	self.focus = True
@@ -76,6 +78,7 @@ class settings(edje_group):
 		
 		self.main.bluemaemo_conf.set_option("user","fullscreen",self.fscreen_option)
 		self.main.bluemaemo_conf.set_option("user","scroll",self.scroll_value)
+		self.main.bluemaemo_conf.set_option("user","autoconnect",self.autoconnect_option)
 		self.main.bluemaemo_conf.save_options()
 		self.main.scroll = self.scroll_value
 		self.main.transition_to("menu")
@@ -88,7 +91,7 @@ class settings(edje_group):
 			self.fscreen_option = "No"
 			self.main.window.fullscreen = False
 
-		elif self.fscreen_option == "No":
+		else:
 			
 			self.part_text_set("fullscreen_option","Yes")
 			self.fscreen_option = "Yes"
@@ -105,4 +108,15 @@ class settings(edje_group):
 		if self.scroll_value >= 1:
 			self.scroll_value -= 1
 			self.part_text_set("scroll_option", str(self.scroll_value))
+
+	elif source == "auto_connect_option":
+
+		if self.autoconnect_option == "Yes":
+			self.part_text_set("auto_connect_option","No")
+			self.autoconnect_option = "No"
+
+		else:
+			self.part_text_set("auto_connect_option","Yes")
+			self.autoconnect_option = "Yes"
+
 
