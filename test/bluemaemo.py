@@ -832,10 +832,8 @@ class GUI(object):
 
 	if self.adapter_on == True:
 		
-			#self.connection.reconnect("00:10:60:EB:85:21")
 			self.connection = Connect()
 			self.connection.start_connection(addr)
-			#ecore.timer_add(1.0,self.connection.start_connection)
 			self.connection_processed = True
 
         else:

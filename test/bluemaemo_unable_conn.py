@@ -37,12 +37,14 @@ class unable_conn(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "unable_conn")
-        
+        self.main = main
 	self.part_text_set("label_connect","Unable to Connect to")
-	self.part_text_set("label_name", "1234 ")
+	
 
     def onShow( self ):
 	self.focus = True
+	self.part_text_set("label_name", self.main.current_adapter_name)
+	ecore.timer_add(6.0,self.main.transition_to,"main")
     
 
     def onHide( self ):

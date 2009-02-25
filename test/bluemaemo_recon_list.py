@@ -98,9 +98,6 @@ class rec_list(edje_group):
 			for addr,name in self.devices_conf.known_devices_list.iteritems():
 				items.append((name,addr, os.path.join(self.directory, "connection_icon.png")))
 		
-		
-		
-		
 		self.evas_obj = self.main.canvas
 		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
 		self.list_obj.freeze()
@@ -259,7 +256,7 @@ class KineticList(evas.SmartObject):
         
         edje_obj.signal_emit("select_adap", "")
 	if edje_obj.part_text_get("adap_addr") == "":
-		ecore.timer_add(1.0,self.main.transition_to,"main") #mudar aqui isto
+		pass
 	else:
 		self.main.current_adapter_name = edje_obj.part_text_get("adap_name")
 		self.main.current_adapter_addr =  edje_obj.part_text_get("adap_addr")
@@ -270,7 +267,7 @@ class KineticList(evas.SmartObject):
             x_pos, y_pos = self.canvas.pointer_canvas_xy
             diff = int(self.last_y_pos - y_pos)
 
-            if diff == 0:
+            if diff == 1 or diff == 0 or diff == -1:
                 return
 
             self.mouse_moved = True
