@@ -45,6 +45,8 @@ class process_conn(edje_group):
 
     def onShow( self ):
 	self.part_text_set("label_name", self.main.current_adapter_name)
+	ecore.timer_add(1.0,self.main.initialize_bluemaemo_server,self.main.current_adapter_addr)
+	ecore.timer_add(1.0,self.check_connection)
 	self.process_connection_status()
 	self.focus = True
     
@@ -75,11 +77,13 @@ class process_conn(edje_group):
 
 		ecore.main_loop_quit()
 
-	if source == "yes_option":
-	
-		self.main.transition_to("menu")
-
     
     def process_connection_status(self):
-	print "pass"
+	#por mais tempo lá em cima
+	if self.main.connection_processed == False:
+		ecore.timer_add(1.0,self.process_connection_status)
+		
+	else:
+		self.part_text_set("label_connect","Connected to")
+		ecore.timer_add(3.0,self.main.transition_to,"menu")
 	

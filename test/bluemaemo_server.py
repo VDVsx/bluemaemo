@@ -262,12 +262,14 @@ class start_deamon(Thread):
 
 				elif self.state == 0:
 					print "error reconneting"
+					self.bluemaemo.error = True
 
 				elif n == 0:
 					pass
 					
 				else:
 					print "Error"
+					self.bluemaemo.error = True
 			try:	
 					
 				input_status = self.bluemaemo.adapter.ListConnections()

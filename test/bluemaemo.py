@@ -757,6 +757,8 @@ class GUI(object):
 	self.current_conf_screen = None
 	self.current_source = None
 	self.reconnect = True
+	self.error = False
+	self.connected = False
 	self.check_bt_status()
 	
 
@@ -767,7 +769,20 @@ class GUI(object):
 
 	else:
 		ecore.timer_add( 10.0, self.check_connection_status)
+
+
+    def check_connection(self):
+
+	if self.main.connection.connect == False:
+		ecore.timer_add(1.0,self.check_connection)
+		
+	elif self.main.connection.error:
+		self.error = True
+	else:
+		self.connected = True
+		
 	
+
 	
     def check_bt_status(self):
 
