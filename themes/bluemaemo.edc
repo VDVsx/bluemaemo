@@ -53,6 +53,8 @@ images {
   image: "listitem.png" COMP;
   image: "selectitem.png" COMP;
   image: "info_icon.png" COMP;
+  image: "reconnect.png" COMP;
+  image: "connect.png" COMP;
 }
 
 styles {
@@ -805,11 +807,11 @@ fonts {
                state: "default" 0.0;					\
                visible: 1;						\
                rel1 {							\
-                  relative: 0.01 0.89;					\
+                  relative: 0.01 0.91;					\
                   offset: 0 0;						\
                }							\
                rel2 {							\
-                  relative: 0.24 0.99;					\
+                  relative: 0.24 0.98;					\
                   offset: -1 -1;					\
                }							\
 	      image { normal: "maemo-logo.png"; }                  	\
@@ -926,7 +928,25 @@ collections {
                visible: 0;
             }
          }
-
+	part {
+		name: "title_image";
+		type: IMAGE;
+		mouse_events: 0;
+		clip_to: "swallow_clip";
+		description {
+		    state: "default" 0.0;
+		    rel1 {
+		        relative: 0.03 0.12;
+		        offset: 0 0;
+		    }
+		    rel2 {
+		        relative: 0.15 0.29;
+		        offset: -1 -1;
+		    }
+		     image { normal: "connection_icon.png"; }		                  
+               	     fill { smooth: 0; } 	
+		}
+      }
 	part {
 		name: "title";
 		type: TEXT;
@@ -960,11 +980,11 @@ collections {
                state: "default" 0.0;					
 	       visible: 1;						
                rel1 {							
-                  relative: 0.60 0.45;					
+                  relative: 0.55 0.40;					
                   offset: 0 0;					
                }							
                rel2 {							
-                  relative: 0.80 0.68;					
+                  relative: 0.75 0.70;					
                   offset: -1 -1;					
                }							
 	       image { normal: "button_background.png"; }		                  
@@ -980,8 +1000,7 @@ collections {
 									
      part {                                                              
         name: "reconnect_icon";                                
-        type: TEXT;                                                     
-        effect: SOFT_OUTLINE;                                           
+        type: IMAGE;                                                                                              
         mouse_events: 0;                                                
         clip_to: "swallow_clip";                                        
         description {                                                   
@@ -997,14 +1016,36 @@ collections {
                 offset: -1 -1;                                          
                 to: reconnect;                                 
             }                                                           
-            text {                                                      
-                font: "Sans";                                           
-                text: "Ok";                                            
-                size: 1;                                                
-                fit: 1 1;                                               
-            }                                                           
+            image { normal: "reconnect.png"; }		                  
+               fill { smooth: 0; } 	                                             
         }                                                               
     }
+
+   part {
+		name: "reconnect_text";
+		type: TEXT;
+		effect: OUTLINE_SOFT_SHADOW;
+		mouse_events: 0;
+		clip_to: "swallow_clip";
+		description {
+		    state: "default" 0.0;
+		    rel1 {
+		        relative: 0.55 0.73;
+		        offset: 0 0;
+		    }
+		    rel2 {
+		        relative: 0.75 0.8;
+		        offset: -1 -1;
+		    }
+		    text {
+		        font: "Sans";
+			text: "Reconnect";
+		        size: 1;
+		        fit: 1 1;
+		        align: 0.5 0.5;
+		    }
+		}
+      }
    part {								
             name: "connect";						
             type: IMAGE;						
@@ -1014,11 +1055,11 @@ collections {
                state: "default" 0.0;					
 	       visible: 1;						
                rel1 {							
-                  relative: 0.30 0.45;					
+                  relative: 0.25 0.40;					
                   offset: 0 0;					
                }							
                rel2 {							
-                  relative: 0.50 0.68;					
+                  relative: 0.45 0.70;					
                   offset: -1 -1;					
                }							
 	       image { normal: "button_background.png"; }		                  
@@ -1034,8 +1075,7 @@ collections {
 									
      part {                                                              
         name: "connect_icon";                                
-        type: TEXT;                                                     
-        effect: SOFT_OUTLINE;                                           
+        type: IMAGE;                                                                                             
         mouse_events: 0;                                                
         clip_to: "swallow_clip";                                        
         description {                                                   
@@ -1051,14 +1091,35 @@ collections {
                 offset: -1 -1;                                          
                 to: connect;                                 
             }                                                           
-            text {                                                      
-                font: "Sans";                                           
-                text: "No";                                            
-                size: 1;                                                
-                fit: 1 1;                                               
-            }                                                           
+             image { normal: "connect.png"; }		                  
+               fill { smooth: 0; } 	                                             
         }                                                               
     }
+     part {
+		name: "connect_text";
+		type: TEXT;
+		effect: OUTLINE_SOFT_SHADOW;
+		mouse_events: 0;
+		clip_to: "swallow_clip";
+		description {
+		    state: "default" 0.0;
+		    rel1 {
+		        relative: 0.22 0.67;
+		        offset: 0 0;
+		    }
+		    rel2 {
+		        relative: 0.48 0.86;
+		        offset: -1 -1;
+		    }
+		    text {
+		        font: "Sans";
+			text: "Open Connection";
+		        size: 1;
+		        fit: 1 1;
+		        align: 0.5 0.5;
+		    }
+		}
+      }
 
 
         LOGO();
