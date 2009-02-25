@@ -44,13 +44,12 @@ class process_conn(edje_group):
 	self.main = main
 
     def onShow( self ):
+	self.focus = True
 	self.part_text_set("label_name", self.main.current_adapter_name)
 	ecore.timer_add(1.0,self.main.initialize_bluemaemo_server,self.main.current_adapter_addr)
-	ecore.timer_add(1.0,self.check_connection)
+	ecore.timer_add(2.0,self.main.check_connection)
 	self.process_connection_status()
-	self.focus = True
-    
-
+	
     def onHide( self ):
 	self.focus = False
      
@@ -79,11 +78,17 @@ class process_conn(edje_group):
 
     
     def process_connection_status(self):
-	#por mais tempo lá em cima
-	if self.main.connection_processed == False:
-		ecore.timer_add(1.0,self.process_connection_status)
-		
+
+	if self.main.error:
+		self.main.transition_to("unable_conn")
+		self.main.error = False
+		self.main.connected = False
+
 	else:
-		self.part_text_set("label_connect","Connected to")
-		ecore.timer_add(3.0,self.main.transition_to,"menu")
+		if self.main.connected == False:
+			ecore.timer_add(1.0,self.process_connection_status)
+		
+		else:
+			self.part_text_set("label_connect","Connected to")
+			ecore.timer_add(3.0,self.main.transition_to,"menu")
 	

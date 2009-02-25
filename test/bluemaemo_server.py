@@ -249,7 +249,7 @@ class start_deamon(Thread):
 				self.state = hidserver.reConnect(self.bluemaemo.adapter_addr,self.addr)
 				#hidserver.reConnect("00:1D:6E:9D:42:9C","00:21:4F:57:93:C8")
 				print "cenas2"
-			while self.bluemaemo.connect == False:
+			while self.bluemaemo.connect == False and self.bluemaemo.error == False:
 				time.sleep(1)
 				n = hidserver.connec_state()
 				print "Waiting for a connection..."
@@ -270,24 +270,28 @@ class start_deamon(Thread):
 				else:
 					print "Error"
 					self.bluemaemo.error = True
-			try:	
+
+			if self.bluemaemo.error:
+				pass
+			else:
+				try:		
 					
-				input_status = self.bluemaemo.adapter.ListConnections()
-				print input_status
-				print "You are connect to the address: " + str(input_status[-1])
-				client_name = self.bluemaemo.adapter.GetRemoteName(input_status[-1])
-				self.bluemaemo.client_name = str(client_name)
-				self.bluemaemo.client_addr = str(input_status[-1])
-				if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
-					print "device already existent"
-				else:
-					self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
-					self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
-				print "connected to: " + str(client_name)
-			except:
+					input_status = self.bluemaemo.adapter.ListConnections()
+					print input_status
+					print "You are connect to the address: " + str(input_status[-1])
+					client_name = self.bluemaemo.adapter.GetRemoteName(input_status[-1])
+					self.bluemaemo.client_name = str(client_name)
+					self.bluemaemo.client_addr = str(input_status[-1])
+					if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
+						print "device already existent"
+					else:
+						self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
+						self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
+					print "connected to: " + str(client_name)
+				except:
 			
-				self.bluemaemo.error = True
-				print 'ERROR: Bluetooth is off'
+					self.bluemaemo.error = True
+					print 'ERROR: Bluetooth is off'
 		except:
 			
 			print "Exit"

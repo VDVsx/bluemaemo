@@ -151,7 +151,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	#ecore.timer_add(1.0,self.main.transition_to,"rec_list")
+	#ecore.timer_add(1.0,self.main.transition_to,"settings")
     
     def onShow( self ):
 	self.focus = True
@@ -772,14 +772,15 @@ class GUI(object):
 
 
     def check_connection(self):
-
-	if self.main.connection.connect == False:
-		ecore.timer_add(1.0,self.check_connection)
 		
-	elif self.main.connection.error:
+	if self.connection.error:
 		self.error = True
 	else:
-		self.connected = True
+
+		if self.connection.connect == False:
+			ecore.timer_add(1.0,self.check_connection)
+		else:
+			self.connected = True
 		
 	
 
@@ -832,7 +833,6 @@ class GUI(object):
 	if self.adapter_on == True:
 		
 			#self.connection.reconnect("00:10:60:EB:85:21")
-
 			self.connection = Connect()
 			self.connection.start_connection(addr)
 			#ecore.timer_add(1.0,self.connection.start_connection)
