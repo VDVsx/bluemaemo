@@ -769,6 +769,8 @@ class GUI(object):
 
     def check_connection_status(self):
 	if self.connection.connect == False:
+		self.error = False
+		self.connected = False
 		self.transition_to("disconnect")
 		print "->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>DISC"
 

@@ -38,7 +38,7 @@ class disconnect(edje_group):
         edje_group.__init__(self, main, "disconnect")
         
 	self.part_text_set("label_error","Error: Disconnected by remote device")
-	self.part_text_set("label_connect", "Open connection again ?")
+	self.part_text_set("label_connect", "Try to reconnect ?")
 
 
     def onShow( self ):
@@ -73,12 +73,7 @@ class disconnect(edje_group):
 		ecore.main_loop_quit()
 
 	if source == "yes_option":
-
+	
 		self.main.connection.terminate_connection()
-		self.main.initialize_bluemaemo_server()
-		self.main.groups["main"].part_text_set("label_connect_to", "")
-		self.main.groups["main"].part_text_set("label_client", "")
-		self.main.groups["main"].part_text_set("label_waiting", "Waiting for connection ... ")
-		ecore.timer_add(1.0,self.main.groups["main"].check_client)
-		self.main.transition_to("main")
+		self.main.transition_to("process_conn")
 		

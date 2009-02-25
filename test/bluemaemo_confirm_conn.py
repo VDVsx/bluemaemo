@@ -67,6 +67,10 @@ class confirm_conn(edje_group):
 			self.main.bluemaemo_conf.fullscreen = "Yes"
 			self.main.window.fullscreen = True
 
+	elif key == "Escape":
+		
+		self.main.transition_to("rec_list")
+
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
