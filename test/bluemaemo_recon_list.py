@@ -90,6 +90,7 @@ class rec_list(edje_group):
 	def onShow( self ):
 		self.focus = True
 		items = []
+		self.devices_conf = bluemaemo_known_devices()
 		if self.devices_conf.empty:
 			
 			items.append(("Known devices list empty","", os.path.join(self.directory, "connection_icon.png")))
@@ -132,7 +133,10 @@ class rec_list(edje_group):
 				self.main.window.fullscreen = True
 	
 		elif key == "Escape":
-			self.main.transition_to("main")
+			if self.main.connected:
+				self.main.transition_to("settings")
+			else:
+				self.main.transition_to("main")
 
 	#def construct(self,evas):
 
@@ -258,9 +262,15 @@ class KineticList(evas.SmartObject):
 	if edje_obj.part_text_get("adap_addr") == "":
 		pass
 	else:
-		self.main.current_adapter_name = edje_obj.part_text_get("adap_name")
-		self.main.current_adapter_addr =  edje_obj.part_text_get("adap_addr")
-		ecore.timer_add(1.0,self.main.transition_to,"confirm_conn")
+		if self.main.connected:
+
+			self.main.auto_name = edje_obj.part_text_get("adap_name")
+			self.main.auto_addr = edje_obj.part_text_get("adap_addr")
+			ecore.timer_add(1.0,self.main.transition_to,"settings")
+		else:
+			self.main.current_adapter_name = edje_obj.part_text_get("adap_name")
+			self.main.current_adapter_addr =  edje_obj.part_text_get("adap_addr")
+			ecore.timer_add(1.0,self.main.transition_to,"confirm_conn")
 
     def __on_mouse_move(self, edje_obj, emission, source, data=None):
         if self.mouse_down:

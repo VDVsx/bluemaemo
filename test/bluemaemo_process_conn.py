@@ -47,7 +47,7 @@ class process_conn(edje_group):
 	self.focus = True
 	self.part_text_set("label_name", self.main.current_adapter_name)
 	ecore.timer_add(1.0,self.main.initialize_bluemaemo_server,self.main.current_adapter_addr)
-	ecore.timer_add(2.0,self.main.check_connection)
+	ecore.timer_add(4.0,self.main.check_connection)
 	self.process_connection_status()
 	
     def onHide( self ):

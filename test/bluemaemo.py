@@ -264,6 +264,7 @@ class wait_conn(edje_group):
 			self.main.current_adapter_name = self.main.connection.client_name
 			self.main.current_adapter_addr = self.main.connection.client_addr
 			self.main.check_first_time()
+			self.main.connected = True
 			ecore.timer_add(3.0,self.main.transition_to,"menu")
 	
 #----------------------------------------------------------------------------#

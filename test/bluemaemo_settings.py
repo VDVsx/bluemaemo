@@ -36,14 +36,19 @@ class settings(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "settings")
+	self.main = main
         self.part_text_set("fullscreen_option",str(self.main.bluemaemo_conf.fullscreen))
 	self.part_text_set("scroll_option", str(self.main.bluemaemo_conf.scroll))
 	self.part_text_set("auto_connect_option",str(self.main.bluemaemo_conf.autoconnect))
+	self.part_text_set("current_device_icon",str(self.main.bluemaemo_conf.name))
 	self.scroll_value = int(self.main.bluemaemo_conf.scroll)
 	self.fscreen_option = str(self.main.bluemaemo_conf.fullscreen)
 	self.autoconnect_option = str(self.main.bluemaemo_conf.autoconnect)
+	if self.autoconnect_option == "No":
+		self.signal_emit("hide_auto_conn_device","")
 
     def onShow( self ):
+	self.part_text_set("current_device_icon",str(self.main.auto_name))
 	self.focus = True
     
 
@@ -79,6 +84,8 @@ class settings(edje_group):
 		self.main.bluemaemo_conf.set_option("user","fullscreen",self.fscreen_option)
 		self.main.bluemaemo_conf.set_option("user","scroll",self.scroll_value)
 		self.main.bluemaemo_conf.set_option("user","autoconnect",self.autoconnect_option)
+		self.main.bluemaemo_conf.set_option("autoconnect","name",self.main.auto_name)
+		self.main.bluemaemo_conf.set_option("autoconnect","addr",self.main.auto_addr)
 		self.main.bluemaemo_conf.save_options()
 		self.main.scroll = self.scroll_value
 		self.main.transition_to("menu")
@@ -114,9 +121,13 @@ class settings(edje_group):
 		if self.autoconnect_option == "Yes":
 			self.part_text_set("auto_connect_option","No")
 			self.autoconnect_option = "No"
+			self.signal_emit("hide_auto_conn_device","")
 
 		else:
 			self.part_text_set("auto_connect_option","Yes")
 			self.autoconnect_option = "Yes"
+			self.signal_emit("show_auto_conn_device","")
 
+	elif source == "current_device":
+		self.main.transition_to("rec_list")
 
