@@ -1,6 +1,17 @@
-bluemaemo (0.1-1) unstable; urgency=low
+bluemaemo (0.2-1) unstable; urgency=low
 
-  * Initial release 
+  bluemaemo 0.2
 
- -- Valerio Valerio <vdv100@gmail.com>  Thu, 16 Oct 2008 11:07:00 +0100
+	* Added space key map to the profiles
+	* Added method to change bluetooth adapter mode
+	* N810 Hardware keyboard support while in mouse profile
+	* Major code refactoring - Separated all profiles
+	* Added reconnect functionality
+	* Added auto-connect functionality
+
+  bluemaemo 0.1
+
+	* First release
+
+ -- Valerio Valerio <vdv100@gmail.com>  Wed, 25 Feb 2009 23:14:54 +0000
 

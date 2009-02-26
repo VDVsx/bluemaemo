@@ -43,6 +43,7 @@ SCROLL_PIXELS_DOWN,
 SCROLL_PIXELS_UP) = range(6)
 
 IMAGE_FOLDER = "/usr/share/bluemaemo/images"
+THEMES_FOLDER = "/usr/share/bluemaemo/themes/bluemaemo.edj"
 
 #----------------------------------------------------------------------------#
 class rec_list(edje_group):
@@ -72,6 +73,7 @@ class rec_list(edje_group):
 		
 		self.evas_obj = self.main.canvas
 		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
+		#self.list_obj = KineticList(self.evas_obj,THEMES_FOLDER,self,self.main,item_height=150)
 		self.list_obj.freeze()
 		for i in items:
 	    		self.list_obj.row_add(i[0], i[1], i[2])
@@ -101,6 +103,7 @@ class rec_list(edje_group):
 		
 		self.evas_obj = self.main.canvas
 		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
+		#self.list_obj = KineticList(self.evas_obj,THEMES_FOLDER,self,self.main,item_height=150)
 		self.list_obj.freeze()
 		for i in items:
 	    		self.list_obj.row_add(i[0], i[1], i[2])

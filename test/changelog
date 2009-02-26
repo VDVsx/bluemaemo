@@ -6,6 +6,8 @@ bluemaemo 0.2
 	* Added method to change bluetooth adapter mode
 	* N810 Hardware keyboard support while in mouse profile
 	* Major code refactoring - Separated all profiles
+	* Added reconnect functionality
+	* Added auto-connect functionality
 
 bluemaemo 0.1
 
@@ -13,4 +15,4 @@ bluemaemo 0.1
 
 
 
--- Valerio Valerio <vdv100@gmail.com>  Thu, 16 Oct 12:00:35
+-- Valerio Valerio <vdv100@gmail.com>  Thu, 26 Fev 12:00:35

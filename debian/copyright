@@ -1,5 +1,5 @@
-This package was debianized by Valerio Valerio <vdv100@gmail.com> on
-Thu, 16 Oct 2008 11:07:00 +0100.
+This package was debianized by unknown <vdv100@gmail.com> on
+Wed, 25 Feb 2009 23:14:54 +0000.
 
 It was downloaded from https://garage.maemo.org/projects/bluemaemo/
 
@@ -31,4 +31,5 @@ is licensed under the GPL, see `/usr/share/common-licenses/GPL'.
 
 
 The virtual keyboard layout and design is (C) 2008-2009, INdT - Instituto Nokia de Tecnologia
-
+Tango icons is (C) 2009, Tango Project
+Gnome icons is (C) 2009, Gnome Project

@@ -66,6 +66,7 @@ install: build
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/themes/
+	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/images/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/lib/python2.5/site-packages/
 	
 	#copy sudoers ruls
@@ -74,17 +75,20 @@ install: build
 	#copy data files
 	cp service_record.xml  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
 	cp settings.cfg  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
+	cp known_devices.cfg $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
 	cp .bluemaemo.cfg  $(CURDIR)/debian/bluemaemo/home/user/
 
 	#copy theme files
 	
 	cp bluemaemo.edj  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/themes/
 
+	#copy image files
+	
+	cp connection_icon.png $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/images/
+
 	#copy libs files
 
-	cp bluemaemo_conf.py  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
-	cp bluemaemo_key_mapper.py  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
-	cp bluemaemo_server.py  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
+	cp *.py  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
 	cp bluemaemo $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
 	cp hidserver.so  $(CURDIR)/debian/bluemaemo/usr/lib/python2.5/site-packages/
 
