@@ -25,18 +25,22 @@ import ConfigParser
 import os
 import os.path
 
-#defaultsfile = "/usr/share/bluemaemo/data/settings.cfg"
-#configfile = os.path.expanduser('~/.bluemaemo.cfg')
-defaultsfile = "settings.cfg"
-configfile = "settings.cfg"
+defaultsfile = "/etc/bluemaemo.cfg"
+defaultsfile = "bluemaemo.cfg"
+configfile = "bluemaemo.cfg"
 
 class bluemaemo_conf:
 
 	def __init__(self):
 
 		self.config = ConfigParser.ConfigParser()
-		
-		self.config.readfp(open(defaultsfile))
+		try:
+			self.config.readfp(open(defaultsfile))
+
+		except:
+			os.system("mv /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/bluemaemo.cfg")
+			self.config.readfp(open(defaultsfile))
+
 		self.config.read(configfile)
 
 		#settings
