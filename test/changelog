@@ -1,8 +1,13 @@
-bluemaemo (0.2) unstable; urgency=low
+bluemaemo (0.3) unstable; urgency=low
+
+
+bluemaemo 0.3
+
+	* 
 
 bluemaemo 0.2
 
-	* Added space key map to the profiles
+	* Added ability to map space key in the profiles
 	* Added method to change bluetooth adapter mode
 	* N810 Hardware keyboard support while in mouse profile
 	* Major code refactoring - Separated all profiles

@@ -56,10 +56,6 @@ from bluemaemo_confirm_conn import *
 from bluemaemo_unable_conn import *
 from bluemaemo_process_conn import *
 
-#from bluemaemo.bluemaemo_server import *
-#from bluemaemo.bluemaemo_key_mapper import *
-#from bluemaemo.bluemaemo_conf import *
-
 WIDTH = 800
 HEIGHT = 480
 
@@ -151,7 +147,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	#ecore.timer_add(1.0,self.main.transition_to,"settings")
+	#ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True
@@ -844,6 +840,7 @@ class GUI(object):
 	
 	if self.restore_conditions == "off":
 
+		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:connectable")
 		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:off")
 
 	elif self.restore_conditions == "connectable":
@@ -1049,7 +1046,7 @@ class EvasCanvas(object):
         if engine == "x11":
             f = ecore.evas.SoftwareX11
         elif engine == "x11-16":
-            if ecore.evas.engine_type_supported_get("software_x11_16"):
+            if ecore.evas.engine_type_supported_get("software_16_x11"):
                 f = ecore.evas.SoftwareX11_16
             else:
                 print "warning: x11-16 is not supported, fallback to x11"
