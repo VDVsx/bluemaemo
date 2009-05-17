@@ -25,8 +25,7 @@ import ConfigParser
 import os
 import os.path
 
-defaultsfile = "/etc/bluemaemo.cfg"
-defaultsfile = "bluemaemo.cfg"
+defaultsfile = "/etc/bluemaemo/bluemaemo.cfg"
 configfile = "bluemaemo.cfg"
 
 class bluemaemo_conf:
@@ -38,7 +37,8 @@ class bluemaemo_conf:
 			self.config.readfp(open(defaultsfile))
 
 		except:
-			os.system("mv /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/bluemaemo.cfg")
+			os.system("mkdir /etc/bluemaemo/")
+			os.system("cp /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/")
 			self.config.readfp(open(defaultsfile))
 
 		self.config.read(configfile)

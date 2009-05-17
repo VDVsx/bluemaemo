@@ -25,8 +25,7 @@ import ConfigParser
 import os
 import os.path
 
-#defaultsfile = "/usr/share/bluemaemo/data/known_devices.cfg"
-#configfile = os.path.expanduser('~/.bluemaemo.cfg')
+defaultsfile = "/etc/bluemaemo/known_devices.cfg"
 configfile = "known_devices.cfg"
 
 class bluemaemo_known_devices:
@@ -47,7 +46,8 @@ class bluemaemo_known_devices:
 			f.close()
 		except:
 			print "Error: Non such file or \'" + configfile + "\'"
-			f= open("known_devices.cfg","w")
+			self.empty = True
+			f= open("/etc/bluemaemo/known_devices.cfg","w")
 			f.close()
 
 	def add_new_dev(self,value):
