@@ -26,13 +26,12 @@ import os
 import os.path
 
 defaultsfile = "/etc/bluemaemo/known_devices.cfg"
-configfile = "known_devices.cfg"
 
 class bluemaemo_known_devices:
 
 	def __init__(self):
 		try:
-			f = open(configfile)
+			f = open(defaultsfile)
 			self.known_devices_list = {}
 			self.empty = True
 			for line in f:
@@ -45,14 +44,14 @@ class bluemaemo_known_devices:
 					self.empty = False
 			f.close()
 		except:
-			print "Error: Non such file or \'" + configfile + "\'"
+			print "Creating \'" + defaultsfile + "\'..."
 			self.empty = True
 			f= open("/etc/bluemaemo/known_devices.cfg","w")
 			f.close()
 
 	def add_new_dev(self,value):
 		
-		f = open(configfile,'a')
+		f = open(defaultsfile,'a')
 		f.write(value)
 		f.close()
 		print "Device added"

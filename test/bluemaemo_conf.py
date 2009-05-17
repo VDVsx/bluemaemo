@@ -26,7 +26,6 @@ import os
 import os.path
 
 defaultsfile = "/etc/bluemaemo/bluemaemo.cfg"
-configfile = "bluemaemo.cfg"
 
 class bluemaemo_conf:
 
@@ -40,8 +39,6 @@ class bluemaemo_conf:
 			os.system("mkdir /etc/bluemaemo/")
 			os.system("cp /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/")
 			self.config.readfp(open(defaultsfile))
-
-		self.config.read(configfile)
 
 		#settings
 		self.fullscreen = self.config.get("user","fullscreen")
@@ -85,14 +82,14 @@ class bluemaemo_conf:
 	
 		try:
 			
-			file = open(configfile, 'w')
+			file = open(defaultsfile, 'w')
 			self.config.write(file)
 			file.close()
 			print "Options saved"
 			
 		except:
 			
-			print "Error: Non such file or directory \'" + configfile + "\'"
+			print "Error: Non such file or directory \'" + defaultsfile + "\'"
 
 		
 		
