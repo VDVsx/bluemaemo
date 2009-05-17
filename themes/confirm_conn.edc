@@ -232,11 +232,11 @@ parts {
         }                                                               
     }
         LOGO();
-	QUIT();
+	BACK();
 	
     }
     programs {
-	ACTIVATE("quit");
+	ACTIVATE("back");
 	ACTIVATE("no_option");
 	ACTIVATE("yes_option");
     	TRANSITION();

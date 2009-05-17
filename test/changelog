@@ -5,10 +5,11 @@ bluemaemo 0.3
 
 	* Fixed bug in bluetooth adapter state
 	* Moved configuration files to /etc/bluemaemo
+	* Added back buttons in 'wait for connection' and 'process connection' screens
 
 bluemaemo 0.2
 
-	* Added ability to map space key in the profiles
+	* Added ability to map the space key in the profiles
 	* Added method to change bluetooth adapter mode
 	* N810 Hardware keyboard support while in mouse profile
 	* Major code refactoring - Separated all profiles

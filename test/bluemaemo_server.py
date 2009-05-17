@@ -190,12 +190,14 @@ class Connect:
 		except:
 			self.connect = False
 			print "disconnected"
+
 			
 	def terminate_connection(self):
 		
 		try:
 			if self.connect == False:
 				hidserver.quit()
+				n = hidserver.quit_server()
 				print "killed"
 			else:
 				n = hidserver.quit_server()

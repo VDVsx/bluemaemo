@@ -319,31 +319,24 @@ int send_mouse_event(int btn, int mov_x, int mov_y, int whell)
 
 void open_sock()
 {
-	int csk, isk,cs,is;
 	int lm = 0;
 
-	csk = l2cap_listen(BDADDR_ANY, L2CAP_PSM_HIDP_CTRL, lm, 10);
-		if (csk < 0) {
+	csg = l2cap_listen(BDADDR_ANY, L2CAP_PSM_HIDP_CTRL, lm, 10);
+		if (csg < 0) {
 			perror("Can't listen on HID control channel");
 			connection = -1;
 		}
 
-	isk = l2cap_listen(BDADDR_ANY, L2CAP_PSM_HIDP_INTR, lm, 10);
-		if (isk < 0) {
+	isg = l2cap_listen(BDADDR_ANY, L2CAP_PSM_HIDP_INTR, lm, 10);
+		if (isg < 0) {
 			perror("Can't listen on HID interrupt channel");
-			close(csk);
+			close(csg);
 			connection = -1;
 		}
 
-	cs = l2cap_accept(csk, NULL);
+	ctrl = l2cap_accept(csg, NULL);
 	
-	is = l2cap_accept(isk, NULL);	
-	
-	csg = csk;
-	isg = isk;
-
-	ctrl = cs;
-	intr = is;
+	intr = l2cap_accept(isg, NULL);	
 
 	connection = 1;
 

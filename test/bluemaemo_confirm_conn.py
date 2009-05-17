@@ -74,9 +74,9 @@ class confirm_conn(edje_group):
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
-	if source == "quit":
+	if source == "back":
 
-		ecore.main_loop_quit()
+		self.main.transition_to("rec_list")
 
 	if source == "no_option":
 		

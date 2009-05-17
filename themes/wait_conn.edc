@@ -125,10 +125,10 @@ parts {
              }
 	}
         LOGO();
-	QUIT();
+	BACK();
 	
     }
     programs {
-	ACTIVATE("quit");
+	ACTIVATE("back");
         TRANSITION();
     }
