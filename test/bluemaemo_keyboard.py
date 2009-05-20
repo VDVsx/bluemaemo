@@ -208,6 +208,7 @@ class keyboard_ui(edje_group):
         self.pressed_keys.clear()
         self.pressed_keys[subpart] = subpart
         o.signal_emit("press_key", subpart)
+	o.signal_emit("activated_key", subpart)
 
     @edje.decorators.signal_callback("mouse,down,1,*", "*")
     def on_edje_signal_mouse_down_multiple_key(self, emission, source):
@@ -218,13 +219,14 @@ class keyboard_ui(edje_group):
 
         if ':' not in source:
             return
+	self.main.connection.release_keyboard_event()   
         part, subpart = source.split(':', 1)
         o = self.obj[part]
         self.is_mouse_down = False
         if subpart in self.pressed_keys:
             del self.pressed_keys[subpart]
             o.signal_emit("release_key", subpart)
-            o.signal_emit("activated_key", subpart)
+            
 
 
     @edje.decorators.signal_callback("key_down", "*")

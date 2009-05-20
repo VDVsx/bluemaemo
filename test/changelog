@@ -6,6 +6,7 @@ bluemaemo 0.3
 	* Fixed bug in bluetooth adapter state
 	* Moved configuration files to /etc/bluemaemo
 	* Added back buttons in 'wait for connection' and 'process connection' screens
+	* Fixed sdl/openGL keystrokes bug
 
 bluemaemo 0.2
 
