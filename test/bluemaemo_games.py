@@ -134,6 +134,7 @@ class games(edje_group):
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
+
 	if source =="back" or source == "conf_keys":
 		pass
 	else:
