@@ -64,7 +64,7 @@ class presentation(edje_group):
 
 		self.main.transition_to("menu")
 
-    @edje.decorators.signal_callback("mouse,clicked,1", "*")
+    @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 	if source == "back":
 		
@@ -98,6 +98,14 @@ class presentation(edje_group):
 		key = self.main.no_fullscreen_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
+
+    @edje.decorators.signal_callback("mouse,up,1", "*")
+    def on_edje_signal_button_released(self, emission, source):
+
+	if source =="back" or source == "conf_keys":
+		pass
+	else:
+		self.main.connection.release_keyboard_event()
 
 #----------------------------------------------------------------------------#
 class presentation_conf(edje_group):
