@@ -148,6 +148,12 @@ class mouse_ui(edje_group):
 	elif key == "ISO_Level3_Shift":
 		self.fn = False
 
+	elif key == "Escape" or key == "F6":
+		pass
+
+	else:
+		self.main.connection.release_keyboard_event()
+
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_mouse_down(self, emission, source):
