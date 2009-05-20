@@ -172,11 +172,20 @@ class Connect:
 		try:
 			mod = int(modifier)
 			key = int(key)
-			n = hidserver.send_event_key(mod,key)
+			n = hidserver.send_key(mod,key)
 			if n < 0:
 				self.connect = False
 				print "Disconnected"
 				
+		except:
+			self.connect = False
+			print "Disconnected"
+
+	def release_keyboard_event(self):
+
+		try:	
+			n = hidserver.release_key()
+
 		except:
 			self.connect = False
 			print "Disconnected"

@@ -1,8 +1,8 @@
 cdef extern from "hidserv.c":
     
     void init_server()
-    int send_event(int modifiers, int val)
-    int send_accel_event(int modifiers, int val)
+    int send_key_down(int modifiers, int val)
+    int send_key_up()
     int send_mouse_event(int btn, int mov_x, int mov_y, int whell)
     int connection_state()
     int reconnect(char *src,char *dst)
@@ -15,14 +15,14 @@ def init_hidserver():
    init_server()
    
 
-def send_event_key(mod, val):
+def send_key(mod, val):
 
-   n = send_event(mod,val)
+   n = send_key_down(mod,val)
    return n
 
-def send_accel_event(mod, val):
+def release_key():
 
-   n = send_event(mod,val)
+   n = send_key_up()
    return n
 
 def send_mouse_ev(btn,mov_x,mov_y,whell):

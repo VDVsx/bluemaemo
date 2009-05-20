@@ -67,6 +67,7 @@ class keyboard_ui(edje_group):
 
     @evas.decorators.key_up_callback
     def key_up_cb( self, event ):
+	self.main.connection.release_keyboard_event()
         key = event.keyname
 
 	if key == "Shift_L":
