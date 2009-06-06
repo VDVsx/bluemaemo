@@ -1371,6 +1371,30 @@ group {
 
       parts {
 
+
+#define INIT_HSPACE -35
+#define KEY_HSPACE 70
+#define KEY_HPOS(index)  KEY_HSPACE * index + INIT_HSPACE
+
+#define F_ROW -60
+
+#undef CLICK_AREA_H
+#undef CLICK_AREA_DY
+#define CLICK_AREA_H 70
+#define CLICK_AREA_DY 21
+
+	 KEY_FULL("F1", KEY_HPOS(0), F_ROW, -6, 0)
+	 KEY_FULL("F2", KEY_HPOS(1), F_ROW, -6, 0)
+         KEY_FULL("F3", KEY_HPOS(2), F_ROW, -6, 0)
+         KEY_FULL("F4", KEY_HPOS(3), F_ROW, -6, 0)
+         KEY_FULL("F5", KEY_HPOS(4), F_ROW, -6, 0)
+         KEY_FULL("F6", KEY_HPOS(5), F_ROW, -6, 0)
+         KEY_FULL("F7", KEY_HPOS(6), F_ROW, -6, 0)
+         KEY_FULL("F8", KEY_HPOS(7), F_ROW, -6, 0)
+         KEY_FULL("F9", KEY_HPOS(8), F_ROW, -6, 0)
+         KEY_FULL("F10", KEY_HPOS(9), F_ROW, -8, -4)
+	 KEY_FULL("F11", KEY_HPOS(10), F_ROW, -8, -4)
+
 #define INIT_HSPACE 0
 #define KEY_HSPACE 70
 #define KEY_HPOS(index)  KEY_HSPACE * index + INIT_HSPACE
@@ -1381,6 +1405,7 @@ group {
 #undef CLICK_AREA_DY
 #define CLICK_AREA_H 70
 #define CLICK_AREA_DY 21
+	
          KEY_FULL("Q", KEY_HPOS(0), FIRST_ROW, -2, 0)
          KEY_FULL("W", KEY_HPOS(1), FIRST_ROW, -5, 0)
          KEY_FULL("E", KEY_HPOS(2), FIRST_ROW, 0, 0)
@@ -1653,8 +1678,7 @@ group {
                target: "key-lbl-"val;                                  \
             }                                                          \
          }
-	 //KEY_SPECIAL("Ctrl", 0, FORTH_ROW, 95)
-         //KEY_SPECIAL("Alt", 105, FORTH_ROW, 95)
+
          KEY_SPACE
          KEY_SPECIAL("enter", 492, FORTH_ROW, 95)
 	 KEY_SPECIAL(".?123", 597, FORTH_ROW, 95)
