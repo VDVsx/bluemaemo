@@ -1429,15 +1429,15 @@ group {
             pointer_mode: NOGRAB;                                       \
             description {                                               \
                state: "default" 0.0;                                    \
-               min: 355 68;                                             \
-               max: 355 68;                                             \
+               min: 270 68;                                             \
+               max: 270 68;                                             \
                rel1 {                                                   \
                   relative: 0.0 0.0;                                    \
-                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+                  offset: (178 + 167) (FORTH_ROW + 27);                 \
                }                                                        \
                rel2 {                                                   \
                   relative: 0.0 0.0;                                    \
-                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+                  offset: (178 + 167) (FORTH_ROW + 27);                 \
                }                                                        \
                color: 0 0 0 0;                                          \
             }                                                           \
@@ -1448,15 +1448,15 @@ group {
             mouse_events: 0;                                            \
             description {                                               \
                state: "default" 0.0;                                    \
-               min: 335 54;                                             \
-               max: 335 54;                                             \
+               min: 270 54;                                             \
+               max: 270 54;                                             \
                rel1 {                                                   \
                   relative: 0.0 0.0;                                    \
-                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+                  offset: (178 + 167) (FORTH_ROW + 27);                 \
                }                                                        \
                rel2 {                                                   \
                   relative: 0.0 0.0;                                    \
-                  offset: (175 + 167) (FORTH_ROW + 27);                 \
+                  offset: (178 + 167) (FORTH_ROW + 27);                 \
                }                                                        \
                image {                                                  \
                   normal: "key-default.png";                            \
@@ -1653,11 +1653,231 @@ group {
                target: "key-lbl-"val;                                  \
             }                                                          \
          }
-
-         KEY_SPECIAL(".?123", 0, FORTH_ROW, 158)
+	 //KEY_SPECIAL("Ctrl", 0, FORTH_ROW, 95)
+         //KEY_SPECIAL("Alt", 105, FORTH_ROW, 95)
          KEY_SPACE
-         KEY_SPECIAL("enter", 525, FORTH_ROW, 158)
+         KEY_SPECIAL("enter", 492, FORTH_ROW, 95)
+	 KEY_SPECIAL(".?123", 597, FORTH_ROW, 95)
 
+/*-------------------Ctrl-Key-------------------------------------------*/
+         part {
+            name: "key-bg-ctrl";
+            type: RECT;
+            pointer_mode: NOGRAB;
+            description {
+               state: "default" 0.0;
+               min: 95 54;
+               max: 95 54;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: (95/2) (FORTH_ROW + 27);
+               }
+               rel2 {
+                  relative: 0.0 0.0;
+                  offset: (95/2) (FORTH_ROW + 27);
+               }
+               color: 0 0 0 0;
+            }
+         }
+         part {
+            name: "key-img-ctrl";
+            type: IMAGE;
+            mouse_events: 0;
+            description {
+               state: "default" 0.0;
+               min: 95 54;
+               max: 95 54;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: (95/2) (FORTH_ROW + 27);
+               }
+               rel2 {
+                  relative: 0.0 0.0;
+                  offset: (95/2) (FORTH_ROW + 27);
+               }
+               image {
+                  normal: "key-special.png";
+                  border: 9 9 9 9;
+               }
+            }
+            description {
+               state: "down" 0.0;
+               inherit: "default" 0.0;
+               image {
+                  normal: "key-special-selected.png";
+                  border: 9 9 9 9;
+               }
+            }
+         }
+          part {                                                        
+           name: "key-lbl-ctrl";                                        
+           type: TEXT;                                                 
+           mouse_events: 0;                                            
+           effect: OUTLINE;                                            
+           description {                                               
+              state: "default" 0.0;                                    
+              color: 240 240 240 255;                                  
+              color2: 110 110 110 255;                                 
+              color3: 110 110 110 255;                                 
+              rel1 {                                                   
+                 to: "key-bg-ctrl";                                     
+                 relative: 0.0 0.0;                                    
+                 offset: 8 4;                                          
+              }                                                        
+              rel2 {                                                   
+                 to: "key-bg-ctrl";                                     
+                 relative: 1.0 1.0;                                    
+                 offset: -1 -1;                                        
+              }                                                        
+              text {                                                   
+                 font: "key";                                          
+                 size: 24;                                             
+                 text: "Ctrl";                                            
+              }                                                        
+           }
+	   description {                                               
+              state: "down" 0.0;                                       
+              inherit: "default" 0.0;                                  
+              color: 200 200 200 255;                                  
+              color2: 90 90 90 255;                                    
+              color3: 90 90 90 255;                                    
+           }                                                              
+         }
+         programs {
+            program {
+               name: "key-down-ctrl";
+               signal: "mouse,clicked,1";
+               source: "key-bg-ctrl";
+               action: SIGNAL_EMIT "key_down" "ctrl";
+            }
+            program {
+               name: "key-down-ctrl-enter";
+               signal: "press_ctrl";
+               action: STATE_SET "down" 0.0;
+               transition: LINEAR 0.1;
+               target: "key-img-ctrl";
+               target: "key-lbl-ctrl";
+            }
+            program {
+               name: "key-down-ctrl-revert";
+               signal: "release_ctrl";
+               action: STATE_SET "default" 0.0;
+               transition: LINEAR 0.1;
+               target: "key-img-ctrl";
+               target: "key-lbl-ctrl";
+            }
+         }
+
+
+/*-------------------End Ctrl-Key-------------------------------------------*/
+
+/*-------------------Alt-Key-------------------------------------------*/
+         part {
+            name: "key-bg-alt";
+            type: RECT;
+            pointer_mode: NOGRAB;
+            description {
+               state: "default" 0.0;
+               min: 95 54;
+               max: 95 54;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: (105 + 95/2) (FORTH_ROW + 27);
+               }
+               rel2 {
+                  relative: 0.0 0.0;
+                  offset: (105 + 95/2) (FORTH_ROW + 27);
+               }
+               color: 0 0 0 0;
+            }
+         }
+         part {
+            name: "key-img-alt";
+            type: IMAGE;
+            mouse_events: 0;
+            description {
+               state: "default" 0.0;
+               min: 95 54;
+               max: 95 54;
+               rel1 {
+                  relative: 0.0 0.0;
+                  offset: (105 + 95/2) (FORTH_ROW + 27);
+               }
+               rel2 {
+                  relative: 0.0 0.0;
+                  offset: (105 + 95/2) (FORTH_ROW + 27);
+               }
+               image {
+                  normal: "key-special.png";
+                  border: 9 9 9 9;
+               }
+            }
+            description {
+               state: "down" 0.0;
+               inherit: "default" 0.0;
+               image {
+                  normal: "key-special-selected.png";
+                  border: 9 9 9 9;
+               }
+            }
+         }
+          part {                                                        
+           name: "key-lbl-alt";                                        
+           type: TEXT;                                                 
+           mouse_events: 0;                                            
+           effect: OUTLINE;                                            
+           description {                                               
+              state: "default" 0.0;                                    
+              color: 240 240 240 255;                                  
+              color2: 110 110 110 255;                                 
+              color3: 110 110 110 255;                                 
+              rel1 {                                                   
+                 to: "key-bg-alt";                                     
+                 relative: 0.0 0.0;                                    
+                 offset: 8 4;                                          
+              }                                                        
+              rel2 {                                                   
+                 to: "key-bg-alt";                                     
+                 relative: 1.0 1.0;                                    
+                 offset: -1 -1;                                        
+              }                                                        
+              text {                                                   
+                 font: "key";                                          
+                 size: 24;                                             
+                 text: "Alt";                                            
+              }                                                        
+           }                                                      
+         }
+         programs {
+            program {
+               name: "key-down-alt";
+               signal: "mouse,clicked,1";
+               source: "key-bg-alt";
+               action: SIGNAL_EMIT "key_down" "alt";
+            }
+            program {
+               name: "key-down-alt-enter";
+               signal: "press_alt";
+               action: STATE_SET "down" 0.0;
+               transition: LINEAR 0.1;
+               target: "key-img-alt";
+               target: "key-lbl-alt";
+            }
+            program {
+               name: "key-down-alt-revert";
+               signal: "release_alt";
+               action: STATE_SET "default" 0.0;
+               transition: LINEAR 0.1;
+               target: "key-img-alt";
+               target: "key-lbl-alt";
+            }
+         }
+
+
+/*-------------------End Alt-Key-------------------------------------------*/
+
+
+/*-------------------Shift-Key---------------------------------------------*/
 
 #undef INIT_HSPACE
 #define INIT_HSPACE 0
@@ -1758,6 +1978,10 @@ group {
                target: "key-lbl-shift";
             }
          }
+
+/*-------------------End shift-Key-------------------------------------------*/
+
+/*-------------------BackSpace-Key-------------------------------------------*/
 
 #define KEY_BACKSPACE                                                   \
          part {                                                         \
@@ -1872,6 +2096,8 @@ group {
          }
 
          KEY_BACKSPACE
+
+/*-------------------END BackSpace-Key-------------------------------------------*/
       }
    }
 
