@@ -56,11 +56,6 @@ class keyboard_ui(edje_group):
         self.pressed_keys = {}
         self.is_shift_down = False
         self.is_mouse_down = False
-	gpart = self.part_swallow_get("alpha")
-	gpart2 = gpart.part_object_get("key-lbl-F10")
-	gpart.text_class_set("key-lbl-F9","key",12)
-	#f_key = self.part_swallow_get("key-lbl-F10")
-	#f_key.set_size("34")
 
     def onShow( self ):
 	self.focus = True

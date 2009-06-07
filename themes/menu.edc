@@ -129,7 +129,7 @@ parts {
 	ICON("presentation",1,0);
 	ICON("multimedia",0,1);
 	ICON("games",0.5,1);
-	ICON("accelerometer",1,1);
+	ICON("ps3",1,1);
 	ICON("conf",0,2);
 	ICON("connection",0.5,2);
 	ICON("about",1,2);
@@ -148,7 +148,7 @@ parts {
 	ACTIVATE("presentation");
 	ACTIVATE("multimedia");
 	ACTIVATE("games");
-	ACTIVATE("accelerometer");
+	ACTIVATE("ps3");
 	ACTIVATE("conf");
 	ACTIVATE("connection");
 	ACTIVATE("about");

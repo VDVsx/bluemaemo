@@ -39,7 +39,7 @@ images {
   image: "scroll_area.png" COMP;
   image: "mouse_icon.png" COMP;
   image: "keyboard_icon.png" COMP;
-  image: "accelerometer_icon.png" COMP;
+  image: "ps3_icon.png" COMP;
   image: "multimedia_icon.png" COMP;
   image: "presentation_icon.png" COMP;
   image: "games_icon.png" COMP;
