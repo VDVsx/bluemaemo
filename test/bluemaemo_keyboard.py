@@ -55,6 +55,8 @@ class keyboard_ui(edje_group):
             }
         self.pressed_keys = {}
         self.is_shift_down = False
+	self.is_ctrl_down = False
+	self.is_alt_down = False
         self.is_mouse_down = False
 
     def onShow( self ):
@@ -176,7 +178,7 @@ class keyboard_ui(edje_group):
         if event.button != 1:
             return
         self.is_mouse_down = False
-
+    #shift
     def press_shift(self):
     	
         self.obj["alpha"].signal_emit("press_shift", "")
@@ -191,6 +193,36 @@ class keyboard_ui(edje_group):
             self.release_shift()
         else:
             self.press_shift()
+    #ctrl
+    def press_ctrl(self):
+    	
+        self.obj["alpha"].signal_emit("press_ctrl", "")
+        self.is_ctrl_down = True
+
+    def release_ctrl(self):
+        self.obj["alpha"].signal_emit("release_ctrl", "")
+        self.is_ctrl_down = False
+
+    def toggle_ctrl(self):
+        if self.is_ctrl_down:
+            self.release_ctrl()
+        else:
+            self.press_ctrl()
+    #alt
+    def press_alt(self):
+    	
+        self.obj["alpha"].signal_emit("press_alt", "")
+        self.is_alt_down = True
+
+    def release_alt(self):
+        self.obj["alpha"].signal_emit("release_alt", "")
+        self.is_alt_down = False
+
+    def toggle_alt(self):
+        if self.is_alt_down:
+            self.release_alt()
+        else:
+            self.press_alt()
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_mouse_down_key(self, emission, source):
@@ -245,6 +277,12 @@ class keyboard_ui(edje_group):
 	    
 	    if key == "space":
 	    	key_s = "space"
+	    elif key == "ctrl":
+		self.toggle_ctrl()
+	    	key_s = "NULL"
+	    elif key == "alt":
+		self.toggle_alt()
+	    	key_s = "NULL"
 	    elif key == "enter":
 	    	key_s = "Return"	    
 	    elif key == "backspace":
@@ -280,6 +318,20 @@ class keyboard_ui(edje_group):
 		if self.is_shift_down:
 			self.main.connection.send_keyboard_event("02",val)
 			self.release_shift()
+
+		elif self.is_ctrl_down and self.is_alt_down:
+			self.main.connection.send_keyboard_event("05",val)
+			self.release_ctrl()
+			self.release_alt()
+				
+		elif self.is_ctrl_down:
+			self.main.connection.send_keyboard_event("01",val)
+			self.release_ctrl()
+				
+		elif self.is_alt_down == True:
+			self.main.connection.send_keyboard_event("04",val) 	
+			self.release_alt()
+
 		else:
 			self.main.connection.send_keyboard_event("00",val)
             

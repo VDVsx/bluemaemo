@@ -3,6 +3,7 @@ bluemaemo (0.3) unstable; urgency=low
 
 bluemaemo 0.3
 
+	* Added Ctrl, Alt and F1 to F11 keys in the virtual keyboard
 	* Fixed bug in bluetooth adapter state
 	* Moved configuration files to /etc/bluemaemo
 	* Added back buttons in 'wait for connection' and 'process connection' screens

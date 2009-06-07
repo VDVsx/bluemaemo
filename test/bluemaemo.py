@@ -37,7 +37,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
 from bluemaemo_edje_group import *
@@ -147,7 +147,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	ecore.timer_add(1.0,self.main.transition_to,"keyboard_ui")
+	#ecore.timer_add(1.0,self.main.transition_to,"keyboard_ui")
     
     def onShow( self ):
 	self.focus = True
@@ -756,8 +756,8 @@ class GUI(object):
 	self.reconnect = True
 	self.error = False
 	self.connected = False
-	#self.check_bt_status()
-	#self.check_autoconnect()
+	self.check_bt_status()
+	self.check_autoconnect()
 	
 
     def check_connection_status(self):
