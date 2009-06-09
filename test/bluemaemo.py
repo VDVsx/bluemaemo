@@ -286,6 +286,8 @@ class conf_keys(edje_group):
             }
         self.pressed_keys = {}
         self.is_shift_down = False
+	self.is_ctrl_down = False
+	self.is_alt_down = False
         self.is_mouse_down = False
     
     def onShow( self ):
@@ -597,6 +599,7 @@ class conf_keys(edje_group):
             return
         self.is_mouse_down = False
 
+    #shift
     def press_shift(self):
     	
         self.obj["alpha"].signal_emit("press_shift", "")
@@ -611,6 +614,37 @@ class conf_keys(edje_group):
             self.release_shift()
         else:
             self.press_shift()
+
+    #ctrl
+    def press_ctrl(self):
+    	
+        self.obj["alpha"].signal_emit("press_ctrl", "")
+        self.is_ctrl_down = True
+
+    def release_ctrl(self):
+        self.obj["alpha"].signal_emit("release_ctrl", "")
+        self.is_ctrl_down = False
+
+    def toggle_ctrl(self):
+        if self.is_ctrl_down:
+            self.release_ctrl()
+        else:
+            self.press_ctrl()
+    #alt
+    def press_alt(self):
+    	
+        self.obj["alpha"].signal_emit("press_alt", "")
+        self.is_alt_down = True
+
+    def release_alt(self):
+        self.obj["alpha"].signal_emit("release_alt", "")
+        self.is_alt_down = False
+
+    def toggle_alt(self):
+        if self.is_alt_down:
+            self.release_alt()
+        else:
+            self.press_alt()
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_mouse_down_key(self, emission, source):
@@ -661,6 +695,12 @@ class conf_keys(edje_group):
 	    
 	    if key == "space":
 	    	key_s = "space"
+	    elif key == "ctrl":
+		self.toggle_ctrl()
+	    	key_s = "NULL"
+	    elif key == "alt":
+		self.toggle_alt()
+	    	key_s = "NULL"
 	    elif key == "enter":
 	    	key_s = "Return"	    
 	    elif key == "backspace":
@@ -692,6 +732,23 @@ class conf_keys(edje_group):
 			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
 			self.main.key_text = "shift+"+str(key_s)
 			self.release_shift()
+
+		elif self.is_ctrl_down and self.is_alt_down:
+			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
+			self.main.key_text = "ctrl+alt"+str(key_s)
+			self.release_ctrl()
+			self.release_alt()
+				
+		elif self.is_ctrl_down:
+			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
+			self.main.key_text = "ctrl"+str(key_s)
+			self.release_ctrl()
+				
+		elif self.is_alt_down == True:
+			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
+			self.main.key_text = "alt"+str(key_s)
+			self.release_alt()
+		
 		else:
 			if self.special_key == True:
 				self.part_text_set("value","  "+ str(key)+ "  ")

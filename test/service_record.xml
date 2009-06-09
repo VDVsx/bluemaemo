@@ -1,3 +1,25 @@
+<!--
+
+      service_record.xml
+
+      Copyright 2008 - 2009 	Valerio Valerio <vdv100@gmail.com>
+						
+
+      This program is free software; you can redistribute it and/or modify
+      it under the terms of the GNU General Public License as published by
+      the Free Software Foundation; either version 2 of the License, or
+      (at your option) any later version.
+
+      This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+
+      You should have received a copy of the GNU General Public License
+      along with this program; if not, write to the Free Software
+      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+-->
+
 <?xml version="1.0" encoding="UTF-8" ?>
 <record> 
 	<attribute id="0x0000"> 
@@ -59,7 +81,7 @@
 		<text encoding="hex" value="426c75655a207669727475616c20636f6d626f" />
 	</attribute>
 	<attribute id="0x0102">
-		<text encoding="hex" value="436f7079726967687420323030382056616c6572696f2056616c6572696f202d2076647631303040676d61696c2e636f6d" />
+				<textencoding="hex"value="436f7079726967687420323030382d323030392056616c6572696f2056616c6572696f202d2076647631303040676d61696c2e636f6d" />
 	</attribute>
 	<attribute id="0x0200">
 		<uint16 value="0x0100" />

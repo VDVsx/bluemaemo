@@ -133,12 +133,6 @@ class Connect:
 			self.input_connect = False
 		try:
 
-			bus_input = dbus.SystemBus()
-			self.input = dbus.Interface(bus_input.get_object('org.bluez', '/org/bluez/service_input'), 'org.bluez.Service')
-		
-			bus_adapter = dbus.SystemBus()
-			self.adapter = dbus.Interface(bus_adapter.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
-
 			# Add service record to the BlueZ database
 			bus = dbus.SystemBus()
 			self.database = dbus.Interface(bus.get_object('org.bluez', '/org/bluez'),

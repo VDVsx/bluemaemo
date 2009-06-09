@@ -178,6 +178,7 @@ class keyboard_ui(edje_group):
         if event.button != 1:
             return
         self.is_mouse_down = False
+
     #shift
     def press_shift(self):
     	
