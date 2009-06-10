@@ -78,6 +78,9 @@ class keyboard_ui(edje_group):
 	elif key == "ISO_Level3_Shift":
 		self.fn = False
 
+	elif key == "Control_L" or key == "Control_R":
+		self.ctrl = False
+
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
         key = event.keyname

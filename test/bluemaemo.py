@@ -55,6 +55,7 @@ from bluemaemo_recon_list import *
 from bluemaemo_confirm_conn import *
 from bluemaemo_unable_conn import *
 from bluemaemo_process_conn import *
+from bluemaemo_hw_kb import *
 
 WIDTH = 800
 HEIGHT = 480
@@ -143,7 +144,6 @@ class main(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "main")
-
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
@@ -155,7 +155,11 @@ class main(edje_group):
 
     def onHide( self ):
 	self.focus = False
-     
+
+    @evas.decorators.key_up_callback
+    def key_up_cb( self, event ):
+	self.main.connection.release_keyboard_event()
+ 
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
         key = event.keyname
@@ -171,6 +175,7 @@ class main(edje_group):
 			
 			self.main.bluemaemo_conf.fullscreen = "Yes"
 			self.main.window.fullscreen = True
+
 
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
@@ -760,6 +765,7 @@ class GUI(object):
 	self.adapter_on = False
 	self.current_adapter_name = None
 	self.current_adapter_addr = None
+	self.hw_kb = bluemaemo_hw_kb(self)
 		
 	self.key_mapper = key_mapper()
 	
