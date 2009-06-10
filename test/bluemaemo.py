@@ -311,7 +311,7 @@ class conf_keys(edje_group):
 		
 		elif len(self.main.key_text) > 3:
 			
-
+			print self.main.key_text
 			if self.main.key_text == "space":
 				text_value = self.main.key_mapper.mapper["space_t"]
 				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
@@ -525,32 +525,6 @@ class conf_keys(edje_group):
 			elif self.main.key_text == "f":
 				self.press_f = True
 				self.part_text_set("value","  " + self.main.key_text+" ")
-				
-			#elif self.press_f == True:
-			#	if self.main.key_text in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
-			#		if self.main.key_text == "1":
-			#			self.press_fpp = True
-			#		self.main.key_text = "f" + self.main.key_text
-			#		self.part_text_set("value","  " + self.main.key_text+" ")
-			#		self.press_f = False
-			#		
-			#	else:
-			#		
-			#		self.press_f = False
-			#		self.part_text_set("value","  " + self.main.key_text+" ")
-					
-					
-			#elif self.press_fpp == True:
-			#	if self.main.key_text in ("0", "1", "2"):
-			#		self.main.key_text = "f1" + self.main.key_text
-			#		self.part_text_set("value","  " + self.main.key_text+" ")
-			#		self.press_fpp = False
-			#			
-			#	else:
-			#		
-			#		self.press_fpp = False
-			#		self.part_text_set("value","  " + self.main.key_text+" ")
-
 			
 			else:
 				self.part_text_set("value","  " + self.main.key_text+" ")
@@ -734,19 +708,19 @@ class conf_keys(edje_group):
 			self.release_shift()
 
 		elif self.is_ctrl_down and self.is_alt_down:
-			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
-			self.main.key_text = "ctrl+alt"+str(key_s)
+			self.part_text_set("value","ctrl+alt+" + str(key_s))
+			self.main.key_text = "ctrl+alt+"+str(key_s)
 			self.release_ctrl()
 			self.release_alt()
 				
 		elif self.is_ctrl_down:
-			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
-			self.main.key_text = "ctrl"+str(key_s)
+			self.part_text_set("value","ctrl+"+ str(key_s)+ "  ")
+			self.main.key_text = "ctrl+"+str(key_s)
 			self.release_ctrl()
 				
 		elif self.is_alt_down == True:
-			self.part_text_set("value","  "+ str(key_s.upper())+ "  ")
-			self.main.key_text = "alt"+str(key_s)
+			self.part_text_set("value","alt+"+ str(key_s)+ "  ")
+			self.main.key_text = "alt+"+str(key_s)
 			self.release_alt()
 		
 		else:

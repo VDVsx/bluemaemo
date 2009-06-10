@@ -118,11 +118,12 @@ class presentation_conf(edje_group):
 	self.full_key = ""
 	self.no_full_key = ""
 	for i in (self.main.previous_key,self.main.next_key,self.main.fullscreen_key, self.main.no_fullscreen_key):
-		if len(i) > 6:
+		if len(i) > 6 and i[0] == "s":
 			#shift translation
-			if i[0] == "s":
-				text_value = self.main.key_mapper.mapper[i]
-				count +=1
+			
+			text_value = self.main.key_mapper.mapper[i]
+			count +=1
+
 		elif len(i) > 5 and i[0] == "f" and i[1] == "n":
 			
 			val = str(i) + "+u"

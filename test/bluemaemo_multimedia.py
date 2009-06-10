@@ -156,21 +156,22 @@ class multimedia_conf(edje_group):
 	self.no_full_key = ""
 
 	for i in (self.main.play_key,self.main.pause_key,self.main.stop_key,self.main.forward_key,self.main.backward_key, self.main.volume_m_key,self.main.volume_p_key,self.main.fullscreen_key_m, self.main.no_fullscreen_key_m):
-		if len(i) > 6:
+		if len(i) > 6 and i[0] == "s":
 			#shift translation
-			if i[0] == "s":
-				text_value = self.main.key_mapper.mapper[i]
-				count +=1
+	
+			text_value = self.main.key_mapper.mapper[i]
+			count +=1
 
-			elif len(i) > 5 and i[0] == "f" and i[1] == "n":
+		elif len(i) > 5 and i[0] == "f" and i[1] == "n":
 			
-				val = str(i) + "+u"
-				text_value = self.main.key_mapper.mapper[val]
-				count +=1
+			val = str(i) + "+u"
+			text_value = self.main.key_mapper.mapper[val]
+			count +=1
 
-			elif len(i) == 4 and i[0] == "s" and i[1] == "p":
-				text_value = self.main.key_mapper.mapper[i]
-				count +=1
+		elif len(i) == 4 and i[0] == "s" and i[1] == "p":
+			text_value = self.main.key_mapper.mapper[i]
+			count +=1
+
 		else:
 			text_value = i
 			count +=1

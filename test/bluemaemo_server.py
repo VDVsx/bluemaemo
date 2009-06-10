@@ -46,11 +46,10 @@ class Connect:
 		self.devices_conf = bluemaemo_known_devices()
 		
 		
-		bus_input = dbus.SystemBus()
-		self.input = dbus.Interface(bus_input.get_object('org.bluez', '/org/bluez/service_input'), 'org.bluez.Service')
+		self.bus = dbus.SystemBus()
+		self.input = dbus.Interface(self.bus.get_object('org.bluez', '/org/bluez/service_input'), 'org.bluez.Service')
 		
-		bus_adapter = dbus.SystemBus()
-		self.adapter = dbus.Interface(bus_adapter.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
+		self.adapter = dbus.Interface(self.bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
 
 		self.adapter_addr = self.adapter.GetAddress()
 		print self.adapter_addr
@@ -132,11 +131,10 @@ class Connect:
 			
 			self.input_connect = False
 		try:
-
+			
+			
 			# Add service record to the BlueZ database
-			bus = dbus.SystemBus()
-			self.database = dbus.Interface(bus.get_object('org.bluez', '/org/bluez'),
-																	'org.bluez.Database')
+			self.database = dbus.Interface(self.bus.get_object('org.bluez', '/org/bluez'),'org.bluez.Database')
 			self.handle = self.database.AddServiceRecordFromXML(xml)
 
 		except:

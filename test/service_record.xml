@@ -81,7 +81,7 @@
 		<text encoding="hex" value="426c75655a207669727475616c20636f6d626f" />
 	</attribute>
 	<attribute id="0x0102">
-				<textencoding="hex"value="436f7079726967687420323030382d323030392056616c6572696f2056616c6572696f202d2076647631303040676d61696c2e636f6d" />
+		<text encoding="hex" value="436f7079726967687420323030382d323030392056616c6572696f2056616c6572696f202d2076647631303040676d61696c2e636f6d" />
 	</attribute>
 	<attribute id="0x0200">
 		<uint16 value="0x0100" />
@@ -96,7 +96,7 @@
 		<uint8 value="0x30" />
 	</attribute>
 	<attribute id="0x0204">
-		<boolean value="true" />
+		<boolean value="false" />
 	</attribute>
 	<attribute id="0x0205">
 		<boolean value="true" />

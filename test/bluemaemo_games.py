@@ -159,11 +159,11 @@ class games_conf(edje_group):
 
 	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.d_key):
 
-		if len(i) > 6:
+		if len(i) > 6 and i[0] == "s":
 			#shift translation
-			if i[0] == "s":
-				text_value = self.main.key_mapper.mapper[i]
-				count +=1
+			
+			text_value = self.main.key_mapper.mapper[i]
+			count +=1
 
 		elif len(i) > 5 and i[0] == "f" and i[1] == "n":
 				val = str(i) + "+u"
