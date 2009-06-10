@@ -43,6 +43,20 @@ class presentation(edje_group):
 
     def onHide( self ):
 	self.focus = False
+
+    @evas.decorators.key_up_callback
+    def key_up_cb( self, event ):
+	self.main.connection.release_keyboard_event()
+        key = event.keyname
+
+	if key == "Shift_L":
+		self.main.hw_kb.shift = False
+
+	elif key == "ISO_Level3_Shift":
+		self.main.hw_kb.fn = False
+	
+	elif key == "Control_L" or key == "Control_R":
+		self.main.hw_kb.ctrl = False
      
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
@@ -60,9 +74,13 @@ class presentation(edje_group):
 			self.main.bluemaemo_conf.fullscreen = "Yes"
 			self.main.window.fullscreen = True
 	
-	elif key == "Escape":
+	#elif key == "Escape":
 
-		self.main.transition_to("menu")
+	#	self.main.transition_to("menu")
+
+	else:
+
+		self.main.hw_kb.send_hw_kb_key(key)
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
