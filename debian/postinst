@@ -2,4 +2,5 @@
 
 echo "Updating Sudoers"
 update-sudoers || true
+gtk-update-icon-cache
 maemo-select-menu-location bluemaemo.desktop

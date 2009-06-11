@@ -61,7 +61,9 @@ install: build
 	mkdir -p $(CURDIR)/debian/bluemaemo/etc/sudoers.d/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/bin/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/applications/hildon/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/pixmaps/
+	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/scalable/hildon/
+	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/48x48/hildon/
+	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/28x28/hildon/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/themes/
@@ -93,7 +95,9 @@ install: build
 	#copy desktop files
 
 	cp bluemaemo.desktop  $(CURDIR)/debian/bluemaemo/usr/share/applications/hildon/
-	cp bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/pixmaps/
+	cp icons/64/bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/scalable/hildon/
+	cp icons/48/bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/48x48/hildon/
+	cp icons/28/bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/28x28/hildon/
 	
 	#copy bash file
 
