@@ -1,17 +1,29 @@
+bluemaemo (0.3-1) unstable; urgency=low
+
+  * Added support for the hardware keyboard in all the profiles
+  * Added support for 'key combos' in the profiles (e.g: ctrl+f,ctrl+alt+f6,...)
+  * Added Ctrl, Alt and F1 to F11 keys in the virtual keyboard
+  * Fixed bug in bluetooth adapter state
+  * Moved configuration files to /etc/bluemaemo/
+  * Added back buttons in 'wait for connection' and 'process connection' screens
+  * Fixed sdl/openGL keystrokes bug
+
+ -- Valerio Valerio <vdv100@gmail.com>  Thu, 11 Jun 2009 14:41:55 +0100
+
 bluemaemo (0.2-1) unstable; urgency=low
 
-  bluemaemo 0.2
-
-	* Added space key map to the profiles
-	* Added method to change bluetooth adapter mode
-	* N810 Hardware keyboard support while in mouse profile
-	* Major code refactoring - Separated all profiles
-	* Added reconnect functionality
-	* Added auto-connect functionality
-
-  bluemaemo 0.1
-
-	* First release
+  * Added ability to map the space key in the profiles
+  * Added method to change bluetooth adapter mode
+  * N810 Hardware keyboard support while in mouse profile
+  * Major code refactoring - Separated all profiles
+  * Added reconnect functionality
+  * Added auto-connect functionality
 
  -- Valerio Valerio <vdv100@gmail.com>  Wed, 25 Feb 2009 23:14:54 +0000
+
+bluemaemo (0.1-1) unstable; urgency=low
+ 
+  * Initial release 
+
+ -- Valerio Valerio <vdv100@gmail.com>  Thu, 16 Oct 2008 11:07:00 +0100
 

@@ -62,18 +62,18 @@ class rec_list(edje_group):
 		
 		if self.devices_conf.empty:
 			
-			items.append(("Known devices list empty","", os.path.join(self.directory, "connection_icon.png")))
+			items.append(("Known devices list empty","", os.path.join(self.directory, "images/connection_icon.png")))
 		else:
 			
 			for addr,name in self.devices_conf.known_devices_list.iteritems():
-				items.append((name,addr, os.path.join(self.directory, "connection_icon.png")))
+				items.append((name,addr, os.path.join(self.directory, "images/connection_icon.png")))
 		
 		
 		
 		
 		self.evas_obj = self.main.canvas
-		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
-		#self.list_obj = KineticList(self.evas_obj,THEMES_FOLDER,self,self.main,item_height=150)
+		#self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
+		self.list_obj = KineticList(self.evas_obj,THEMES_FOLDER,self,self.main,item_height=150)
 		self.list_obj.freeze()
 		for i in items:
 	    		self.list_obj.row_add(i[0], i[1], i[2])
@@ -95,15 +95,15 @@ class rec_list(edje_group):
 		self.devices_conf = bluemaemo_known_devices()
 		if self.devices_conf.empty:
 			
-			items.append(("Known devices list empty","", os.path.join(self.directory, "connection_icon.png")))
+			items.append(("Known devices list empty","", os.path.join(self.directory, "images/connection_icon.png")))
 		else:
 			
 			for addr,name in self.devices_conf.known_devices_list.iteritems():
-				items.append((name,addr, os.path.join(self.directory, "connection_icon.png")))
+				items.append((name,addr, os.path.join(self.directory, "images/connection_icon.png")))
 		
 		self.evas_obj = self.main.canvas
-		self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
-		#self.list_obj = KineticList(self.evas_obj,THEMES_FOLDER,self,self.main,item_height=150)
+		#self.list_obj = KineticList(self.evas_obj,"bluemaemo.edj",self,self.main,item_height=150)
+		self.list_obj = KineticList(self.evas_obj,THEMES_FOLDER,self,self.main,item_height=150)
 		self.list_obj.freeze()
 		for i in items:
 	    		self.list_obj.row_add(i[0], i[1], i[2])

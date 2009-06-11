@@ -155,10 +155,6 @@ class main(edje_group):
 
     def onHide( self ):
 	self.focus = False
-
-    @evas.decorators.key_up_callback
-    def key_up_cb( self, event ):
-	self.main.connection.release_keyboard_event()
  
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
