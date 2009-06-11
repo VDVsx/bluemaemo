@@ -56,6 +56,20 @@ class mouse_ui(edje_group):
 
     def onHide( self ):
 	self.focus = False
+
+    @evas.decorators.key_up_callback
+    def key_up_cb( self, event ):
+	self.main.connection.release_keyboard_event()
+        key = event.keyname
+
+	if key == "Shift_L":
+		self.main.hw_kb.shift = False
+
+	elif key == "ISO_Level3_Shift":
+		self.main.hw_kb.fn = False
+	
+	elif key == "Control_L" or key == "Control_R":
+		self.main.hw_kb.ctrl = False
   
     #mouse
     @evas.decorators.key_down_callback
@@ -85,74 +99,8 @@ class mouse_ui(edje_group):
 
 	else:
 		
-		try:
-			if key == "Shift_L":
-				self.shift = True
-			
-			elif key == "Control_L" or key == "Control_R":
-				self.ctrl = True
-			
-			elif key == "Alt_L":
-				self.alt = True
+		self.main.hw_kb.send_hw_kb_key(key)
 
-			elif key == "ISO_Level3_Shift":
-				self.fn = True
-			
-			else:
-			
-				value = self.main.key_mapper.mapper[str(key)]
-			
-				if self.shift == True:
-					self.main.connection.send_keyboard_event("02",value)
-			
-				elif self.alt == True and self.ctrl == True:
-					self.main.connection.send_keyboard_event("05",value)
-					self.ctrl = False
-					self.alt = False
-				
-				elif self.ctrl == True:
-					self.main.connection.send_keyboard_event("01",value)
-					self.ctrl = False
-				
-				elif self.alt == True:
-					self.main.connection.send_keyboard_event("04",value) 	
-					self.alt = False
-			
-				elif str(key) == "plus" and self.fn == False:
-
-					self.main.connection.send_keyboard_event("02",value) 
-			
-				elif self.fn == True:
-					modi = self.main.key_mapper.mapper["fn_m+"+str(key)]
-					value2 = self.main.key_mapper.mapper["fn_k+"+str(key)]
-					self.main.connection.send_keyboard_event(modi,value2) 	
-			
-				else:
-					self.main.connection.send_keyboard_event("00",value)
-		except:
-			print "Key error --->>>"
-				
-
-
-    @evas.decorators.key_up_callback
-    def key_up_cb( self, event ):
-        key = event.keyname
-	
-	if key == "F7" or key == "F8":
-		self.button_hold = False
-		self.signal_emit("hold_released", "")
-
-	elif key == "Shift_L":
-		self.shift = False
-
-	elif key == "ISO_Level3_Shift":
-		self.fn = False
-
-	elif key == "Escape" or key == "F6":
-		pass
-
-	else:
-		self.main.connection.release_keyboard_event()
 
 
     @edje.decorators.signal_callback("mouse,down,1", "*")

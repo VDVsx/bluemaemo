@@ -32,7 +32,6 @@ class bluemaemo_hw_kb:
 
 	def send_hw_kb_key(self,key):
 		
-		print key
 		try:
 			if key == "Shift_L":
 				self.shift = True
@@ -49,7 +48,7 @@ class bluemaemo_hw_kb:
 			else:
 			
 				value = self.main.key_mapper.mapper[str(key)]
-				print "1"	
+					
 				if self.shift == True:
 					self.main.connection.send_keyboard_event("02",value)
 			
