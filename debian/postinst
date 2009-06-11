@@ -2,3 +2,4 @@
 
 echo "Updating Sudoers"
 update-sudoers || true
+maemo-select-menu-location bluemaemo.desktop
