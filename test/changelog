@@ -2,7 +2,8 @@ bluemaemo (0.3) unstable; urgency=low
 
 
 bluemaemo 0.3
-	
+
+	* Added support for the hardware keyboard in all the profiles
 	* Added support for 'key combos' in the profiles (e.g: ctrl+f, ctrl+alt+f6,...)
 	* Added Ctrl, Alt and F1 to F11 keys in the virtual keyboard
 	* Fixed bug in bluetooth adapter state
@@ -25,4 +26,4 @@ bluemaemo 0.1
 
 
 
--- Valerio Valerio <vdv100@gmail.com>  Thu, 26 Fev 12:00:35
+-- Valerio Valerio <vdv100@gmail.com>  Thu, 11 Jun 12:30:35

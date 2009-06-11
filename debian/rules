@@ -58,7 +58,6 @@ install: build
 	# Add here commands to install the package into debian/bluemaemo.
 	#$(MAKE) DESTDIR=$(CURDIR)/debian/bluemaemo install
 	
-	mkdir -p $(CURDIR)/debian/bluemaemo/home/user/
 	mkdir -p $(CURDIR)/debian/bluemaemo/etc/sudoers.d/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/bin/
 	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/applications/hildon/
@@ -74,9 +73,8 @@ install: build
 	
 	#copy data files
 	cp service_record.xml  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
-	cp settings.cfg  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
+	cp bluemaemo.cfg  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
 	cp known_devices.cfg $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
-	cp .bluemaemo.cfg  $(CURDIR)/debian/bluemaemo/home/user/
 
 	#copy theme files
 	
