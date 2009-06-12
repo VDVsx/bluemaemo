@@ -1,6 +1,49 @@
 #! /bin/sh
+#
+#      bluemaemo - postinst
+#
+#      Copyright 2008 -2008 Faheem Pervez <trippin1@gmail.com> and Valério Valério <vdv100@gmail.com>
+#			
+#						
+#      This program is free software; you can redistribute it and/or modify
+#      it under the terms of the GNU General Public License as published by
+#      the Free Software Foundation; either version 2 of the License, or
+#      (at your option) any later version.
+#
+#      This program is distributed in the hope that it will be useful,
+#      but WITHOUT ANY WARRANTY; without even the implied warranty of
+#      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#      GNU General Public License for more details.
+#
+#      You should have received a copy of the GNU General Public License
+#      along with this program; if not, write to the Free Software
+#      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+#
+
+
 
 echo "Updating Sudoers"
 update-sudoers || true
-gtk-update-icon-cache
-maemo-select-menu-location bluemaemo.desktop
+
+if [ -r /etc/osso-af-init/af-defines.sh ]; then
+  source /etc/osso-af-init/af-defines.sh
+fi
+
+if [ -x /usr/bin/dbus-send -a -x /usr/bin/gtk-update-icon-cache ]; then
+  dbus-send --type=method_call --dest=org.freedesktop.Notifications /org/freedesktop/Notifications org.freedesktop.Notifications.SystemNoteInfoprint string:"Updating icon cache" || true
+fi
+
+if [ -x /usr/bin/gtk-update-icon-cache ]; then
+  gtk-update-icon-cache -f /usr/share/icons/hicolor || true
+fi
+
+case "$1" in
+    configure)
+        [ -z "$2" ] && \
+         if [ -x /usr/bin/maemo-select-menu-location ]; then
+            maemo-select-menu-location bluemaemo.desktop 
+         fi
+        ;;
+esac
+
+exit 0
