@@ -3,13 +3,13 @@ bluemaemo (0.3) unstable; urgency=low
 
 bluemaemo 0.3
 
-	* Added support for the hardware keyboard in all the profiles
-	* Added support for 'key combos' in the profiles (e.g: ctrl+f, ctrl+alt+f6,...)
+	* Added support for the hardware keyboard in all profiles
+	* Added support for 'key combos' (e.g: ctrl+f, ctrl+alt+f6,...)
 	* Added Ctrl, Alt and F1 to F11 keys in the virtual keyboard
-	* Fixed bug in bluetooth adapter state
+	* Fixed bug in the bluetooth adapter state
 	* Moved configuration files to /etc/bluemaemo/
-	* Added back buttons in 'wait for connection' and 'process connection' screens
-	* Fixed sdl/openGL keystrokes bug
+	* Added back buttons in the 'wait for connection' and 'process connection' screens
+	* Fixed the sdl/openGL keystrokes bug
 
 bluemaemo 0.2
 

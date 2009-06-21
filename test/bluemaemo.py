@@ -65,17 +65,6 @@ WM_NAME = "bluemaemo"
 WM_CLASS = "bluemaemo"
 
 
-edjepaths = "bluemaemo.edj themes/bluemaemo.edj /usr/share/bluemaemo/themes/bluemaemo.edj".split()
-
-for i in edjepaths:
-    if os.path.exists( i ):
-       global edjepath
-       edjepath = i
-       break
-else:
-    raise Exception( "bluemaemo.edj not found. looked in %s" % edjepaths )
-
-
 #----------------------------------------------------------------------------#
 def translate_key(self,keyname, keystring):
 #----------------------------------------------------------------------------#
