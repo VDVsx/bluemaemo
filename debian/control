@@ -9,7 +9,7 @@ Package: bluemaemo
 Architecture: armel
 Replaces: bluemaemo
 Depends: efl-core, python2.5-efl-core, python2.5-ecore, python2.5-edbus, python2.5-evas, python2.5-edje
-Description: BlueMaemo BT HID mouse & keyboard
+Description: bluetooth HID mouse & keyboard
  Turns your internet tablet into a mixed Bluetooth keyboard-and-mouse device through the HID Bluetooth profile.
  .
  Home page: http://www.valeriovalerio.org/bluemaemo

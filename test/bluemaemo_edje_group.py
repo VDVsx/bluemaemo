@@ -97,45 +97,45 @@ def key_dec(self,key):
 			
 			else:
 			
-				if self.shift == True:
+				if self.shift:
 
 					self.modif = "02"
 					self.shift = False
 					self.val = self.main.key_mapper.mapper[str(i)]
 
-				if self.win == True:
+				if self.win:
 
 					self.modif = "08"
 					self.win = False
 					self.val = self.main.key_mapper.mapper[str(i)]
 
-				elif self.ctrl == True and self.alt == True:
+				elif self.ctrl and self.alt:
 
 					self.ctrl = False
 					self.alt = False
 					self.modif = "05"
 					self.val = self.main.key_mapper.mapper[str(i)]
 				
-				elif self.ctrl == True:
+				elif self.ctrl:
 
 					
 					self.ctrl = False
 					self.modif = "01"
 					self.val = self.main.key_mapper.mapper[str(i)]
 				
-				elif self.alt == True:
+				elif self.alt:
 					
 					self.alt = False
 					self.modif = "04"
 					self.val = self.main.key_mapper.mapper[str(i)]
 
-				elif self.fn == True:
+				elif self.fn:
 
 					self.fn = False
 					self.modif = self.main.key_mapper.mapper["fn_m+"+str(i)]
 					self.val = self.main.key_mapper.mapper["fn_k+"+str(i)]
 
-				elif self.sp == True:
+				elif self.sp:
 
 					self.sp = False
 					self.val = self.main.key_mapper.mapper[str(i)+ "_k"]

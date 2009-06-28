@@ -37,7 +37,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
 from bluemaemo_edje_group import *
@@ -136,7 +136,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	ecore.timer_add(1.0,self.main.transition_to,"menu")
+	#ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True
@@ -222,9 +222,9 @@ class wait_conn(edje_group):
 
     def check_connection(self):
 
-		if self.main.connection_processed == True:
+		if self.main.connection_processed:
 
-			if self.main.connection.connect == False:
+			if not self.main.connection.connect:
 				ecore.timer_add(1.0,self.check_connection)
 				
 			else:
@@ -294,7 +294,7 @@ class conf_keys(edje_group):
 		prev_source = self.main.current_source + "_icon"
 		local_key = str(self.main.current_source)
 		
-		if self.hit == False:
+		if not self.hit:
 			
 			self.hit = False
 			self.main.transition_to(prev)
@@ -362,26 +362,26 @@ class conf_keys(edje_group):
 
 	else:
 
-		if self.shift == True:
+		if self.shift:
 			
 			self.part_text_set("value","  "+ str(key)+ "  ")
 			self.shift = False
 			self.main.key_text = "shift+"+str(key_value)
 		
-		elif self.alt == True and self.ctrl == True:
+		elif self.alt and self.ctrl:
 
 			self.part_text_set("value","ctrl+alt+" + str(key_key))
 			self.ctrl = False
 			self.alt = False
 			self.main.key_text = "ctrl+alt+" + str(key_key)
 
-		elif self.ctrl == True:
+		elif self.ctrl:
 
 			self.part_text_set("value","ctrl+" + str(key_key))
 			self.ctrl = False
 			self.main.key_text = "ctrl+" + str(key_key)
 	
-		elif self.fn == True:
+		elif self.fn:
 			if key_key == "EuroSign":
 				self.part_text_set("value","  "+"€"+ " ")
 				self.fn = False
@@ -390,7 +390,7 @@ class conf_keys(edje_group):
 				self.part_text_set("value","  "+"£"+ " ")
 				self.fn = False
 				self.main.key_text = "fn_k+" + str(key_value)	
-			elif self.press_f == True:
+			elif self.press_f:
 				self.main.key_text = translate_key(self,key_value,key)
 
 				if self.main.key_text in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
@@ -407,7 +407,7 @@ class conf_keys(edje_group):
 						self.part_text_set("value","  " +self.main.key_text+ " ")
 						self.fn = False
 
-			elif self.press_fpp == True:
+			elif self.press_fpp:
 				self.main.key_text = translate_key(self,key_value,key)
 				if self.main.key_text in ("0", "1", "2"):
 					self.main.key_text = "f1" + self.main.key_text
@@ -427,7 +427,7 @@ class conf_keys(edje_group):
 				self.fn = False
 				self.main.key_text = "fn_k+" + str(key_value)		
 
-		elif self.alt == True:
+		elif self.alt:
 
 			if key_value == "Tab":
 
@@ -442,7 +442,7 @@ class conf_keys(edje_group):
 					self.press_f = True
 					self.part_text_set("value","alt+" + self.main.key_text)
 				
-				elif self.press_f == True:
+				elif self.press_f:
 					if self.main.key_text in ("0", "1", "2", "3", "4", "5", "6", "7", "8", "9"):
 						if self.main.key_text == "1":
 							self.press_fpp = True
@@ -457,7 +457,7 @@ class conf_keys(edje_group):
 						self.part_text_set("value","  " +self.main.key_text+ " ")
 					
 					
-				elif self.press_fpp == True:
+				elif self.press_fpp:
 					if self.main.key_text in ("0", "1", "2"):
 						self.main.key_text = "alt+f1" + self.main.key_text
 						self.part_text_set("value",self.main.key_text)
@@ -483,7 +483,7 @@ class conf_keys(edje_group):
 				self.press_w = True
 				self.part_text_set("value","  " + self.main.key_text+" ")
 
-			elif self.press_w == True:
+			elif self.press_w:
 
 				if self.main.key_text == "i":
 					self.press_wi = True
@@ -494,7 +494,7 @@ class conf_keys(edje_group):
 					self.press_w = False
 					self.part_text_set("value","  " + self.main.key_text+" ")
 
-			elif self.press_wi == True:	
+			elif self.press_wi:	
 
 				if self.main.key_text == "n":
 					self.press_win = True
@@ -505,7 +505,7 @@ class conf_keys(edje_group):
 					self.press_w = False
 					self.part_text_set("value","  " + self.main.key_text+" ")
 
-			elif self.press_win == True:
+			elif self.press_win:
 
 				self.press_win = False	
 				self.part_text_set("value","win+" + self.main.key_text+" ")
@@ -708,13 +708,13 @@ class conf_keys(edje_group):
 			self.main.key_text = "ctrl+"+str(key_s)
 			self.release_ctrl()
 				
-		elif self.is_alt_down == True:
+		elif self.is_alt_down:
 			self.part_text_set("value","alt+"+ str(key_s)+ "  ")
 			self.main.key_text = "alt+"+str(key_s)
 			self.release_alt()
 		
 		else:
-			if self.special_key == True:
+			if self.special_key:
 				self.part_text_set("value","  "+ str(key)+ "  ")
 				self.main.key_text = str(key_s)
 				self.special_key = False
@@ -778,12 +778,12 @@ class GUI(object):
 	self.reconnect = True
 	self.error = False
 	self.connected = False
-	#self.check_bt_status()
-	#self.check_autoconnect()
+	self.check_bt_status()
+	self.check_autoconnect()
 	
 
     def check_connection_status(self):
-	if self.connection.connect == False:
+	if not self.connection.connect:
 		self.error = False
 		self.connected = False
 		self.transition_to("disconnect")
@@ -799,7 +799,7 @@ class GUI(object):
 		self.error = True
 	else:
 
-		if self.connection.connect == False:
+		if not self.connection.connect:
 			ecore.timer_add(1.0,self.check_connection)
 		else:
 			self.connected = True
@@ -873,7 +873,7 @@ class GUI(object):
 
     def initialize_bluemaemo_server(self,addr=1):
 
-	if self.adapter_on == True:
+	if self.adapter_on:
 		
 			self.connection = Connect()
 			self.connection.start_connection(addr)

@@ -49,27 +49,27 @@ class bluemaemo_hw_kb:
 			
 				value = self.main.key_mapper.mapper[str(key)]
 					
-				if self.shift == True:
+				if self.shift:
 					self.main.connection.send_keyboard_event("02",value)
 			
-				elif self.alt == True and self.ctrl == True:
+				elif self.alt and self.ctrl:
 					self.main.connection.send_keyboard_event("05",value)
 					self.ctrl = False
 					self.alt = False
 				
-				elif self.ctrl == True:
+				elif self.ctrl:
 					self.main.connection.send_keyboard_event("01",value)
 					self.ctrl = False
 				
-				elif self.alt == True:
+				elif self.alt:
 					self.main.connection.send_keyboard_event("04",value) 	
 					self.alt = False
 			
-				elif str(key) == "plus" and self.fn == False:
+				elif str(key) == "plus" and not self.fn:
 
 					self.main.connection.send_keyboard_event("02",value) 
 			
-				elif self.fn == True:
+				elif self.fn:
 					modi = self.main.key_mapper.mapper["fn_m+"+str(key)]
 					value2 = self.main.key_mapper.mapper["fn_k+"+str(key)]
 					self.main.connection.send_keyboard_event(modi,value2) 	

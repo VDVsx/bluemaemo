@@ -342,7 +342,7 @@ class KineticList(evas.SmartObject):
     def __do_scroll(self):
         self.is_scrolling = True
 
-        if self.continue_scrolling == False:
+        if not self.continue_scrolling:
             return
 
         diff = int(self.pixel_per_sec / 10)

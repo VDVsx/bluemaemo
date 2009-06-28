@@ -113,7 +113,7 @@ class menu(edje_group):
 
 		elif source == "connection":
 
-			if self.main.connection.connect == True:
+			if self.main.connection.connect:
 				self.main.groups["connection_status"].part_text_set("label_connect_to","Connected to:")
     				self.main.groups["connection_status"].part_text_set("label_client", self.main.connection.client_name)
 				self.main.groups["connection_status"].part_text_set("label_addr",self.main.connection.client_addr)

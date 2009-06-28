@@ -102,27 +102,27 @@ class keyboard_ui(edje_group):
 			
 			value = self.main.key_mapper.mapper[str(key)]
 			
-			if self.shift == True:
+			if self.shift:
 				self.main.connection.send_keyboard_event("02",value)
 			
-			elif self.alt == True and self.ctrl == True:
+			elif self.alt and self.ctrl:
 				self.main.connection.send_keyboard_event("05",value)
 				self.ctrl = False
 				self.alt = False
 				
-			elif self.ctrl == True:
+			elif self.ctrl:
 				self.main.connection.send_keyboard_event("01",value)
 				self.ctrl = False
 				
-			elif self.alt == True:
+			elif self.alt:
 				self.main.connection.send_keyboard_event("04",value) 	
 				self.alt = False
 			
-			elif str(key) == "plus" and self.fn == False:
+			elif str(key) == "plus" and not self.fn:
 
 				self.main.connection.send_keyboard_event("02",value) 
 			
-			elif self.fn == True:
+			elif self.fn:
 				modi = self.main.key_mapper.mapper["fn_m+"+str(key)]
 				value2 = self.main.key_mapper.mapper["fn_k+"+str(key)]
 				self.main.connection.send_keyboard_event(modi,value2) 	
@@ -332,7 +332,7 @@ class keyboard_ui(edje_group):
 			self.main.connection.send_keyboard_event("01",val)
 			self.release_ctrl()
 				
-		elif self.is_alt_down == True:
+		elif self.is_alt_down:
 			self.main.connection.send_keyboard_event("04",val) 	
 			self.release_alt()
 
@@ -367,9 +367,9 @@ class keyboard_ui(edje_group):
     @edje.decorators.signal_callback("mouse_over_area", "*")
     def on_mouse_over_area(self, emission, source):
 
-		if self.mouse_down == True:
+		if self.mouse_down:
 			
-			if self.first_touch == True:
+			if self.first_touch:
 				
 				self.first_touch = False
 				self.x_init, self.y_init = self.main.canvas.pointer_canvas_xy

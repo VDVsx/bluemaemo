@@ -95,7 +95,7 @@ class Connect:
 
                        self.input_connect = False
 
-		if input_status == True:
+		if input_status:
 			
 			try:
 				cenas = self.input.Stop()
@@ -196,7 +196,7 @@ class Connect:
 	def terminate_connection(self):
 		
 		try:
-			if self.connect == False:
+			if not self.connect:
 				hidserver.quit()
 				n = hidserver.quit_server()
 				print "killed"
@@ -212,10 +212,12 @@ class Connect:
 		self.database.RemoveServiceRecord(self.handle)
 
 		# Restore initial input service condition
-		if self.input_connect == True:
+		if self.input_connect:
 			self.input.Start()
 			print "--> BlueZ input service started"
-		if self.bluez_subsystem == True:
+
+		if self.bluez_subsystem:
+
 			try:
 				os.system("/etc/init.d/bluetooth stop")
 			except:
@@ -252,14 +254,14 @@ class start_deamon(Thread):
 				self.state = hidserver.reConnect(self.bluemaemo.adapter_addr,self.addr)
 				#hidserver.reConnect("00:1D:6E:9D:42:9C","00:21:4F:57:93:C8")
 		
-			while self.bluemaemo.connect == False and self.bluemaemo.error == False:
+			while not self.bluemaemo.connect  and not self.bluemaemo.error:
 				time.sleep(1)
 				n = hidserver.connec_state()
 				print "Waiting for a connection..."
 				if n == 1:
 					self.bluemaemo.connect = True
 
-				elif self.bluemaemo.quit_server == True:
+				elif self.bluemaemo.quit_server:
 					print "Exit"
 					bluemaemo.shutdown()
 
