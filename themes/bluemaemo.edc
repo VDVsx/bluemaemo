@@ -21,11 +21,12 @@
 */
 
 images {
-  
+
+  image: "background.png" COMP;
+  image: "main_toolbar_background.png" COMP;
   image: "button_background.png" COMP;
   image: "button_background_active.png" COMP;
   image: "backdrop.png" COMP;
-  image: "background.png" COMP;
   image: "back.png" COMP;
   image: "quit.png" COMP;
   image: "button_right.png" COMP;
@@ -63,7 +64,6 @@ images {
   image: "volume+_icon.png" COMP;
   image: "down_icon.png" COMP;
   image: "up_icon.png" COMP;
-  
   image: "key-default.png" COMP;
   image: "key-default-selected.png" COMP;
   image: "key-special.png" COMP;
@@ -91,6 +91,7 @@ fonts {
    font: "VeraBd.ttf" "Sans";
    font: "VeraBd.ttf" "key";
    font: "VeraBd.ttf" "Font Item";
+   font: "NS Wide Regular V3.ttf" "Nokia Sans Wide";
 }
 
 #define BUTTON_BOTTOM_HEIGHT 0.12;
@@ -136,6 +137,51 @@ fonts {
             }                                                           \
             color: 255 255 255 0;                                       \
         }                                                               \
+    }	
+
+
+#define TOP_BAR()							\
+  part {								\
+            name: "top_bar";						\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               rel1 {							\
+                  relative: 0.0 0.0;					\
+                  offset: 0 0 ;						\
+               }							\
+               rel2 {							\
+                  relative: 1.0 0.0;					\
+                  offset:  -1 50;					\
+               }							\
+	       image { normal: "main_toolbar_background.png"; }         \        
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+  part {								\
+        name: "menu_title";						\
+        type: TEXT;							\
+        mouse_events: 0;						\
+        clip_to: "swallow_clip";					\
+        description {							\
+            state: "default" 0.0;					\
+            rel1 {							\
+                relative: 0.0 0.0;					\
+                offset: 42 1;						\
+            }								\
+            rel2 {							\
+                relative: 1.0 0.1;					\
+                offset: -1 -1;						\
+            }								\
+            text {							\
+                font: "Nokia Sans Wide";				\
+                size: 26;						\
+		align: 0 0.5;						\
+            }								\
+        }								\
     }									
 
 #define CONF_TEXT(part_name,y_pos)					\

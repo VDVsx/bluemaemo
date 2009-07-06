@@ -37,7 +37,7 @@ class menu(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "menu")
-	self.part_text_set( "label_title", "BlueMaemo" )
+	self.part_text_set( "menu_title", "Main Menu" )
 
     def onShow( self ):
 	self.focus = True

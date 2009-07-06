@@ -81,6 +81,8 @@ parts {
 
         BACKGROUND(0);
 
+	TOP_BAR();
+/*
     part {
         name: "label_title";
         type: TEXT;
@@ -104,7 +106,7 @@ parts {
                 align: 0.5 0.5;
             }
         }
-    }
+    }*/
 	ICON("mouse",0,0);
 	ICON("keyboard",0.5,0);
 	ICON("presentation",1,0);

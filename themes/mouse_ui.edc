@@ -27,6 +27,7 @@ parts {
         BACKGROUND(0);
 
 	SCREEN_TEXT("Mouse","mouse_icon.png",0.15);
+
 	part {
             name: "mouse_area";
             type: IMAGE;
