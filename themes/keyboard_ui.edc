@@ -23,32 +23,8 @@ parts {
 
 	  SWALLOWCLIP();
 		
-	  part {
-            name: "background";
-            type: IMAGE;
-            mouse_events: 1;
-	    clip_to: "swallow_clip";   
-            description {
-               state: "default" 0.0;
-               visible: 1;
-               rel1 {
-                  relative: 0.0 0.0;
-                  offset: 0 0;
-               }
-               rel2 {
-                  relative: 1.0 1.0;
-                  offset: -1 -1;
-               }
-	       image { normal: "background.png"; }                  
-               fill { smooth: 0; } 
-            }
+	  BACKGROUND(1);
 
-	    description {
-               state: "hidden" 0.0;
-               inherit: "default" 0.0;
-               visible: 0;
-            }
-         }
    SCREEN_TEXT("Keyboard","keyboard_icon.png",0.2);
    part {								
             name: "back";						
