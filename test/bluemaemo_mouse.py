@@ -37,6 +37,7 @@ class mouse_ui(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "mouse_ui")
+	self.part_text_set( "menu_title", "Mouse" )
         self.x_init, self.y_init = 0,0
         self.mouse_down = False
         self.first_touch = True

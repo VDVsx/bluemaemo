@@ -35,6 +35,7 @@ class multimedia(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "multimedia")
+	self.part_text_set( "menu_title", "Multimedia" )
 
     def onShow( self ):
 	self.focus = True
@@ -84,11 +85,8 @@ class multimedia(edje_group):
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
-	if source == "back":
-		
-		self.main.transition_to("menu")	
-		
-	elif source ==	"conf_keys":
+	
+	if source == "conf_keys":
 		
 		self.main.transition_to("multimedia_conf")
 
@@ -151,7 +149,7 @@ class multimedia(edje_group):
     def on_edje_signal_button_released(self, emission, source):
 
 	if source =="back" or source == "conf_keys":
-		pass
+		self.main.transition_to("menu")	
 	else:
 		self.main.connection.release_keyboard_event()
 
@@ -161,6 +159,7 @@ class multimedia_conf(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "multimedia_conf")
+	self.part_text_set( "menu_title", "Multimedia settings" )
 	count = 0
 	self.play_key = ""
 	self.pause_key = ""

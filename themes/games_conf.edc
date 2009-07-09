@@ -26,38 +26,38 @@ parts {
 		
 	   BACKGROUND(0);
 
-	SCREEN_TEXT("Configurations","conf_icon.png",0.28);
-
+	//SCREEN_TEXT("Configurations","conf_icon.png",0.28);
+/*
 	//Screen 1
-	CONF_TEXT("Up",0);
+	CONF_ENTRY("Up",0);
 	CONF_KEY_ICON("up_key",0);
-	CONF_TEXT("Down",1);
+	CONF_ENTRY("Down",1);
 	CONF_KEY_ICON("down_key",1);
-	CONF_TEXT("Right",2);
+	CONF_ENTRY("Right",2);
 	CONF_KEY_ICON("right_key",2);
-	CONF_TEXT("Left",3);
+	CONF_ENTRY("Left",3);
 	CONF_KEY_ICON("left_key",3);
-	CONF_TEXT("A",4);
+	CONF_ENTRY("A",4);
 	CONF_KEY_ICON("a_key",4);
 
 	//Screen 2
-	CONF_TEXT("B",0);
+	CONF_ENTRY("B",0);
 	CONF_KEY_ICON("b_key",0);
-	CONF_TEXT("C",1);
+	CONF_ENTRY("C",1);
 	CONF_KEY_ICON("c_key",1);
-	CONF_TEXT("D",2);
+	CONF_ENTRY("D",2);
 	CONF_KEY_ICON("d_key",2);
 	
 	SCREEN_NUMBER("1",0);
 	SCREEN_NUMBER("2",1);
 	
-        LOGO();
+        */
 	BACK();
 	
     }
 
     programs {
-
+	/*
 	//hide_screen 1
 	program {                                                          
         	name: "hide_Screen_1";
@@ -439,6 +439,8 @@ parts {
        ACTIVATE("b_key");
        ACTIVATE("c_key");
        ACTIVATE("d_key");
+
+	*/
        TRANSITION();
     }
     

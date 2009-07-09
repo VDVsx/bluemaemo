@@ -26,7 +26,9 @@ parts {
 
         BACKGROUND(0);
 
-	SCREEN_TEXT("Mouse","mouse_icon.png",0.15);
+	TOP_BAR();
+
+	//SCREEN_TEXT("Mouse","mouse_icon.png",0.15);
 
 	part {
             name: "mouse_area";
@@ -72,7 +74,7 @@ parts {
 	BT_MIDDLE();
 	BT_RIGHT();
 	BT_HOLD();
-	SCROLL_AREA_ICONS();
+	//SCROLL_AREA_ICONS();
 	BACK();
 
      programs {

@@ -20,61 +20,7 @@
 *      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#define ICON(part_name, xpos, ypos)                         		 \
-            part {                                                       \
-                name: part_name;                                	 \
-                mouse_events: 1;                                         \
-                type: IMAGE;                                             \
-                clip_to: "swallow_clip";                                 \
-                description {                                            \
-                    state: "default" 0.0;                                \
-                    rel1 {                                               \
-                        relative: 0.05+(xpos*0.65) 0.10+(ypos*0.25);     \
-                        offset: 0 0;                                     \
-                        to: "swallow_clip";                              \
-                    }                                                    \
-                    rel2 {                                               \
-                        relative: 0.32+(xpos*0.65) 0.30+(ypos*0.25);     \
-                        offset: -1 -1;                                   \
-                        to: "swallow_clip";                              \
-                    }                                                    \
-                    image {                                              \
-                        normal: "button_background.png";                 \
-                        border: 27 27 27 27;                             \
-                    }                                                    \
-                }                                                        \
-                description {                                            \
-                    state: "clicked" 0.0;                                 \
-                    inherit: "default" 0.0;                              \
-                    image {normal: "button_background_active.png";}      \
-			 fill { smooth: 0; }                            \
-                }                                                        \
-            }    							\
-	                                                      		 \
-            part {                                                       \
-                name: part_name"_icon";                           	\
-                mouse_events: 0;                                         \
-                type: IMAGE;                                             \
-                clip_to: "swallow_clip";                                 \
-                description {                                            \
-                    state: "default" 0.0;                                \
-                    aspect: 1.0 1.0;                                     \
-                    aspect_preference: BOTH;                             \
-                    rel1 {                                               \
-                        relative: 0.0 0.0;                               \
-                        offset: 0 0;                                     \
-                        to: part_name;                         		 \
-                    }                                                    \
-                    rel2 {                                               \
-                        relative: 1.0 1.0;                               \
-                        offset: -1 -1;                                   \
-                        to: part_name;                         		 \
-                    }                                                    \
-                    image {                                              \
-                        normal: part_name"_icon.png";                	 \
-                    }                                                    \
-                }                                                        \
-            }
+
 
 parts {
 
@@ -82,34 +28,381 @@ parts {
 		
 	   BACKGROUND(0);
 
+	   TOP_BAR();
 
-	ICON("play",0,0);
-	ICON("pause",0.5,0);
-	ICON("stop",1,0);
-	ICON("forward",0,1);
-	ICON("backward",0.5,1);
-	ICON("fullscreen",1,1);
-	ICON("volume-",0,2);
-	ICON("volume+",0.5,2);
-	ICON("no_fullscreen",1,2);
+	   BACK();
 
-	SCREEN_TEXT("Multimedia","multimedia_icon.png",0.25);
-        LOGO();
-	CONF_KEYS();
-	BACK();
+
+	part {								
+            name: "fullscreen";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 22 119;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 104 200;					
+               }							
+	       image { 
+			normal: "fullscreen_released.png"; 
+			border:  0 0 0 0;
+		}			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { 
+			normal: "fullscreen_pressed.png"; 
+			border:  0 0 0 0;
+		}       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "no_fullscreen";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 1.0 0.0;					
+                  offset: -104 119;					
+               }							
+               rel2 {							
+                  relative: 1.0 0.0;					
+                  offset: -22 200;					
+               }							
+	       image { normal: "no_fullscreen_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "no_fullscreen_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "previous";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 22 -200;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset: 104 -119;					
+               }							
+	       image { normal: "previous_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "previous_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "next";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 1.0 1.0;					
+                  offset: -104 -200;					
+               }							
+               rel2 {							
+                  relative: 1.0 1.0;					
+                  offset: -22 -119;					
+               }							
+	       image { normal: "next_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "next_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }			
+
+     part {								
+            name: "volume-";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 238 119;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 400 200;					
+               }							
+	       image { normal: "volume_decrease_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "volume_decrease_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }
+
+	part {								
+            name: "volume+";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 1.0 0.0;					
+                  offset: -402 119;					
+               }							
+               rel2 {							
+                  relative: 1.0 0.0;					
+                  offset: -240 200;					
+               }							
+	       image { normal: "volume_increase_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "volume_increase_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "mute";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 359 119;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 441 200;					
+               }							
+	       image { normal: "mute_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "mute_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "rewind";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 157 -200;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset: 400 -119;					
+               }							
+	       image { normal: "rewind_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "rewind_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "forward";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 1.0 1.0;					
+                  offset: -402 -200;					
+               }							
+               rel2 {							
+                  relative: 1.0 1.0;					
+                  offset: -159 -119;					
+               }							
+	       image { normal: "forward_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "forward_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }
+
+	part {								
+            name: "stop";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 238 -200;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset: 400 -119;					
+               }							
+	       image { normal: "stop_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "stop_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "pause";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 1.0 1.0;					
+                  offset: -402 -200;					
+               }							
+               rel2 {							
+                  relative: 1.0 1.0;					
+                  offset: -240 -119;					
+               }							
+	       image { normal: "pause_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "pause_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "play";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 319 -241;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset: 481 -78;					
+               }							
+	       image { normal: "play_released.png"; }			                  
+               fill {
+
+
+			smooth: 0;
+			size {
+    				relative: 0  0;
+    				offset:   163  164;
+  			}
+
+
+		}
+
+	       				
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "play_pressed.png"; }       		          
+               fill { 
+			smooth: 0; 
+
+			size {
+		    		relative: 0  0;
+		    		offset:   163  164;
+	  		}
+		} 					
+            }								
+         }																	
 	
     }
     programs {
 	ACTIVATE("back");
-	ACTIVATE("play");
-	ACTIVATE("pause");
-	ACTIVATE("forward");
-	ACTIVATE("backward");
-	ACTIVATE("stop");
 	ACTIVATE("fullscreen");
+	ACTIVATE("no_fullscreen");
+	ACTIVATE("previous");
+	ACTIVATE("next");
 	ACTIVATE("volume-");
 	ACTIVATE("volume+");
-	ACTIVATE("no_fullscreen");
-	ACTIVATE("conf_keys");
+	ACTIVATE("mute");
+	ACTIVATE("rewind");
+	ACTIVATE("forward");
+	ACTIVATE("stop");
+	ACTIVATE("pause");
+	ACTIVATE("play");
+	
+	//ACTIVATE("forward");
+	//ACTIVATE("backward");
+	
+	
+	
+	
     	TRANSITION();
     }

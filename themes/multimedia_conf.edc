@@ -26,32 +26,35 @@ parts {
 		
 	   BACKGROUND(0);
 
-	SCREEN_TEXT("Configurations","conf_icon.png",0.28);
-	CONF_TEXT("Play",0);
-	CONF_KEY_ICON("play_key",0);
-	CONF_TEXT("Pause",1);
-	CONF_KEY_ICON("pause_key",1);
-	CONF_TEXT("Stop",2);
-	CONF_KEY_ICON("stop_key",2);
-	CONF_TEXT("Forward",3);
-	CONF_KEY_ICON("forward_key",3);
-	CONF_TEXT("Backward",4);
-	CONF_KEY_ICON("backward_key",4);
-	CONF_TEXT("Fullscreen",0);
-	CONF_KEY_ICON("fullscreen_key_m",0);
-	CONF_TEXT("Volume +",1);
-	CONF_KEY_ICON("volume_p_key",1);
-	CONF_TEXT("Volume -",2);
-	CONF_KEY_ICON("volume_m_key",2);
-	CONF_TEXT("No Fullscreen",3);
-	CONF_KEY_ICON("no_fullscreen_key_m",3);
-	SCREEN_NUMBER("1",0);
-	SCREEN_NUMBER("2",1);
-        LOGO();
-	BACK();
+	   TOP_BAR();
+
+	   BACK();
+
+	CONF_ENTRY("Play", 0);
+	
+	CONF_ENTRY("Pause",1);
+	
+	CONF_ENTRY("Stop",2);
+	
+	CONF_ENTRY("Forward",3);
+	
+	CONF_ENTRY("Backward",4);
+	
+	CONF_ENTRY("Fullscreen",5);
+	
+//	CONF_ENTRY("Volume +",1);
+	
+//	CONF_ENTRY("Volume -",2);
+	
+//	CONF_ENTRY("No Fullscreen",3);
+	
+	//SCREEN_NUMBER("1",0);
+	//SCREEN_NUMBER("2",1);
+        
 	
     }
     programs {
+	/*
 	//hide_screen 1
 	program {                                                          
         	name: "hide_Screen_1";
@@ -467,16 +470,16 @@ parts {
 		
 	}
 	                               
-	                                                       
+	   */                                                    
 	ACTIVATE("back");
-	ACTIVATE("play_key");
-	ACTIVATE("pause_key");
-	ACTIVATE("stop_key");
-	ACTIVATE("forward_key");
-	ACTIVATE("backward_key");
-	ACTIVATE("fullscreen_key_m");
-	ACTIVATE("volume_p_key");
-	ACTIVATE("volume_m_key");
-	ACTIVATE("no_fullscreen_key_m");
+	//ACTIVATE("play_key");
+	//ACTIVATE("pause_key");
+	//ACTIVATE("stop_key");
+	//ACTIVATE("forward_key");
+	//ACTIVATE("backward_key");
+	//ACTIVATE("fullscreen_key_m");
+	//ACTIVATE("volume_p_key");
+	//ACTIVATE("volume_m_key");
+	//ACTIVATE("no_fullscreen_key_m");
     	TRANSITION();
     }

@@ -23,12 +23,40 @@
 images {
 
   image: "background.png" COMP;
+  image: "settings_item_background.png" COMP;
   image: "main_toolbar_background.png" COMP;
+  image: "close_released.png" COMP;
+  image: "close_pressed.png" COMP;
+  image: "back_released.png" COMP;
+  image: "back_pressed.png"  COMP;
+  image: "back.png" COMP; //remove
+  image: "fullscreen_pressed.png" COMP;
+  image: "fullscreen_released.png" COMP;
+  image: "no_fullscreen_pressed.png" COMP;
+  image: "no_fullscreen_released.png" COMP;
+  image: "volume_decrease_pressed.png" COMP;
+  image: "volume_decrease_released.png" COMP;
+  image: "volume_increase_pressed.png" COMP;
+  image: "volume_increase_released.png" COMP;
+  image: "mute_pressed.png" COMP;
+  image: "mute_released.png" COMP;
+  image: "rewind_pressed.png" COMP;
+  image: "rewind_released.png" COMP;
+  image: "forward_pressed.png" COMP;
+  image: "forward_released.png" COMP;
+  image: "stop_pressed.png" COMP;
+  image: "stop_released.png" COMP;
+  image: "pause_pressed.png" COMP;
+  image: "pause_released.png" COMP; 
+  image: "play_pressed.png" COMP;
+  image: "play_released.png" COMP;  
+  image: "previous_pressed.png" COMP;
+  image: "next_released.png" COMP;
+  image: "next_pressed.png" COMP;
+  image: "previous_released.png" COMP;
   image: "button_background.png" COMP;
   image: "button_background_active.png" COMP;
   image: "backdrop.png" COMP;
-  image: "back.png" COMP;
-  image: "quit.png" COMP;
   image: "button_right.png" COMP;
   image: "button_left.png" COMP;
   image: "button_middle.png" COMP;
@@ -154,7 +182,7 @@ fonts {
                }							\
                rel2 {							\
                   relative: 1.0 0.0;					\
-                  offset:  -1 50;					\
+                  offset:  -1 54;					\
                }							\
 	       image { normal: "main_toolbar_background.png"; }         \        
                fill { smooth: 0; } 					\
@@ -170,7 +198,7 @@ fonts {
             state: "default" 0.0;					\
             rel1 {							\
                 relative: 0.0 0.0;					\
-                offset: 42 1;						\
+                offset: 42 5;						\
             }								\
             rel2 {							\
                 relative: 1.0 0.1;					\
@@ -184,29 +212,60 @@ fonts {
         }								\
     }									
 
-#define CONF_TEXT(part_name,y_pos)					\
-									\
+#define CONF_ENTRY(part_name, ypos)					\
+    part {	                                                        \
+                name: part_name"_strip";                                \
+                mouse_events: 1;                                        \
+                type: IMAGE;                                            \
+                description {                                           \
+                    state: "default" 0.0;                               \
+                    rel1 {                                              \
+                        relative: 0.0 0.0;	        		\
+                        offset: 0 (ypos*62)+54;                         \
+                        		                                \
+                    }                                                   \
+                    rel2 {                                              \
+                        relative: 1.0 0.0; 		   		\
+                        offset: -1 (((ypos+1)*62)+54);                  \
+                       				                        \
+                    }                                                   \
+                    image {                                             \
+                        normal: "settings_item_background.png";         \
+                    }                                                   \
+                }                                                       \
+                description {                                           \
+                    state: "clicked" 0.0;                               \
+                    inherit: "default" 0.0;                             \
+                    image {normal: "settings_item_background.png";}     \
+			 fill { smooth: 0; }                            \
+                }                                                       \
+		description {                                           \
+            		state: "invisible" 0.0;                         \
+            		inherit: "default" 0.0;                         \
+            		visible: 0;                                     \
+        	}                                                       \
+            }    							\									
     part {								\
                 name: part_name;					\
                 type: TEXT;						\
-		effect: OUTLINE_SOFT_SHADOW;				\
                 mouse_events: 0;					\
                 description {						\					
                     state: "default" 0.0;				\
                     rel1 {						\
-                        relative: 0.02 0.12+(y_pos*0.15);		\
-                        offset: 0 0;					\
+			to: part_name"_strip";				\
+                        relative: 0.0 0.0;				\
+                        offset: 42 5;					\
                         						\
                     }							\
                     rel2 {						\
-                        relative: 0.7 0.2+(y_pos*0.15);			\
-                        offset: -1 -1;					\
+                        to_x: part_name"_strip";			\
+                        to_y: part_name"_strip";			\
                     }							\
                     text {						\
-                        font: "Sans";					\
+                        font: "Nokia Sans Wide";			\
 			text: part_name;				\
-                        size: 32;					\
-                        align: 0.0 0.0;					\
+                        size: 26;					\
+                        align: 0.0 0.5;					\
                     }							\	
 	       }							\
 		description {                                           \
@@ -214,7 +273,11 @@ fonts {
             		inherit: "default" 0.0;                         \
             		visible: 0;                                     \
         	}                                                       \
-	}								\									
+	}								
+									
+    	
+	                                                      		
+            
 
 #define CONF_KEY_ICON(part_name, ypos)                         	 	 \
             part {                                                       \
@@ -480,44 +543,24 @@ fonts {
                state: "default" 0.0;					\
 	       visible: 1;						\
                rel1 {							\
-                  relative: 0.87 0.87;					\
-                  offset: 0 0;						\
+                  relative: 1.0 0.0;					\
+                  offset: -108 0;					\
                }							\
                rel2 {							\
-                  relative: 0.99 0.99;					\
-                  offset: -1 -1;					\
+                  relative: 1.0 0.0;					\
+                  offset: -1 54;					\
                }							\
-	       image { normal: "button_background.png"; }		\                  
+	       image { normal: "close_released.png"; }			\                  
                fill { smooth: 0; } 					\
             }								\
 	    description {						\
                state: "clicked" 0.0;					\
 	       inherit: "default" 0.0;                              	\
-	       image { normal: "button_background_active.png"; }        \          
-               fill { smooth: 0; } 					\
-            }								\
-         }								\
-									\
-	part {								\
-            name: "quit_icon";						\
-            type: IMAGE;						\
-            mouse_events: 0;						\
-            clip_to: "swallow_clip";   					\
-            description {						\
-               state: "default" 0.0;					\
-	       visible: 1;						\
-               rel1 {							\
-                  relative: 0.87 0.87;					\
-                  offset: 0 0;						\
-               }							\
-               rel2 {							\
-                  relative: 0.99 0.99;					\
-                  offset: -1 -1;					\
-               }							\
-	       image { normal: "quit.png"; }                  		\
+	       image { normal: "close_pressed.png"; }       		\          
                fill { smooth: 0; } 					\
             }								\
          }								
+														
 	
 #define BACK()								\
    part {								\
@@ -529,44 +572,23 @@ fonts {
                state: "default" 0.0;					\
 	       visible: 1;						\
                rel1 {							\
-                  relative: 0.85 0.83;					\
-                  offset: 0 0;						\
+                  relative: 1.0 0.0;					\
+                  offset: -108 0;					\
                }							\
                rel2 {							\
-                  relative: 0.99 0.99;					\
-                  offset: -1 -1;					\
+                  relative: 1.0 0.0;					\
+                  offset: -1 54;					\
                }							\
-	       image { normal: "button_background.png"; }               \   
+	       image { normal: "back_released.png"; }                   \   
                fill { smooth: 0; } 					\
             }								\
 	    description {						\
                state: "clicked" 0.0;					\
 	       inherit: "default" 0.0;                             	\
-	       image { normal: "button_background_active.png"; }        \          
+	       image { normal: "back_pressed.png"; }   		        \          
                fill { smooth: 0; } 					\
             }								\
-         }								\
-									\
-	part {								\
-            name: "back_icon";						\
-            type: IMAGE;						\
-            mouse_events: 0;						\
-            clip_to: "swallow_clip";   					\
-            description {						\
-               state: "default" 0.0;					\
-	       visible: 1;						\
-               rel1 {							\
-                  relative: 0.85 0.83;					\
-                  offset: 0 0;						\
-               }							\
-               rel2 {							\
-                  relative: 0.99 0.99;					\
-                  offset: -1 -1;					\
-               }							\
-	       image { normal: "back.png"; }                  		\
-               fill { smooth: 0; } 					\
-            }								\
-         }
+         }								
 
 #define CONF_KEYS()							\
    part {								\
