@@ -38,6 +38,7 @@ class keyboard_ui(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "keyboard_ui")
+	self.part_text_set( "menu_title", "Keyboard" )
         self.alt = False
         self.ctrl = False
 	self.fn = False

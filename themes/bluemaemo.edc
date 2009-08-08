@@ -23,6 +23,7 @@
 images {
 
   image: "background.png" COMP;
+  image: "keyboard_background.png" COMP;
   image: "settings_item_background.png" COMP;
   image: "main_toolbar_background.png" COMP;
   image: "close_released.png" COMP;
@@ -96,6 +97,14 @@ images {
   image: "key-default-selected.png" COMP;
   image: "key-special.png" COMP;
   image: "key-special-selected.png" COMP;
+  image: "key-special2.png" COMP;
+  image: "key-special-selected2.png" COMP;
+  image: "key-spacebar.png" COMP;
+  image: "key-spacebar-selected.png" COMP;
+  image: "key-shift.png" COMP;
+  image: "key-shift-selected.png" COMP;
+  image: "key-sym.png" COMP;
+  image: "key-sym-selected.png" COMP;
   image: "backspace.png" COMP;
   image: "backspace-selected.png" COMP;
   image: "shift.png" COMP;
@@ -120,6 +129,7 @@ fonts {
    font: "VeraBd.ttf" "key";
    font: "VeraBd.ttf" "Font Item";
    font: "NS Wide Regular V3.ttf" "Nokia Sans Wide";
+   font: "NS Wide Bold V3.ttf" "Nokia Sans Wide Bold";
 }
 
 #define BUTTON_BOTTOM_HEIGHT 0.12;
@@ -221,12 +231,12 @@ fonts {
                     state: "default" 0.0;                               \
                     rel1 {                                              \
                         relative: 0.0 0.0;	        		\
-                        offset: 0 (ypos*62)+54;                         \
+                        offset: 0 (ypos*62)+54+(ypos);                  \
                         		                                \
                     }                                                   \
                     rel2 {                                              \
                         relative: 1.0 0.0; 		   		\
-                        offset: -1 (((ypos+1)*62)+54);                  \
+                        offset: -1 (((ypos+1)*62)+54)+(ypos);           \
                        				                        \
                     }                                                   \
                     image {                                             \
@@ -273,7 +283,40 @@ fonts {
             		inherit: "default" 0.0;                         \
             		visible: 0;                                     \
         	}                                                       \
-	}								
+	}								 \
+									 \
+    part {                                                     		 \
+                name: part_name"_key";                           	 \
+                mouse_events: 0; 					 \
+                type: TEXT;                                              \
+                description {                                            \
+                    state: "default" 0.0;                                \
+		    color: 126 195 254 255;                              \                       
+                     rel1 {						 \
+			to: part_name"_strip";				 \
+                        relative: 0.0 0.0;				 \
+                        offset: 400 5;					 \
+                        						 \
+                    }							 \
+                    rel2 {						 \
+                        to: part_name"_strip";				 \
+                        relative: 1.0 1.0;				 \
+                        offset: -42 -1;				         \
+                        						 \
+                    }							 \
+                   text {						 \
+                	font: "Nokia Sans Wide";			 \
+                	size: 26;					 \
+			text: "Ctrl+alt+a";				 \
+                	align: 1.0 0.5;					 \
+                  }						         \
+               }                                                         \
+		description {                                            \
+            		state: "invisible" 0.0;                          \
+            		inherit: "default" 0.0;                          \
+            		visible: 0;                                      \
+        	}                                                        \
+            }								
 									
     	
 	                                                      		
@@ -1241,7 +1284,7 @@ group {
 #define CLICK_AREA_H 58
 #define CLICK_AREA_DX 27
 #define CLICK_AREA_DY 27
-#define SKEY_FULL(key_text, key_name, x, y, lbl_dx, lbl_dy)            \
+#define SKEY_FULL_SPECIAL(key_text, key_name, x, y, lbl_dx, lbl_dy)    \
          part {                                                        \
             name: "key-bg-"key_name;                                   \
             type: RECT;                                                \
@@ -1277,7 +1320,7 @@ group {
                   relative: 0.0 0.0;                                   \
                   offset: (x + 27) (y + 27);                           \
                }                                                       \
-               image.normal: "key-default.png";                        \
+               image.normal: "key-special2.png";                       \
             }                                                          \
             description {                                              \
                state: "down" 0.0;                                      \
@@ -1289,7 +1332,6 @@ group {
            name: "key-lbl-"key_name;                                   \
            type: TEXT;                                                 \
            mouse_events: 0;                                            \
-           effect: OUTLINE;                                            \
            description {                                               \
               state: "default" 0.0;                                    \
               color: 0 0 0 255;                                        \
@@ -1306,8 +1348,8 @@ group {
                  offset: -1 48;                                        \
               }                                                        \
               text {                                                   \
-                 font: "key";                                          \
-                 size: 32;                                             \
+                 font: "Nokia Sans Wide Bold";                         \
+                 size: 23;                                             \
                  text: key_text;                                       \
               }                                                        \
             }                                                          \
@@ -1333,7 +1375,7 @@ group {
                   relative: 0.0 0.0;                                   \
                   offset: (x + 26) (y - 21);                           \
                }                                                       \
-               image.normal: "key-default-selected.png";               \
+               image.normal: ""key-special-selected2.png"";            \
                color: 255 255 255 0;                                   \
                visible: 0;                                             \
             }                                                          \
@@ -1362,8 +1404,8 @@ group {
                   offset: -1 48;                                       \
                }                                                       \
                text {                                                  \
-                  font: "key";                                         \
-                  size: 48;                                            \
+                  font: "Nokia Sans Wide Bold";                        \
+                  size: 34;                                            \
                   text: key_text;                                      \
                }                                                       \
                visible: 0;                                             \
@@ -1419,7 +1461,7 @@ group {
 
 /*-----------------------End of SKEY_FULL--------------------------------------*/
 
-#define SKEY_FULL_SPECIAL(key_text, key_name, x, y, lbl_dx, lbl_dy)    \
+#define SKEY_FULL(key_text, key_name, x, y, lbl_dx, lbl_dy)    \
          part {                                                        \
             name: "key-bg-"key_name;                                   \
             type: RECT;                                                \
@@ -1467,7 +1509,6 @@ group {
            name: "key-lbl-"key_name;                                   \
            type: TEXT;                                                 \
            mouse_events: 0;                                            \
-           effect: OUTLINE;                                            \
            description {                                               \
               state: "default" 0.0;                                    \
               color: 0 0 0 255;                                        \
@@ -1484,7 +1525,7 @@ group {
                  offset: -1 48;                                        \
               }                                                        \
               text {                                                   \
-                 font: "key";                                          \
+                 font: "Nokia Sans Wide Bold";                         \
                  size: 23;                                             \
                  text: key_text;                                       \
               }                                                        \
@@ -1540,8 +1581,8 @@ group {
                   offset: -1 48;                                       \
                }                                                       \
                text {                                                  \
-                  font: "key";                                         \
-                  size: 32;                                            \
+                  font: "Nokia Sans Wide Bold";                        \
+                  size: 34;                                            \
                   text: key_text;                                      \
                }                                                       \
                visible: 0;                                             \
@@ -1627,28 +1668,30 @@ group {
       parts {
 
 
-#define INIT_HSPACE -35
-#define KEY_HSPACE 70
+#define INIT_HSPACE 89
+#define KEY_HSPACE 58
 #define KEY_HPOS(index)  KEY_HSPACE * index + INIT_HSPACE
 
-#define F_ROW -60
+#define F_ROW -61
 
 #undef CLICK_AREA_H
 #undef CLICK_AREA_DY
 #define CLICK_AREA_H 70
 #define CLICK_AREA_DY 21
 
-	 KEY_FULL("F1", KEY_HPOS(0), F_ROW, -6, 0)
-	 KEY_FULL("F2", KEY_HPOS(1), F_ROW, -6, 0)
-         KEY_FULL("F3", KEY_HPOS(2), F_ROW, -6, 0)
-         KEY_FULL("F4", KEY_HPOS(3), F_ROW, -6, 0)
-         KEY_FULL("F5", KEY_HPOS(4), F_ROW, -6, 0)
-         KEY_FULL("F6", KEY_HPOS(5), F_ROW, -6, 0)
-         KEY_FULL("F7", KEY_HPOS(6), F_ROW, -6, 0)
-         KEY_FULL("F8", KEY_HPOS(7), F_ROW, -6, 0)
-         KEY_FULL("F9", KEY_HPOS(8), F_ROW, -6, 0)
-         KEY_FULL_SPECIAL("F10", KEY_HPOS(9), F_ROW, -6, 0)
-	 KEY_FULL_SPECIAL("F11", KEY_HPOS(10), F_ROW, -6, 0)
+	 KEY_FULL_SPECIAL("Esc", -40, F_ROW, -6, 0)
+	 KEY_FULL_SPECIAL("F1", 31, F_ROW, -6, 0)
+	 KEY_FULL_SPECIAL("F2", KEY_HPOS(0), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F3", KEY_HPOS(1), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F4", KEY_HPOS(2), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F5", KEY_HPOS(3), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F6", KEY_HPOS(4), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F7", KEY_HPOS(5), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F8", KEY_HPOS(6), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F9", KEY_HPOS(7), F_ROW, -6, 0)
+         KEY_FULL_SPECIAL("F10", KEY_HPOS(8), F_ROW, -6, 0)
+	 KEY_FULL_SPECIAL("F11", KEY_HPOS(9), F_ROW, -6, 0)
+	 KEY_FULL_SPECIAL("F12", KEY_HPOS(10), F_ROW, -6, 0)	 
 
 #define INIT_HSPACE 0
 #define KEY_HSPACE 70
@@ -1661,16 +1704,16 @@ group {
 #define CLICK_AREA_H 70
 #define CLICK_AREA_DY 21
 	
-         KEY_FULL("Q", KEY_HPOS(0), FIRST_ROW, -2, 0)
+         KEY_FULL("Q", KEY_HPOS(0), FIRST_ROW, -6, 0)
          KEY_FULL("W", KEY_HPOS(1), FIRST_ROW, -5, 0)
-         KEY_FULL("E", KEY_HPOS(2), FIRST_ROW, 0, 0)
-         KEY_FULL("R", KEY_HPOS(3), FIRST_ROW, 0, 0)
-         KEY_FULL("T", KEY_HPOS(4), FIRST_ROW, -4, 0)
-         KEY_FULL("Y", KEY_HPOS(5), FIRST_ROW, -6, 0)
-         KEY_FULL("U", KEY_HPOS(6), FIRST_ROW, 0, 0)
-         KEY_FULL("I", KEY_HPOS(7), FIRST_ROW, 2, 0)
-         KEY_FULL("O", KEY_HPOS(8), FIRST_ROW, -2, 0)
-         KEY_FULL("P", KEY_HPOS(9), FIRST_ROW, 0, 0)
+         KEY_FULL("E", KEY_HPOS(2), FIRST_ROW, -6, 0)
+         KEY_FULL("R", KEY_HPOS(3), FIRST_ROW, -6, 0)
+         KEY_FULL("T", KEY_HPOS(4), FIRST_ROW, -6, 0)
+         KEY_FULL("Y", KEY_HPOS(5), FIRST_ROW, -7, 0)
+         KEY_FULL("U", KEY_HPOS(6), FIRST_ROW, -4, 0)
+         KEY_FULL("I", KEY_HPOS(7), FIRST_ROW, -4, 0)
+         KEY_FULL("O", KEY_HPOS(8), FIRST_ROW, -4, 0)
+         KEY_FULL("P", KEY_HPOS(9), FIRST_ROW, -4, 0)
 
 #undef INIT_HSPACE
 #define INIT_HSPACE 35
@@ -1680,26 +1723,26 @@ group {
 #undef CLICK_AREA_DY
 #define CLICK_AREA_H 58
 #define CLICK_AREA_DY 27
-         KEY_FULL("A", KEY_HPOS(0), SECOND_ROW, -8, 0)
-         KEY_FULL("S", KEY_HPOS(1), SECOND_ROW, 0, 0)
-         KEY_FULL("D", KEY_HPOS(2), SECOND_ROW, 0, 0)
-         KEY_FULL("F", KEY_HPOS(3), SECOND_ROW, 0, 0)
-         KEY_FULL("G", KEY_HPOS(4), SECOND_ROW, -2, 2)
-         KEY_FULL("H", KEY_HPOS(5), SECOND_ROW, 2, 0)
-         KEY_FULL("J", KEY_HPOS(6), SECOND_ROW, -6, 0)
-         KEY_FULL("K", KEY_HPOS(7), SECOND_ROW, 0, 0)
-         KEY_FULL("L", KEY_HPOS(8), SECOND_ROW, 0, 0)
+         KEY_FULL("A", KEY_HPOS(0), SECOND_ROW, -6, 0)
+         KEY_FULL("S", KEY_HPOS(1), SECOND_ROW, -4, 0)
+         KEY_FULL("D", KEY_HPOS(2), SECOND_ROW, -4, 0)
+         KEY_FULL("F", KEY_HPOS(3), SECOND_ROW, -4, 0)
+         KEY_FULL("G", KEY_HPOS(4), SECOND_ROW, -4, 0)
+         KEY_FULL("H", KEY_HPOS(5), SECOND_ROW, -4, 0)
+         KEY_FULL("J", KEY_HPOS(6), SECOND_ROW, -4, 0)
+         KEY_FULL("K", KEY_HPOS(7), SECOND_ROW, -4, 0)
+         KEY_FULL("L", KEY_HPOS(8), SECOND_ROW, -4, 0)
 
 #undef INIT_HSPACE
 #define INIT_HSPACE 105
 #define THIRD_ROW 120
-         KEY_FULL("Z", KEY_HPOS(0), THIRD_ROW, 0, 0)
-         KEY_FULL("X", KEY_HPOS(1), THIRD_ROW, -4, 0)
-         KEY_FULL("C", KEY_HPOS(2), THIRD_ROW, -4, 0)
+         KEY_FULL("Z", KEY_HPOS(0), THIRD_ROW, -4, 0)
+         KEY_FULL("X", KEY_HPOS(1), THIRD_ROW, -6, 0)
+         KEY_FULL("C", KEY_HPOS(2), THIRD_ROW, -6, 0)
          KEY_FULL("V", KEY_HPOS(3), THIRD_ROW, -6, 0)
-         KEY_FULL("B", KEY_HPOS(4), THIRD_ROW, 2, 0)
-         KEY_FULL("N", KEY_HPOS(5), THIRD_ROW, 2, 0)
-         KEY_FULL("M", KEY_HPOS(6), THIRD_ROW, 0, 0)
+         KEY_FULL("B", KEY_HPOS(4), THIRD_ROW, -4, 0)
+         KEY_FULL("N", KEY_HPOS(5), THIRD_ROW, -4, 0)
+         KEY_FULL("M", KEY_HPOS(6), THIRD_ROW, -4, 0)
 
 #define FORTH_ROW 190
 #define KEY_SPACE                                                       \
@@ -1739,7 +1782,7 @@ group {
                   offset: (178 + 167) (FORTH_ROW + 27);                 \
                }                                                        \
                image {                                                  \
-                  normal: "key-default.png";                            \
+                  normal: "key-spacebar.png";                           \
                   border: 9 9 9 9;                                      \
                }                                                        \
             }                                                           \
@@ -1747,13 +1790,16 @@ group {
                state: "down" 0.0;                                       \
                inherit: "default" 0.0;                                  \
                color: 160 160 160 255;                                  \
+	       image {                                                  \
+                  normal: "key-spacebar-selected.png";                  \
+                  border: 9 9 9 9;                                      \
+               }                                                        \
             }                                                           \
          }                                                              \
          part {                                                         \
            name: "key-lbl-space";                                       \
            type: TEXT;                                                  \
            mouse_events: 0;                                             \
-           effect: OUTLINE;                                             \
            description {                                                \
               state: "default" 0.0;                                     \
               color: 0 0 0 255;                                         \
@@ -1770,9 +1816,9 @@ group {
                  offset: -1 -1;                                         \
               }                                                         \
               text {                                                    \
-                 font: "key";                                           \
+                 font: "Nokia Sans Wide Bold";                          \
                  size: 28;                                              \
-                 text: "space";                                         \
+                 text: "Space";                                         \
               }                                                         \
            }                                                            \
          }                                                              \
@@ -1812,7 +1858,7 @@ group {
             }                                                           \
          }
 
-#define KEY_SPECIAL(val, x, y, w)                                      \
+#define KEY_SPECIAL(val,img,x, y, w)                                   \
          part {                                                        \
             name: "key-bg-"val;                                        \
             type: RECT;                                                \
@@ -1849,7 +1895,7 @@ group {
                   offset: (x + w/2) (y + 27);                          \
                }                                                       \
                image {                                                 \
-                  normal: "key-special.png";                           \
+                  normal: img".png";                                   \
                   border: 9 9 9 9;                                     \
                }                                                       \
             }                                                          \
@@ -1857,7 +1903,7 @@ group {
                state: "down" 0.0;                                      \
                inherit: "default" 0.0;                                 \
                image {                                                 \
-                  normal: "key-special-selected.png";                  \
+                  normal: img"-selected.png";                           \
                   border: 9 9 9 9;                                     \
                }                                                       \
             }                                                          \
@@ -1866,7 +1912,6 @@ group {
            name: "key-lbl-"val;                                        \
            type: TEXT;                                                 \
            mouse_events: 0;                                            \
-           effect: OUTLINE;                                            \
            description {                                               \
               state: "default" 0.0;                                    \
               color: 240 240 240 255;                                  \
@@ -1883,7 +1928,7 @@ group {
                  offset: -1 -1;                                        \
               }                                                        \
               text {                                                   \
-                 font: "key";                                          \
+                 font: "Nokia Sans Wide Bold";                         \
                  size: 24;                                             \
                  text: val;                                            \
               }                                                        \
@@ -1935,8 +1980,8 @@ group {
          }
 
          KEY_SPACE
-         KEY_SPECIAL("enter", 492, FORTH_ROW, 95)
-	 KEY_SPECIAL(".?123", 597, FORTH_ROW, 95)
+         KEY_SPECIAL("Enter", "key-special", 492, FORTH_ROW, 95)
+	 KEY_SPECIAL(".?123","key-sym", 597, FORTH_ROW, 95)
 
 /*-------------------Ctrl-Key-------------------------------------------*/
          part {
@@ -1992,7 +2037,6 @@ group {
            name: "key-lbl-ctrl";                                        
            type: TEXT;                                                 
            mouse_events: 0;                                            
-           effect: OUTLINE;                                            
            description {                                               
               state: "default" 0.0;                                    
               color: 240 240 240 255;                                  
@@ -2009,7 +2053,7 @@ group {
                  offset: -1 -1;                                        
               }                                                        
               text {                                                   
-                 font: "key";                                          
+                 font: "Nokia Sans Wide Bold";                                          
                  size: 24;                                             
                  text: "Ctrl";                                            
               }                                                        
@@ -2104,7 +2148,6 @@ group {
            name: "key-lbl-alt";                                        
            type: TEXT;                                                 
            mouse_events: 0;                                            
-           effect: OUTLINE;                                            
            description {                                               
               state: "default" 0.0;                                    
               color: 240 240 240 255;                                  
@@ -2121,7 +2164,7 @@ group {
                  offset: -1 -1;                                        
               }                                                        
               text {                                                   
-                 font: "key";                                          
+                 font: "Nokia Sans Wide Bold";                                          
                  size: 24;                                             
                  text: "Alt";                                            
               }                                                        
@@ -2170,11 +2213,11 @@ group {
                max: 87 54;
                rel1 {
                   relative: 0.0 0.0;
-                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+                  offset: 44 (THIRD_ROW + 27);
                }
                rel2 {
                   relative: 0.0 0.0;
-                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+                  offset: 44 (THIRD_ROW + 27);
                }
                color: 0 0 0 0;
             }
@@ -2189,14 +2232,14 @@ group {
                max: 87 54;
                rel1 {
                   relative: 0.0 0.0;
-                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+                  offset: 44 (THIRD_ROW + 27);
                }
                rel2 {
                   relative: 0.0 0.0;
-                  offset: (INIT_HSPACE + 44) (THIRD_ROW + 27);
+                  offset: 44 (THIRD_ROW + 27);
                }
                image {
-                  normal: "key-special.png";
+                  normal: "key-shift.png";
                   border: 9 9 9 9;
                }
             }
@@ -2204,7 +2247,7 @@ group {
                state: "down" 0.0;
                inherit: "default" 0.0;
                image {
-                  normal: "key-special-selected.png";
+                  normal: "key-shift-selected.png";
                   border: 9 9 9 9;
                }
             }
@@ -2420,12 +2463,12 @@ group {
          SKEY("'", "single_quote", KEY_HPOS(5), THIRD_ROW)
          SKEY("\"", "double_quote", KEY_HPOS(6), THIRD_ROW)
 
-         KEY_SPECIAL("#+=", 0, THIRD_ROW, 80)
+         KEY_SPECIAL("#+=","key-sym", 0, THIRD_ROW, 80)
          KEY_BACKSPACE
 
-         KEY_SPECIAL("ABC", 0, FORTH_ROW, 158)
+         KEY_SPECIAL("ABC","key-special", 0, FORTH_ROW, 158)
          KEY_SPACE
-         KEY_SPECIAL("enter", 525, FORTH_ROW, 158)
+         KEY_SPECIAL("Enter","key-special", 525, FORTH_ROW, 158)
       }
    }
 
@@ -2452,12 +2495,12 @@ group {
          SKEY("{", "open_brace", KEY_HPOS(6), SECOND_ROW)
          SKEY("}", "close_brace", KEY_HPOS(7), SECOND_ROW)
 
-         KEY_SPECIAL(".?12", 0, THIRD_ROW, 80)
+         KEY_SPECIAL(".?12","key-sym", 0, THIRD_ROW, 80)
          KEY_BACKSPACE
 
-         KEY_SPECIAL("ABC", 0, FORTH_ROW, 158)
+         KEY_SPECIAL("ABC","key-special", 0, FORTH_ROW, 158)
          KEY_SPACE
-         KEY_SPECIAL("enter", 525, FORTH_ROW, 158)
+         KEY_SPECIAL("Enter","key-special" ,525, FORTH_ROW, 158)
       }
    }
 

@@ -211,15 +211,15 @@ class multimedia_conf(edje_group):
 			self.no_full_key = text_value
 				
 		 
-	self.part_text_set("play_key_icon", self.play_key)
-	self.part_text_set("pause_key_icon", self.pause_key)
-	self.part_text_set("stop_key_icon", self.stop_key)
-	self.part_text_set("forward_key_icon", self.forw_key)
-	self.part_text_set("backward_key_icon", self.backw_key)
-	self.part_text_set("volume_m_key_icon", self.vol_m_key)
-	self.part_text_set("volume_p_key_icon", self.vol_p_key)
-	self.part_text_set("fullscreen_key_m_icon", self.full_key)
-	self.part_text_set("no_fullscreen_key_m_icon", self.no_full_key)
+	self.part_text_set("Play_key", self.play_key)
+	self.part_text_set("Pause_key", self.pause_key)
+	self.part_text_set("Stop_key", self.stop_key)
+	self.part_text_set("Forward_key", self.forw_key)
+	self.part_text_set("Backward_key", self.backw_key)
+	self.part_text_set("Volume_m_key", self.vol_m_key)
+	self.part_text_set("Volume_p_key", self.vol_p_key)
+	self.part_text_set("Fullscreen_m_key", self.full_key)
+	self.part_text_set("No_fullscreen_m_key", self.no_full_key) #ver dos nomes
 	self.key_value = ""
 	self.signal_emit("hide_screen_2", "")
 	self.signal_emit("show_screen_1", "")
@@ -272,43 +272,43 @@ class multimedia_conf(edje_group):
 	
 	else:
 		
-		if source == "play_key":
+		if source == "Play_strip":
 
-			self.key_value = self.part_text_get("play_key_icon")
+			self.key_value = self.part_text_get("Play_key")
 			self.main.key_text = self.key_value
 
-		elif source == "pause_key":
+		elif source == "Pause_strip":
 
-			self.key_value = self.part_text_get("pause_key_icon")
+			self.key_value = self.part_text_get("Pause_key")
 			self.main.key_text = self.key_value
 
-		if source == "stop_key":
+		if source == "Stop_strip":
 
-			self.key_value = self.part_text_get("stop_key_icon")
+			self.key_value = self.part_text_get("Stop_key")
 			self.main.key_text = self.key_value
 
-		elif source == "forward_key":
+		elif source == "Forward_strip":
 
-			self.key_value = self.part_text_get("forward_key_icon")
+			self.key_value = self.part_text_get("Forward_key")
 			self.main.key_text = self.key_value
 
-		if source == "backward_key":
+		if source == "Backward_strip":
 
-			self.key_value = self.part_text_get("backward_key_icon")
+			self.key_value = self.part_text_get("Backward_key")
 			self.main.key_text = self.key_value
 
-		elif source == "volume_m_key":
+		elif source == "Volume_m_strip":
 
-			self.key_value = self.part_text_get("volume_m_key_icon")
+			self.key_value = self.part_text_get("Volume_m_key")
 			self.main.key_text = self.key_value
 
-		elif source == "volume_p_key":
+		elif source == "Volume_p_strip":
 
-			self.key_value = self.part_text_get("volume_p_key_icon")
+			self.key_value = self.part_text_get("Volume_p_key")
 			self.main.key_text = self.key_value
 
 
-		elif source == "fullscreen_key_m":
+		elif source == "Fullscreen_key_m":
 
 			self.key_value = self.part_text_get("fullscreen_key_m_icon")
 			self.main.key_text = self.key_value
