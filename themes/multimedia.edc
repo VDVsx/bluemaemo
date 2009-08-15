@@ -31,6 +31,8 @@ parts {
 	   TOP_BAR();
 
 	   BACK();
+		
+	   BOTTOM_BAR();
 
 
 	part {								

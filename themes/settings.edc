@@ -85,7 +85,7 @@ parts {
 	   BACKGROUND(0);
 	   TOP_BAR();
   	   BACK();
-	
+	   BOTTOM_BAR();
 
 	
 
@@ -356,9 +356,6 @@ parts {
             	color: 255 255 255 0;                                       
            }         		                                                               
     }
-
-	
-        LOGO();
 	
     }
     programs {

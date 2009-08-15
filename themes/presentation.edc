@@ -84,13 +84,14 @@ parts {
 
 	TOP_BAR();
         BACK();
+	BOTTOM_BAR();
 		
 	ICON("previous",0,0);
 	ICON("next",0.8,0);
 	ICON("fullscreen",0,1.5);
 	ICON("no_fullscreen",0.8,1.5);
-        LOGO();
-	CONF_KEYS();
+        //LOGO();
+	//CONF_KEYS();
 
 	
     }
@@ -101,6 +102,6 @@ parts {
 	ACTIVATE("next");
 	ACTIVATE("fullscreen");
 	ACTIVATE("no_fullscreen");
-	ACTIVATE("conf_keys");
+	//ACTIVATE("conf_keys");
     	TRANSITION();
     }

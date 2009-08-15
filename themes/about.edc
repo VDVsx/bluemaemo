@@ -29,6 +29,8 @@ parts {
 	   TOP_BAR();
   	   BACK();
 
+	   BOTTOM_BAR();
+
 	part {
                 name: "label_version";
                 type: TEXT;
@@ -220,9 +222,6 @@ parts {
              }
 	}
 		
-        LOGO();
-
-	
     }
     programs {
 	ACTIVATE("back");

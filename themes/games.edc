@@ -28,6 +28,7 @@ parts {
 
            TOP_BAR();
            BACK();
+	   BOTTOM_BAR();
 
 	part {                                                      
                 name: "up";                                	 
@@ -494,7 +495,7 @@ parts {
 					
 									
 	
-						
+ /*						
    part {								
             name: "conf_keys";						
             type: IMAGE;						
@@ -541,9 +542,9 @@ parts {
 	       image { normal: "keyboard_icon.png"; }                  	
                fill { smooth: 0; } 					
             }								
-         }
+         }*/
 	
-        LOGO();
+        //LOGO();
 	
     }
     programs {
@@ -556,6 +557,6 @@ parts {
 	ACTIVATE("B");
 	ACTIVATE("C");
 	ACTIVATE("D");
-	ACTIVATE("conf_keys");
+	//ACTIVATE("conf_keys");
     	TRANSITION();
     }

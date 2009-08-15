@@ -25,6 +25,7 @@ parts {
 	   SWALLOWCLIP();
 		
 	   BACKGROUND(0);
+	   TOP_BAR();
 
 	part {
                 name: "label_waiting";
@@ -99,7 +100,7 @@ parts {
                     }
              }
 	}
-        LOGO();
+        BOTTOM_BAR();
 	BACK();
 	
     }

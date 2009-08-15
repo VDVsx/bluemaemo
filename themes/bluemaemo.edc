@@ -1102,6 +1102,7 @@ collections {
 	   SWALLOWCLIP();
 		
 	   BACKGROUND(0);
+	   TOP_BAR()
 
 	part {
 		name: "title_image";
@@ -1296,8 +1297,8 @@ collections {
 		}
       }
 
-
-        LOGO();
+	BOTTOM_BAR();
+        //LOGO();
 	QUIT();
 	
     }
