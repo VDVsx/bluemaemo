@@ -38,6 +38,7 @@ class about(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "about")
+	self.part_text_set( "menu_title", "About" )
 
     def onShow( self ):
 	self.focus = True

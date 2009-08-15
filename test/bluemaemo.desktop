@@ -3,7 +3,7 @@ Encoding=UTF-8
 Version=0.1
 Type=Application
 Name=BlueMaemo
-Exec=/usr/bin/bluemaemo
+Exec=sudo /usr/bin/bluemaemo
 Icon=bluemaemo
 MimeType=application/x-example;
 

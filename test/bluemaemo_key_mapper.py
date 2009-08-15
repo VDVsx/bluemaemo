@@ -65,7 +65,9 @@ class key_mapper:
 		self.mapper['0'] = 39
 		self.mapper['Return'] = 40
 		self.mapper['KP_Enter'] = 40
+		self.mapper['enter'] = 40
 		self.mapper['Escape'] = 41 
+		self.mapper['esc'] = 41 
 		self.mapper['BackSpace'] = 42
 		self.mapper['Tab'] = 43
 		self.mapper['space'] = 44

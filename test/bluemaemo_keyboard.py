@@ -38,7 +38,6 @@ class keyboard_ui(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "keyboard_ui")
-	self.part_text_set( "menu_title", "Keyboard" )
         self.alt = False
         self.ctrl = False
 	self.fn = False
@@ -66,6 +65,7 @@ class keyboard_ui(edje_group):
 
     def onHide( self ):
 	self.focus = False
+	self.signal_emit("activate_keyboard_sw", "")
      
 
     @evas.decorators.key_up_callback
@@ -231,6 +231,11 @@ class keyboard_ui(edje_group):
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_mouse_down_key(self, emission, source):
+
+	if source == "mouse_switcher":
+
+		self.signal_emit("mouse_sw_pressed","")   
+
         if ':' not in source:
             return
         part, subpart = source.split(':', 1)
@@ -253,6 +258,10 @@ class keyboard_ui(edje_group):
         
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_mouse_up_key(self, emission, source):
+
+	if source == "mouse_switcher":
+
+		self.main.transition_to("mouse_ui")
 
         if ':' not in source:
             return

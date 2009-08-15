@@ -36,6 +36,7 @@ class settings(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "settings")
+        self.part_text_set( "menu_title", "Settings" )
 	self.main = main
         self.part_text_set("fullscreen_option",str(self.main.bluemaemo_conf.fullscreen))
 	self.part_text_set("scroll_option", str(self.main.bluemaemo_conf.scroll))

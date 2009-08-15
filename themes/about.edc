@@ -25,9 +25,10 @@ parts {
 
 	   SWALLOWCLIP();
 		
-	  BACKGROUND(0);
+	   BACKGROUND(0);
+	   TOP_BAR();
+  	   BACK();
 
-	SCREEN_TEXT("About","about_icon.png",0.15);
 	part {
                 name: "label_version";
                 type: TEXT;
@@ -218,10 +219,9 @@ parts {
                     }
              }
 	}
-	
-	
+		
         LOGO();
-	BACK();
+
 	
     }
     programs {

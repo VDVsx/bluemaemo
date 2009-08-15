@@ -136,7 +136,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	ecore.timer_add(1.0,self.main.transition_to,"keyboard_ui")
+	ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True

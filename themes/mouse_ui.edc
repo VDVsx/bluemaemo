@@ -24,32 +24,194 @@ parts {
 
 	SWALLOWCLIP();
 
-        BACKGROUND(0);
+		
+	  part {								
+            name: "mouse_area";						
+            type: IMAGE;						
+            mouse_events: 1;					
+	    clip_to: "swallow_clip";   					
+            description {						
+               state: "default" 0.0;					
+               visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 0 0;						
+               }							
+               rel2 {							
+                  relative: 1.0 1.0;					
+                  offset: -1 -1;					
+               }							
+	       image { normal: "mouse_background.png"; }                  	
+               fill { smooth: 0; } 					
+            }														
+         }
 
 	TOP_BAR();
+	BACK();
 
-	//SCREEN_TEXT("Mouse","mouse_icon.png",0.15);
+	part {								
+            name: "mouse_switcher";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 31 0;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 130  54;					
+               }							
+	       image { normal: "mouse_pressed.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "mouse_released.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
 
-	part {
-            name: "mouse_area";
-            type: IMAGE;
-            mouse_events: 1;
-	    clip_to: "swallow_clip";   
-            description {
-               state: "default" 0.0;
-	       //color: 0 0 255 255;
-               rel1 {
-                  relative: 0.0 0.0;
-                  offset: 0 0 ;
-               }
-               rel2 {
-                  relative: 1.0 1.0;
-                  offset:  -1 -1;
-               }
-	       image { normal: "backdrop.png"; }                  
-               fill { smooth: 0; } 
-            }
-         }
+
+	part {								
+            name: "keyboard_switcher";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 131 0;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 264  54;					
+               }							
+	       image { normal: "keyboard_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "keyboard_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "bt_hold";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: -1 -55;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset:  107 -1;					
+               }							
+	       image { normal: "hold_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "hold_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	part {								
+            name: "bt_left";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 107 -55;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset:  345 -1;					
+               }							
+	       image { normal: "lmb_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "lmb_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }				
+	
+	part {								
+            name: "bt_middle";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 345 -55;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset:  453 -1;					
+               }							
+	       image { normal: "mmb_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "mmb_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }		
+
+	part {								
+            name: "bt_right";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 1.0;					
+                  offset: 453 -55;					
+               }							
+               rel2 {							
+                  relative: 0.0 1.0;					
+                  offset: 799  -1;					
+               }							
+	       image { normal: "rmb_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "rmb_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }			
+
 	part {
             name: "scroll_area";
             type: IMAGE;
@@ -69,20 +231,27 @@ parts {
                fill { smooth: 0; } 
             }
          }
+	
 
-	BT_LEFT();
-	BT_MIDDLE();
-	BT_RIGHT();
-	BT_HOLD();
+
+	//BT_HOLD();
 	//SCROLL_AREA_ICONS();
-	BACK();
+	
+	
 
      programs {
+	
+	program {
+		name: "tap_mouse";
+		signal: "tap_mouse";
+		action: STATE_SET "clicked" 0.0;
+		target: "bt_left";   
+        }
 
 	program {
-		name: "show_mouse";
-		signal: "show_mouse";
-		action: STATE_SET "clicked" 0.0;
+		name: "untap_mouse";
+		signal: "untap_mouse";
+		action: STATE_SET "default" 0.0;
 		target: "bt_left";   
         }
 	program {
@@ -103,6 +272,20 @@ parts {
                 source: "mouse_area";
 		action: SIGNAL_EMIT "mouse_area_released" "mouse_area";       
         }
+
+	program {
+                name: "keyboard_switcher_pressed";
+                signal: "keyboard_sw_pressed";
+		action: STATE_SET "clicked" 0.0;
+		target: "mouse_switcher";   
+        }
+	program {
+                name: "activate_mouse_sw";
+                signal: "activate_mouse_sw";
+		action: STATE_SET "default" 0.0;
+		target: "mouse_switcher";   
+        }
+
 	program {
                 name: "button_hold_pressed";
                 signal: "hold_pressed";
@@ -119,6 +302,7 @@ parts {
 	ACTIVATE("bt_left");
 	ACTIVATE("bt_right");
 	ACTIVATE("bt_middle");
+	ACTIVATE("keyboard_switcher");
 	ACTIVATE("back");
 	TRANSITION();
      }

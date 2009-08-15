@@ -24,12 +24,27 @@ images {
 
   image: "background.png" COMP;
   image: "keyboard_background.png" COMP;
+  image: "mouse_background.png" COMP;
   image: "settings_item_background.png" COMP;
   image: "main_toolbar_background.png" COMP;
+  image: "overlay.png" COMP;
+  image: "bottom_bar.png" COMP;
   image: "close_released.png" COMP;
   image: "close_pressed.png" COMP;
   image: "back_released.png" COMP;
   image: "back_pressed.png"  COMP;
+  image: "keyboard_pressed.png" COMP;
+  image: "keyboard_released.png" COMP;
+  image: "mouse_pressed.png" COMP;
+  image: "mouse_released.png" COMP;
+  image: "hold_pressed.png" COMP;
+  image: "hold_released.png" COMP;
+  image: "lmb_pressed.png" COMP;
+  image: "lmb_released.png" COMP;
+  image: "mmb_pressed.png" COMP;
+  image: "mmb_released.png" COMP;
+  image: "rmb_pressed.png" COMP;
+  image: "rmb_released.png" COMP;
   image: "back.png" COMP; //remove
   image: "fullscreen_pressed.png" COMP;
   image: "fullscreen_released.png" COMP;
@@ -220,7 +235,29 @@ fonts {
 		align: 0 0.5;						\
             }								\
         }								\
-    }									
+    }	
+
+#define BOTTOM_BAR()							\
+  part {								\
+            name: "bottom_bar";						\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               rel1 {							\
+                  relative: 0.0 1.0;					\
+                  offset: 0 -54 ;					\
+               }							\
+               rel2 {							\
+                  relative: 1.0 1.0;					\
+                  offset:  -1 0;					\
+               }							\
+	       image { normal: "bottom_bar.png"; }        		\        
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+																	
 
 #define CONF_ENTRY(part_name, ypos)					\
     part {	                                                        \

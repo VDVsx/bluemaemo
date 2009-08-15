@@ -79,18 +79,19 @@
 
 parts {
 
-	   SWALLOWCLIP();
-		
-	   BACKGROUND(0);
+	SWALLOWCLIP();
+	BACKGROUND(0);
 
+	TOP_BAR();
+        BACK();
+		
 	ICON("previous",0,0);
 	ICON("next",0.8,0);
 	ICON("fullscreen",0,1.5);
 	ICON("no_fullscreen",0.8,1.5);
-	SCREEN_TEXT("Presentation","presentation_icon.png",0.25);
         LOGO();
 	CONF_KEYS();
-	BACK();
+
 	
     }
     programs {

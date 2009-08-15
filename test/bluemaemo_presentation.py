@@ -36,6 +36,7 @@ class presentation(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "presentation")
+        self.part_text_set( "menu_title", "Presentation" )
 
     def onShow( self ):
 	self.focus = True
@@ -84,11 +85,9 @@ class presentation(edje_group):
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
-	if source == "back":
-		
-		self.main.transition_to("menu")
 
-	elif source ==	"conf_keys":
+
+	if source == "conf_keys":
 		
 		self.main.transition_to("presentation_conf")
 
@@ -121,7 +120,7 @@ class presentation(edje_group):
     def on_edje_signal_button_released(self, emission, source):
 
 	if source =="back" or source == "conf_keys":
-		pass
+		self.main.transition_to("menu")	
 	else:
 		self.main.connection.release_keyboard_event()
 

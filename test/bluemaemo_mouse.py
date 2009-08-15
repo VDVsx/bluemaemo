@@ -37,7 +37,6 @@ class mouse_ui(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "mouse_ui")
-	self.part_text_set( "menu_title", "Mouse" )
         self.x_init, self.y_init = 0,0
         self.mouse_down = False
         self.first_touch = True
@@ -53,10 +52,12 @@ class mouse_ui(edje_group):
     
     def onShow( self ):
 	self.focus = True
+
     
 
     def onHide( self ):
 	self.focus = False
+	self.signal_emit("activate_mouse_sw", "")
 
     @evas.decorators.key_up_callback
     def key_up_cb( self, event ):
@@ -106,11 +107,13 @@ class mouse_ui(edje_group):
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_mouse_down(self, emission, source):
-		
+	
 		self.mouse_down = True
 		self.tape_mouse_area = time.time()
 
-    		
+		if source == "keyboard_switcher":
+
+			self.signal_emit("keyboard_sw_pressed","")    		
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_mouse_up(self, emission, source):
@@ -122,6 +125,10 @@ class mouse_ui(edje_group):
 
 				self.main.connection.send_mouse_event(1,0,0,0)
 				self.main.connection.send_mouse_event(0,0,0,0)
+
+		elif source == "keyboard_switcher":
+
+			self.main.transition_to("keyboard_ui")
 				
 
 		self.mouse_down = False
@@ -231,6 +238,7 @@ class mouse_ui(edje_group):
 	
 			print self.main.previous_group
 			self.main.transition_to("menu")
+
 				
 		else:
 				

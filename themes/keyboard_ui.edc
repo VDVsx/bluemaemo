@@ -41,19 +41,69 @@ parts {
                }							
 	       image { normal: "keyboard_background.png"; }                  	
                fill { smooth: 0; } 					
-            }								
-									
-	    description {						
-               state: "hidden" 0.0;					
-               inherit: "default" 0.0;					
-               visible: 0;						
-            }								
+            }															
          }								
 
 
-	  TOP_BAR();
+	 TOP_BAR();
 
-	  BACK();
+	 BACK();
+
+	 part {								
+            name: "mouse_switcher";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 31 0;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 130  54;					
+               }							
+	       image { normal: "mouse_released.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "mouse_pressed.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+
+	part {								
+            name: "keyboard_switcher";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 131 0;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 264  54;					
+               }							
+	       image { normal: "keyboard_pressed.png"; }			                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "keyboard_released.png"; }       		          
+               fill { smooth: 0; } 					
+            }								
+         }		
+	
 
          part {
             name: "field_bg";
@@ -255,8 +305,21 @@ parts {
 		action: SIGNAL_EMIT "mouse_over_area" "mouse_area";       
         }
 	ACTIVATE("back");
+	ACTIVATE("mouse_switcher");
     	TRANSITION();
 	
+	program {
+                name: "mouse_switcher_pressed";
+                signal: "mouse_sw_pressed";
+		action: STATE_SET "clicked" 0.0;
+		target: "keyboard_switcher";   
+        }
+	program {
+                name: "activate_keyboard_sw";
+                signal: "activate_keyboard_sw";
+		action: STATE_SET "default" 0.0;
+		target: "keyboard_switcher";  
+	}
 	program {
             name: "show-alpha";
             signal: "show-alpha";
