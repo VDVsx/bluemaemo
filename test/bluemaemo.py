@@ -37,7 +37,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
 from bluemaemo_edje_group import *
@@ -778,8 +778,22 @@ class GUI(object):
 	self.reconnect = True
 	self.error = False
 	self.connected = False
-	#self.check_bt_status()
-	#self.check_autoconnect()
+	self.bluez_version = 3
+	self.check_bluez_version()
+	self.check_bt_status()
+	self.check_autoconnect()
+
+    def check_bluez_version(self):
+
+		try:
+
+			manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
+			self.bluez_version = 4
+			print "Running BlueZ 4"
+
+		except:
+
+			print "Running BlueZ 3"
 	
 
     def check_connection_status(self):
@@ -815,9 +829,20 @@ class GUI(object):
 	
     def check_bt_status(self):
 
-	bus_adapter = dbus.SystemBus()
-	adapter = dbus.Interface(bus_adapter.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
-	state = adapter.GetMode()
+	bus = dbus.SystemBus()
+
+	if self.bluez_version == 3:
+		bus_adapter = dbus.SystemBus()
+		adapter = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
+		state = adapter.GetMode()
+
+	else: 
+
+		manager = dbus.Interface(bus.get_object("org.bluez", "/"),"org.bluez.Manager")
+		path = manager.DefaultAdapter()
+		adapter = dbus.Interface(bus.get_object("org.bluez", path),"org.bluez.Adapter")
+		properties = adapter.GetProperties()
+		state = properties["Mode"]
 
 	if state == "discoverable":
 		
@@ -875,7 +900,7 @@ class GUI(object):
 
 	if self.adapter_on:
 		
-			self.connection = Connect()
+			self.connection = Connect(self.bluez_version)
 			self.connection.start_connection(addr)
 			self.connection_processed = True
 

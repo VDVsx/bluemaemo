@@ -38,14 +38,22 @@ class menu(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "menu")
 	self.part_text_set( "menu_title", "Main Menu" )
+	self.part_text_set( "mouse_text2", "Mouse")
 	self.part_text_set( "mouse_text", "Mouse")
 	self.part_text_set( "keyboard_text", "Keyboard")
+	self.part_text_set( "keyboard_text2", "Keyboard")
 	self.part_text_set( "presentation_text", "Presentation")
+	self.part_text_set( "presentation_text2", "Presentation")
 	self.part_text_set( "multimedia_text", "Media Remote")
+	self.part_text_set( "multimedia_text2", "Media Remote")
 	self.part_text_set( "games_text", "Gamepad")
+	self.part_text_set( "games_text2", "Gamepad")
 	self.part_text_set( "ps3_text", "PS3 Control")
+	self.part_text_set( "ps3_text2", "PS3 Control")
 	self.part_text_set( "conf_text", "Settings")
+	self.part_text_set( "conf_text2", "Settings")
 	self.part_text_set( "about_text", "About")
+	self.part_text_set( "about_text2", "About")
 
     def onShow( self ):
 	self.focus = True
