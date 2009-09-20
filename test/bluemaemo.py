@@ -244,7 +244,6 @@ class wait_conn(edje_group):
 			self.part_text_set("label_waiting", "")
 			self.part_text_set("label_connect_to", "Connected to: ")
 			self.part_text_set("label_client", self.main.connection.client_name)
-			ecore.idle_enterer_add( self.main.check_connection_status)
 			self.main.current_adapter_name = self.main.connection.client_name
 			self.main.current_adapter_addr = self.main.connection.client_addr
 			self.main.check_first_time()
@@ -739,9 +738,12 @@ class GUI(object):
             engine = options.engine,
             size = options.geometry
         )
+	
 	self.evas_canvas.main = self
 	self.canvas = self.evas_canvas.evas_obj.evas
 	self.window = self.evas_canvas.evas_obj
+	#self.window.focus_set(1)
+	print self.window.focus_get()
 	self.connection_processed = False
 	self.restore_conditions = False
 	self.key_text = ""
@@ -779,6 +781,10 @@ class GUI(object):
 	self.error = False
 	self.connected = False
 	self.bluez_version = 3
+	self.power = False
+	self.discoverable = False
+	self.pairable = False
+	self.initialize_dbus()
 	self.check_bluez_version()
 	self.check_bt_status()
 	self.check_autoconnect()
@@ -788,6 +794,7 @@ class GUI(object):
 		try:
 
 			manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
+			path = manager.DefaultAdapter()
 			self.bluez_version = 4
 			print "Running BlueZ 4"
 
@@ -808,7 +815,7 @@ class GUI(object):
 
 
     def check_connection(self):
-		
+
 	if self.connection.error:
 		self.error = True
 	else:
@@ -817,6 +824,7 @@ class GUI(object):
 			ecore.timer_add(1.0,self.check_connection)
 		else:
 			self.connected = True
+			ecore.timer_add(10.0, self.check_connection_status)
 		
 	
     def check_autoconnect(self):
@@ -829,34 +837,57 @@ class GUI(object):
 	
     def check_bt_status(self):
 
-	bus = dbus.SystemBus()
-
 	if self.bluez_version == 3:
-		bus_adapter = dbus.SystemBus()
-		adapter = dbus.Interface(bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
+
+		adapter = dbus.Interface(self.bus.get_object('org.bluez', '/org/bluez/hci0'), 'org.bluez.Adapter')
 		state = adapter.GetMode()
+		if state == "discoverable":
+		
+			self.adapter_on = True
+
+		elif state == "off":
+
+			self.power_on_bt()
+			self.restore_conditions = "off"
+
+		elif state == "connectable":
+		
+			self.power_on_bt()
+			self.restore_conditions = "connectable"
 
 	else: 
 
-		manager = dbus.Interface(bus.get_object("org.bluez", "/"),"org.bluez.Manager")
+		manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
 		path = manager.DefaultAdapter()
-		adapter = dbus.Interface(bus.get_object("org.bluez", path),"org.bluez.Adapter")
+		adapter = dbus.Interface(self.bus.get_object("org.bluez", path),"org.bluez.Adapter")
 		properties = adapter.GetProperties()
-		state = properties["Mode"]
+		self.power = properties["Powered"]
+		self.discoverable = properties["Discoverable"]
+		self.pairable = properties["Pairable"]
 
-	if state == "discoverable":
+		if not self.power:
+
+			adapter.SetProperty("Powered", dbus.Boolean(1))
+			adapter.SetProperty("Discoverable", dbus.Boolean(1) )
+			adapter.SetProperty("Pairable", dbus.Boolean(1) )
+			self.adapter_on = True
+			print "off"
+			
+		elif not self.discoverable:
+
+			adapter.SetProperty("Discoverable", dbus.Boolean(1) )
+			adapter.SetProperty("Pairable", dbus.Boolean(1) )
+			self.adapter_on = True
+			print "dis"
+
+		elif not self.pairable:
 		
-		self.adapter_on = True
-
-	elif state == "off":
-
-		self.power_on_bt()
-		self.restore_conditions = "off"
-
-	elif state == "connectable":
-		
-		self.power_on_bt()
-		self.restore_conditions = "connectable"
+			adapter.SetProperty("Pairable", dbus.Boolean(1) )
+			self.restore_conditions = "connectable"
+			self.adapter_on = True
+			print "connect"
+		else:
+			self.adapter_on = True
 
     def check_first_time(self):
 
@@ -873,35 +904,63 @@ class GUI(object):
 		pass	
 		
 	
+    def initialize_dbus( self ):
+
+        try:
+            self.bus = SystemBus( mainloop=e_dbus.DBusEcoreMainLoop() )
+        except DBusException, e:
+            print "could not connect to dbus_object system bus:", e
+            return False
 
     def power_on_bt(self):
 	
 	os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:discoverable")
 	self.adapter_on = True
+	print "Bluetooth turned on"
 	
         
     def on_exit(self):
-	
-	if self.restore_conditions == "off":
+	if self.bluez_version == 3:
+		if self.restore_conditions == "off":
 
-		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:connectable")
-		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:off")
+			os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:connectable")
+			os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:off")
 
-	elif self.restore_conditions == "connectable":
+		elif self.restore_conditions == "connectable":
 
-		os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:connectable")
+			os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:connectable")
+
+		else:
+			pass
 
 	else:
-		pass
-	
+		try:
+			manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
+			path = manager.DefaultAdapter()
+			adapter = dbus.Interface(self.bus.get_object("org.bluez", path),"org.bluez.Adapter")
+			if not self.pairable:
+				adapter.SetProperty("Pairable", dbus.Boolean(0))
+				print "restored pair"
+
+			if not self.discoverable:
+				adapter.SetProperty("Discoverable", dbus.Boolean(0))
+				print "restored dis"
+
+			if not self.power:
+				adapter.SetProperty("Powered", dbus.Boolean(0))
+				print "restored power"
+
+			
+		except:
+			print "Error: Can't restore bluetooth settings"
         
 
-    def initialize_bluemaemo_server(self,addr=1):
+    def initialize_bluemaemo_server(self,addr=1, name=""):
 
 	if self.adapter_on:
 		
 			self.connection = Connect(self.bluez_version)
-			self.connection.start_connection(addr)
+			self.connection.start_connection(addr, name)
 			self.connection_processed = True
 
         else:
@@ -1082,7 +1141,7 @@ class GUI(object):
         self.previous_group.hide()
         self.groups["swallow"].part_swallow("area1", self.current_group)
         self.in_transition = False
-            
+           
 #----------------------------------------------------------------------------#
 class EvasCanvas(object):
 #----------------------------------------------------------------------------#
@@ -1104,6 +1163,7 @@ class EvasCanvas(object):
         self.evas_obj.name_class = (WM_NAME, WM_CLASS)
         self.evas_obj.fullscreen = fullscreen
         self.evas_obj.size = size
+	#self.evas_obj.focus_set(1)
         self.evas_obj.evas.image_cache_set( 6*1024*1024 )
         self.evas_obj.evas.font_cache_set( 2*1024*1024 )
         self.evas_obj.show()

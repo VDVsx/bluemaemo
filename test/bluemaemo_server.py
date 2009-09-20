@@ -27,7 +27,7 @@ import sys
 from threading import Thread
 import hidserver
 from bluemaemo_known_devices_conf import *
-
+#from bluemaemo_bluez_conf import *
 
 class Connect:
 	
@@ -45,12 +45,13 @@ class Connect:
 		self.known_dev = None
 		self.bluez_version = version
 		self.devices_conf = bluemaemo_known_devices()
+		#self.bluez_conf = Bluez_conf()
 	
 		
 		# Read record file
 		file_read = open('service_record.xml','r')
 		#file_read = open('/usr/share/bluemaemo/data/service_record.xml','r')
-		self.xml = file_read.read()
+		xml = file_read.read()
 
 		self.bus = dbus.SystemBus()
 
@@ -68,27 +69,30 @@ class Connect:
 		# Check if input service is running, if yes terminate the service
 
 		else:	
-		
-			try:
-				os.system("/etc/init.d/bluetooth stop")
-			except:
-				print "can't stop bluetooth services"
-			try:
-				os.system("mv /usr/lib/bluetooth/plugins/input.so /usr/lib/bluetooth/plugins/input.so_back")
-			except:
-				print "can't move input plugin"
+			
+			#try:
+			#	os.system("/etc/init.d/bluetooth stop")
+			#	self.bluez_conf.check_conf()
+			#except:
+				#print "can't stop bluetooth services"
 
-			try:
-		
-				os.system("/etc/init.d/bluetooth start")
-			except:
-				print "can't start bluetooth services"
+			#if self.bluez_conf.restart_bluez:
 
-			try:
-				os.system("mv /usr/lib/bluetooth/plugins/input.so_back /usr/lib/bluetooth/plugins/input.so")
-				self.bluez_subsystem = True
-			except:
-				print "can't move input plugin" 		
+			#	try:
+		
+			#		os.system("/etc/init.d/bluetooth start")
+			#		self.bluez_conf.restore_options()
+			#		print "Bluez configurations restored"
+			#		self.bluez_subsystem = True
+			#	except:
+			#		print "can't start bluetooth services"
+			#else:
+			#	try:
+			#		os.system("/etc/init.d/bluetooth start")
+			#	except:
+			#		print "can't start bluetooth services"
+					
+				
                         input_status = False
 
                         self.input_connect = False
@@ -114,36 +118,48 @@ class Connect:
 			if self.bluez_version == 3:
 				# Add service record to the BlueZ database
 				self.database = dbus.Interface(self.bus.get_object('org.bluez', '/org/bluez'),'org.bluez.Database')
-				self.handle = self.database.AddServiceRecordFromXML(self.xml)
+				self.handle = self.database.AddServiceRecordFromXML(xml)
 
 			else:
 
 				# Add service record to the BlueZ database
 				manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
-
+		
 				self.path = manager.DefaultAdapter()
 				self.adapter = dbus.Interface(self.bus.get_object("org.bluez", self.path),"org.bluez.Adapter")
-
+				properties = self.adapter.GetProperties()
+				self.adapter_addr = properties["Address"]
 				self.service = dbus.Interface(self.bus.get_object("org.bluez", self.path),"org.bluez.Service")
-
 				self.handle = self.service.AddRecord(xml)
-
-				self.adapter.connect_to_signal("DeviceCreated", self._device_created)
-
+				#self.adapter.connect_to_signal("DeviceCreated", self._device_created)
+				
 		except:
 			print "Error in d-bus system - database"
 
-	def _device_created(self, device_path):
+	#def _device_created(self, device_path):
 
-		device = dbus.Interface(self.bus.get_object("org.bluez", device_path),"org.bluez.Device")
+	#	device = dbus.Interface(self.bus.get_object("org.bluez", device_path),"org.bluez.Device")
+	#	properties = device.GetProperties()
+	#	self.client_name = properties["Name"]
+	#	self.client_addr =  properties["Address"]
+	#	print self.client_addr
+	
+	def get_device_info(self,addr):
+		print addr
+		path = self.adapter.FindDevice(addr)
+		print "1"
+		print path
+		device = dbus.Interface(self.bus.get_object("org.bluez", path),"org.bluez.Device")
+		print "2"
 		properties = device.GetProperties()
+		print "3"
 		self.client_name = properties["Name"]
 		self.client_addr =  properties["Address"]
+		print self.client_addr
 	
-	
-	def start_connection(self,addr):	
+	def start_connection(self,addr, name):	
 		
-		self.deamon = start_deamon(self,addr)
+		self.deamon = start_deamon(self,addr, name)
 		self.deamon.start()
 
 	
@@ -240,25 +256,29 @@ class Connect:
 				
 class start_deamon(Thread):
 	
-	def __init__(self,bluemaemo,addr):
+	def __init__(self,bluemaemo,addr, name):
 		
 		self.bluemaemo = bluemaemo
 		self.addr = addr
+		self.name = name
 		self.state = 1
 		Thread.__init__(self)
 		print "initializing daemon ..."
 		
 	def run(self):
-		
+
 		try:
+
 			if self.addr==1:
 
 				hidserver.init_hidserver()
 			else:
 				
 				self.state = hidserver.reConnect(self.bluemaemo.adapter_addr,self.addr)
+				self.bluemaemo.client_addr = self.addr
+				self.bluemaemo.client_name = self.name
 				#hidserver.reConnect("00:1D:6E:9D:42:9C","00:21:4F:57:93:C8")
-		
+
 			while not self.bluemaemo.connect  and not self.bluemaemo.error:
 				time.sleep(1)
 				n = hidserver.connec_state()
@@ -305,21 +325,37 @@ class start_deamon(Thread):
 						print 'ERROR: Bluetooth is off'
 
 				else:
-					try:	
-						properties = self.bluemaemo.adapter.GetProperties()
-						print properties["Address"]
-						print "You are connect to the address: " + self.bluemaemo.client_addr
 					
-						if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
-							print "device already existent"
+					try:	
+						self.bluemaemo.client_addr = hidserver.get_client_addr()
+
+						try:
+							self.bluemaemo.get_device_info(self.bluemaemo.client_addr)
+
+						except:
+							print "Error: Can't get remote device information"
+							print self.bluemaemo.connect
+							print self.bluemaemo.error
+
+						print self.bluemaemo.client_addr
+						if self.bluemaemo.client_addr != None:
+							print "You are connect to the address: " + self.bluemaemo.client_addr
+					
+							if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
+								print "device already existent"
+							else:
+								self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
+								self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
+							print "connected to: " + self.bluemaemo.client_name
 						else:
-							self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
-							self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
-						print "connected to: " + self.bluemaemo.client_name
+
+							print "Error: Can't get remote device information"
+							print self.bluemaemo.connect
+							print self.bluemaemo.error
 					except:
 			
 						self.bluemaemo.error = True
-						print 'ERROR: Bluetooth is off'
+						print 'Error: Bluetooth is off'
 		except:
 			
 			print "Exit"

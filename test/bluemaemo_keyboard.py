@@ -61,7 +61,7 @@ class keyboard_ui(edje_group):
 
     def onShow( self ):
 	self.focus = True
-     
+     	print self.focus_get()
 
     def onHide( self ):
 	self.focus = False

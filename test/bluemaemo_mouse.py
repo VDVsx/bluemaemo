@@ -236,7 +236,6 @@ class mouse_ui(edje_group):
 			
 		elif source == "back":
 	
-			print self.main.previous_group
 			self.main.transition_to("menu")
 
 				

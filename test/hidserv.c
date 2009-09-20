@@ -53,6 +53,7 @@ uint8_t cls[3];
 
 int ctrl,intr,csg,isg, class_st=0, connection =0;
 char default_class[8];
+char client_addr[1024] = { 0 };
 pthread_t thread;
 
 void error(char *msg)
@@ -179,6 +180,10 @@ static int l2cap_accept(int sk, bdaddr_t *bdaddr)
 
 	if (bdaddr)
 		bacpy(bdaddr, &addr.l2_bdaddr);
+
+	ba2str( &addr.l2_bdaddr, client_addr );
+    	fprintf(stderr, "accepted connection from %s\n", client_addr);
+
 
 	return nsk;
 }
@@ -371,6 +376,11 @@ void init_server()
 int connection_state()
 {
 	return connection;
+}
+
+char* client_address()
+{
+	return client_addr;
 }
 
 
