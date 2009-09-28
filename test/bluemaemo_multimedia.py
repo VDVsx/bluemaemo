@@ -326,52 +326,6 @@ class multimedia_conf(edje_group):
 		self.main.transition_to("multimedia")	
 	
 	else:
-		
-		if source == "Play_strip":
-
-			self.key_value = self.part_text_get("Play_key")
-			self.main.key_text = self.key_value
-
-		elif source == "Pause_strip":
-
-			self.key_value = self.part_text_get("Pause_key")
-			self.main.key_text = self.key_value
-
-		if source == "Stop_strip":
-
-			self.key_value = self.part_text_get("Stop_key")
-			self.main.key_text = self.key_value
-
-		elif source == "Forward_strip":
-
-			self.key_value = self.part_text_get("Forward_key")
-			self.main.key_text = self.key_value
-
-		if source == "Backward_strip":
-
-			self.key_value = self.part_text_get("Backward_key")
-			self.main.key_text = self.key_value
-
-		elif source == "Volume_m_strip":
-
-			self.key_value = self.part_text_get("Volume_m_key")
-			self.main.key_text = self.key_value
-
-		elif source == "Volume_p_strip":
-
-			self.key_value = self.part_text_get("Volume_p_key")
-			self.main.key_text = self.key_value
-
-
-		elif source == "Fullscreen_key_m":
-
-			self.key_value = self.part_text_get("fullscreen_key_m_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "no_fullscreen_key_m":
-
-			self.key_value = self.part_text_get("no_fullscreen_key_m_icon")
-			self.main.key_text = self.key_value
 
 		self.main.current_conf_screen = "multimedia"
 		self.main.current_source = source

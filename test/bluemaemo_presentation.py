@@ -28,6 +28,7 @@ import edje.decorators
 import ecore
 import ecore.x
 import ecore.evas
+import elementary
 from bluemaemo_edje_group import *
 
 
@@ -100,9 +101,10 @@ class presentation(edje_group):
 
 	elif source == "next":
 
-		key = self.main.next_key
-		modif, val = key_dec(self,key)
-		self.main.connection.send_keyboard_event(modif,val)
+		self.main.transition_to("presentation_conf")
+		#key = self.main.next_key
+		#modif, val = key_dec(self,key)
+		#self.main.connection.send_keyboard_event(modif,val)
 
 	elif source == "fullscreen":
 
@@ -129,11 +131,22 @@ class presentation_conf(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "presentation_conf")
+	self.part_text_set( "menu_title", "Presentation settings" )
 	count = 0
+	self.key_value = ""    
+	self.constructed = False
 	self.prev_key = ""
 	self.next_key = ""
 	self.full_key = ""
 	self.no_full_key = ""
+
+
+	self.prev_key_lb = elementary.Label(self)
+	self.next_key_lb = elementary.Label(self)
+	self.full_key_lb = elementary.Label(self)
+	self.no_full_key_lb = elementary.Label(self)
+	
+
 	for i in (self.main.previous_key,self.main.next_key,self.main.fullscreen_key, self.main.no_fullscreen_key):
 		if len(i) > 6 and i[0] == "s":
 			#shift translation
@@ -162,20 +175,62 @@ class presentation_conf(edje_group):
 			self.full_key = text_value
 		elif count == 4:
 			self.no_full_key = text_value
-				
-		 
-	self.part_text_set("previous_key_icon", self.prev_key)
-	self.part_text_set("next_key_icon", self.next_key)
-	self.part_text_set("fullscreen_key_icon", self.full_key)
-	self.part_text_set("no_fullscreen_key_icon", self.no_full_key)
+
+	self.prev_key_lb.label_set(self.prev_key)
+	self.next_key_lb.label_set(self.next_key)
+	self.full_key_lb.label_set(self.full_key)
+	self.no_full_key_lb.label_set(self.no_full_key)			
+	
+	self.labels = {"Previous":self.prev_key_lb,
+		"Next":self.next_key_lb,
+		"Fullscreen":self.full_key_lb,
+		"No fullscreen":self.no_full_key_lb}
+
+	self.items = {"Previous":self.prev_key,
+		"Next":self.next_key,
+		"Fullscreen":self.full_key,
+		"No fullscreen":self.no_full_key}
+
 	self.key_value = ""
+
+    def list_item_cb(self,obj, event, data):
+
+	self.obj = obj
+	label = obj.label_get()
+	label_obj = self.labels[label]
+	current_conf = self.items[label]
+	self.main.current_conf_screen = "presentation"
+	self.main.current_source = label_obj
+	self.main.current_label = label
+	self.main.groups["conf_keys"].part_text_set("value","  "+current_conf + "  ")
+	self.main.transition_to("conf_keys")
+	self.obj.selected_set(0)
 
     def onShow( self ):
 	self.focus = True
-    
+    	if self.constructed:
+		self.li.go()
+		self.li.show()
+	else:
+		self.li = elementary.List(self)
+	    	self.li.size_hint_weight_set(1.0, 1.0)
+	    	self.li.size_hint_align_set(-1.0, -1.0)
+		self.li.geometry_set(0,54, 800,372)
+		self.li.show()
+	
+		labels_sorted = self.labels.keys()
+		labels_sorted.sort()
+		for item in labels_sorted:
+
+			item_list = self.li.item_append(item, None, self.labels[item] , self.list_item_cb)
+				
+		
+	    	self.li.go()
+		self.constructed = True
 
     def onHide( self ):
 	self.focus = False
+	self.li.hide()
      
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
@@ -204,25 +259,6 @@ class presentation_conf(edje_group):
 		self.main.bluemaemo_conf.save_options()
 		self.main.transition_to("presentation")	
 	else:
-		if source == "previous_key":
-
-			self.key_value = self.part_text_get("previous_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "next_key":
-
-			self.key_value = self.part_text_get("next_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "fullscreen_key":
-
-			self.key_value = self.part_text_get("fullscreen_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "no_fullscreen_key":
-
-			self.key_value = self.part_text_get("no_fullscreen_key_icon")
-			self.main.key_text = self.key_value
 
 		self.main.current_conf_screen = "presentation"
 		self.main.current_source = source

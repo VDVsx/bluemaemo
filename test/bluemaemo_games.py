@@ -289,7 +289,7 @@ class games_conf(edje_group):
 		labels_sorted.sort()
 		for item in labels_sorted:
 
-				item_list = self.li.item_append(item, None, self.labels[item] , self.list_item_cb)
+			item_list = self.li.item_append(item, None, self.labels[item] , self.list_item_cb)
 				
 		
 	    	self.li.go()
@@ -307,58 +307,8 @@ class games_conf(edje_group):
 		self.main.bluemaemo_conf.save_options()
 		self.main.transition_to("games")
 
-	elif source == "1":
-
-		self.signal_emit("hide_screen_2", "")
-		self.signal_emit("show_screen_1", "")
-
-	elif source == "2":
-
-		self.signal_emit("hide_screen_1", "")
-		self.signal_emit("show_screen_2", "")
-
+	
 	else:
-		
-		if source == "up_key":
-
-			self.key_value = self.part_text_get("up_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "down_key":
-
-			self.key_value = self.part_text_get("down_key_icon")
-			self.main.key_text = self.key_value
-
-		if source == "right_key":
-
-			self.key_value = self.part_text_get("right_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "left_key":
-
-			self.key_value = self.part_text_get("left_key_icon")
-			self.main.key_text = self.key_value
-
-		if source == "a_key":
-
-			self.key_value = self.part_text_get("a_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "b_key":
-
-			self.key_value = self.part_text_get("b_key_icon")
-			self.main.key_text = self.key_value
-
-		elif source == "c_key":
-
-			self.key_value = self.part_text_get("c_key_icon")
-			self.main.key_text = self.key_value
-
-
-		elif source == "d_key":
-
-			self.key_value = self.part_text_get("d_key_icon")
-			self.main.key_text = self.key_value
 
 		self.main.current_conf_screen = "games"
 		self.main.current_source = source

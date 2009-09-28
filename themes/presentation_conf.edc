@@ -25,26 +25,17 @@ parts {
 	   SWALLOWCLIP();
 		
 	   BACKGROUND(0);
-	   TOP_BAR();	
-	//SCREEN_TEXT("Configurations","conf_icon.png",0.28);
 
-	//CONF_ENTRY("Previous",1);
+	   TOP_BAR();
 
-	//CONF_ENTRY("Next",2);
+	   BACK();
+	   
+	   BOTTOM_BAR();
 
-	//CONF_ENTRY("Fullscreen",3);
-
-	//CONF_ENTRY("No Fullscreen",4);
-
-        LOGO();
-	BACK();
+       
 	
     }
     programs {
 	ACTIVATE("back");
-	//ACTIVATE("previous_key");
-	//ACTIVATE("next_key");
-	//ACTIVATE("fullscreen_key");
-	//ACTIVATE("no_fullscreen_key");
     	TRANSITION();
     }

@@ -1018,22 +1018,22 @@ class GUI(object):
 
     def save_local_conf(self, button_name, profile, key):
 	
-	if button_name == "previous_key":
+	if button_name == "Previous":
 
 		self.previous_key = key
 		self.bluemaemo_conf.set_option("presentation","previous_key",key)
 
-	elif button_name == "next_key":
+	elif button_name == "Next":
 
 		self.next_key = key
 		self.bluemaemo_conf.set_option("presentation","next_key",key)
 
-	elif button_name == "fullscreen_key":
+	elif button_name == "Fullscreen" and profile == "presentation":
 
 		self.fullscreen_key = key
 		self.bluemaemo_conf.set_option("presentation","fullscreen_key",key)
 
-	elif button_name == "no_fullscreen_key":
+	elif button_name == "No fullscreen" and profile == "presentation":
 
 		self.no_fullscreen_key = key
 		self.bluemaemo_conf.set_option("presentation","no_fullscreen_key",key)
