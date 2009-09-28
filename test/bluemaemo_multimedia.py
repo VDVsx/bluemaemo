@@ -163,6 +163,8 @@ class multimedia_conf(edje_group):
         edje_group.__init__(self, main, "multimedia_conf")
 	self.part_text_set( "menu_title", "Multimedia settings" )
 	count = 0
+	self.key_value = ""    
+	self.constructed = False
 	self.play_key = ""
 	self.pause_key = ""
 	self.stop_key = ""
@@ -253,11 +255,7 @@ class multimedia_conf(edje_group):
                "Fullscreen":self.full_key, 
 	       "No fullscreen":self.no_full_key}
 
-	#usar o nome do profile + o nome do elemento para fazer o local conf
-	#tentar mudar as transicoes do selected
-
-	self.key_value = ""    
-	self.constructed = False
+	
     	
     def list_item_cb(self,obj, event, data):
 	self.obj = obj
@@ -268,7 +266,8 @@ class multimedia_conf(edje_group):
 	self.main.current_source = label_obj
 	self.main.current_label = label
 	self.main.groups["conf_keys"].part_text_set("value","  "+current_conf + "  ")
-	self.main.transition_to("conf_keys")	
+	self.main.transition_to("conf_keys")
+	self.obj.selected_set(0)
 	
 	
     def onShow( self ):
@@ -292,13 +291,11 @@ class multimedia_conf(edje_group):
 		
 	    	self.li.go()
 		self.constructed = True
-	#self.li.clear()
-	#self.signal_emit("show_screen_1", "")
+	
     
     def onHide( self ):
 	self.focus = False
      	self.li.hide()
-	#self.li.delete()
 
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):

@@ -26,6 +26,12 @@ parts {
 		
 	   BACKGROUND(0);
 
+	   TOP_BAR();
+
+	   BACK();
+	   
+	   BOTTOM_BAR();
+
 	//SCREEN_TEXT("Configurations","conf_icon.png",0.28);
 /*
 	//Screen 1
@@ -52,7 +58,6 @@ parts {
 	SCREEN_NUMBER("2",1);
 	
         */
-	BACK();
 	
     }
 
@@ -430,7 +435,7 @@ parts {
         	target: "1";
 	}
 
-       ACTIVATE("back");
+       
        ACTIVATE("up_key");
        ACTIVATE("down_key");
        ACTIVATE("right_key");
@@ -441,6 +446,7 @@ parts {
        ACTIVATE("d_key");
 
 	*/
+       ACTIVATE("back");
        TRANSITION();
     }
     

@@ -264,6 +264,7 @@ class conf_keys(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "conf_keys")
+	self.part_text_set( "menu_title", "Multimedia settings" )
 	self.shift = False
 	self.ctrl = False
 	self.alt = False
@@ -1083,42 +1084,42 @@ class GUI(object):
 		self.no_fullscreen_key_m = key
 		self.bluemaemo_conf.set_option("multimedia","no_fullscreen_key_m",key)
 
-	elif button_name == "up_key":
+	elif button_name == "Up":
 
 		self.up_key = key
 		self.bluemaemo_conf.set_option("games","up_key",key)
 
-	elif button_name == "down_key":
+	elif button_name == "Down":
 
 		self.down_key = key
 		self.bluemaemo_conf.set_option("games","down_key",key)
 
-	elif button_name == "right_key":
+	elif button_name == "Right":
 
 		self.right_key = key
 		self.bluemaemo_conf.set_option("games","right_key",key)
 
-	elif button_name == "left_key":
+	elif button_name == "Left":
 
 		self.left_key = key
 		self.bluemaemo_conf.set_option("games","left_key",key)
 	
-	elif button_name == "a_key":
+	elif button_name == "A":
 
 		self.a_key = key
 		self.bluemaemo_conf.set_option("games","a_key",key)
 
-	elif button_name == "b_key":
+	elif button_name == "B":
 
 		self.b_key = key
 		self.bluemaemo_conf.set_option("games","b_key",key)
 	
-	elif button_name == "c_key":
+	elif button_name == "C":
 
 		self.c_key = key
 		self.bluemaemo_conf.set_option("games","c_key",key)
 
-	elif button_name == "d_key":
+	elif button_name == "D":
 
 		self.d_key = key
 		self.bluemaemo_conf.set_option("games","d_key",key)

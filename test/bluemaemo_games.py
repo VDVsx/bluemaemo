@@ -29,6 +29,7 @@ import edje.decorators
 import ecore
 import ecore.x
 import ecore.evas
+import elementary
 from accelerometer import *
 from bluemaemo_edje_group import *
 
@@ -40,9 +41,7 @@ class games(edje_group):
         edje_group.__init__(self, main, "games")
 	self.part_text_set( "menu_title", "Games" )
 
-	self.accel = Accelerometer()
-
-	
+	#self.accel = Accelerometer()
 
     def onShow( self ):
 	self.focus = True
@@ -127,12 +126,14 @@ class games(edje_group):
 		self.main.connection.send_keyboard_event(modif,val)
 
 	elif source == "A":
+		
+		self.main.transition_to("games_conf")
 
-		if self.accel.accel_on:
-			 self.accel.accel_on = False
-		else:
-			self.accel.accel_on = True
-			self.accel.read_dir(self.main)
+		#if self.accel.accel_on:
+		#	 self.accel.accel_on = False
+		#else:
+		#	self.accel.accel_on = True
+		#	self.accel.read_dir(self.main)
 			
 		#key = self.main.a_key
 		#modif, val = key_dec(self,key)
@@ -173,17 +174,28 @@ class games_conf(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "games_conf")
+	self.part_text_set( "menu_title", "Multimedia settings" )
 	count = 0
+	self.key_value = ""    
+	self.constructed = False
 	self.up_key = ""
 	self.down_key = ""
 	self.right_key = ""
 	self.left_key = ""
-	
 	self.a_key = ""
 	self.b_key = ""
 	self.c_key = ""
 	self.d_key = ""
 
+	self.up_key_lb = elementary.Label(self)
+	self.down_key_lb = elementary.Label(self)
+	self.right_key_lb = elementary.Label(self)
+	self.left_key_lb = elementary.Label(self)
+	self.a_key_lb = elementary.Label(self)
+	self.b_key_lb = elementary.Label(self)
+	self.c_key_lb = elementary.Label(self)
+	self.d_key_lb = elementary.Label(self)
+	
 	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.d_key):
 
 		if len(i) > 6 and i[0] == "s":
@@ -220,20 +232,73 @@ class games_conf(edje_group):
 		elif count == 8:
 			self.d_key = text_value
 				
-		 
-	self.part_text_set("up_key_icon", self.up_key)
-	self.part_text_set("down_key_icon", self.down_key)
-	self.part_text_set("right_key_icon", self.right_key)
-	self.part_text_set("left_key_icon", self.left_key)
-	self.part_text_set("a_key_icon", self.a_key)
-	self.part_text_set("b_key_icon", self.b_key)
-	self.part_text_set("c_key_icon", self.c_key)
-	self.part_text_set("d_key_icon", self.d_key)
+	self.up_key_lb.label_set(self.up_key)
+	self.down_key_lb.label_set(self.down_key)
+	self.right_key_lb.label_set(self.right_key)
+	self.left_key_lb.label_set(self.left_key)
+	self.a_key_lb.label_set(self.a_key)
+	self.b_key_lb.label_set(self.b_key)
+	self.c_key_lb.label_set(self.c_key)
+	self.d_key_lb.label_set(self.d_key) 
+	
+	self.labels = {"Up":self.up_key_lb,
+		"Down":self.down_key_lb,
+		"Right":self.right_key_lb,
+		"Left":self.left_key_lb,
+		"A":self.a_key_lb,
+		"B":self.b_key_lb,
+		"C":self.c_key_lb,
+		"D":self.d_key_lb}
+
+	self.items = {"Up":self.up_key,
+		"Down":self.down_key,
+		"Right":self.right_key,
+		"Left":self.left_key,
+		"A":self.a_key,
+		"B":self.b_key,
+		"C":self.c_key,
+		"D":self.d_key}
+
+    def list_item_cb(self,obj, event, data):
+	self.obj = obj
+	label = obj.label_get()
+	label_obj = self.labels[label]
+	current_conf = self.items[label]
+	self.main.current_conf_screen = "games"
+	self.main.current_source = label_obj
+	self.main.current_label = label
+	self.main.groups["conf_keys"].part_text_set("value","  "+current_conf + "  ")
+	self.main.transition_to("conf_keys")
+	self.obj.selected_set(0)
 	
 	
+    def onShow( self ):
+
+	self.focus = True
+	if self.constructed:
+		self.li.go()
+		self.li.show()
+	else:
+		self.li = elementary.List(self)
+	    	self.li.size_hint_weight_set(1.0, 1.0)
+	    	self.li.size_hint_align_set(-1.0, -1.0)
+		self.li.geometry_set(0,54, 800,372)
+		self.li.show()
 	
-	self.signal_emit("hide_screen_2", "")
-	self.signal_emit("show_screen_1", "")
+		labels_sorted = self.labels.keys()
+		labels_sorted.sort()
+		for item in labels_sorted:
+
+				item_list = self.li.item_append(item, None, self.labels[item] , self.list_item_cb)
+				
+		
+	    	self.li.go()
+		self.constructed = True
+	
+    
+    def onHide( self ):
+	self.focus = False
+     	self.li.hide()
 
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
