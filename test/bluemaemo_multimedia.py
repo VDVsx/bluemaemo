@@ -28,6 +28,7 @@ import edje.decorators
 import ecore
 import ecore.x
 import ecore.evas
+import elementary
 from bluemaemo_edje_group import *
 
 #----------------------------------------------------------------------------#
@@ -141,9 +142,10 @@ class multimedia(edje_group):
 
 	elif source == "no_fullscreen":
 
-		key = self.main.no_fullscreen_key_m
-		modif, val = key_dec(self,key)
-		self.main.connection.send_keyboard_event(modif,val)
+		self.main.transition_to("multimedia_conf")
+		#key = self.main.no_fullscreen_key_m
+		#modif, val = key_dec(self,key)
+		#self.main.connection.send_keyboard_event(modif,val)
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
@@ -170,6 +172,16 @@ class multimedia_conf(edje_group):
 	self.vol_p_key = ""
 	self.full_key = ""
 	self.no_full_key = ""
+
+	self.play_key_lb = elementary.Label(self)
+	self.pause_key_lb = elementary.Label(self)
+	self.stop_key_lb = elementary.Label(self)
+	self.forw_key_lb = elementary.Label(self)
+	self.backw_key_lb = elementary.Label(self)
+	self.vol_m_key_lb = elementary.Label(self)
+	self.vol_p_key_lb = elementary.Label(self)
+	self.full_key_lb = elementary.Label(self)
+	self.no_full_key_lb = elementary.Label(self)
 
 	for i in (self.main.play_key,self.main.pause_key,self.main.stop_key,self.main.forward_key,self.main.backward_key, self.main.volume_m_key,self.main.volume_p_key,self.main.fullscreen_key_m, self.main.no_fullscreen_key_m):
 		if len(i) > 6 and i[0] == "s":
@@ -211,27 +223,83 @@ class multimedia_conf(edje_group):
 			self.no_full_key = text_value
 				
 		 
-	self.part_text_set("Play_key", self.play_key)
-	self.part_text_set("Pause_key", self.pause_key)
-	self.part_text_set("Stop_key", self.stop_key)
-	self.part_text_set("Forward_key", self.forw_key)
-	self.part_text_set("Backward_key", self.backw_key)
-	self.part_text_set("Volume_m_key", self.vol_m_key)
-	self.part_text_set("Volume_p_key", self.vol_p_key)
-	self.part_text_set("Fullscreen_m_key", self.full_key)
-	self.part_text_set("No_fullscreen_m_key", self.no_full_key) #ver dos nomes
-	self.key_value = ""
-	self.signal_emit("hide_screen_2", "")
-	self.signal_emit("show_screen_1", "")
+	self.play_key_lb.label_set(self.play_key)
+	self.pause_key_lb.label_set(self.pause_key)
+	self.stop_key_lb.label_set(self.stop_key)
+	self.forw_key_lb.label_set(self.forw_key)
+	self.backw_key_lb.label_set(self.backw_key)
+	self.vol_m_key_lb.label_set(self.vol_m_key)
+	self.vol_p_key_lb.label_set(self.vol_p_key)
+	self.full_key_lb.label_set(self.full_key)
+	self.no_full_key_lb.label_set(self.no_full_key)
 
+	self.labels = {"Play":self.play_key_lb, 
+               "Pause":self.pause_key_lb,  
+               "Stop":self.stop_key_lb, 
+               "Forward":self.forw_key_lb,
+               "Backward":self.backw_key_lb, 
+	       "Volume +":self.vol_p_key_lb, 
+	       "Volume -":self.vol_m_key_lb, 
+               "Fullscreen":self.full_key_lb, 
+	       "No fullscreen":self.no_full_key_lb}
 
+	self.items = {"Play":self.play_key, 
+               "Pause":self.pause_key,  
+               "Stop":self.stop_key, 
+               "Forward":self.forw_key,
+               "Backward":self.backw_key, 
+	       "Volume +":self.vol_p_key, 
+	       "Volume -":self.vol_m_key, 
+               "Fullscreen":self.full_key, 
+	       "No fullscreen":self.no_full_key}
+
+	#usar o nome do profile + o nome do elemento para fazer o local conf
+	#tentar mudar as transicoes do selected
+
+	self.key_value = ""    
+	self.constructed = False
+    	
+    def list_item_cb(self,obj, event, data):
+	self.obj = obj
+	label = obj.label_get()
+	label_obj = self.labels[label]
+	current_conf = self.items[label]
+	self.main.current_conf_screen = "multimedia"
+	self.main.current_source = label_obj
+	self.main.current_label = label
+	self.main.groups["conf_keys"].part_text_set("value","  "+current_conf + "  ")
+	self.main.transition_to("conf_keys")	
+	
+	
     def onShow( self ):
 	self.focus = True
-    
+	if self.constructed:
+		self.li.go()
+		self.li.show()
+	else:
+		self.li = elementary.List(self)
+	    	self.li.size_hint_weight_set(1.0, 1.0)
+	    	self.li.size_hint_align_set(-1.0, -1.0)
+		self.li.geometry_set(0,54, 800,372)
+		self.li.show()
+	
+		labels_sorted = self.labels.keys()
+		labels_sorted.sort()
+		for item in labels_sorted:
 
+				item_list = self.li.item_append(item, None, self.labels[item] , self.list_item_cb)
+				
+		
+	    	self.li.go()
+		self.constructed = True
+	#self.li.clear()
+	#self.signal_emit("show_screen_1", "")
+    
     def onHide( self ):
 	self.focus = False
-     
+     	self.li.hide()
+	#self.li.delete()
+
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
         key = event.keyname
@@ -259,16 +327,6 @@ class multimedia_conf(edje_group):
 
 		self.main.bluemaemo_conf.save_options()
 		self.main.transition_to("multimedia")	
-
-	elif source == "1":
-
-		self.signal_emit("hide_screen_2", "")
-		self.signal_emit("show_screen_1", "")
-
-	elif source == "2":
-
-		self.signal_emit("hide_screen_1", "")
-		self.signal_emit("show_screen_2", "")
 	
 	else:
 		
@@ -322,4 +380,4 @@ class multimedia_conf(edje_group):
 		self.main.current_source = source
 		self.main.groups["conf_keys"].part_text_set("value","  "+self.key_value + "  ")
 		self.main.transition_to("conf_keys")	
-	
+

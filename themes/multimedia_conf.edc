@@ -29,24 +29,26 @@ parts {
 	   TOP_BAR();
 
 	   BACK();
+	   
+	   BOTTOM_BAR();
 
-	CONF_ENTRY("Play", 0);
+	//CONF_ENTRY("Play", 0);
 	
-	CONF_ENTRY("Pause",1);
+	//CONF_ENTRY("Pause",1);
 	
-	CONF_ENTRY("Stop",2);
+	//CONF_ENTRY("Stop",2);
 	
-	CONF_ENTRY("Forward",3);
+	//CONF_ENTRY("Forward",3);
 	
-	CONF_ENTRY("Backward",4);
+	//CONF_ENTRY("Backward",4);
 	
-	CONF_ENTRY("Fullscreen",5);
+//	CONF_ENTRY("Fullscreen",5);
 	
-//	CONF_ENTRY("Volume +",1);
+	//CONF_ENTRY("Volume +",1);
 	
-//	CONF_ENTRY("Volume -",2);
+	//CONF_ENTRY("Volume -",2);
 	
-//	CONF_ENTRY("No Fullscreen",3);
+	//CONF_ENTRY("No Fullscreen",3);
 	
 	//SCREEN_NUMBER("1",0);
 	//SCREEN_NUMBER("2",1);
@@ -54,6 +56,7 @@ parts {
 	
     }
     programs {
+
 	/*
 	//hide_screen 1
 	program {                                                          

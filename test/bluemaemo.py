@@ -33,11 +33,12 @@ import edje.decorators
 import ecore
 import ecore.x
 import ecore.evas
+import elementary
 from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-from bluemaemo_server import *
+#from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
 from bluemaemo_edje_group import *
@@ -56,6 +57,7 @@ from bluemaemo_confirm_conn import *
 from bluemaemo_unable_conn import *
 from bluemaemo_process_conn import *
 from bluemaemo_hw_kb import *
+from test_lista import *
 
 WIDTH = 800
 HEIGHT = 480
@@ -63,6 +65,13 @@ HEIGHT = 480
 TITLE = "bluemaemo"
 WM_NAME = "bluemaemo"
 WM_CLASS = "bluemaemo"
+
+elementary.init()
+
+elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
+
+#elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
+elementary.c_elementary.finger_size_set(62)
 
 
 #----------------------------------------------------------------------------#
@@ -136,7 +145,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	#ecore.timer_add(1.0,self.main.transition_to,"menu")
+	ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True
@@ -290,8 +299,8 @@ class conf_keys(edje_group):
 	if source == "back":
 		
 		prev = self.main.current_conf_screen + "_conf"
-		prev_source = self.main.current_source + "_icon"
-		local_key = str(self.main.current_source)
+		#prev_source = self.main.current_source + "_icon"
+		#local_key = self.main.current_source
 		
 		if not self.hit:
 			
@@ -303,35 +312,39 @@ class conf_keys(edje_group):
 			print self.main.key_text
 			if self.main.key_text == "space":
 				text_value = self.main.key_mapper.mapper["space_t"]
-				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
-				self.main.save_local_conf(local_key,self.main.key_text)	
+				self.main.current_source.label_set(text_value)
+				#self.main.groups[prev].part_text_set(prev_source,text_value + " ")
+				self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,self.main.key_text)	
 
 			#shift translation	
 			elif self.main.key_text[0] == "s":
 				text_value = self.main.key_mapper.mapper[self.main.key_text]
-				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
-				self.main.save_local_conf(local_key,self.main.key_text)	
+				self.main.current_source.label_set(text_value)
+				self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,self.main.key_text)	
 			elif self.main.key_text[0] == "f" and self.main.key_text[1] == "n":
 				val = str(self.main.key_text) + "+u"
 				text_value = self.main.key_mapper.mapper[val]
-				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
-				self.main.save_local_conf(local_key,self.main.key_text)	
+				self.main.current_source.label_set(text_value)
+				self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,self.main.key_text)	
 
 			elif self.main.key_text[0] == "s" and self.main.key_text[1] == "p":
 				val = str(self.main.key_text)
 				text_value = self.main.key_mapper.mapper[val]
-				self.main.groups[prev].part_text_set(prev_source,text_value + " ")
-				self.main.save_local_conf(local_key,self.main.key_text)					
+				self.main.current_source.label_set(text_value)
+				self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,self.main.key_text)	
 				
 			else:
-				self.main.groups[prev].part_text_set(prev_source,self.main.key_text + " ")
-				self.main.save_local_conf(local_key,self.main.key_text)	
+				self.main.current_source.label_set(self.main.key_text)
+				#self.main.groups[prev].part_text_set(prev_source,self.main.key_text + " ")
+				self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,self.main.key_text)	
 		elif self.main.key_text == "-":
-			self.main.groups[prev].part_text_set(prev_source,"minus")
-			self.main.save_local_conf(local_key,"minus")
+			self.main.current_source.label_set("minus")
+			#self.main.groups[prev].part_text_set(prev_source,"minus")
+			self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,"minus")
 		else:
-			self.main.groups[prev].part_text_set(prev_source,self.main.key_text + " ")
-			self.main.save_local_conf(local_key,self.main.key_text)
+			self.main.current_source.label_set(self.main.key_text)
+			#self.main.groups[prev].part_text_set(prev_source,self.main.key_text + " ")
+			self.main.save_local_conf(self.main.current_label,self.main.current_conf_screen,self.main.key_text)
 		self.hit = False
 		self.main.transition_to(prev)
 
@@ -777,6 +790,7 @@ class GUI(object):
         self.in_transition = False
 	self.current_conf_screen = None
 	self.current_source = None
+	self.current_label = None
 	self.reconnect = True
 	self.error = False
 	self.connected = False
@@ -784,10 +798,10 @@ class GUI(object):
 	self.power = False
 	self.discoverable = False
 	self.pairable = False
-	self.initialize_dbus()
-	self.check_bluez_version()
-	self.check_bt_status()
-	self.check_autoconnect()
+	#self.initialize_dbus()
+	#self.check_bluez_version()
+	#self.check_bt_status()
+	#self.check_autoconnect()
 
     def check_bluez_version(self):
 
@@ -1001,7 +1015,7 @@ class GUI(object):
 	self.auto_addr = self.bluemaemo_conf.addr
 	
 
-    def save_local_conf(self, button_name, key):
+    def save_local_conf(self, button_name, profile, key):
 	
 	if button_name == "previous_key":
 
@@ -1023,48 +1037,48 @@ class GUI(object):
 		self.no_fullscreen_key = key
 		self.bluemaemo_conf.set_option("presentation","no_fullscreen_key",key)
 
-	elif button_name == "play_key":
+	elif button_name == "Play":
 
 		self.play_key = key
 		self.bluemaemo_conf.set_option("multimedia","play_key",key)
 
-	elif button_name == "pause_key":
+	elif button_name == "Pause":
 
 		self.pause_key = key
 		self.bluemaemo_conf.set_option("multimedia","pause_key",key)
 
-	elif button_name == "stop_key":
+	elif button_name == "Stop":
 
 		self.stop_key = key
 		self.bluemaemo_conf.set_option("multimedia","stop_key",key)
 
-	elif button_name == "forward_key":
+	elif button_name == "Forward":
 
 		self.forward_key = key
 		self.bluemaemo_conf.set_option("multimedia","forward_key",key)
 
-	elif button_name == "backward_key":
+	elif button_name == "Backward":
 
 		self.backward_key = key
 		self.bluemaemo_conf.set_option("multimedia","backward_key",key)
 
-	elif button_name == "volume_p_key":
+	elif button_name == "Volume +":
 
 		self.volume_p_key = key
 		self.bluemaemo_conf.set_option("multimedia","volume_p_key",key)
 
-	elif button_name == "volume_m_key":
+	elif button_name == "Volume -":
 
 		self.volume_m_key = key
 		self.bluemaemo_conf.set_option("multimedia","volume_m_key",key)
 	
 	
-	elif button_name == "fullscreen_key_m":
+	elif button_name == "Fullscreen" and profile == "multimedia":
 
 		self.fullscreen_key_m = key
 		self.bluemaemo_conf.set_option("multimedia","fullscreen_key_m",key)
 
-	elif button_name == "no_fullscreen_key_m":
+	elif button_name == "No fullscreen" and profile == "multimedia":
 
 		self.no_fullscreen_key_m = key
 		self.bluemaemo_conf.set_option("multimedia","no_fullscreen_key_m",key)

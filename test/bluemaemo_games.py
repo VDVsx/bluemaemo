@@ -29,6 +29,7 @@ import edje.decorators
 import ecore
 import ecore.x
 import ecore.evas
+from accelerometer import *
 from bluemaemo_edje_group import *
 
 
@@ -38,6 +39,10 @@ class games(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "games")
 	self.part_text_set( "menu_title", "Games" )
+
+	self.accel = Accelerometer()
+
+	
 
     def onShow( self ):
 	self.focus = True
@@ -123,10 +128,15 @@ class games(edje_group):
 
 	elif source == "A":
 
-
-		key = self.main.a_key
-		modif, val = key_dec(self,key)
-		self.main.connection.send_keyboard_event(modif,val)
+		if self.accel.accel_on:
+			 self.accel.accel_on = False
+		else:
+			self.accel.accel_on = True
+			self.accel.read_dir(self.main)
+			
+		#key = self.main.a_key
+		#modif, val = key_dec(self,key)
+		#self.main.connection.send_keyboard_event(modif,val)
 	
 	elif source == "B":
 
