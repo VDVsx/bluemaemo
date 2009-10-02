@@ -26,7 +26,6 @@ import socket
 import sys
 from threading import Thread
 import hidserver
-from bluemaemo_known_devices_conf import *
 #from bluemaemo_bluez_conf import *
 
 class Connect:
@@ -42,9 +41,7 @@ class Connect:
 		self.error = False
 		self.bluez_subsystem = False
 		self.quit_server = False
-		self.known_dev = None
 		self.bluez_version = version
-		self.devices_conf = bluemaemo_known_devices()
 		#self.bluez_conf = Bluez_conf()
 	
 		
@@ -313,12 +310,8 @@ class start_deamon(Thread):
 						client_name = self.bluemaemo.adapter.GetRemoteName(input_status[-1])
 						self.bluemaemo.client_name = str(client_name)
 						self.bluemaemo.client_addr = str(input_status[-1])
-						if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
-							print "device already existent"
-						else:
-							self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
-							self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
 						print "connected to: " + str(client_name)
+
 					except:
 			
 						self.bluemaemo.error = True
@@ -327,8 +320,11 @@ class start_deamon(Thread):
 				else:
 					
 					try:	
-						self.bluemaemo.client_addr = hidserver.get_client_addr()
+						if self.addr==1:
 
+							self.bluemaemo.client_addr = hidserver.get_client_addr()
+						else:
+							self.bluemaemo.client_addr = self.addr
 						try:
 							self.bluemaemo.get_device_info(self.bluemaemo.client_addr)
 
@@ -340,12 +336,6 @@ class start_deamon(Thread):
 						print self.bluemaemo.client_addr
 						if self.bluemaemo.client_addr != None:
 							print "You are connect to the address: " + self.bluemaemo.client_addr
-					
-							if self.bluemaemo.devices_conf.known_devices_list.has_key(self.bluemaemo.client_addr):
-								print "device already existent"
-							else:
-								self.bluemaemo.devices_conf.add_new_dev(self.bluemaemo.client_addr +'='+ self.bluemaemo.client_name + "\n")
-								self.bluemaemo.devices_conf.known_devices_list[self.bluemaemo.client_addr] = self.bluemaemo.client_name
 							print "connected to: " + self.bluemaemo.client_name
 						else:
 

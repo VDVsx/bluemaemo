@@ -38,7 +38,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
 from bluemaemo_edje_group import *
@@ -68,9 +68,9 @@ WM_CLASS = "bluemaemo"
 
 elementary.init()
 
-elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
+#elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
 
-#elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
+elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
 elementary.c_elementary.finger_size_set(62)
 
 
@@ -145,7 +145,7 @@ class main(edje_group):
 	self.part_text_set("title", "BlueMaemo")
 	self.main = main
 	
-	ecore.timer_add(1.0,self.main.transition_to,"menu")
+	#ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True
@@ -799,10 +799,10 @@ class GUI(object):
 	self.power = False
 	self.discoverable = False
 	self.pairable = False
-	#self.initialize_dbus()
-	#self.check_bluez_version()
-	#self.check_bt_status()
-	#self.check_autoconnect()
+	self.initialize_dbus()
+	self.check_bluez_version()
+	self.check_bt_status()
+	self.check_autoconnect()
 
     def check_bluez_version(self):
 
@@ -903,6 +903,20 @@ class GUI(object):
 			print "connect"
 		else:
 			self.adapter_on = True
+
+		cenas = adapter.ListDevices()
+		for item in cenas:
+			
+			device = dbus.Interface(self.bus.get_object("org.bluez", item),"org.bluez.Device")
+			print "2"
+			properties = device.GetProperties()
+			print "3"
+			client_name = properties["Name"]
+			client_addr =  properties["Address"]
+			print client_addr
+			print client_name
+			
+		
 
     def check_first_time(self):
 

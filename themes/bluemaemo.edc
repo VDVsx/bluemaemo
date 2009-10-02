@@ -2512,12 +2512,30 @@ group {
          SKEY("\\", "backslash", KEY_HPOS(8), FIRST_ROW)
          SKEY("|", "vert_bar", KEY_HPOS(9), FIRST_ROW)
 
+#undef INIT_HSPACE
+#define INIT_HSPACE 35	
+
+	 SKEY_FULL("ins", "Insert", KEY_HPOS(0), SECOND_ROW,-8,0)
+         SKEY_FULL("del", "Delete", KEY_HPOS(1), SECOND_ROW, -8,0)
          SKEY("<", "less", KEY_HPOS(2), SECOND_ROW)
          SKEY(">", "greater", KEY_HPOS(3), SECOND_ROW)
          SKEY("[", "open_bracket", KEY_HPOS(4), SECOND_ROW)
          SKEY("]", "close_bracket", KEY_HPOS(5), SECOND_ROW)
          SKEY("{", "open_brace", KEY_HPOS(6), SECOND_ROW)
          SKEY("}", "close_brace", KEY_HPOS(7), SECOND_ROW)
+	 SKEY_FULL("hm", "Home", KEY_HPOS(8), SECOND_ROW,-8,0)
+         
+
+#undef INIT_HSPACE
+#define INIT_HSPACE 105
+
+	 SKEY_FULL("pu", "Next", KEY_HPOS(0), THIRD_ROW, -8,0)
+	 SKEY_FULL("pd", "Prior", KEY_HPOS(1), THIRD_ROW, -8,0)
+	 SKEY_FULL("lf", "Left", KEY_HPOS(2), THIRD_ROW, -8,0)
+	 SKEY_FULL("rg", "Right", KEY_HPOS(3), THIRD_ROW, -8,0)
+	 SKEY_FULL("up", "Up", KEY_HPOS(4), THIRD_ROW, -8,0)
+	 SKEY_FULL("dw", "Down", KEY_HPOS(5), THIRD_ROW, -8,0)
+	 SKEY_FULL("end", "End", KEY_HPOS(6), THIRD_ROW, -8,0)
 
          KEY_SPECIAL(".?12","key-sym", 0, THIRD_ROW, 80)
          KEY_BACKSPACE

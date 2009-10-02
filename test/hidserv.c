@@ -126,7 +126,6 @@ int l2cap_connect(bdaddr_t *src, bdaddr_t *dst, unsigned short psm)
 	return sk;
 }
 
-/*From Bluez Utils 3.2*/
 
 static int l2cap_listen(const bdaddr_t *bdaddr, unsigned short psm, int lm, int backlog)
 {
@@ -164,7 +163,6 @@ static int l2cap_listen(const bdaddr_t *bdaddr, unsigned short psm, int lm, int 
 	return sk;
 }
 
-/*From Bluez Utils 3.2*/
 
 static int l2cap_accept(int sk, bdaddr_t *bdaddr)
 {

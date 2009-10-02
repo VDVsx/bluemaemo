@@ -39,8 +39,32 @@ class presentation(edje_group):
         edje_group.__init__(self, main, "presentation")
         self.part_text_set( "menu_title", "Presentation" )
 
+	self.bx = elementary.Box(self)
+    	self.bx.size_hint_weight_set(1.0, 1.0)
+	self.bx.geometry_set(200,0, 50,50)
+
+	self.hv = elementary.Hover(self)
+    	self.hv.style_set("popout")
+	bt = elementary.Button(self)
+    	bt.label_set("Button")
+    	bt.clicked = (self.hover_bt1_clicked, self.hv)
+	self.bx.pack_end(bt)
+    	bt.show()
+    	self.hv.parent_set(self)
+    	self.hv.target_set(bt)
+    
+    	bt2 = elementary.Button(self)
+    	bt2.label_set("Popup")
+    	self.hv.content_set("bottom", bt2)
+    	bt2.show()
+
+    def hover_bt1_clicked(self,obj, event, data):
+    	data.show()
+
+
     def onShow( self ):
 	self.focus = True
+	self.bx.show()
     
 
     def onHide( self ):
