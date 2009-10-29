@@ -48,6 +48,7 @@ parts {
 
 	TOP_BAR();
 	BACK();
+        TASK_SWITCHER();
 
 	part {								
             name: "mouse_switcher";						
@@ -59,11 +60,11 @@ parts {
 	       visible: 1;						
                rel1 {							
                   relative: 0.0 0.0;					
-                  offset: 31 0;					
+                  offset: 131 0;					
                }							
                rel2 {							
                   relative: 0.0 0.0;					
-                  offset: 130  54;					
+                  offset: 230  54;					
                }							
 	       image { normal: "mouse_pressed.png"; }			                  
                fill { smooth: 0; } 					
@@ -87,11 +88,11 @@ parts {
 	       visible: 1;						
                rel1 {							
                   relative: 0.0 0.0;					
-                  offset: 131 0;					
+                  offset: 231 0;					
                }							
                rel2 {							
                   relative: 0.0 0.0;					
-                  offset: 264  54;					
+                  offset: 363  54;					
                }							
 	       image { normal: "keyboard_released.png"; }			                  
                fill { smooth: 0; } 					
@@ -304,6 +305,7 @@ parts {
 	ACTIVATE("bt_middle");
 	ACTIVATE("keyboard_switcher");
 	ACTIVATE("back");
+	ACTIVATE("task_switcher")
 	TRANSITION();
      }
  

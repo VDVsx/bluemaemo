@@ -34,11 +34,13 @@ import ecore
 import ecore.x
 import ecore.evas
 import elementary
+
 from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-from bluemaemo_server import *
+#from bluemaemo_server import *
+from bluemaemo_main import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
 from bluemaemo_edje_group import *
@@ -57,7 +59,6 @@ from bluemaemo_confirm_conn import *
 from bluemaemo_unable_conn import *
 from bluemaemo_process_conn import *
 from bluemaemo_hw_kb import *
-from test_lista import *
 
 WIDTH = 800
 HEIGHT = 480
@@ -68,9 +69,9 @@ WM_CLASS = "bluemaemo"
 
 elementary.init()
 
-#elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
+elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
 
-elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
+#elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
 elementary.c_elementary.finger_size_set(62)
 
 
@@ -136,52 +137,6 @@ def translate_key(self,keyname, keystring):
 
 	else:
 		return keystring
-
-#----------------------------------------------------------------------------#
-class main(edje_group):
-#----------------------------------------------------------------------------#
-    def __init__(self, main):
-        edje_group.__init__(self, main, "main")
-	self.part_text_set("title", "BlueMaemo")
-	self.main = main
-	
-	#ecore.timer_add(1.0,self.main.transition_to,"menu")
-    
-    def onShow( self ):
-	self.focus = True
-    
-
-    def onHide( self ):
-	self.focus = False
- 
-    @evas.decorators.key_down_callback
-    def key_down_cb( self, event ):
-        key = event.keyname
-
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-
-    @edje.decorators.signal_callback("mouse,clicked,1", "*")
-    def on_edje_signal_button_pressed(self, emission, source):
-	if source == "quit":
-		
-		self.main.on_exit()
-		ecore.main_loop_quit()
-	elif source == "connect":
-		self.main.transition_to("wait_conn")
-	elif source == "reconnect":
-		self.main.transition_to("rec_list")
-		
 
 #----------------------------------------------------------------------------#
 class wait_conn(edje_group):
@@ -776,7 +731,7 @@ class GUI(object):
         self.groups["swallow"] = edje_group(self, "swallow")
         self.evas_canvas.evas_obj.data["swallow"] = self.groups["swallow"]
 
-        for page in ("main","mouse_ui", "menu", "disconnect", "connection_status", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "rec_list","confirm_conn","unable_conn","process_conn","wait_conn"):
+        for page in ("main","mouse_ui", "menu", "disconnect", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "reconnect_list","confirm_conn","unable_conn","process_conn","wait_conn","new_device"):
 		ctor = globals().get( page, None )
 		if ctor:
 			self.groups[page] = ctor( self )
@@ -799,10 +754,11 @@ class GUI(object):
 	self.power = False
 	self.discoverable = False
 	self.pairable = False
-	self.initialize_dbus()
-	self.check_bluez_version()
-	self.check_bt_status()
-	self.check_autoconnect()
+	self.paired_devices = {}
+	#self.initialize_dbus()
+	#self.check_bluez_version()
+	#self.check_bt_status()
+	#self.check_autoconnect()
 
     def check_bluez_version(self):
 
@@ -904,19 +860,15 @@ class GUI(object):
 		else:
 			self.adapter_on = True
 
-		cenas = adapter.ListDevices()
-		for item in cenas:
+		self.paired_devs = adapter.ListDevices()
+		for item in self.paired_devs:
 			
 			device = dbus.Interface(self.bus.get_object("org.bluez", item),"org.bluez.Device")
-			print "2"
 			properties = device.GetProperties()
-			print "3"
 			client_name = properties["Name"]
 			client_addr =  properties["Address"]
-			print client_addr
-			print client_name
-			
-		
+			self.paired_devices[str(client_name)] = str(client_addr)
+		print self.paired_devices
 
     def check_first_time(self):
 
@@ -1139,7 +1091,8 @@ class GUI(object):
 		self.bluemaemo_conf.set_option("games","d_key",key)
 
     def run( self ):
-        ecore.main_loop_begin()
+	
+	ecore.main_loop_begin()
 	
     def shutdown( self ):
         ecore.main_loop_quit()
@@ -1156,13 +1109,7 @@ class GUI(object):
         self.current_group.onShow()
         self.current_group.signal_emit("visible", "")
         self.groups["swallow"].part_swallow("area1", self.current_group)
-	if self.previous_group == self.groups["rec_list"]:
-		self.groups["rec_list"].invisible()
-	else:
-        	self.previous_group.signal_emit("fadeout", "")
-
-	if target == "rec_list":
-		self.groups[target].visible()
+        self.previous_group.signal_emit("fadeout", "")
 
     def transition_finished(self):
         print "finished"

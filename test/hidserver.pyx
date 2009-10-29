@@ -2,7 +2,9 @@ cdef extern from "hidserv.c":
     
     void init_server()
     int send_key_down(int modifiers, int val)
+    int send_multiple_key_down(int modifiers, int val, int val2)
     int send_key_up()
+    int send_multiple_key_up(int val)
     int send_mouse_event(int btn, int mov_x, int mov_y, int whell)
     char* client_address()
     int connection_state()
@@ -21,9 +23,19 @@ def send_key(mod, val):
    n = send_key_down(mod,val)
    return n
 
+def send_multiple_key(mod, val, val2):
+
+   n = send_multiple_key_down(mod,val, val2)
+   return n
+
 def release_key():
 
    n = send_key_up()
+   return n
+
+def release_multiple_key(val):
+
+   n = send_multiple_key_up(val)
    return n
 
 def send_mouse_ev(btn,mov_x,mov_y,whell):

@@ -29,7 +29,9 @@ parts {
 	   TOP_BAR();
 
 	   BACK();
-	   
+
+	   TASK_SWITCHER();
+
 	   BOTTOM_BAR();
 
 	//CONF_ENTRY("Play", 0);
@@ -475,6 +477,7 @@ parts {
 	                               
 	   */                                                    
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
 	//ACTIVATE("play_key");
 	//ACTIVATE("pause_key");
 	//ACTIVATE("stop_key");

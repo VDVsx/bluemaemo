@@ -27,9 +27,10 @@ parts {
 		
 	   BACKGROUND(0);
 	   TOP_BAR();
+	   TASK_SWITCHER();
   	   BACK();
 
-	   BOTTOM_BAR();
+	   BOTTOM_BAR_CENTERED()
 
 	part {
                 name: "label_version";
@@ -225,5 +226,6 @@ parts {
     }
     programs {
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
     	TRANSITION();
     }

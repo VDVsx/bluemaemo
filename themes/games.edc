@@ -28,6 +28,7 @@ parts {
 
            TOP_BAR();
            BACK();
+	   TASK_SWITCHER();
 	   BOTTOM_BAR();
 
 	part {                                                      
@@ -490,65 +491,11 @@ parts {
               	    }					                                           
                 }                                                        
             }
-
-
-					
-									
-	
- /*						
-   part {								
-            name: "conf_keys";						
-            type: IMAGE;						
-            mouse_events: 1;						
-            clip_to: "swallow_clip";   					
-            description {						
-               state: "default" 0.0;					
-	       visible: 1;						
-               rel1 {							
-                  relative: 0.38 0.80;					
-                  offset: 0 0;						
-               }							
-               rel2 {							
-                  relative: 0.52 0.99;					
-                  offset: -1 -1;					
-               }							
-	       image { normal: "button_background.png"; }                  
-               fill { smooth: 0; } 					
-            }								
-	    description {						
-               state: "clicked" 0.0;					
-	       inherit: "default" 0.0;                             	
-	       image { normal: "button_background_active.png"; }                  
-               fill { smooth: 0; } 					
-            }								
-         }								
-									
-	part {								
-            name: "conf_keys_icon";					
-            type: IMAGE;						
-            mouse_events: 0;						
-            clip_to: "swallow_clip";   					
-            description {						
-               state: "default" 0.0;					
-	       visible: 1;						
-               rel1 {							
-                  relative: 0.38 0.80;					
-                  offset: 0 0;						
-               }							
-               rel2 {							
-                  relative: 0.52 0.99;					
-                  offset: -1 -1;					
-               }							
-	       image { normal: "keyboard_icon.png"; }                  	
-               fill { smooth: 0; } 					
-            }								
-         }*/
-	
-        //LOGO();
 	
     }
     programs {
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
 	ACTIVATE("left");
 	ACTIVATE("right");
 	ACTIVATE("up");

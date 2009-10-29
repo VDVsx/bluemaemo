@@ -25,6 +25,11 @@ parts {
 	   SWALLOWCLIP();
 		
 	   BACKGROUND(0);
+           TOP_BAR();
+	   TASK_SWITCHER();
+  	   BACK();
+
+	   BOTTOM_BAR();
 
 	part {								
             name: "error_icon";					
@@ -206,12 +211,12 @@ parts {
             }                                                           
         }                                                               
     }
-        LOGO();
 	QUIT();
 	
     }
     programs {
 	ACTIVATE("quit");
+	ACTIVATE("task_switcher");
 	ACTIVATE("no_option");
 	ACTIVATE("yes_option");
     	TRANSITION();

@@ -105,6 +105,10 @@ class menu(edje_group):
 			self.main.connection.terminate_connection()
 			self.main.on_exit()
 			ecore.main_loop_quit()
+
+		elif source == "task_switcher":
+
+			pass
 			
 		elif source == "mouse":
 			

@@ -25,7 +25,7 @@ parts {
 	   SWALLOWCLIP();
 		
 	   BACKGROUND(0);
-
+	   TASK_SWITCHER();
 	   TOP_BAR();
 
 	   BACK();
@@ -246,6 +246,7 @@ parts {
     programs {
 
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
     	TRANSITION();
 
 	program {

@@ -26,6 +26,10 @@ parts {
 		
 	   BACKGROUND(0);
 	   TOP_BAR();
+	   TASK_SWITCHER();
+  	   BACK();
+
+	   BOTTOM_BAR();
 
 	part {
                 name: "label_waiting";
@@ -100,11 +104,10 @@ parts {
                     }
              }
 	}
-        BOTTOM_BAR();
-	BACK();
 	
     }
     programs {
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
         TRANSITION();
     }

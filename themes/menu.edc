@@ -123,6 +123,7 @@ parts {
         BACKGROUND(0);
 
 	TOP_BAR();
+	TASK_SWITCHER();
 
 	MENU("mouse",-4,85,0);
 	MENU("keyboard",262,352,0);
@@ -143,6 +144,7 @@ parts {
      programs {
 
 	ACTIVATE("quit");
+	ACTIVATE("task_switcher");
 	ACTIVATE("mouse");
 	ACTIVATE("keyboard");
 	ACTIVATE("presentation");

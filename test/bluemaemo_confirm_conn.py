@@ -55,32 +55,20 @@ class confirm_conn(edje_group):
     def key_down_cb( self, event ):
         key = event.keyname
 
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-	elif key == "Escape":
+	if key == "Escape":
 		
-		self.main.transition_to("rec_list")
+		self.main.transition_to("reconnect_list")
 
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
 	if source == "back":
 
-		self.main.transition_to("rec_list")
+		self.main.transition_to("reconnect_list")
 
 	if source == "no_option":
 		
-		self.main.transition_to("rec_list")
+		self.main.transition_to("reconnect_list")
 
 	if source == "yes_option":
 	

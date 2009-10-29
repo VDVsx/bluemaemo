@@ -81,8 +81,8 @@ parts {
 
 	SWALLOWCLIP();
 	BACKGROUND(0);
-
 	TOP_BAR();
+	TASK_SWITCHER();
         BACK();
 	BOTTOM_BAR();
 		
@@ -90,14 +90,13 @@ parts {
 	ICON("next",0.8,0);
 	ICON("fullscreen",0,1.5);
 	ICON("no_fullscreen",0.8,1.5);
-        //LOGO();
-	//CONF_KEYS();
-
+        
 	
     }
     programs {
 
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
 	ACTIVATE("previous");
 	ACTIVATE("next");
 	ACTIVATE("fullscreen");

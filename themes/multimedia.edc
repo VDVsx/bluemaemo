@@ -30,6 +30,8 @@ parts {
 
 	   TOP_BAR();
 
+	   TASK_SWITCHER();
+
 	   BACK();
 		
 	   BOTTOM_BAR();
@@ -387,6 +389,7 @@ parts {
     }
     programs {
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
 	ACTIVATE("fullscreen");
 	ACTIVATE("no_fullscreen");
 	ACTIVATE("previous");

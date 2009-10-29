@@ -272,6 +272,28 @@ int send_key_down(int modifiers, int val)
 	return n;
 }
 
+int send_multiple_key_down(int modifiers, int val, int val2)
+{
+
+        unsigned char th[10];
+	int n;
+	
+	th[0] = 0xa1;
+	th[1] = 0x01;
+	th[2] = modifiers; //1 -left control ,2 - left shift, 4 left alt,5- ctrl+ alt (01 + 04) 8 - left gui, 16 - right control, 32 - right sift, 64 - right alt, 128 - right gui
+	th[3] = 0x00;
+	th[4] = val; // the key code
+	th[5] = val2;
+	th[6] = 0x00;
+	th[7] = 0x00;
+	th[8] = 0x00;
+	th[9] = 0x00;
+	
+	
+	n = write(intr, th, sizeof(th));
+	return n;
+}
+
 int send_key_up()
 {
 
@@ -284,6 +306,27 @@ int send_key_up()
 	th[3] = 0x00;
 	th[4] = 0x00;
 	th[5] = 0x00;
+	th[6] = 0x00;
+	th[7] = 0x00;
+	th[8] = 0x00;
+	th[9] = 0x00;
+	
+	
+	n = write(intr, th, sizeof(th));
+	return n;
+}
+int send_multiple_key_up(int val)
+{
+
+        unsigned char th[10];
+	int n;
+	
+	th[0] = 0xa1;
+	th[1] = 0x01;
+	th[2] = 0x00;
+	th[3] = 0x00;
+	th[4] = 0x00;
+	th[5] = val;
 	th[6] = 0x00;
 	th[7] = 0x00;
 	th[8] = 0x00;

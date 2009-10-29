@@ -85,6 +85,7 @@ parts {
 	   BACKGROUND(0);
 	   TOP_BAR();
   	   BACK();
+	   TASK_SWITCHER();
 	   BOTTOM_BAR();
 
 	
@@ -393,6 +394,7 @@ parts {
 	CLICK_ANIMATION_PROG("scroll_right_icon");
 	CLICK_ANIMATION_PROG("auto_connect_option");
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
 	ACTIVATE("current_device");
     	TRANSITION();
     }

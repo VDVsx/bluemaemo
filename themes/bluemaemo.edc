@@ -31,6 +31,8 @@ images {
   image: "bottom_bar.png" COMP;
   image: "close_released.png" COMP;
   image: "close_pressed.png" COMP;
+  image: "ts_released.png" COMP;
+  image: "ts_pressed.png" COMP;
   image: "back_released.png" COMP;
   image: "back_pressed.png"  COMP;
   image: "keyboard_pressed.png" COMP;
@@ -93,7 +95,7 @@ images {
   image: "conf_icon.png" COMP;
   image: "icon_accept.png" COMP;
   image: "icon_left.png" COMP;
-  image: "maemo-logo.png" COMP;
+  image: "maemo_logo.png" COMP;
   image: "error.png" COMP;
   image: "next_icon.png" COMP;
   image: "previous_icon.png" COMP;
@@ -127,8 +129,10 @@ images {
   image: "listitem.png" COMP;
   image: "selectitem.png" COMP;
   image: "info_icon.png" COMP;
-  image: "reconnect.png" COMP;
-  image: "connect.png" COMP;
+  image: "reconnect_icon.png" COMP;
+  image: "connect_icon.png" COMP;
+  image: "wait_connection_icon.png" COMP;
+  image: "bottom_bar_centered.png" COMP;
 }
 
 styles {
@@ -223,7 +227,7 @@ fonts {
             state: "default" 0.0;					\
             rel1 {							\
                 relative: 0.0 0.0;					\
-                offset: 42 5;						\
+                offset: 131 5;						\
             }								\
             rel2 {							\
                 relative: 1.0 0.1;					\
@@ -254,6 +258,47 @@ fonts {
                   offset:  -1 0;					\
                }							\
 	       image { normal: "bottom_bar.png"; }        		\        
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+
+#define BOTTOM_BAR_CENTERED()						\
+  part {								\
+            name: "bottom_bar";						\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               rel1 {							\
+                  relative: 0.0 1.0;					\
+                  offset: 0 -54 ;					\
+               }							\
+               rel2 {							\
+                  relative: 1.0 1.0;					\
+                  offset:  -1 0;					\
+               }							\
+	       image { normal: "bottom_bar_centered.png"; }        	\        
+               fill { smooth: 0; } 					\
+            }								\
+         }								\
+									\
+    part {								\
+            name: "maemo_logo";						\
+            type: IMAGE;						\
+            mouse_events: 0;						\
+	    clip_to: "swallow_clip";   					\
+            description {						\
+               state: "default" 0.0;					\
+               rel1 {							\
+                  relative: 0.0 1.0;					\
+                  offset: 336 -54 ;					\
+               }							\
+               rel2 {							\
+                  relative: 0.0 1.0;					\
+                  offset:  464 0;					\
+               }							\
+	       image { normal: "maemo_logo.png"; }        		\        
                fill { smooth: 0; } 					\
             }								\
          }								\
@@ -419,186 +464,6 @@ fonts {
         	}                                                        \
             }
 
-#define SCREEN_NUMBER(part_name, xpos)                         	 	 \
-            part {                                                       \
-                name: part_name;                                	 \
-                mouse_events: 1;                                         \
-                type: IMAGE;                                             \
-                clip_to: "swallow_clip";                                 \
-                description {                                            \
-                    state: "default" 0.0;                                \
-                    rel1 {                                               \
-                        relative: 0.4+(xpos*0.13) 0.85;	         	 \
-                        offset: 0 0;                                     \
-                        to: "swallow_clip";                              \
-                    }                                                    \
-                    rel2 {                                               \
-                        relative: 0.5+(xpos*0.13) 0.99;		    	 \
-                        offset: -1 -1;                                   \
-                        to: "swallow_clip";                              \
-                    }                                                    \
-                    image {                                              \
-                        normal: "button_background.png";                 \
-                        border: 27 27 27 27;                             \
-                    }                                                    \
-                }                                                        \
-                description {                                            \
-                    state: "clicked" 0.0;                                \
-                    inherit: "default" 0.0;                              \
-                    image {normal: "button_background_active.png";}      \
-			 fill { smooth: 0; }                             \
-                }                                                        \
-            }    							 \
-	                                                      		 \
-            part {                                                       \
-                name: part_name"_icon";                           	 \
-                mouse_events: 0;                                         \
-                type: TEXT;                                              \
-                clip_to: "swallow_clip";                                 \
-                description {                                            \
-                    state: "default" 0.0;                                \
-                    aspect: 1.0 1.0;                                     \
-                    aspect_preference: BOTH;                             \
-                    rel1 {                                               \
-                        relative: 0.0 0.0;                               \
-                        offset: 0 0;                                     \
-                        to: part_name;                         		 \
-                    }                                                    \
-                    rel2 {                                               \
-                        relative: 1.0 1.0;                               \
-                        offset: -1 -1;                                   \
-                        to: part_name;                         		 \
-                    }                                                    \
-                   text {						 \
-                	font: "Sans";					 \
-                	size: 1;					 \
-                	fit: 1 1;					 \
-			text: part_name;				 \
-                	align: 0.5 0.5;					 \
-              }								 \
-                }                                                        \
-            }
-									
-#define SCREEN_NUMBER_2(part_name, xpos)                         	 \
-            part {                                                       \
-                name: part_name;                                	 \
-                mouse_events: 1;                                         \
-                type: IMAGE;                                             \
-                clip_to: "swallow_clip";                                 \
-                description {                                            \
-                    state: "default" 0.0;                                \
-                    rel1 {                                               \
-                        relative: 0.3+(xpos*0.13) 0.9;	         	 \
-                        offset: 0 0;                                     \
-                        to: "swallow_clip";                              \
-                    }                                                    \
-                    rel2 {                                               \
-                        relative: 0.4+(xpos*0.13) 0.99;		    	 \
-                        offset: -1 -1;                                   \
-                        to: "swallow_clip";                              \
-                    }                                                    \
-                    image {                                              \
-                        normal: "button_background.png";                 \
-                        border: 27 27 27 27;                             \
-                    }                                                    \
-                }                                                        \
-                description {                                            \
-                    state: "clicked" 0.0;                                \
-                    inherit: "default" 0.0;                              \
-                    image {normal: "button_background_active.png";}      \
-			 fill { smooth: 0; }                             \
-                }							 \
-		description {                                            \
-            		state: "invisible" 0.0;                          \
-            		inherit: "default" 0.0;                          \
-            		visible: 0;                                      \
-        	}                                                        \                                                        
-            }    							 \
-	                                                      		 \
-            part {                                                       \
-                name: part_name"_icon";                           	 \
-                mouse_events: 0;                                         \
-                type: TEXT;                                              \
-                clip_to: "swallow_clip";                                 \
-                description {                                            \
-                    state: "default" 0.0;                                \
-                    aspect: 1.0 1.0;                                     \
-                    aspect_preference: BOTH;                             \
-                    rel1 {                                               \
-                        relative: 0.0 0.0;                               \
-                        offset: 0 0;                                     \
-                        to: part_name;                         		 \
-                    }                                                    \
-                    rel2 {                                               \
-                        relative: 1.0 1.0;                               \
-                        offset: -1 -1;                                   \
-                        to: part_name;                         		 \
-                    }                                                    \
-                   text {						 \
-                	font: "Sans";					 \
-                	size: 1;					 \
-                	fit: 1 1;					 \
-			text: part_name;				 \
-                	align: 0.5 0.5;					 \
-              }								 \
-                }							 \
-		description {                                            \
-            		state: "invisible" 0.0;                          \
-            		inherit: "default" 0.0;                          \
-            		visible: 0;                                      \
-        	}                                                        \                                                        
-            }
-					
- 
-#define SCREEN_TEXT(part_label, part_icon,part_comp)			\
-									\
-    part {								\
-                name: part_label"_text";				\
-                type: TEXT;						\
-                mouse_events: 0;					\
-                description {						\
-                    state: "default" 0.0;				\
-                    rel1 {						\
-                        relative: 0.02 0.02;				\
-                        offset: 0 0;					\
-                        						\
-                    }							\
-                    rel2 {						\
-                        relative: part_comp 0.1;			\
-                        offset: -1 -1;					\
-                    }							\
-                    text {						\
-                        font: "Sans";					\
-			text: part_label;				\
-                        size: 1;					\
-                        fit: 1 1;					\
-                        align: 0.0 0.0;					\
-                    }							\
-             }								\
-	}								\									
-									\
-    part {								\
-            name: part_label"_icon";					\
-            type: IMAGE;						\
-            mouse_events: 0;						\
-            clip_to: "swallow_clip";   					\
-            description {						\
-               state: "default" 0.0;					\
-	       visible: 1;						\
-               rel1 {							\
-                  relative: (part_comp +0.02) 0.02;			\
-                  offset: 0 0;						\
-               }							\
-               rel2 {							\
-                  relative: (part_comp + 0.08) 0.09;			\
-                  offset: -1 -1;					\
-               }							\
-	       image { normal:part_icon; }                  		\
-               fill { smooth: 0; } 					\
-            }								\
-         }				
-	
-							
 #define QUIT()								\
     part {								\
             name: "quit";						\
@@ -623,6 +488,34 @@ fonts {
                state: "clicked" 0.0;					\
 	       inherit: "default" 0.0;                              	\
 	       image { normal: "close_pressed.png"; }       		\          
+               fill { smooth: 0; } 					\
+            }								\
+         }			
+
+#define TASK_SWITCHER()							\
+    part {								\
+            name: "task_switcher";					\
+            type: IMAGE;						\
+            mouse_events: 1;						\
+            clip_to: "swallow_clip";					\   
+            description {						\
+               state: "default" 0.0;					\
+	       visible: 1;						\
+               rel1 {							\
+                  relative: 0.0 0.0;					\
+                  offset: 0 0;						\
+               }							\
+               rel2 {							\
+                  relative: 0.0 0.0;					\
+                  offset: 108 54;					\
+               }							\
+	       image { normal: "ts_released.png"; }			\                  
+               fill { smooth: 0; } 					\
+            }								\
+	    description {						\
+               state: "clicked" 0.0;					\
+	       inherit: "default" 0.0;                              	\
+	       image { normal: "ts_pressed.png"; }       		\          
                fill { smooth: 0; } 					\
             }								\
          }								
@@ -950,30 +843,6 @@ fonts {
             }								\
          }														
 
-				
-
-#define LOGO()								\
-									\
-  part {								\
-            name: "bt_left_icon";					\
-            type: IMAGE;						\
-            mouse_events: 0;						\
-            clip_to: "swallow_clip";   					\
-            description {						\
-               state: "default" 0.0;					\
-               visible: 1;						\
-               rel1 {							\
-                  relative: 0.01 0.91;					\
-                  offset: 0 0;						\
-               }							\
-               rel2 {							\
-                  relative: 0.24 0.98;					\
-                  offset: -1 -1;					\
-               }							\
-	      image { normal: "maemo-logo.png"; }                  	\
-              fill { smooth: 0; } 					\
-            }								\
-         }	
 
 #define BACKGROUND(click_value)						\							
   part {								\
@@ -1080,223 +949,6 @@ collections {
    }
 
 
-  group {
-	name: "main";
-
-	parts {
-
-	   SWALLOWCLIP();
-		
-	   BACKGROUND(0);
-	   TOP_BAR()
-
-	part {
-		name: "title_image";
-		type: IMAGE;
-		mouse_events: 0;
-		clip_to: "swallow_clip";
-		description {
-		    state: "default" 0.0;
-		    rel1 {
-		        relative: 0.03 0.12;
-		        offset: 0 0;
-		    }
-		    rel2 {
-		        relative: 0.15 0.29;
-		        offset: -1 -1;
-		    }
-		     image { normal: "connection_icon.png"; }		                  
-               	     fill { smooth: 0; } 	
-		}
-      }
-	part {
-		name: "title";
-		type: TEXT;
-		effect: OUTLINE_SOFT_SHADOW;
-		mouse_events: 0;
-		clip_to: "swallow_clip";
-		description {
-		    state: "default" 0.0;
-		    rel1 {
-		        relative: 0.0 0.1;
-		        offset: 0 0;
-		    }
-		    rel2 {
-		        relative: 1.0 0.3;
-		        offset: -1 -1;
-		    }
-		    text {
-		        font: "Sans";
-		        size: 1;
-		        fit: 1 1;
-		        align: 0.5 0.5;
-		    }
-		}
-      }
-      part {								
-            name: "reconnect";						
-            type: IMAGE;						
-            mouse_events: 1;						
-            clip_to: "swallow_clip";					   
-            description {						
-               state: "default" 0.0;					
-	       visible: 1;						
-               rel1 {							
-                  relative: 0.55 0.40;					
-                  offset: 0 0;					
-               }							
-               rel2 {							
-                  relative: 0.75 0.70;					
-                  offset: -1 -1;					
-               }							
-	       image { normal: "button_background.png"; }		                  
-               fill { smooth: 0; } 					
-            }								
-	    description {						
-               state: "clicked" 0.0;					
-	       inherit: "default" 0.0;                              	
-	       image { normal: "button_background_active.png"; }                  
-               fill { smooth: 0; } 					
-            }								
-         }								
-									
-     part {                                                              
-        name: "reconnect_icon";                                
-        type: IMAGE;                                                                                              
-        mouse_events: 0;                                                
-        clip_to: "swallow_clip";                                        
-        description {                                                   
-            state: "default" 0.0;                                       
-            align: 0.5 0.5;                                             
-            rel1 {                                                      
-                relative: 0.1 0.1;                                      
-                offset: 0 0;                                            
-                to: reconnect;                                 
-            }                                                           
-            rel2 {                                                      
-                relative: 0.9 0.9;                                      
-                offset: -1 -1;                                          
-                to: reconnect;                                 
-            }                                                           
-            image { normal: "reconnect.png"; }		                  
-               fill { smooth: 0; } 	                                             
-        }                                                               
-    }
-
-   part {
-		name: "reconnect_text";
-		type: TEXT;
-		effect: OUTLINE_SOFT_SHADOW;
-		mouse_events: 0;
-		clip_to: "swallow_clip";
-		description {
-		    state: "default" 0.0;
-		    rel1 {
-		        relative: 0.55 0.73;
-		        offset: 0 0;
-		    }
-		    rel2 {
-		        relative: 0.75 0.8;
-		        offset: -1 -1;
-		    }
-		    text {
-		        font: "Sans";
-			text: "Reconnect";
-		        size: 1;
-		        fit: 1 1;
-		        align: 0.5 0.5;
-		    }
-		}
-      }
-   part {								
-            name: "connect";						
-            type: IMAGE;						
-            mouse_events: 1;						
-            clip_to: "swallow_clip";					   
-            description {						
-               state: "default" 0.0;					
-	       visible: 1;						
-               rel1 {							
-                  relative: 0.25 0.40;					
-                  offset: 0 0;					
-               }							
-               rel2 {							
-                  relative: 0.45 0.70;					
-                  offset: -1 -1;					
-               }							
-	       image { normal: "button_background.png"; }		                  
-               fill { smooth: 0; } 					
-            }								
-	    description {						
-               state: "clicked" 0.0;					
-	       inherit: "default" 0.0;                              	
-	       image { normal: "button_background_active.png"; }                  
-               fill { smooth: 0; } 					
-            }								
-         }								
-									
-     part {                                                              
-        name: "connect_icon";                                
-        type: IMAGE;                                                                                             
-        mouse_events: 0;                                                
-        clip_to: "swallow_clip";                                        
-        description {                                                   
-            state: "default" 0.0;                                       
-            align: 0.5 0.5;                                             
-            rel1 {                                                      
-                relative: 0.1 0.1;                                      
-                offset: 0 0;                                            
-                to: connect;                                 
-            }                                                           
-            rel2 {                                                      
-                relative: 0.9 0.9;                                      
-                offset: -1 -1;                                          
-                to: connect;                                 
-            }                                                           
-             image { normal: "connect.png"; }		                  
-               fill { smooth: 0; } 	                                             
-        }                                                               
-    }
-     part {
-		name: "connect_text";
-		type: TEXT;
-		effect: OUTLINE_SOFT_SHADOW;
-		mouse_events: 0;
-		clip_to: "swallow_clip";
-		description {
-		    state: "default" 0.0;
-		    rel1 {
-		        relative: 0.22 0.67;
-		        offset: 0 0;
-		    }
-		    rel2 {
-		        relative: 0.48 0.86;
-		        offset: -1 -1;
-		    }
-		    text {
-		        font: "Sans";
-			text: "Open Connection";
-		        size: 1;
-		        fit: 1 1;
-		        align: 0.5 0.5;
-		    }
-		}
-      }
-
-	BOTTOM_BAR();
-        //LOGO();
-	QUIT();
-	
-    }
-    programs {
-	ACTIVATE("quit");
-	ACTIVATE("reconnect")
-	ACTIVATE("connect")
-        TRANSITION();
-    }
- }
-
-
 group {
       name: "numeric";
 
@@ -1358,9 +1010,6 @@ group {
            mouse_events: 0;                                            \
            description {                                               \
               state: "default" 0.0;                                    \
-              color: 0 0 0 255;                                        \
-              color2: 100 100 100 255;                                 \
-              color3: 100 100 100 255;                                 \
               rel1 {                                                   \
                  to: "key-img-"key_name;                               \
                  relative: 0.0 0.0;                                    \
@@ -1416,7 +1065,6 @@ group {
             mouse_events: 0;                                           \
             description {                                              \
                state: "default" 0.0;                                   \
-               color: 0 0 0 0;                                         \
                rel1 {                                                  \
                   to: "key-img-zoom-"key_name;                         \
                   relative: 0.0 0.0;                                   \
@@ -1437,7 +1085,6 @@ group {
             description {                                              \
                state: "down" 0.0;                                      \
                inherit: "default" 0.0;                                 \
-               color: 0 0 0 255;                                       \
                visible: 1;                                             \
             }                                                          \
          }                                                             \
@@ -2590,8 +2237,8 @@ group {
 		#include "disconnect.edc"
 	 }
 	 group {
-		  name: "connection_status";
-		  #include "connection_status.edc"
+		  name: "main";
+		  #include "main.edc"
 	 }
 	 group {
 		name: "conf_keys";
@@ -2607,8 +2254,8 @@ group {
 		#include "settings.edc"
 	 }
 	 group {
-		name: "rec_list";
-		#include "rec_list.edc"
+		name: "reconnect_list";
+		#include "reconnect_list.edc"
 	 }
          group {
 		name: "confirm_conn";
@@ -2625,4 +2272,8 @@ group {
           group {
 		name: "wait_conn";
 		#include "wait_conn.edc"
+	 }
+	  group {
+		name: "new_device";
+		#include "new_device.edc"
 	 }

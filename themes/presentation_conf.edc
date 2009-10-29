@@ -23,11 +23,11 @@
 parts {
 
 	   SWALLOWCLIP();
-		
+
 	   BACKGROUND(0);
 
 	   TOP_BAR();
-
+	   TASK_SWITCHER();
 	   BACK();
 	   
 	   BOTTOM_BAR();
@@ -37,5 +37,6 @@ parts {
     }
     programs {
 	ACTIVATE("back");
+	ACTIVATE("task_switcher");
     	TRANSITION();
     }

@@ -40,8 +40,13 @@ class games(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "games")
 	self.part_text_set( "menu_title", "Games" )
+	self.key_pressed = False
+	self.current_key= ""
+	self.current_modif= ""
+	self.press = False
+	self.first_time = True
 
-	#self.accel = Accelerometer()
+	self.accel = Read_accelerometer(self)
 
     def onShow( self ):
 	self.focus = True
@@ -103,6 +108,9 @@ class games(edje_group):
 		key = self.main.up_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
 
 	elif source == "down":
 
@@ -110,6 +118,9 @@ class games(edje_group):
 		key = self.main.down_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
 
 	elif source == "left":
 
@@ -124,41 +135,64 @@ class games(edje_group):
 		key = self.main.right_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
 
 	elif source == "A":
 		
-		self.main.transition_to("games_conf")
+		#self.main.transition_to("games_conf")
 
-		#if self.accel.accel_on:
-		#	 self.accel.accel_on = False
-		#else:
-		#	self.accel.accel_on = True
-		#	self.accel.read_dir(self.main)
+		if self.accel.accel_on:
+			 self.accel.accel_on = False
+		else:
+			self.accel.accel_on = True
+			self.accel.read_dir(self.main)
 			
 		#key = self.main.a_key
 		#modif, val = key_dec(self,key)
 		#self.main.connection.send_keyboard_event(modif,val)
+		#self.key_pressed = True
+		#self.current_key= val
+		#self.current_modif= modif
 	
 	elif source == "B":
 
+		if not self.press:
+			self.press = True
+			self.accel.air_mouse(self.main)
+			self.first_time = False
 
-		key = self.main.b_key
-		modif, val = key_dec(self,key)
-		self.main.connection.send_keyboard_event(modif,val)
+		else:
+			self.press = False
+			self.first_time = True
+		#key = self.main.b_key
+		#modif, val = key_dec(self,key)
+		#self.main.connection.send_keyboard_event(modif,val)
+		#self.key_pressed = True
+		#self.current_key= val
+		#self.current_modif= modif
 
 	elif source == "C":
 
 
 		key = self.main.c_key
 		modif, val = key_dec(self,key)
-		self.main.connection.send_keyboard_event(modif,val)
+		self.main.connection.send_keyboard_event('0','40')
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
 
 	elif source == "D":
 
-
-		key = self.main.d_key
-		modif, val = key_dec(self,key)
-		self.main.connection.send_keyboard_event(modif,val)
+		self.main.connection.send_mouse_event(1,0,0,0)
+		self.main.connection.send_mouse_event(0,0,0,0)	
+		#key = self.main.d_key
+		#modif, val = key_dec(self,key)
+		#self.main.connection.send_keyboard_event(modif,val)
+		#self.key_pressed = True
+		#self.current_key= val
+		#self.current_modif= modif
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
@@ -167,6 +201,7 @@ class games(edje_group):
 		self.main.transition_to("menu")	
 	else:
 		self.main.connection.release_keyboard_event()
+		self.key_pressed = False
 	
 
 #----------------------------------------------------------------------------#
