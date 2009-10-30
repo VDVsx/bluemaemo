@@ -72,8 +72,12 @@ class disconnect(edje_group):
 		self.main.on_exit()
 		ecore.main_loop_quit()
 
-	if source == "yes_option":
+	elif source == "yes_option":
 	
 		self.main.connection.terminate_connection()
 		self.main.transition_to("process_conn")
+
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
 		

@@ -91,6 +91,10 @@ class settings(edje_group):
 		self.main.scroll = self.scroll_value
 		self.main.transition_to("menu")
 
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
 	elif source == "fullscreen_option":
 		
 		if self.fscreen_option == "Yes":

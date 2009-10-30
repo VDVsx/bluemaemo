@@ -238,6 +238,10 @@ class mouse_ui(edje_group):
 	
 			self.main.transition_to("menu")
 
+		elif source == "task_switcher":
+
+			self.main.task_switcher()
+
 				
 		else:
 				

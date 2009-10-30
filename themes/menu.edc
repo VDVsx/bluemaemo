@@ -136,7 +136,7 @@ parts {
 
         QUIT();
 
-	BOTTOM_BAR();
+	BOTTOM_BAR_CENTERED()
 	
 	
 	

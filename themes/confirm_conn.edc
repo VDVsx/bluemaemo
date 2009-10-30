@@ -28,7 +28,7 @@ parts {
 	  TOP_BAR();
 	  TASK_SWITCHER();
   	  BACK();
-	  BOTTOM_BAR();
+	  BOTTOM_BAR_CENTERED()
 
 	part {								
             name: "info_icon";					

@@ -108,7 +108,7 @@ class menu(edje_group):
 
 		elif source == "task_switcher":
 
-			pass
+			self.main.task_switcher()
 			
 		elif source == "mouse":
 			

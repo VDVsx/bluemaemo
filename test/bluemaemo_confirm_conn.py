@@ -66,11 +66,15 @@ class confirm_conn(edje_group):
 
 		self.main.transition_to("reconnect_list")
 
-	if source == "no_option":
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
+	elif source == "no_option":
 		
 		self.main.transition_to("reconnect_list")
 
-	if source == "yes_option":
+	elif source == "yes_option":
 	
 		self.main.transition_to("process_conn")
 

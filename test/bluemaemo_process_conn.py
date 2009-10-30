@@ -76,6 +76,10 @@ class process_conn(edje_group):
 
 		ecore.main_loop_quit()
 
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
     
     def process_connection_status(self):
 

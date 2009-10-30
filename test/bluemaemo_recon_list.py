@@ -107,3 +107,7 @@ class reconnect_list(edje_group):
 		
 			self.main.transition_to("main")
 
+		elif source == "task_switcher":
+
+			self.main.task_switcher()
+

@@ -199,10 +199,14 @@ class games(edje_group):
 
 	if source =="back" or source == "conf_keys":
 		self.main.transition_to("menu")	
+	
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
 	else:
 		self.main.connection.release_keyboard_event()
 		self.key_pressed = False
-	
 
 #----------------------------------------------------------------------------#
 class games_conf(edje_group):
@@ -342,6 +346,9 @@ class games_conf(edje_group):
 		self.main.bluemaemo_conf.save_options()
 		self.main.transition_to("games")
 
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
 	
 	else:
 

@@ -122,6 +122,11 @@ class presentation(edje_group):
 
 	if source =="back" or source == "conf_keys":
 		self.main.transition_to("menu")	
+
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
 	else:
 		self.main.connection.release_keyboard_event()
 
@@ -257,6 +262,10 @@ class presentation_conf(edje_group):
 	if source == "back":
 		self.main.bluemaemo_conf.save_options()
 		self.main.transition_to("presentation")	
+	
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
 	else:
 
 		self.main.current_conf_screen = "presentation"

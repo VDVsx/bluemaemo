@@ -139,6 +139,10 @@ class keyboard_ui(edje_group):
 		
 		self.main.transition_to("menu")
 
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
 
     @edje.decorators.signal_callback("mouse_over_key", "*")
     def on_edje_signal_mouse_over_key(self, emission, source):

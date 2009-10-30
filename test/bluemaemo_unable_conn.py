@@ -73,8 +73,12 @@ class unable_conn(edje_group):
 
 		ecore.main_loop_quit()
 
-	if source == "ok_option":
+	elif source == "ok_option":
 
 		self.main.transition_to("main")
+
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
 
 

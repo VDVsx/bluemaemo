@@ -39,7 +39,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_main import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
@@ -69,9 +69,9 @@ WM_CLASS = "bluemaemo"
 
 elementary.init()
 
-elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
+#elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
 
-#elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
+elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
 elementary.c_elementary.finger_size_set(62)
 
 
@@ -184,6 +184,10 @@ class wait_conn(edje_group):
 		self.main.connection.terminate_connection()
 		self.main.transition_to("main")
 
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
+
     def check_connection(self):
 
 		if self.main.connection_processed:
@@ -252,7 +256,12 @@ class conf_keys(edje_group):
 
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
-	if source == "back":
+
+	if source == "task_switcher":
+
+		self.main.task_switcher()
+
+	elif source == "back":
 		
 		prev = self.main.current_conf_screen + "_conf"
 		#prev_source = self.main.current_source + "_icon"
@@ -755,10 +764,10 @@ class GUI(object):
 	self.discoverable = False
 	self.pairable = False
 	self.paired_devices = {}
-	#self.initialize_dbus()
-	#self.check_bluez_version()
-	#self.check_bt_status()
-	#self.check_autoconnect()
+	self.initialize_dbus()
+	self.check_bluez_version()
+	self.check_bt_status()
+	self.check_autoconnect()
 
     def check_bluez_version(self):
 
@@ -892,6 +901,8 @@ class GUI(object):
         except DBusException, e:
             print "could not connect to dbus_object system bus:", e
             return False
+
+
 
     def power_on_bt(self):
 	
@@ -1089,6 +1100,12 @@ class GUI(object):
 
 		self.d_key = key
 		self.bluemaemo_conf.set_option("games","d_key",key)
+
+
+    def task_switcher(self):
+
+	os.system("dbus-send --type=signal --session /com/nokia/hildon_desktop com.nokia.hildon_desktop.exit_app_view")
+        print "app minimized"
 
     def run( self ):
 	

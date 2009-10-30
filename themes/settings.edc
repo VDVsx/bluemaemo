@@ -86,7 +86,7 @@ parts {
 	   TOP_BAR();
   	   BACK();
 	   TASK_SWITCHER();
-	   BOTTOM_BAR();
+	   BOTTOM_BAR_CENTERED()
 
 	
 
