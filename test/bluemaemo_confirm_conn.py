@@ -41,6 +41,7 @@ class confirm_conn(edje_group):
         
 	self.part_text_set("label_connect","Connect to")
 	self.part_text_set("label_name", "")
+	self.part_text_set( "menu_title", "Reconnect" )
 	self.main = main
 
     def onShow( self ):

@@ -41,6 +41,7 @@ class process_conn(edje_group):
         
 	self.part_text_set("label_connect","Trying to connect to")
 	self.part_text_set("label_name", "")
+	self.part_text_set( "menu_title", "Reconnect" )
 	self.main = main
 
     def onShow( self ):
@@ -72,9 +73,10 @@ class process_conn(edje_group):
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
-	if source == "quit":
+	if source == "back":
 
-		ecore.main_loop_quit()
+		self.main.connection.terminate_connection()
+		self.main.transition_to("main")
 
 	elif source == "task_switcher":
 
@@ -94,5 +96,6 @@ class process_conn(edje_group):
 		
 		else:
 			self.part_text_set("label_connect","Connected to")
+			self.part_text_set( "menu_title", "Connection Status" )
 			ecore.timer_add(3.0,self.main.transition_to,"menu")
 	

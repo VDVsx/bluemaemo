@@ -143,7 +143,7 @@ class wait_conn(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "wait_conn")
-
+	self.part_text_set("menu_title", "Wait for connection" )
 	self.part_text_set("label_waiting", "Waiting for connection ... ")
 	self.main = main
 	#ecore.timer_add(7.0,self.main.transition_to,"menu")
@@ -210,6 +210,7 @@ class wait_conn(edje_group):
 		else:
 			
 			self.part_text_set("label_waiting", "")
+			self.part_text_set( "menu_title", "Connection Status" )
 			self.part_text_set("label_connect_to", "Connected to: ")
 			self.part_text_set("label_client", self.main.connection.client_name)
 			self.main.current_adapter_name = self.main.connection.client_name

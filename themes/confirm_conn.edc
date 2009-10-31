@@ -29,7 +29,7 @@ parts {
 	  TASK_SWITCHER();
   	  BACK();
 	  BOTTOM_BAR_CENTERED()
-
+/*
 	part {								
             name: "info_icon";					
             type: IMAGE;						
@@ -49,7 +49,7 @@ parts {
 	      image { normal: "info_icon.png"; }                  	
               fill { smooth: 0; } 					
             }								
-         }				
+         }	*/			
 
 	part {
                 name: "label_name";

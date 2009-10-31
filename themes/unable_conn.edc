@@ -29,7 +29,7 @@ parts {
 	   TASK_SWITCHER();
   	   BACK();
 
-	   BOTTOM_BAR();
+	   BOTTOM_BAR_CENTERED();
 
 	part {								
             name: "error_icon";					

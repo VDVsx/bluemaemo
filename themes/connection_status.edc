@@ -25,7 +25,11 @@ parts {
 	   SWALLOWCLIP();
 		
 	   BACKGROUND(0);
-	   BACK();
+	   TOP_BAR();
+	   TASK_SWITCHER();
+  	   BACK();
+
+	   BOTTOM_BAR_CENTERED();
 	
 	//SCREEN_TEXT("Connection","connection_icon.png",0.25);
 	part {
@@ -128,5 +132,6 @@ parts {
     }
     programs {
 	ACTIVATE("back");
+	ACTIVATE("task_switcher")
     	TRANSITION();
     }

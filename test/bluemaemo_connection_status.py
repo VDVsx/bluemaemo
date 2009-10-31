@@ -36,6 +36,7 @@ class connection_status(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "connection_status")
+	self.part_text_set( "menu_title", "Connection Status" )
         
     def onShow( self ):
 	self.focus = True
@@ -68,4 +69,8 @@ class connection_status(edje_group):
 	if source == "back":
 		
 		self.main.transition_to("menu")
+
+	elif source == "task_switcher":
+
+		self.main.task_switcher()
 

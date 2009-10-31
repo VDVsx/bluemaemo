@@ -292,11 +292,11 @@ fonts {
                state: "default" 0.0;					\
                rel1 {							\
                   relative: 0.0 1.0;					\
-                  offset: 336 -54 ;					\
+                  offset: 333 -54 ;					\
                }							\
                rel2 {							\
                   relative: 0.0 1.0;					\
-                  offset:  464 0;					\
+                  offset:  468 0;					\
                }							\
 	       image { normal: "maemo_logo.png"; }        		\        
                fill { smooth: 0; } 					\

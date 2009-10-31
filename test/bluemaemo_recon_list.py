@@ -47,7 +47,6 @@ class reconnect_list(edje_group):
 					
 		self.constructed = False
 		self.labels = {}
-		print "Reco"
 
 	def list_item_cb(self,obj, event, data):
 		self.obj = obj
@@ -60,9 +59,7 @@ class reconnect_list(edje_group):
 			
 	def onShow( self ):
 		self.focus = True
-		#label = self.main.paired_devices.keys()
-		#self.labels = {"Blue-Z":"123456","VDV-12456787":"5543222","N900":"4535235","N810":"fsfewf"}
-		print self.main.paired_devices
+		#print self.main.paired_devices
 
 		if self.constructed:
 			self.li.go()
