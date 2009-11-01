@@ -85,6 +85,7 @@ parts {
 	TASK_SWITCHER();
         BACK();
 	BOTTOM_BAR();
+	SETTINGS();
 		
 	ICON("previous",0,0);
 	ICON("next",0.8,0);
@@ -97,6 +98,7 @@ parts {
 
 	ACTIVATE("back");
 	ACTIVATE("task_switcher");
+	ACTIVATE("settings");
 	ACTIVATE("previous");
 	ACTIVATE("next");
 	ACTIVATE("fullscreen");

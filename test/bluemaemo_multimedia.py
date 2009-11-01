@@ -87,12 +87,8 @@ class multimedia(edje_group):
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 	
-	if source == "conf_keys":
-		
-		self.main.transition_to("multimedia_conf")
-
-
-	elif source == "play":
+	
+	if source == "play":
 
 		key = self.main.play_key
 		modif, val = key_dec(self,key)
@@ -142,16 +138,20 @@ class multimedia(edje_group):
 
 	elif source == "no_fullscreen":
 
-		self.main.transition_to("multimedia_conf")
-		#key = self.main.no_fullscreen_key_m
-		#modif, val = key_dec(self,key)
-		#self.main.connection.send_keyboard_event(modif,val)
+
+		key = self.main.no_fullscreen_key_m
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
 
-	if source =="back" or source == "conf_keys":
+	if source =="back":
 		self.main.transition_to("menu")	
+
+	elif source == "settings":
+
+		self.main.transition_to("multimedia_conf")
 
 	elif source == "task_switcher":
 

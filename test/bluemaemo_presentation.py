@@ -100,10 +100,9 @@ class presentation(edje_group):
 
 	elif source == "next":
 
-		self.main.transition_to("presentation_conf")
-		#key = self.main.next_key
-		#modif, val = key_dec(self,key)
-		#self.main.connection.send_keyboard_event(modif,val)
+		key = self.main.next_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
 
 	elif source == "fullscreen":
 
@@ -120,12 +119,17 @@ class presentation(edje_group):
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
 
-	if source =="back" or source == "conf_keys":
+	if source =="back":
+
 		self.main.transition_to("menu")	
 
 	elif source == "task_switcher":
 
 		self.main.task_switcher()
+
+	elif source == "settings":
+
+		self.main.transition_to("presentation_conf")
 
 	else:
 		self.main.connection.release_keyboard_event()

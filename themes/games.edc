@@ -30,6 +30,7 @@ parts {
            BACK();
 	   TASK_SWITCHER();
 	   BOTTOM_BAR();
+	   SETTINGS();
 
 	part {                                                      
                 name: "up";                                	 
@@ -496,6 +497,7 @@ parts {
     programs {
 	ACTIVATE("back");
 	ACTIVATE("task_switcher");
+	ACTIVATE("settings");
 	ACTIVATE("left");
 	ACTIVATE("right");
 	ACTIVATE("up");

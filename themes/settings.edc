@@ -90,7 +90,7 @@ parts {
 
 	
 
-	CLICK_ANIMATION("fullscreen_option",0.13,0.32,0.20,0.27);
+	/*CLICK_ANIMATION("fullscreen_option",0.13,0.32,0.20,0.27);
 	
 	part {
 		
@@ -141,7 +141,7 @@ parts {
                         align: 0.0 0.0;
                     }
              }
-	}
+	}*/
 
 	CLICK_ANIMATION("scroll_right_icon",0.30,0.49,0.37,0.44);
 	CLICK_ANIMATION("scroll_left_icon",0.30,0.49,0.37,0.44);
@@ -389,7 +389,7 @@ parts {
 		target: "current_device";  
 	}
 
-	CLICK_ANIMATION_PROG("fullscreen_option");
+	//CLICK_ANIMATION_PROG("fullscreen_option");
 	CLICK_ANIMATION_PROG("scroll_left_icon"); 
 	CLICK_ANIMATION_PROG("scroll_right_icon");
 	CLICK_ANIMATION_PROG("auto_connect_option");

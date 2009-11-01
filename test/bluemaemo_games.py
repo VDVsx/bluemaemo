@@ -197,12 +197,16 @@ class games(edje_group):
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
 
-	if source =="back" or source == "conf_keys":
+	if source =="back":
 		self.main.transition_to("menu")	
 	
 	elif source == "task_switcher":
 
 		self.main.task_switcher()
+
+	elif source == "settings":
+
+		self.main.transition_to("games_conf")
 
 	else:
 		self.main.connection.release_keyboard_event()
