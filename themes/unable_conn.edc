@@ -31,8 +31,10 @@ parts {
 
 	   BOTTOM_BAR_CENTERED();
 
-	part {								
-            name: "error_icon";					
+	
+	part {
+
+	    name: "trying_dialog";					
             type: IMAGE;						
             mouse_events: 0;						
             clip_to: "swallow_clip";   					
@@ -40,69 +42,19 @@ parts {
                state: "default" 0.0;					
                visible: 1;						
                rel1 {							
-                  relative: 0.42 0.05;					
-                  offset: 0 0;					
+                  relative: 0.0 0.0;					
+                  offset: 100 145;					
                }							
                rel2 {							
-                  relative: 0.55 0.24;					
-                  offset: -1 -1;					
+                  relative: 0.0 0.0;					
+                  offset: 700 278;					
                }							
-	      image { normal: "error.png"; }                  	
+	      image { normal: "unable_dialog.png"; }                  	
               fill { smooth: 0; } 					
             }								
-         }				
+         }	
 
-	part {
-                name: "label_name";
-                type: TEXT;
-		effect: SOFT_OUTLINE;
-                mouse_events: 0;
-                description {
-                    state: "default" 0.0;
-                    rel1 {
-                        relative: 0.32 0.24;
-                        offset: 0 0;
-                        
-                    }
-                    rel2 {
-                        relative: 0.73 0.84;
-                        offset: -1 -1;
-                    }
-                    text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.50 0.50;
-                    }
-             }
-	}
-
-	part {
-                name: "label_connect";
-                type: TEXT;
-                mouse_events: 0;
-                description {
-                    state: "default" 0.0;
-                    rel1 {
-                        relative: 0.20 0.18;
-                        offset: 0 0;
-                        
-                    }
-                    rel2 {
-                        relative: 0.8 0.68;
-                        offset: -1 -1;
-                    }
-                    text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.27 0.27;
-                    }
-             }
-	}
-	
-
-   part {								
+	part {								
             name: "ok_option";						
             type: IMAGE;						
             mouse_events: 1;						
@@ -111,51 +63,73 @@ parts {
                state: "default" 0.0;					
 	       visible: 1;						
                rel1 {							
-                  relative: 0.40 0.65;					
-                  offset: 0 0;					
+                  relative: 0.0 0.0;					
+                  offset: 99 254;					
                }							
                rel2 {							
-                  relative: 0.60 0.88;					
-                  offset: -1 -1;					
+                  relative: 0.0 0.0;					
+                  offset: 700 336;					
                }							
-	       image { normal: "button_background.png"; }		                  
+	       image { normal: "unable_released.png"; }		                  
                fill { smooth: 0; } 					
             }								
 	    description {						
                state: "clicked" 0.0;					
 	       inherit: "default" 0.0;                              	
-	       image { normal: "button_background_active.png"; }                  
+	       image { normal: "unable_pressed.png"; }                  
                fill { smooth: 0; } 					
             }								
-         }								
-									
-     part {                                                              
-        name: "ok_option_icon";                                
-        type: TEXT;                                                     
-        effect: SOFT_OUTLINE;                                           
-        mouse_events: 0;                                                
-        clip_to: "swallow_clip";                                        
-        description {                                                   
-            state: "default" 0.0;                                       
-            align: 0.5 0.5;                                             
-            rel1 {                                                      
-                relative: 0.1 0.1;                                      
-                offset: 0 0;                                            
-                to: ok_option;                                 
-            }                                                           
-            rel2 {                                                      
-                relative: 0.9 0.9;                                      
-                offset: -1 -1;                                          
-                to: ok_option;                                 
-            }                                                           
-            text {                                                      
-                font: "Sans";                                           
-                text: "Ok";                                            
-                size: 1;                                                
-                fit: 1 1;                                               
-            }                                                           
-        }                                                               
-    }
+         }
+
+	part {
+                name: "label_name";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+		    color: 0 146 249 255;
+                    rel1 {
+                        relative: 0.0 0.0;
+                        offset: 100 223;
+                        
+                    }
+                    rel2 {
+                        relative: 0.0 0.0;
+                        offset: 700 258;
+                    }
+                    text {
+                        font: "Nokia Sans";
+			size: 25;
+                        align: 0.5 0.5;
+                    }
+             }
+	}		
+
+
+	part {
+                name: "label_name_shadow";
+                type: TEXT;
+                mouse_events: 0;
+                description {
+                    state: "default" 0.0;
+		    color: 0 146 249 255;
+                    rel1 {
+                        relative: 0.0 0.0;
+                        offset: 100 222;
+                        
+                    }
+                    rel2 {
+                        relative: 0.0 0.0;
+                        offset: 700 257;
+                    }
+                    text {
+                        font: "Nokia Sans";
+			size: 25;
+                        align: 0.5 0.5;
+                    }
+             }
+	}														
+    
 	QUIT();
 	
     }

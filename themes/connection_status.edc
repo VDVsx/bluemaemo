@@ -32,53 +32,7 @@ parts {
 	   BOTTOM_BAR_CENTERED();
 	
 
-	part {
-                name: "label_connect_to";
-                type: TEXT;
-                mouse_events: 0;
-                description {
-                    state: "default" 0.0;
-                    rel1 {
-                        relative: 0.2 0.1;
-                        offset: 0 0;
-                        
-                    }
-                    rel2 {
-                        relative: 0.8 0.9;
-                        offset: -1 -1;
-                    }
-                    text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.1 0.2;
-                    }
-             }
-	}
-	part {
-                name: "label_not_connect";
-                type: TEXT;
-                mouse_events: 0;
-                description {
-                    state: "default" 0.0;
-                    rel1 {
-                        relative: 0.2 0.1;
-                        offset: 0 0;
-                        
-                    }
-                    rel2 {
-                        relative: 0.8 0.9;
-                        offset: -1 -1;
-                    }
-                    text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.1 0.2;
-                    }
-             }
-	}
-
+	
 	part {
                 name: "label_client";
                 type: TEXT;
@@ -100,30 +54,6 @@ parts {
                         size: 1;
                         fit: 1 1;
                         align: 0.3 0.5;
-                    }
-             }
-	}
-	part {
-                name: "label_addr";
-                type: TEXT;
-		effect: SOFT_OUTLINE;
-                mouse_events: 0;
-                description {
-                    state: "default" 0.0;
-                    rel1 {
-                        relative: 0.25 0.1;
-                        offset: 0 0;
-                        
-                    }
-                    rel2 {
-                        relative: 0.75 0.9;
-                        offset: -1 -1;
-                    }
-                    text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.0 0.7;
                     }
              }
 	}

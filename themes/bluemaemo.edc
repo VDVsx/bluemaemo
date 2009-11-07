@@ -143,6 +143,9 @@ images {
   image: "trying_dialog.png" COMP;
   image: "trying_pressed.png" COMP;
   image: "trying_released.png" COMP;
+  image: "unable_dialog.png" COMP;
+  image: "unable_pressed.png" COMP;
+  image: "unable_released.png" COMP;
 
 }
 
