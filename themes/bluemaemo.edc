@@ -160,6 +160,8 @@ fonts {
    font: "VeraBd.ttf" "Font Item";
    font: "NS Wide Regular V3.ttf" "Nokia Sans Wide";
    font: "NS Wide Bold V3.ttf" "Nokia Sans Wide Bold";
+   font: "NOSNR.TTF" "Nokia Sans";
+   font: "NOSNB.TTF" "Nokia Sans Bold";
 }
 
 #define BUTTON_BOTTOM_HEIGHT 0.12;
@@ -245,7 +247,7 @@ fonts {
                 offset: -1 -1;						\
             }								\
             text {							\
-                font: "Nokia Sans Wide";				\
+                font: "Nokia Sans";				\
                 size: 26;						\
 		align: 0 0.5;						\
             }								\

@@ -54,7 +54,7 @@ parts {
          }	
 
 	part {								
-            name: "trying_cancel";						
+            name: "cancel";						
             type: IMAGE;						
             mouse_events: 1;						
             clip_to: "swallow_clip";					   
@@ -69,73 +69,75 @@ parts {
                   relative: 0.0 0.0;					
                   offset: 700 336;					
                }							
-	       image { normal: "trying_released.png.png"; }		                  
+	       image { normal: "trying_released.png"; }		                  
                fill { smooth: 0; } 					
             }								
 	    description {						
                state: "clicked" 0.0;					
 	       inherit: "default" 0.0;                              	
-	       image { normal: "trying_pressed.png.png"; }                  
+	       image { normal: "trying_pressed.png"; }                  
                fill { smooth: 0; } 					
             }								
-         }	
+         }
 
-	//add cancel here and in the py
-
-	/*
 	part {
                 name: "label_name";
                 type: TEXT;
-		effect: SOFT_OUTLINE;
                 mouse_events: 0;
                 description {
                     state: "default" 0.0;
+		    color: 0 146 249 255;
                     rel1 {
-                        relative: 0.25 0.24;
-                        offset: 0 0;
+                        relative: 0.0 0.0;
+                        offset: 100 223;
                         
                     }
                     rel2 {
-                        relative: 0.75 0.84;
-                        offset: -1 -1;
+                        relative: 0.0 0.0;
+                        offset: 700 258;
                     }
                     text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.50 0.50;
+                        font: "Nokia Sans";
+			size: 25;
+                        align: 0.5 0.5;
                     }
              }
-	}
+	}		
+
 
 	part {
-                name: "label_connect";
+                name: "label_name_shadow";
                 type: TEXT;
                 mouse_events: 0;
                 description {
                     state: "default" 0.0;
+		    color: 0 146 249 255;
                     rel1 {
-                        relative: 0.20 0.18;
-                        offset: 0 0;
+                        relative: 0.0 0.0;
+                        offset: 100 222;
                         
                     }
                     rel2 {
-                        relative: 0.8 0.68;
-                        offset: -1 -1;
+                        relative: 0.0 0.0;
+                        offset: 700 257;
                     }
                     text {
-                        font: "Sans";
-                        size: 1;
-                        fit: 1 1;
-                        align: 0.27 0.27;
+                        font: "Nokia Sans";
+			size: 25;
+                        align: 0.5 0.5;
                     }
              }
-	}*/
+	}						
+
+	//add cancel  in the py
+
+
 	
     }
     programs {
 	ACTIVATE("back");
 	ACTIVATE("task_switcher");
+	ACTIVATE("cancel")
     	TRANSITION();
     }
 

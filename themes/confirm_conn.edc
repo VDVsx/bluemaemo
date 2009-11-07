@@ -125,8 +125,8 @@ parts {
                         offset: 700 258;
                     }
                     text {
-                        font: "Nokia Sans Wide";
-			size: 26;
+                        font: "Nokia Sans";
+			size: 25;
                         align: 0.5 0.5;
                     }
              }
@@ -150,8 +150,8 @@ parts {
                         offset: 700 257;
                     }
                     text {
-                        font: "Nokia Sans Wide";
-			size: 26;
+                        font: "Nokia Sans";
+			size: 25;
                         align: 0.5 0.5;
                     }
              }

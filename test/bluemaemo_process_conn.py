@@ -39,7 +39,6 @@ class process_conn(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "process_conn")
         
-	self.part_text_set("label_connect","Trying to connect to")
 	self.part_text_set("label_name", "")
 	self.part_text_set( "menu_title", "Reconnect" )
 	self.main = main
@@ -47,6 +46,7 @@ class process_conn(edje_group):
     def onShow( self ):
 	self.focus = True
 	self.part_text_set("label_name", self.main.current_adapter_name)
+	self.part_text_set("label_name_shadow", self.main.current_adapter_name)
 	ecore.timer_add(1.0,self.main.initialize_bluemaemo_server,self.main.current_adapter_addr, self.main.current_adapter_name)
 	ecore.timer_add(4.0,self.main.check_connection)
 	self.process_connection_status()
