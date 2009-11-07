@@ -39,12 +39,13 @@ class confirm_conn(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "confirm_conn")
         
-	self.part_text_set("label_connect","Connect to")
 	self.part_text_set("label_name", "")
+	self.part_text_set("label_name_shadow", "")
 	self.part_text_set( "menu_title", "Reconnect" )
 	self.main = main
 
     def onShow( self ):
+	self.part_text_set("label_name", self.main.current_adapter_name + " ?")
 	self.part_text_set("label_name", self.main.current_adapter_name + " ?")
 	self.focus = True
     

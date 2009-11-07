@@ -29,9 +29,11 @@ parts {
   	   BACK();
 
 	   BOTTOM_BAR_CENTERED()
-/*
-	part {								
-            name: "info_icon";					
+
+
+	part {
+
+	    name: "trying_dialog";					
             type: IMAGE;						
             mouse_events: 0;						
             clip_to: "swallow_clip";   					
@@ -39,18 +41,48 @@ parts {
                state: "default" 0.0;					
                visible: 1;						
                rel1 {							
-                  relative: 0.42 0.05;					
-                  offset: 0 0;					
+                  relative: 0.0 0.0;					
+                  offset: 100 145;					
                }							
                rel2 {							
-                  relative: 0.55 0.24;					
-                  offset: -1 -1;					
+                  relative: 0.0 0.0;					
+                  offset: 700 278;					
                }							
-	      image { normal: "info_icon.png"; }                  	
+	      image { normal: "trying_dialog.png"; }                  	
               fill { smooth: 0; } 					
             }								
-         }	*/			
+         }	
 
+	part {								
+            name: "trying_cancel";						
+            type: IMAGE;						
+            mouse_events: 1;						
+            clip_to: "swallow_clip";					   
+            description {						
+               state: "default" 0.0;					
+	       visible: 1;						
+               rel1 {							
+                  relative: 0.0 0.0;					
+                  offset: 99 254;					
+               }							
+               rel2 {							
+                  relative: 0.0 0.0;					
+                  offset: 700 336;					
+               }							
+	       image { normal: "trying_released.png.png"; }		                  
+               fill { smooth: 0; } 					
+            }								
+	    description {						
+               state: "clicked" 0.0;					
+	       inherit: "default" 0.0;                              	
+	       image { normal: "trying_pressed.png.png"; }                  
+               fill { smooth: 0; } 					
+            }								
+         }	
+
+	//add cancel here and in the py
+
+	/*
 	part {
                 name: "label_name";
                 type: TEXT;
@@ -98,7 +130,7 @@ parts {
                         align: 0.27 0.27;
                     }
              }
-	}
+	}*/
 	
     }
     programs {

@@ -135,6 +135,15 @@ images {
   image: "connect_icon.png" COMP;
   image: "wait_connection_icon.png" COMP;
   image: "bottom_bar_centered.png" COMP;
+  image: "connect_to_dialog.png" COMP;
+  image: "connect_to_no.png" COMP;
+  image: "connect_to_no_released.png" COMP;
+  image: "connect_to_yes.png" COMP;
+  image: "connect_to_yes_released.png" COMP;
+  image: "trying_dialog.png" COMP;
+  image: "trying_pressed.png" COMP;
+  image: "trying_released.png" COMP;
+
 }
 
 styles {
@@ -276,7 +285,7 @@ fonts {
 	       visible: 1;						\
                rel1 {							\
                   relative: 0.0 1.0;					\
-                  offset: 640 -54;					\
+                  offset: 642 -54;					\
                }							\
                rel2 {							\
                   relative: 0.0 1.0;					\
