@@ -39,6 +39,21 @@ class about(edje_group):
     def __init__(self, main):
         edje_group.__init__(self, main, "about")
 	self.part_text_set( "menu_title", "About" )
+	self.part_text_set("label_version","BlueMaemo v.0.3.8")
+	self.part_text_set("label_version_shadow","BlueMaemo v.0.3.8")
+	self.part_text_set("label_programming","Programming:")
+	self.part_text_set("label_programming_shadow","Programming:")
+	self.part_text_set("label_visual","Visual design:")
+	self.part_text_set("label_visual_shadow","Visual design:")
+	self.part_text_set("label_programming_name","Valerio Valerio")
+	self.part_text_set("label_programming_name_shadow","Valerio Valerio")
+	self.part_text_set("label_visual_name","Andrew Zhilin")
+	self.part_text_set("label_visual_name_shadow","Andrew Zhilin")
+	self.part_text_set("label_programming_email","vdv100@gmail.com")
+	#self.part_text_set("label_programming_email_shadow","vdv100@gmail.com")
+	self.part_text_set("label_visual_email","drew.zhilin@gmail.com")
+	#.part_text_set("label_visual_email_shadow","drew.zhilin@gmail.com")
+	
 
     def onShow( self ):
 	self.focus = True

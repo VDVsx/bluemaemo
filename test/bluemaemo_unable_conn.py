@@ -42,10 +42,8 @@ class unable_conn(edje_group):
 
     def onShow( self ):
 	self.focus = True
-	#self.part_text_set("label_name", self.main.current_adapter_name)
-	#self.part_text_set("label_name_shadow", self.main.current_adapter_name)
-	self.part_text_set("label_name","Nokia N1000")
-	self.part_text_set("label_name_shadow","Nokia N1000")
+	self.part_text_set("label_name", self.main.current_adapter_name)
+	self.part_text_set("label_name_shadow", self.main.current_adapter_name)
 	ecore.timer_add(6.0,self.main.transition_to,"main")
     
 

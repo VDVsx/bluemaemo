@@ -44,7 +44,7 @@ class main(edje_group):
 	self.part_text_set( "reconnect_text", "Reconnect")
 	self.main = main
 	
-	ecore.timer_add(1.0,self.main.transition_to,"unable_conn")
+	ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True

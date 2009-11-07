@@ -144,12 +144,6 @@ class menu(edje_group):
 
 		elif source == "about":
 			
-			self.main.groups["about"].part_text_set("label_version","BlueMaemo v0.3")
-			self.main.groups["about"].part_text_set("label_developed","Developed by:")
-			self.main.groups["about"].part_text_set("label_name","Valerio Valerio")
-			self.main.groups["about"].part_text_set("label_email","<vdv100@gmail.com>")
-
-			
 			self.main.transition_to("about")	
 
 		elif source == "conf":
