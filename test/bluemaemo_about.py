@@ -50,9 +50,9 @@ class about(edje_group):
 	self.part_text_set("label_visual_name","Andrew Zhilin")
 	self.part_text_set("label_visual_name_shadow","Andrew Zhilin")
 	self.part_text_set("label_programming_email","vdv100@gmail.com")
-	#self.part_text_set("label_programming_email_shadow","vdv100@gmail.com")
+	self.part_text_set("label_programming_email_shadow","vdv100@gmail.com")
 	self.part_text_set("label_visual_email","drew.zhilin@gmail.com")
-	#.part_text_set("label_visual_email_shadow","drew.zhilin@gmail.com")
+	self.part_text_set("label_visual_email_shadow","drew.zhilin@gmail.com")
 	
 
     def onShow( self ):

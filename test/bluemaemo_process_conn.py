@@ -73,7 +73,7 @@ class process_conn(edje_group):
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 
-	if source == "back":
+	if source == "back" or source == "cancel":
 
 		self.main.connection.terminate_connection()
 		self.main.transition_to("main")

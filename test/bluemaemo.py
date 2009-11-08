@@ -69,11 +69,16 @@ WM_CLASS = "bluemaemo"
 
 elementary.init()
 
-elementary.c_elementary.theme_overlay_add("/home/valerio/bluemaemo/trunk/test/elementary_theme.edj")
+elementary_paths = "/home/valerio/bluemaemo/trunk/test/elementary_theme.edj  /root/test/elementary_theme.edj".split()
 
-#elementary.c_elementary.theme_overlay_add("/root/test/elementary_theme.edj")
+for i in elementary_paths:
+    if os.path.exists( i ):
+       elementary.c_elementary.theme_overlay_add(i)
+       break
+else:
+    raise Exception( "elementary_theme.edj not found. looked in %s" % elementary_paths )
+
 elementary.c_elementary.finger_size_set(62)
-
 
 #----------------------------------------------------------------------------#
 def translate_key(self,keyname, keystring):

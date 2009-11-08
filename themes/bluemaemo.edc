@@ -146,6 +146,19 @@ images {
   image: "unable_dialog.png" COMP;
   image: "unable_pressed.png" COMP;
   image: "unable_released.png" COMP;
+  image: "games_arrow_left.png" COMP;
+  image: "games_arrow_left_pressed.png" COMP;
+  image: "games_arrow_up.png" COMP;
+  image: "games_arrow_up_pressed.png" COMP;
+  image: "games_arrow_down.png" COMP;
+  image: "games_arrow_down_pressed.png" COMP;
+  image: "games_arrow_right.png" COMP;
+  image: "games_arrow_right_pressed.png" COMP;
+  image: "games_button_released.png" COMP;
+  image: "games_button_pressed.png" COMP;
+  image: "start_released.png" COMP;
+  image: "start_pressed.png" COMP;
+
 
 }
 

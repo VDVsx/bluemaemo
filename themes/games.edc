@@ -36,462 +36,314 @@ parts {
                 name: "up";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.1 0.20;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 159 80;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.24 0.37;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 244 206;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image { normal: "games_arrow_up.png"; }                                             
+                    fill { smooth: 0; }                                        
+                                                                        
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_arrow_up_pressed.png";}   
+		    fill { smooth: 0; }   
+                           
                 }                                                        
             }    							
-	                                                      		
-            part {                                                       
-                name: "up_icon";                           	
-                mouse_events: 0;                                         
-                type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
-                description {                                            
-                    state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH;                             
-                    rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "up";                         		 
-                    }                                                    
-                    rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "up";                         		 
-                    }                                                    
-                    image {                                              
-                        normal: "up_icon.png";                	 
-                    }                                                    
-                }                                                        
-            }
+	                                                      		 
 	part {                                                      
                 name: "left";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.01 0.40;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 37 200;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.15 0.57;     
-                        offset: -1 -1;                                   
+                        relative: 0.0 0.0;     
+                        offset: 163 285;                                   
                         to: "swallow_clip";                              
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image {normal: "games_arrow_left.png";}                                            
+                    fill { smooth: 0; }
+                                                                        
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_arrow_left_pressed.png";} 
+		    fill { smooth: 0; }     
                 }                                                        
             }    							
 	                                                      		
-            part {                                                       
-                name: "left_icon";                           	
-                mouse_events: 0;                                         
-                type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
-                description {                                            
-                    state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH;                             
-                    rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "left";                         		 
-                    }                                                    
-                    rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "left";                         		 
-                    }                                                    
-                    image {                                              
-                        normal: "previous_icon.png";                	 
-                    }                                                    
-                }                                                        
-            }
-
 	part {                                                      
                 name: "down";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.1 0.60;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 159 282;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.24 0.77;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 244 408;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image {normal: "games_arrow_down.png";}        
+		    fill { smooth: 0; }                                               
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_arrow_down_pressed.png";}    
+		    fill { smooth: 0; }       
                 }                                                        
             }    							
 	                                                      		
-            part {                                                       
-                name: "down_icon";                           	
-                mouse_events: 0;                                         
-                type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
-                description {                                            
-                    state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH;                             
-                    rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "down";                         		 
-                    }                                                    
-                    rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "down";                         		 
-                    }                                                    
-                    image {                                              
-                        normal: "down_icon.png";                	 
-                    }                                                    
-                }                                                        
-            }
-
+            
+	
 	part {                                                      
                 name: "right";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.20 0.40;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 241 200;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.34 0.57;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 367 285;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image {normal: "games_arrow_right.png";}   
+		    fill { smooth: 0; }                                                      
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_arrow_right_pressed.png";}      
+		    fill { smooth: 0; }     
                 }                                                        
             }    							
 	                                                      		
-            part {                                                       
-                name: "right_icon";                           	
-                mouse_events: 0;                                         
+
+	part {                                                      
+                name: "X";                                	 
+                mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH;                             
                     rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "right";                         		 
+                        relative: 0.0 0.0;     
+                        offset: 400 80;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "right";                         		 
+                        relative: 0.0 0.0;     
+                        offset: 486 165;                                   
                     }                                                    
-                    image {                                              
-                        normal: "next_icon.png";                	 
-                    }                                                    
+                    image {normal: "games_button_released.png";}
+	            fill { smooth: 0; }                                                
+                                  
+                                                                       
                 }                                                        
-            }
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_button_pressed.png";}     
+		    fill { smooth: 0; }      
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "Y";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 540 100;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 626 185;                                   
+                    }                                                    
+                    image {normal: "games_button_released.png";}                                              
+                    fill { smooth: 0; }                                                                     
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_button_pressed.png";}  
+		    fill { smooth: 0; }      
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "Z";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 680 120;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 766 205;                                   
+                    }                                                    
+                    image {  normal: "games_button_released.png"; }                                            
+                    fill { smooth: 0; }                        
+                                                                        
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_button_pressed.png";}  
+		    fill { smooth: 0; }     
+                }                                                        
+            }    	
 
 	part {                                                      
                 name: "A";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.60 0.65;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 400 323;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.75 0.85;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 486  408;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image { normal: "games_button_released.png";}                                             
+                    fill { smooth: 0; }                                                                                
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_button_pressed.png";} 
+		    fill { smooth: 0; }          
                 }                                                        
-            }    							
-	                                                      		
-            part {                                                       
-                name: "A_icon";                           	
-                mouse_events: 0; 
-		effect: OUTLINE;                                         
-                type: TEXT;                                             
-                clip_to: "swallow_clip";                                 
-                description {                                            
-                    state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH; 
-		    color: 255 255 0 255;                                                                                                    
-                    rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "A";                         		 
-                    }                                                    
-                    rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "A";                         		 
-                    }                                                    
-                    text {						 
-                	font: "key";					 
-                	size: 1;					 
-                	fit: 1 1;					 
-			text: "A";				 
-                	align: 0.5 0.5;					 
-              	    }					                                           
-                }                                                        
-            }
+            }    	
+
 	part {                                                      
                 name: "B";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.80 0.65;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 540 303;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.95 0.85;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 626 388;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image { normal: "games_button_released.png"; }                                             
+                    fill { smooth: 0; }                                                                    
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_button_pressed.png";}    
+		    fill { smooth: 0; }            
                 }                                                        
-            }    							
-	                                                      		
-            part {                                                       
-                name: "B_icon";                           	
-                mouse_events: 0;                                         
-                type: TEXT; 
-		effect: OUTLINE;                                             
-                clip_to: "swallow_clip";                                 
-                description {                                            
-                    state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH; 
-		    color: 255 0 0 255;                               
-                    rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "B";                         		 
-                    }                                                    
-                    rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "B";                         		 
-                    }                                                    
-                    text {						 
-                	font: "key";					 
-                	size: 1;					 
-                	fit: 1 1;					 
-			text: "B";				 
-                	align: 0.5 0.5;					 
-              	    }					                                           
-                }                                                        
-            }
+            }    													
+	              
+
 	part {                                                      
                 name: "C";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.60 0.35;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 680 283;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.75 0.55;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 766 368;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image {normal: "games_button_released.png"; }      
+		    fill { smooth: 0; }                                                          
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "games_button_pressed.png";}    
+		    fill { smooth: 0; }  
                 }                                                        
-            }    							
-	                                                      		
-            part {                                                       
-                name: "C_icon";                           	
-                mouse_events: 0;    
-		effect: OUTLINE;                                      
-                type: TEXT;                                             
-                clip_to: "swallow_clip";                                 
-                description {                                            
-                    state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH;   
-		    color: 0 255 0 255;                             
-                    rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "C";                         		 
-                    }                                                    
-                    rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "C";                         		 
-                    }                                                    
-                    text {						 
-                	font: "key";					 
-                	size: 1;					 
-                	fit: 1 1;					 
-			text: "C";				 
-                	align: 0.5 0.5;					 
-              	    }					                                           
-                }                                                        
-            }
-	
+            } 
+
 	part {                                                      
-                name: "D";                                	 
+                name: "one";                                	 
                 mouse_events: 1;                                         
                 type: IMAGE;                                             
-                clip_to: "swallow_clip";                                 
                 description {                                            
                     state: "default" 0.0;                                
                     rel1 {                                               
-                        relative: 0.80 0.35;     
-                        offset: 0 0;                                     
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 0 80;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 0.95 0.55;     
-                        offset: -1 -1;                                   
-                        to: "swallow_clip";                              
+                        relative: 0.0 0.0;     
+                        offset: 73 124;                                   
                     }                                                    
-                    image {                                              
-                        normal: "button_background.png";                 
-                        border: 27 27 27 27;                             
-                    }                                                    
+                    image {normal: "start_released.png"; }      
+		    fill { smooth: 0; }                                                          
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "button_background_active.png";}      
-			 fill { smooth: 0; }                            
+                    image {normal: "start_pressed.png";}    
+		    fill { smooth: 0; }  
                 }                                                        
-            }    							
-	                                                      		
-            part {                                                       
-                name: "D_icon";                           	
-                mouse_events: 0;                                         
-                type: TEXT;
-		effect: OUTLINE;                                              
-                clip_to: "swallow_clip";                                 
+            }    
+
+	part {                                                      
+                name: "two";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
                 description {                                            
                     state: "default" 0.0;                                
-                    aspect: 1.0 1.0;                                     
-                    aspect_preference: BOTH;  
-                    color: 0 0 255 255;                              
                     rel1 {                                               
-                        relative: 0.0 0.0;                               
-                        offset: 0 0;                                     
-                        to: "D";                         		 
+                        relative: 0.0 0.0;     
+                        offset: 0 360;                                     
                     }                                                    
                     rel2 {                                               
-                        relative: 1.0 1.0;                               
-                        offset: -1 -1;                                   
-                        to: "D";                         		 
+                        relative: 0.0 0.0;     
+                        offset: 73 404;                                   
                     }                                                    
-                    text {						 
-                	font: "key";					 
-                	size: 1;					 
-                	fit: 1 1;					 
-			text: "D";				 
-                	align: 0.5 0.5;					 
-              	    }					                                           
+                    image {normal: "start_released.png"; }      
+		    fill { smooth: 0; }                                                          
                 }                                                        
-            }
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "start_pressed.png";}    
+		    fill { smooth: 0; }  
+                }                                                        
+            }    				   													
+	                                                                		                                      		
+          
 	
     }
     programs {
@@ -505,7 +357,10 @@ parts {
 	ACTIVATE("A");
 	ACTIVATE("B");
 	ACTIVATE("C");
-	ACTIVATE("D");
-	//ACTIVATE("conf_keys");
+	ACTIVATE("X");
+	ACTIVATE("Y");
+	ACTIVATE("Z");
+	ACTIVATE("one");
+	ACTIVATE("two");
     	TRANSITION();
     }
