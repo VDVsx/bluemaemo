@@ -134,21 +134,21 @@ class multimedia(edje_group):
 	elif source == "mute":
 
 
-		key = self.main.mute
+		key = self.main.mute_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
 
 	elif source == "next":
 
 
-		key = self.main.mute
+		key = self.main.next_key_m
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
 
 	elif source == "previous":
 
 
-		key = self.main.previous
+		key = self.main.previous_key_m
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
 
@@ -202,8 +202,11 @@ class multimedia_conf(edje_group):
 	self.vol_p_key_lb = elementary.Label(self)
 	self.full_key_lb = elementary.Label(self)
 	self.no_full_key_lb = elementary.Label(self)
+	self.mute_key_lb = elementary.Label(self)
+	self.next_key_lb = elementary.Label(self)
+	self.prev_key_lb = elementary.Label(self)
 
-	for i in (self.main.play_key,self.main.pause_key,self.main.stop_key,self.main.forward_key,self.main.rewind_key, self.main.volume_m_key,self.main.volume_p_key,self.main.fullscreen_key_m, self.main.no_fullscreen_key_m, self.main.mute, self.main.next, self.main.previous):
+	for i in (self.main.play_key,self.main.pause_key,self.main.stop_key,self.main.forward_key,self.main.rewind_key, self.main.volume_m_key,self.main.volume_p_key,self.main.fullscreen_key_m, self.main.no_fullscreen_key_m, self.main.mute_key, self.main.next_key_m, self.main.previous_key_m):
 		if len(i) > 6 and i[0] == "s":
 			#shift translation
 	
@@ -266,23 +269,28 @@ class multimedia_conf(edje_group):
                "Pause":self.pause_key_lb,  
                "Stop":self.stop_key_lb, 
                "Forward":self.forw_key_lb,
-               "Backward":self.backw_key_lb, 
+               "Rewind":self.rewd_key_lb, 
 	       "Volume +":self.vol_p_key_lb, 
 	       "Volume -":self.vol_m_key_lb, 
                "Fullscreen":self.full_key_lb, 
-	       "No fullscreen":self.no_full_key_lb}
+	       "No fullscreen":self.no_full_key_lb,
+	       "Mute":self.mute_key_lb, 
+               "Previous":self.prev_key_lb, 
+               "Next":self.next_key_lb}
 
 	self.items = {"Play":self.play_key, 
                "Pause":self.pause_key,  
                "Stop":self.stop_key, 
                "Forward":self.forw_key,
-               "Backward":self.backw_key, 
+               "Rewind":self.rewd_key, 
 	       "Volume +":self.vol_p_key, 
 	       "Volume -":self.vol_m_key, 
                "Fullscreen":self.full_key, 
-	       "No fullscreen":self.no_full_key}
+	       "No fullscreen":self.no_full_key,
+	       "Mute":self.mute_key, 
+               "Previous":self.prev_key, 
+               "Next":self.next_key}
 
-	
     	
     def list_item_cb(self,obj, event, data):
 	self.obj = obj
@@ -328,19 +336,7 @@ class multimedia_conf(edje_group):
     def key_down_cb( self, event ):
         key = event.keyname
 
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-	elif key == "Escape":
+	if key == "Escape":
 
 		self.main.bluemaemo_conf.save_options()
 		self.main.transition_to("multimedia")	

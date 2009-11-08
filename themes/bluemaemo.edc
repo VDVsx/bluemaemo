@@ -158,6 +158,7 @@ images {
   image: "games_button_pressed.png" COMP;
   image: "start_released.png" COMP;
   image: "start_pressed.png" COMP;
+  image: "connected_to.png" COMP;
 
 
 }
@@ -2323,6 +2324,10 @@ group {
 	 group {
 		name: "unable_conn";
 		#include "unable_conn.edc"
+	}
+	 group {
+		name: "connection_status";
+		#include "connection_status.edc"
 	}
 	 group {
 		name: "process_conn";

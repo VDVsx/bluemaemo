@@ -36,10 +36,15 @@ class connection_status(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "connection_status")
-	self.part_text_set( "menu_title", "Connection Status" )
+	self.part_text_set( "menu_title", "Connected" )
+	self.part_text_set("label_name", "")
+	self.part_text_set("label_name_shadow", "")
         
     def onShow( self ):
+	self.part_text_set("label_name", self.main.current_adapter_name)
+	self.part_text_set("label_name_shadow", self.main.current_adapter_name)
 	self.focus = True
+	ecore.timer_add(3.0,self.main.transition_to,"menu")
     
 
     def onHide( self ):

@@ -281,7 +281,8 @@ class games_conf(edje_group):
 	self.one_key_lb = elementary.Label(self)
 	self.two_key_lb = elementary.Label(self)
 	
-	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.x_key, self.y_key, self.z_key, self.one_key, self.two_key ):
+
+	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.x_key, self.main.y_key, self.main.z_key, self.main.one_key, self.main.two_key ):
 
 		if len(i) > 6 and i[0] == "s":
 			#shift translation

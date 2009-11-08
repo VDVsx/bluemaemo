@@ -46,7 +46,7 @@ class confirm_conn(edje_group):
 
     def onShow( self ):
 	self.part_text_set("label_name", self.main.current_adapter_name + " ?")
-	self.part_text_set("label_name", self.main.current_adapter_name + " ?")
+	self.part_text_set("label_name_shadow", self.main.current_adapter_name + " ?")
 	self.focus = True
     
 

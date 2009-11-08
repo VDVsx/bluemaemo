@@ -83,8 +83,4 @@ class process_conn(edje_group):
 			ecore.timer_add(1.0,self.process_connection_status)
 		
 		else:
-			#change image or transit for connection status screen
-			self.part_text_set("label_connect","Connected to")
-			self.part_text_set( "menu_title", "Connection Status" )
-			ecore.timer_add(3.0,self.main.transition_to,"menu")
-	
+			self.main.transition_to("connection_status")

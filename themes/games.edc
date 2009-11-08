@@ -67,11 +67,11 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 37 200;                                     
+                        offset: 37 201;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 163 285;                                   
+                        offset: 163 286;                                   
                         to: "swallow_clip";                              
                     }                                                    
                     image {normal: "games_arrow_left.png";}                                            
@@ -121,11 +121,11 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 241 200;                                     
+                        offset: 241 201;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 367 285;                                   
+                        offset: 367 286;                                   
                     }                                                    
                     image {normal: "games_arrow_right.png";}   
 		    fill { smooth: 0; }                                                      

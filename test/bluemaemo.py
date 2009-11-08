@@ -39,7 +39,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_main import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
@@ -201,16 +201,12 @@ class wait_conn(edje_group):
 			ecore.timer_add(1.0,self.check_client)
 			
 		else:
-			
-			self.part_text_set("label_waiting", "")
-			self.part_text_set( "menu_title", "Connection Status" )
-			self.part_text_set("label_connect_to", "Connected to: ")
-			self.part_text_set("label_client", self.main.connection.client_name)
+
 			self.main.current_adapter_name = self.main.connection.client_name
 			self.main.current_adapter_addr = self.main.connection.client_addr
 			self.main.check_first_time()
 			self.main.connected = True
-			ecore.timer_add(3.0,self.main.transition_to,"menu")
+			self.main.transition_to("connection_status")
 	
 #----------------------------------------------------------------------------#
 class conf_keys(edje_group):
@@ -700,7 +696,7 @@ class GUI(object):
 	
 	self.bluemaemo_conf = bluemaemo_conf()
 	self.load_local_confs()
-	opt_fullscreen = False 
+	opt_fullscreen = True 
         edje.frametime_set(1.0 / options.fps)
         self.evas_canvas = EvasCanvas(
             fullscreen = opt_fullscreen,
@@ -731,7 +727,7 @@ class GUI(object):
         self.groups["swallow"] = edje_group(self, "swallow")
         self.evas_canvas.evas_obj.data["swallow"] = self.groups["swallow"]
 
-        for page in ("main","mouse_ui", "menu", "disconnect", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "reconnect_list","confirm_conn","unable_conn","process_conn","wait_conn","new_device"):
+        for page in ("main","mouse_ui", "menu", "disconnect", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "reconnect_list","confirm_conn","unable_conn","process_conn","wait_conn", "connection_status","new_device"):
 		ctor = globals().get( page, None )
 		if ctor:
 			self.groups[page] = ctor( self )
@@ -755,10 +751,10 @@ class GUI(object):
 	self.discoverable = False
 	self.pairable = False
 	self.paired_devices = {}
-	#self.initialize_dbus()
-	#self.check_bluez_version()
-	#self.check_bt_status()
-	#self.check_autoconnect()
+	self.initialize_dbus()
+	self.check_bluez_version()
+	self.check_bt_status()
+	self.check_autoconnect()
 
     def check_bluez_version(self):
 
@@ -964,11 +960,14 @@ class GUI(object):
 	self.pause_key = self.bluemaemo_conf.pause_key
 	self.stop_key = self.bluemaemo_conf.stop_key
 	self.forward_key = self.bluemaemo_conf.forward_key
-	self.backward_key = self.bluemaemo_conf.backward_key
+	self.rewind_key = self.bluemaemo_conf.rewind_key
 	self.volume_m_key = self.bluemaemo_conf.volume_m_key
 	self.volume_p_key = self.bluemaemo_conf.volume_p_key
 	self.fullscreen_key_m = self.bluemaemo_conf.fullscreen_key_m
 	self.no_fullscreen_key_m = self.bluemaemo_conf.no_fullscreen_key_m
+	self.mute_key = self.bluemaemo_conf.mute_key
+	self.previous_key_m = self.bluemaemo_conf.previous_key_m
+	self.next_key_m = self.bluemaemo_conf.next_key_m
 	#games profile
 	self.up_key = self.bluemaemo_conf.up_key
 	self.down_key = self.bluemaemo_conf.down_key
@@ -989,12 +988,12 @@ class GUI(object):
 
     def save_local_conf(self, button_name, profile, key):
 	
-	if button_name == "Previous":
+	if button_name == "Previous" and profile == "presentation":
 
 		self.previous_key = key
 		self.bluemaemo_conf.set_option("presentation","previous_key",key)
 
-	elif button_name == "Next":
+	elif button_name == "Next" and profile == "presentation":
 
 		self.next_key = key
 		self.bluemaemo_conf.set_option("presentation","next_key",key)
@@ -1029,10 +1028,10 @@ class GUI(object):
 		self.forward_key = key
 		self.bluemaemo_conf.set_option("multimedia","forward_key",key)
 
-	elif button_name == "Backward":
+	elif button_name == "Rewind":
 
 		self.backward_key = key
-		self.bluemaemo_conf.set_option("multimedia","backward_key",key)
+		self.bluemaemo_conf.set_option("multimedia","rewind_key",key)
 
 	elif button_name == "Volume +":
 
@@ -1043,6 +1042,11 @@ class GUI(object):
 
 		self.volume_m_key = key
 		self.bluemaemo_conf.set_option("multimedia","volume_m_key",key)
+
+	elif button_name == "Mute":
+
+		self.volume_m_key = key
+		self.bluemaemo_conf.set_option("multimedia","mute_key",key)
 	
 	
 	elif button_name == "Fullscreen" and profile == "multimedia":
@@ -1054,6 +1058,16 @@ class GUI(object):
 
 		self.no_fullscreen_key_m = key
 		self.bluemaemo_conf.set_option("multimedia","no_fullscreen_key_m",key)
+
+	elif button_name == "Previous" and profile == "multimedia":
+
+		self.previous_key = key
+		self.bluemaemo_conf.set_option("multimedia","previous_key_m",key)
+
+	elif button_name == "Next" and profile == "multimedia":
+
+		self.next_key = key
+		self.bluemaemo_conf.set_option("multimedia","next_key_m",key)
 
 	elif button_name == "Up":
 
