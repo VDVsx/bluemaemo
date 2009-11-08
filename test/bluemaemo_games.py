@@ -39,7 +39,7 @@ class games(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "games")
-	self.part_text_set( "menu_title", "Games" )
+	self.part_text_set( "menu_title", "Gamepad" )
 	self.key_pressed = False
 	self.current_key= ""
 	self.current_modif= ""
@@ -73,43 +73,19 @@ class games(edje_group):
     def key_down_cb( self, event ):
         key = event.keyname
 
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-	#elif key == "Escape":
-
-	#	self.main.transition_to("menu")
-
-	else:
-
-		self.main.hw_kb.send_hw_kb_key(key)
-	
-	
+	self.main.hw_kb.send_hw_kb_key(key)
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 	
-	if source == "conf_keys":
-		
-		self.main.transition_to("games_conf")
-
-	elif source == "up":
+	if source == "up":
 
 
 		key = self.main.up_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
 		self.key_pressed = True
-		self.current_key= val
+		self.current_key= val  #check if this is in use
 		self.current_modif= modif
 
 	elif source == "down":
@@ -128,6 +104,8 @@ class games(edje_group):
 		key = self.main.left_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
+		self.current_key= val
+		self.current_modif= modif
 
 	elif source == "right":
 
@@ -178,10 +156,66 @@ class games(edje_group):
 
 		key = self.main.c_key
 		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif, val)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
+
+	elif source == "X":
+
+
+		key = self.main.x_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
+
+	elif source == "Y":
+
+
+		key = self.main.y_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif, value)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
+	
+	elif source == "Z":
+
+
+		key = self.main.z_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,value)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
+
+	elif source == "one":
+
+
+		key = self.main.one_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif, value)
+		self.key_pressed = True
+		self.current_key= val
+		self.current_modif= modif
+
+
+	elif source == "two":
+
+
+		key = self.main.two_key
+		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event('0','40')
 		self.key_pressed = True
 		self.current_key= val
 		self.current_modif= modif
+
+
+
+
+
 
 	elif source == "D":
 
@@ -228,7 +262,11 @@ class games_conf(edje_group):
 	self.a_key = ""
 	self.b_key = ""
 	self.c_key = ""
-	self.d_key = ""
+	self.x_key = ""
+	self.y_key = ""
+	self.z_key = ""
+	self.one_key = ""
+	self.two_key = ""
 
 	self.up_key_lb = elementary.Label(self)
 	self.down_key_lb = elementary.Label(self)
@@ -237,9 +275,13 @@ class games_conf(edje_group):
 	self.a_key_lb = elementary.Label(self)
 	self.b_key_lb = elementary.Label(self)
 	self.c_key_lb = elementary.Label(self)
-	self.d_key_lb = elementary.Label(self)
+	self.x_key_lb = elementary.Label(self)
+	self.y_key_lb = elementary.Label(self)
+	self.z_key_lb = elementary.Label(self)
+	self.one_key_lb = elementary.Label(self)
+	self.two_key_lb = elementary.Label(self)
 	
-	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.d_key):
+	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.x_key, self.y_key, self.z_key, self.one_key, self.two_key ):
 
 		if len(i) > 6 and i[0] == "s":
 			#shift translation
@@ -273,7 +315,15 @@ class games_conf(edje_group):
 		elif count == 7:
 			self.c_key = text_value
 		elif count == 8:
-			self.d_key = text_value
+			self.x_key = text_value
+		elif count == 9:
+			self.y_key = text_value
+		elif count == 10:
+			self.z_key = text_value
+		elif count == 11:
+			self.one_key = text_value
+		elif count == 12:
+			self.two_key = text_value
 				
 	self.up_key_lb.label_set(self.up_key)
 	self.down_key_lb.label_set(self.down_key)
@@ -282,7 +332,11 @@ class games_conf(edje_group):
 	self.a_key_lb.label_set(self.a_key)
 	self.b_key_lb.label_set(self.b_key)
 	self.c_key_lb.label_set(self.c_key)
-	self.d_key_lb.label_set(self.d_key) 
+	self.x_key_lb.label_set(self.x_key) 
+	self.y_key_lb.label_set(self.y_key) 
+	self.z_key_lb.label_set(self.z_key) 
+	self.one_key_lb.label_set(self.one_key) 
+	self.two_key_lb.label_set(self.two_key) 
 	
 	self.labels = {"Up":self.up_key_lb,
 		"Down":self.down_key_lb,
@@ -291,7 +345,11 @@ class games_conf(edje_group):
 		"A":self.a_key_lb,
 		"B":self.b_key_lb,
 		"C":self.c_key_lb,
-		"D":self.d_key_lb}
+		"X":self.x_key_lb,
+		"Y":self.y_key_lb,
+		"Z":self.z_key_lb,
+		"1":self.one_key_lb,
+		"2":self.two_key_lb}
 
 	self.items = {"Up":self.up_key,
 		"Down":self.down_key,
@@ -300,7 +358,11 @@ class games_conf(edje_group):
 		"A":self.a_key,
 		"B":self.b_key,
 		"C":self.c_key,
-		"D":self.d_key}
+		"X":self.x_key,
+		"Y":self.y_key,
+		"Z":self.z_key,
+		"1":self.one_key,
+		"2":self.two_key}
 
     def list_item_cb(self,obj, event, data):
 	self.obj = obj

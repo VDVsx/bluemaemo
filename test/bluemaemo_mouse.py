@@ -43,7 +43,6 @@ class mouse_ui(edje_group):
         self.button_hold = False
 	self.scroll_pos = 0
 	self.tape_mouse_area = 0
-	self.main.bluemaemo_conf.fullscreen
 	self.alt = False
         self.ctrl = False
 	self.fn = False
@@ -83,21 +82,9 @@ class mouse_ui(edje_group):
 		self.button_hold = True
 		self.signal_emit("hold_pressed", "")
 
-	elif key == "F6":
+	#elif key == "Escape":
 
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
-	elif key == "Escape":
-
-		self.main.transition_to("menu")
+		#self.main.transition_to("menu")
 
 	else:
 		

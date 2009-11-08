@@ -63,25 +63,13 @@ class multimedia(edje_group):
     def key_down_cb( self, event ):
         key = event.keyname
 
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
 	#elif key == "Escape":
 
 	#	self.main.transition_to("menu")
 
-	else:
+	
 
-		self.main.hw_kb.send_hw_kb_key(key)
+	self.main.hw_kb.send_hw_kb_key(key)
 	
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
@@ -112,9 +100,9 @@ class multimedia(edje_group):
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
 
-	elif source == "backward":
+	elif source == "rewind":
 
-		key = self.main.backward_key
+		key = self.main.rewind_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
 
@@ -142,6 +130,28 @@ class multimedia(edje_group):
 		key = self.main.no_fullscreen_key_m
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
+
+	elif source == "mute":
+
+
+		key = self.main.mute
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
+
+	elif source == "next":
+
+
+		key = self.main.mute
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
+
+	elif source == "previous":
+
+
+		key = self.main.previous
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
+
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
@@ -174,23 +184,26 @@ class multimedia_conf(edje_group):
 	self.pause_key = ""
 	self.stop_key = ""
 	self.forw_key = ""
-	self.backw_key = ""
+	self.rewd_key = ""
 	self.vol_m_key = ""
 	self.vol_p_key = ""
 	self.full_key = ""
 	self.no_full_key = ""
+	self.mute_key = ""
+	self.next_key = ""
+	self.prev_key = ""
 
 	self.play_key_lb = elementary.Label(self)
 	self.pause_key_lb = elementary.Label(self)
 	self.stop_key_lb = elementary.Label(self)
 	self.forw_key_lb = elementary.Label(self)
-	self.backw_key_lb = elementary.Label(self)
+	self.rewd_key_lb = elementary.Label(self)
 	self.vol_m_key_lb = elementary.Label(self)
 	self.vol_p_key_lb = elementary.Label(self)
 	self.full_key_lb = elementary.Label(self)
 	self.no_full_key_lb = elementary.Label(self)
 
-	for i in (self.main.play_key,self.main.pause_key,self.main.stop_key,self.main.forward_key,self.main.backward_key, self.main.volume_m_key,self.main.volume_p_key,self.main.fullscreen_key_m, self.main.no_fullscreen_key_m):
+	for i in (self.main.play_key,self.main.pause_key,self.main.stop_key,self.main.forward_key,self.main.rewind_key, self.main.volume_m_key,self.main.volume_p_key,self.main.fullscreen_key_m, self.main.no_fullscreen_key_m, self.main.mute, self.main.next, self.main.previous):
 		if len(i) > 6 and i[0] == "s":
 			#shift translation
 	
@@ -219,7 +232,7 @@ class multimedia_conf(edje_group):
 		elif count == 4:
 			self.forw_key = text_value
 		elif count == 5:
-			self.backw_key = text_value
+			self.rewd_key = text_value
 		elif count == 6:
 			self.vol_m_key = text_value
 		elif count == 7:
@@ -228,17 +241,26 @@ class multimedia_conf(edje_group):
 			self.full_key = text_value
 		elif count == 9:
 			self.no_full_key = text_value
+		elif count == 10:
+			self.mute_key = text_value
+		elif count == 11:
+			self.prev_key = text_value
+		elif count == 12:
+			self.next_key = text_value
 				
 		 
 	self.play_key_lb.label_set(self.play_key)
 	self.pause_key_lb.label_set(self.pause_key)
 	self.stop_key_lb.label_set(self.stop_key)
 	self.forw_key_lb.label_set(self.forw_key)
-	self.backw_key_lb.label_set(self.backw_key)
+	self.rewd_key_lb.label_set(self.rewd_key)
 	self.vol_m_key_lb.label_set(self.vol_m_key)
 	self.vol_p_key_lb.label_set(self.vol_p_key)
 	self.full_key_lb.label_set(self.full_key)
 	self.no_full_key_lb.label_set(self.no_full_key)
+	self.mute_key_lb.label_set(self.mute_key)
+	self.prev_key_lb.label_set(self.prev_key)
+	self.next_key_lb.label_set(self.next_key)
 
 	self.labels = {"Play":self.play_key_lb, 
                "Pause":self.pause_key_lb,  

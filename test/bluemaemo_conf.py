@@ -39,39 +39,45 @@ class bluemaemo_conf:
 			os.system("mkdir /etc/bluemaemo/")
 			os.system("cp /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/")
 			self.config.readfp(open(defaultsfile))
+		try:
+			#settings
+			self.scroll = self.config.get("user","scroll")
+			self.firsttime = self.config.get("user","firsttime")
+			self.autoconnect = self.config.get("user","autoconnect")
+			#presentation profile
+			self.previous_key = self.config.get("presentation","previous_key")
+			self.next_key = self.config.get("presentation","next_key")
+			self.fullscreen_key = self.config.get("presentation","fullscreen_key")
+			self.no_fullscreen_key = self.config.get("presentation","no_fullscreen_key")
+			#multimedia profile
+			self.play_key = self.config.get("multimedia","play_key")
+			self.pause_key = self.config.get("multimedia","pause_key")
+			self.stop_key = self.config.get("multimedia","stop_key")
+			self.forward_key = self.config.get("multimedia","forward_key")
+			self.backward_key = self.config.get("multimedia","backward_key")
+			self.fullscreen_key_m = self.config.get("multimedia","fullscreen_key_m")
+			self.volume_m_key = self.config.get("multimedia","volume_m_key")
+			self.volume_p_key = self.config.get("multimedia","volume_p_key")
+			self.no_fullscreen_key_m = self.config.get("multimedia", "no_fullscreen_key_m")
+			#games profile
+			self.up_key = self.config.get("games","up_key")
+			self.down_key = self.config.get("games","down_key")
+			self.right_key = self.config.get("games","right_key")
+			self.left_key = self.config.get("games","left_key")
+			self.a_key = self.config.get("games", "a_key")
+			self.b_key = self.config.get("games","b_key")
+			self.c_key = self.config.get("games","c_key")
+			self.x_key = self.config.get("games", "x_key")
+			self.y_key = self.config.get("games", "y_key")
+			self.z_key = self.config.get("games", "z_key")
+			self.one_key = self.config.get("games", "one_key")
+			self.two_key = self.config.get("games", "two_key")
+			#autoconnect options
+			self.name = self.config.get("autoconnect","name")
+			self.addr = self.config.get("autoconnect", "addr")
+		except:
 
-		#settings
-		self.fullscreen = self.config.get("user","fullscreen")
-		self.scroll = self.config.get("user","scroll")
-		self.firsttime = self.config.get("user","firsttime")
-		self.autoconnect = self.config.get("user","autoconnect")
-		#presentation profile
-		self.previous_key = self.config.get("presentation","previous_key")
-		self.next_key = self.config.get("presentation","next_key")
-		self.fullscreen_key = self.config.get("presentation","fullscreen_key")
-		self.no_fullscreen_key = self.config.get("presentation","no_fullscreen_key")
-		#multimedia profile
-		self.play_key = self.config.get("multimedia","play_key")
-		self.pause_key = self.config.get("multimedia","pause_key")
-		self.stop_key = self.config.get("multimedia","stop_key")
-		self.forward_key = self.config.get("multimedia","forward_key")
-		self.backward_key = self.config.get("multimedia","backward_key")
-		self.fullscreen_key_m = self.config.get("multimedia","fullscreen_key_m")
-		self.volume_m_key = self.config.get("multimedia","volume_m_key")
-		self.volume_p_key = self.config.get("multimedia","volume_p_key")
-		self.no_fullscreen_key_m = self.config.get("multimedia", "no_fullscreen_key_m")
-		#games profile
-		self.up_key = self.config.get("games","up_key")
-		self.down_key = self.config.get("games","down_key")
-		self.right_key = self.config.get("games","right_key")
-		self.left_key = self.config.get("games","left_key")
-		self.a_key = self.config.get("games", "a_key")
-		self.b_key = self.config.get("games","b_key")
-		self.c_key = self.config.get("games","c_key")
-		self.d_key = self.config.get("games", "d_key")
-		#autoconnect options
-		self.name = self.config.get("autoconnect","name")
-		self.addr = self.config.get("autoconnect", "addr")
+			print "Error: Failed to read the config file"
 
 	def set_option(self,seccion,opt,value):
 		

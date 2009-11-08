@@ -169,19 +169,7 @@ class wait_conn(edje_group):
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
         key = event.keyname
-
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
-
+	
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
 	if source == "back":
@@ -712,10 +700,7 @@ class GUI(object):
 	
 	self.bluemaemo_conf = bluemaemo_conf()
 	self.load_local_confs()
-	if self.fullscreen == "Yes":
-		opt_fullscreen = True
-	else:
-		opt_fullscreen = False 
+	opt_fullscreen = False 
         edje.frametime_set(1.0 / options.fps)
         self.evas_canvas = EvasCanvas(
             fullscreen = opt_fullscreen,
@@ -966,7 +951,6 @@ class GUI(object):
 	
     def load_local_confs(self):
 	#settings
-	self.fullscreen = self.bluemaemo_conf.fullscreen
 	self.scroll = int(self.bluemaemo_conf.scroll)
 	self.firsttime = int(self.bluemaemo_conf.firsttime)
 	self.autoconnect = self.bluemaemo_conf.autoconnect
@@ -993,7 +977,11 @@ class GUI(object):
 	self.a_key = self.bluemaemo_conf.a_key
 	self.b_key = self.bluemaemo_conf.b_key
 	self.c_key = self.bluemaemo_conf.c_key
-	self.d_key = self.bluemaemo_conf.d_key
+	self.x_key = self.bluemaemo_conf.x_key
+	self.y_key = self.bluemaemo_conf.y_key
+	self.z_key = self.bluemaemo_conf.z_key
+	self.one_key = self.bluemaemo_conf.one_key
+	self.two_key = self.bluemaemo_conf.two_key
 	#autoconnect options
 	self.auto_name = self.bluemaemo_conf.name
 	self.auto_addr = self.bluemaemo_conf.addr
@@ -1102,10 +1090,30 @@ class GUI(object):
 		self.c_key = key
 		self.bluemaemo_conf.set_option("games","c_key",key)
 
-	elif button_name == "D":
+	elif button_name == "X":
 
-		self.d_key = key
-		self.bluemaemo_conf.set_option("games","d_key",key)
+		self.x_key = key
+		self.bluemaemo_conf.set_option("games","x_key",key)
+
+	elif button_name == "y":
+
+		self.y_key = key
+		self.bluemaemo_conf.set_option("games","y_key",key)
+
+	elif button_name == "Z":
+
+		self.z_key = key
+		self.bluemaemo_conf.set_option("games","z_key",key)
+
+	elif button_name == "1":
+
+		self.one_key = key
+		self.bluemaemo_conf.set_option("games","one_key",key)
+
+	elif button_name == "2":
+
+		self.two_key = key
+		self.bluemaemo_conf.set_option("games","two_key",key)
 
 
     def task_switcher(self):

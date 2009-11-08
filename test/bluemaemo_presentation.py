@@ -62,26 +62,12 @@ class presentation(edje_group):
     @evas.decorators.key_down_callback
     def key_down_cb( self, event ):
         key = event.keyname
-
-	if key == "F6":
-
-		if self.main.bluemaemo_conf.fullscreen == "Yes":
-			
-			self.main.bluemaemo_conf.fullscreen = "No"
-			self.main.window.fullscreen = False
-
-		elif self.main.bluemaemo_conf.fullscreen == "No":
-			
-			self.main.bluemaemo_conf.fullscreen = "Yes"
-			self.main.window.fullscreen = True
 	
 	#elif key == "Escape":
 
 	#	self.main.transition_to("menu")
 
-	else:
-
-		self.main.hw_kb.send_hw_kb_key(key)
+	self.main.hw_kb.send_hw_kb_key(key)
 
     @edje.decorators.signal_callback("mouse,down,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
