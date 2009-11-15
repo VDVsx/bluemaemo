@@ -47,7 +47,14 @@ class process_conn(edje_group):
 	self.focus = True
 	self.part_text_set("label_name", self.main.current_adapter_name)
 	self.part_text_set("label_name_shadow", self.main.current_adapter_name)
-	ecore.timer_add(1.0,self.main.initialize_bluemaemo_server,self.main.current_adapter_addr, self.main.current_adapter_name)
+
+	if self.main.new_device:
+
+		ecore.timer_add(1.0,self.main.initialize_new_bluemaemo_server,self.main.current_adapter_addr, self.main.current_adapter_name)
+	else:
+
+		ecore.timer_add(1.0,self.main.initialize_bluemaemo_server,self.main.current_adapter_addr, self.main.current_adapter_name)
+
 	ecore.timer_add(4.0,self.main.check_connection)
 	self.process_connection_status()
 	

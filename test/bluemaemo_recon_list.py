@@ -59,7 +59,7 @@ class reconnect_list(edje_group):
 			
 	def onShow( self ):
 		self.focus = True
-		#print self.main.paired_devices
+		self.main.update_paired_devices
 
 		if self.constructed:
 			self.li.go()

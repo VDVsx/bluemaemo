@@ -751,6 +751,7 @@ class GUI(object):
 	self.power = False
 	self.discoverable = False
 	self.pairable = False
+	self.new_device = False
 	self.paired_devices = {}
 	self.initialize_dbus()
 	self.check_bluez_version()
@@ -865,7 +866,22 @@ class GUI(object):
 			client_name = properties["Name"]
 			client_addr =  properties["Address"]
 			self.paired_devices[str(client_name)] = str(client_addr)
-		print self.paired_devices
+
+    def update_paired_devices(self):
+
+	manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
+	path = manager.DefaultAdapter()
+	adapter = dbus.Interface(self.bus.get_object("org.bluez", path),"org.bluez.Adapter")	
+
+	self.paired_devs = adapter.ListDevices()
+
+	for item in self.paired_devs:
+		
+		device = dbus.Interface(self.bus.get_object("org.bluez", item),"org.bluez.Device")
+		properties = device.GetProperties()
+		client_name = properties["Name"]
+		client_addr =  properties["Address"]
+		self.paired_devices[str(client_name)] = str(client_addr)
 
     def check_first_time(self):
 
@@ -940,6 +956,16 @@ class GUI(object):
 	if self.adapter_on:
 		
 			self.connection = Connect(self.bluez_version)
+			self.connection.start_connection(addr, name)
+			self.connection_processed = True
+
+        else:
+		ecore.timer_add(1.0,self.initialize_bluemaemo_server)
+
+    def initialize_new_bluemaemo_server(self,addr=1, name=""):
+
+	if self.adapter_on:
+		
 			self.connection.start_connection(addr, name)
 			self.connection_processed = True
 

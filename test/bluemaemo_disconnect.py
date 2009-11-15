@@ -54,8 +54,14 @@ class disconnect(edje_group):
 
     @edje.decorators.signal_callback("mouse,clicked,1", "*")
     def on_edje_signal_button_pressed(self, emission, source):
-	if source == "quit" or source == "no_option" :
+
+	if source == "no_option":
 		
+		self.main.connection.terminate_connection()
+		self.main.transition_to("main")
+
+	elif source == "quit":
+
 		self.main.connection.terminate_connection()
 		self.main.on_exit()
 		ecore.main_loop_quit()

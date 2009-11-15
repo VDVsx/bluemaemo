@@ -151,6 +151,11 @@ images {
   image: "z_released.png" COMP;
   image: "z_pressed.png" COMP;
   image: "connected_to.png" COMP;
+  image: "red_no.png" COMP;
+  image: "red_released_no.png" COMP;
+  image: "red_yes.png" COMP;
+  image: "red_released_yes.png" COMP;
+  image: "disconnected_dialog.png" COMP;
 
 
 }

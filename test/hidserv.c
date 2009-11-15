@@ -445,14 +445,8 @@ int quit_serv()
 
 void quit_thread()
 {
-	int hdev = 0;
+	printf("Thread finished\n");
 	int  iret;
-
-	if (class_st == 1){
-
-		set_device_class(hdev, default_class);
-		printf("Device class changed to: %s\n", default_class);
-	}
 	
 	iret = pthread_cancel(thread);
 	printf("Thread finished\n");

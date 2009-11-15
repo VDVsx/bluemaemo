@@ -116,6 +116,7 @@ class Connect:
 				# Add service record to the BlueZ database
 				self.database = dbus.Interface(self.bus.get_object('org.bluez', '/org/bluez'),'org.bluez.Database')
 				self.handle = self.database.AddServiceRecordFromXML(xml)
+				print "Info: SDP record added"
 
 			else:
 
@@ -128,6 +129,7 @@ class Connect:
 				self.adapter_addr = properties["Address"]
 				self.service = dbus.Interface(self.bus.get_object("org.bluez", self.path),"org.bluez.Service")
 				self.handle = self.service.AddRecord(xml)
+				print "Info: SDP record added"
 				#self.adapter.connect_to_signal("DeviceCreated", self._device_created)
 				
 		except:
@@ -239,6 +241,7 @@ class Connect:
 			else: 
 
 				self.service.RemoveRecord(self.handle)
+				print "Info: SDP record removed"
 				# Restore initial input service condition
 
 				if self.bluez_subsystem:
@@ -254,9 +257,10 @@ class Connect:
 						print "can't start bluetooth services"
 
 			if not self.connect:
-				hidserver.quit()
+
+				#hidserver.quit()
 				n = hidserver.quit_server()
-				print "killed"
+
 			else:
 				n = hidserver.quit_server()
 				if n < 0:

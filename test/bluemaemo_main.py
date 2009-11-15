@@ -29,6 +29,7 @@ import ecore
 import ecore.x
 import ecore.evas
 from bluemaemo_edje_group import *
+from bluemaemo_server import *
 
 #----------------------------------------------------------------------------#
 class main(edje_group):
@@ -47,6 +48,7 @@ class main(edje_group):
 	#ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
+	self.main.new_device = False
 	self.focus = True
     
 
@@ -66,6 +68,8 @@ class main(edje_group):
 
 	elif source == "connect":
 
+		self.main.connection = Connect(self.main.bluez_version)
+		self.main.new_device = True
 		self.bus = self.main.bus
 		manager = dbus.Interface(self.bus.get_object("org.bluez", "/"),"org.bluez.Manager")
 		
@@ -80,11 +84,14 @@ class main(edje_group):
 		self.dbus_manager.connect_to_signal("search_result", self._device_selected)
 
 	elif source == "reconnect":
+
+		self.main.new_device = False
 		self.main.transition_to("reconnect_list")
 		#wainting for connection
 
 	elif source == "wait_connection":
 
+		self.main.new_device = False
 		self.main.transition_to("wait_conn")
 
 	elif source == "task_switcher":
@@ -92,23 +99,24 @@ class main(edje_group):
 		self.main.task_switcher()
 
     def _device_selected(self, address, name, icon, major_class, minor_class, trusted, services):
-		if trusted ==1:
 
-			self.main.current_adapter_addr = address
-			self.main.current_adapter_name = name
-			self.main.transition_to("confirm_conn")
-		else:
-			print address
-			print trusted
+		if name in self.main.paired_devices:
 
+			if self.main.paired_devices[name] == address:
+
+				self.main.current_adapter_addr = address
+				self.main.current_adapter_name = name
+				self.main.transition_to("confirm_conn")
+		
 		#if device is paired, connect, if not wait for device created (look at process conn)
 
     def _device_created(self, device_path):
 
+		print "Info: New Device paired"
 		device = dbus.Interface(self.bus.get_object("org.bluez", device_path),"org.bluez.Device")
 		properties = device.GetProperties()
-		self.client_name = properties["Name"]
-		self.client_addr =  properties["Address"]
-		print self.client_addr
+		self.main.current_adapter_name = properties["Name"]
+		self.main.current_adapter_addr =  properties["Address"]
+		self.main.transition_to("confirm_conn")
 		#try to connect here
     
