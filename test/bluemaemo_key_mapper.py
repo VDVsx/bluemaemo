@@ -122,15 +122,25 @@ class key_mapper:
 		self.mapper['F12'] = 69
 		
 		self.mapper['Insert'] = 73
+		self.mapper['ins'] = 73
 		self.mapper['Home'] = 74
+		self.mapper['hm'] = 74
 		self.mapper['Prior'] = 75
+		self.mapper['pu'] = 75
 		self.mapper['Delete'] = 76
+		self.mapper['del'] = 76
 		self.mapper['End'] = 77
+		self.mapper['end'] = 77
 		self.mapper['Next'] = 78
+		self.mapper['pd'] = 78
 		self.mapper['Right'] = 79
+		self.mapper['rg'] = 79
 		self.mapper['Left'] = 80
+		self.mapper['lf'] = 80
 		self.mapper['Down'] = 81
+		self.mapper['dw'] = 81
 		self.mapper['Up'] = 82
+		self.mapper['up'] = 82
 		
 		self.mapper["v+"] = 128
 		self.mapper["v-"] = 129
