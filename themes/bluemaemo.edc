@@ -49,7 +49,6 @@ images {
   image: "rmb_released.png" COMP;
   image: "settings_pressed.png" COMP;
   image: "settings_released.png" COMP;
-  image: "back.png" COMP; //remove
   image: "fullscreen_pressed.png" COMP;
   image: "fullscreen_released.png" COMP;
   image: "no_fullscreen_pressed.png" COMP;
@@ -77,12 +76,6 @@ images {
   image: "button_background.png" COMP;
   image: "button_background_active.png" COMP;
   image: "backdrop.png" COMP;
-  image: "button_right.png" COMP;
-  image: "button_left.png" COMP;
-  image: "button_middle.png" COMP;
-  image: "button_hold.png" COMP;
-  image: "arrow_up.png" COMP;
-  image: "arrow_down.png" COMP;
   image: "arrow_left.png" COMP;
   image: "arrow_right.png" COMP;
   image: "scroll_area.png" COMP;
@@ -95,23 +88,12 @@ images {
   image: "connection_icon.png" COMP;
   image: "about_icon.png" COMP;
   image: "conf_icon.png" COMP;
-  image: "icon_accept.png" COMP;
-  image: "icon_left.png" COMP;
   image: "maemo_logo.png" COMP;
   image: "error.png" COMP;
   image: "next_icon.png" COMP;
   image: "previous_icon.png" COMP;
   image: "fullscreen_icon.png" COMP;
   image: "no_fullscreen_icon.png" COMP;
-  image: "play_icon.png" COMP;
-  image: "pause_icon.png" COMP;
-  image: "stop_icon.png" COMP;
-  image: "backward_icon.png" COMP;
-  image: "forward_icon.png" COMP;
-  image: "volume-_icon.png" COMP;
-  image: "volume+_icon.png" COMP;
-  image: "down_icon.png" COMP;
-  image: "up_icon.png" COMP;
   image: "key-default.png" COMP;
   image: "key-default-selected.png" COMP;
   image: "key-special.png" COMP;
@@ -129,8 +111,6 @@ images {
   image: "shift.png" COMP;
   image: "shift-selected.png" COMP;
   image: "listitem.png" COMP;
-  image: "selectitem.png" COMP;
-  image: "info_icon.png" COMP;
   image: "reconnect_icon.png" COMP;
   image: "connect_icon.png" COMP;
   image: "wait_connection_icon.png" COMP;
@@ -154,10 +134,22 @@ images {
   image: "games_arrow_down_pressed.png" COMP;
   image: "games_arrow_right.png" COMP;
   image: "games_arrow_right_pressed.png" COMP;
-  image: "games_button_released.png" COMP;
-  image: "games_button_pressed.png" COMP;
-  image: "start_released.png" COMP;
-  image: "start_pressed.png" COMP;
+  image: "1_released.png" COMP;
+  image: "1_pressed.png" COMP;
+  image: "2_released.png" COMP;
+  image: "2_pressed.png" COMP;
+  image: "a_released.png" COMP;
+  image: "a_pressed.png" COMP;
+  image: "b_released.png" COMP;
+  image: "b_pressed.png" COMP;
+  image: "c_released.png" COMP;
+  image: "c_pressed.png" COMP;
+  image: "x_released.png" COMP;
+  image: "x_pressed.png" COMP;
+  image: "y_released.png" COMP;
+  image: "y_pressed.png" COMP;
+  image: "z_released.png" COMP;
+  image: "z_pressed.png" COMP;
   image: "connected_to.png" COMP;
 
 

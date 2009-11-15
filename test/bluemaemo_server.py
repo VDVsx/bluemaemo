@@ -142,14 +142,10 @@ class Connect:
 	#	print self.client_addr
 	
 	def get_device_info(self,addr):
-		print addr
+
 		path = self.adapter.FindDevice(addr)
-		print "1"
-		print path
 		device = dbus.Interface(self.bus.get_object("org.bluez", path),"org.bluez.Device")
-		print "2"
 		properties = device.GetProperties()
-		print "3"
 		self.client_name = properties["Name"]
 		self.client_addr =  properties["Address"]
 		print self.client_addr

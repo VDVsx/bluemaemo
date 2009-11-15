@@ -39,7 +39,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-from bluemaemo_server import *
+#from bluemaemo_server import *
 from bluemaemo_main import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
@@ -696,7 +696,8 @@ class GUI(object):
 	
 	self.bluemaemo_conf = bluemaemo_conf()
 	self.load_local_confs()
-	opt_fullscreen = True 
+	opt_fullscreen = False
+	#opt_fullscreen = True
         edje.frametime_set(1.0 / options.fps)
         self.evas_canvas = EvasCanvas(
             fullscreen = opt_fullscreen,
@@ -751,10 +752,10 @@ class GUI(object):
 	self.discoverable = False
 	self.pairable = False
 	self.paired_devices = {}
-	self.initialize_dbus()
-	self.check_bluez_version()
-	self.check_bt_status()
-	self.check_autoconnect()
+	#self.initialize_dbus()
+	#self.check_bluez_version()
+	#self.check_bt_status()
+	#self.check_autoconnect()
 
     def check_bluez_version(self):
 

@@ -44,7 +44,7 @@ class main(edje_group):
 	self.part_text_set( "reconnect_text", "Reconnect")
 	self.main = main
 	
-	##ecore.timer_add(1.0,self.main.transition_to,"connection_status")
+	#ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.focus = True
@@ -101,7 +101,7 @@ class main(edje_group):
 			print address
 			print trusted
 
-		#if device is paired, connect, if not wait for device created
+		#if device is paired, connect, if not wait for device created (look at process conn)
 
     def _device_created(self, device_path):
 

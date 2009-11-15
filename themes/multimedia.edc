@@ -404,13 +404,7 @@ parts {
 	ACTIVATE("forward");
 	ACTIVATE("stop");
 	ACTIVATE("pause");
-	ACTIVATE("play");
-	
-	//ACTIVATE("forward");
-	//ACTIVATE("backward");
-	
-	
-	
+	ACTIVATE("play");	
 	
     	TRANSITION();
     }

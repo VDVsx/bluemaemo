@@ -1,3 +1,39 @@
+bluemaemo (0.3-7) unstable; urgency=low
+
+  * Fremantle test version - fixed d-bus call
+
+ -- Valerio Valerio <vdv100@gmail.com>  Thu, 20 Aug 2009 22:16:45 +0100
+
+bluemaemo (0.3-6) unstable; urgency=low
+
+  * Fremantle test version - fixed dependency version for libbluetooth
+
+ -- Valerio Valerio <vdv100@gmail.com>  Sun, 16 Aug 2009 11:06:47 +0100
+
+bluemaemo (0.3-5) unstable; urgency=low
+
+  * Fremantle test version - added missing dependency
+
+ -- Valerio Valerio <vdv100@gmail.com>  Sun, 16 Aug 2009 11:05:35 +0100
+
+bluemaemo (0.3-4) unstable; urgency=low
+
+  * Fremantle test version - UI improvements
+
+ -- Valerio Valerio <vdv100@gmail.com>  Sat, 15 Aug 2009 12:17:54 +0100
+
+bluemaemo (0.3-3) unstable; urgency=low
+
+  * Fremantle test version - fixed desktop file
+
+ -- Valerio Valerio <vdv100@gmail.com>  Tue, 11 Aug 2009 01:43:46 +0100
+
+bluemaemo (0.3-2) unstable; urgency=low
+
+  * Fremantle test version
+
+ -- Valerio Valerio <vdv100@gmail.com>  Tue, 11 Aug 2009 01:00:17 +0100
+
 bluemaemo (0.3-1) unstable; urgency=low
 
   * Added support for the hardware keyboard in all the profiles

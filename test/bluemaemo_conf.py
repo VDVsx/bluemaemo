@@ -22,6 +22,7 @@
 
 
 import ConfigParser
+import ecore
 import os
 import os.path
 
@@ -34,6 +35,7 @@ class bluemaemo_conf:
 		self.config = ConfigParser.ConfigParser()
 		try:
 			self.config.readfp(open(defaultsfile))
+			version = self.config.get("version", "version")
 
 		except:
 			os.system("mkdir /etc/bluemaemo/")
@@ -78,9 +80,18 @@ class bluemaemo_conf:
 			#autoconnect options
 			self.name = self.config.get("autoconnect","name")
 			self.addr = self.config.get("autoconnect", "addr")
-		except:
 
+		except:
+			
 			print "Error: Failed to read the config file"
+			try:
+				#try to restore the conf files
+				os.system("mkdir /etc/bluemaemo/")
+				os.system("cp /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/")
+			except:
+				print "Error: Failed to restore the config file"
+				
+			ecore.main_loop_quit()
 
 	def set_option(self,seccion,opt,value):
 		

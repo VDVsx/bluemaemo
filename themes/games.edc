@@ -40,11 +40,11 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 159 80;                                     
+                        offset: 159 76;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 244 206;                                   
+                        offset: 244 202;                                   
                     }                                                    
                     image { normal: "games_arrow_up.png"; }                                             
                     fill { smooth: 0; }                                        
@@ -67,11 +67,11 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 37 201;                                     
+                        offset: 38 197;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 163 286;                                   
+                        offset: 164 282;                                   
                         to: "swallow_clip";                              
                     }                                                    
                     image {normal: "games_arrow_left.png";}                                            
@@ -94,11 +94,11 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 159 282;                                     
+                        offset: 159 279;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 244 408;                                   
+                        offset: 244 403;                                   
                     }                                                    
                     image {normal: "games_arrow_down.png";}        
 		    fill { smooth: 0; }                                               
@@ -121,11 +121,11 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 241 201;                                     
+                        offset: 239 197;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 367 286;                                   
+                        offset: 365 282;                                   
                     }                                                    
                     image {normal: "games_arrow_right.png";}   
 		    fill { smooth: 0; }                                                      
@@ -147,13 +147,13 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 400 80;                                     
+                        offset: 400 76;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 486 165;                                   
+                        offset: 486 161;                                   
                     }                                                    
-                    image {normal: "games_button_released.png";}
+                    image {normal: "x_released.png";}
 	            fill { smooth: 0; }                                                
                                   
                                                                        
@@ -161,7 +161,7 @@ parts {
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "games_button_pressed.png";}     
+                    image {normal: "x_pressed.png";}     
 		    fill { smooth: 0; }      
                 }                                                        
             }    	
@@ -174,19 +174,19 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 540 100;                                     
+                        offset: 540 96;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 626 185;                                   
+                        offset: 626 181;                                   
                     }                                                    
-                    image {normal: "games_button_released.png";}                                              
+                    image {normal: "y_released.png";}                                              
                     fill { smooth: 0; }                                                                     
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "games_button_pressed.png";}  
+                    image {normal: "y_pressed.png";}  
 		    fill { smooth: 0; }      
                 }                                                        
             }    	
@@ -199,20 +199,20 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 680 120;                                     
+                        offset: 680 116;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 766 205;                                   
+                        offset: 766 201;                                   
                     }                                                    
-                    image {  normal: "games_button_released.png"; }                                            
+                    image {  normal: "z_released.png"; }                                            
                     fill { smooth: 0; }                        
                                                                         
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "games_button_pressed.png";}  
+                    image {normal: "z_pressed.png";}  
 		    fill { smooth: 0; }     
                 }                                                        
             }    	
@@ -225,19 +225,19 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 400 323;                                     
+                        offset: 400 318;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 486  408;                                   
+                        offset: 486  403;                                   
                     }                                                    
-                    image { normal: "games_button_released.png";}                                             
+                    image { normal: "a_released.png";}                                             
                     fill { smooth: 0; }                                                                                
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "games_button_pressed.png";} 
+                    image {normal: "a_pressed.png";} 
 		    fill { smooth: 0; }          
                 }                                                        
             }    	
@@ -250,19 +250,19 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 540 303;                                     
+                        offset: 540 298;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 626 388;                                   
+                        offset: 626 383;                                   
                     }                                                    
-                    image { normal: "games_button_released.png"; }                                             
+                    image { normal: "b_released.png"; }                                             
                     fill { smooth: 0; }                                                                    
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "games_button_pressed.png";}    
+                    image {normal: "b_pressed.png";}    
 		    fill { smooth: 0; }            
                 }                                                        
             }    													
@@ -276,19 +276,19 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 680 283;                                     
+                        offset: 680 278;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 766 368;                                   
+                        offset: 766 363;                                   
                     }                                                    
-                    image {normal: "games_button_released.png"; }      
+                    image {normal: "c_released.png"; }      
 		    fill { smooth: 0; }                                                          
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "games_button_pressed.png";}    
+                    image {normal: "c_pressed.png";}    
 		    fill { smooth: 0; }  
                 }                                                        
             } 
@@ -301,19 +301,19 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 0 80;                                     
+                        offset: 0 76;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 73 124;                                   
+                        offset: 73 120;                                   
                     }                                                    
-                    image {normal: "start_released.png"; }      
+                    image {normal: "1_released.png"; }      
 		    fill { smooth: 0; }                                                          
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "start_pressed.png";}    
+                    image {normal: "1_pressed.png";}    
 		    fill { smooth: 0; }  
                 }                                                        
             }    
@@ -326,19 +326,19 @@ parts {
                     state: "default" 0.0;                                
                     rel1 {                                               
                         relative: 0.0 0.0;     
-                        offset: 0 360;                                     
+                        offset: 0 359;                                     
                     }                                                    
                     rel2 {                                               
                         relative: 0.0 0.0;     
-                        offset: 73 404;                                   
+                        offset: 73 403;                                   
                     }                                                    
-                    image {normal: "start_released.png"; }      
+                    image {normal: "2_released.png"; }      
 		    fill { smooth: 0; }                                                          
                 }                                                        
                 description {                                            
                     state: "clicked" 0.0;                                
                     inherit: "default" 0.0;                              
-                    image {normal: "start_pressed.png";}    
+                    image {normal: "2_pressed.png";}    
 		    fill { smooth: 0; }  
                 }                                                        
             }    				   													
