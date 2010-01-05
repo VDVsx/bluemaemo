@@ -39,7 +39,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-from bluemaemo_server import *
+#from bluemaemo_server import *
 from bluemaemo_main import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
@@ -59,6 +59,7 @@ from bluemaemo_confirm_conn import *
 from bluemaemo_unable_conn import *
 from bluemaemo_process_conn import *
 from bluemaemo_hw_kb import *
+from bluemaemo_ps3_control import *
 
 WIDTH = 800
 HEIGHT = 480
@@ -696,8 +697,8 @@ class GUI(object):
 	
 	self.bluemaemo_conf = bluemaemo_conf()
 	self.load_local_confs()
-	#opt_fullscreen = False
-	opt_fullscreen = True
+	opt_fullscreen = False
+	#opt_fullscreen = True
         edje.frametime_set(1.0 / options.fps)
         self.evas_canvas = EvasCanvas(
             fullscreen = opt_fullscreen,
@@ -728,7 +729,7 @@ class GUI(object):
         self.groups["swallow"] = edje_group(self, "swallow")
         self.evas_canvas.evas_obj.data["swallow"] = self.groups["swallow"]
 
-        for page in ("main","mouse_ui", "menu", "disconnect", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "reconnect_list","confirm_conn","unable_conn","process_conn","wait_conn", "connection_status","new_device"):
+        for page in ("main","mouse_ui", "menu", "disconnect", "keyboard_ui","about","settings","games", "games_conf","multimedia","multimedia_conf","presentation","presentation_conf","conf_keys", "reconnect_list","confirm_conn","unable_conn","process_conn","wait_conn", "connection_status","new_device", "ps3_control", "ps3_control_conf"):
 		ctor = globals().get( page, None )
 		if ctor:
 			self.groups[page] = ctor( self )
@@ -753,10 +754,11 @@ class GUI(object):
 	self.pairable = False
 	self.new_device = False
 	self.paired_devices = {}
-	self.initialize_dbus()
-	self.check_bluez_version()
-	self.check_bt_status()
-	self.check_autoconnect()
+	#self.initialize_dbus()
+	#self.check_bluez_version()
+	#self.check_bt_status()
+	#self.check_autoconnect()
+	#self.export_session_bus()
 
     def check_bluez_version(self):
 
@@ -902,12 +904,31 @@ class GUI(object):
 
         try:
             self.bus = SystemBus( mainloop=e_dbus.DBusEcoreMainLoop() )
+	    
         except DBusException, e:
-            print "could not connect to dbus_object system bus:", e
+            print "Error: Could not connect to dbus_object system bus:", e
             return False
 
+    def export_session_bus(self):
 
+	if self.bluez_version == 3:
+		pass
 
+	else:
+		try:
+			session_bus_file = open('/tmp/session_bus_address.user', 'r')
+			session_bus_command = session_bus_file.readline()
+			b = session_bus_command.split('=')
+			var = b[1] + "=" + b[2] + "=" + b[3] 
+			var = var.split('\'')
+			print var
+			os.putenv("DBUS_SESSION_BUS_ADDRESS", var[1])
+
+		except:
+			
+			print "ERROR: Could not export the session bus"
+
+		
     def power_on_bt(self):
 	
 	os.system("dbus-send --system --type=method_call --dest=org.bluez /org/bluez/hci0 org.bluez.Adapter.SetMode string:discoverable")
@@ -1223,7 +1244,11 @@ class EvasCanvas(object):
 
     def on_delete_request(self, evas_obj):
 
-	self.main.connection.terminate_connection()
+	try:
+		self.main.connection.terminate_connection()
+	except:
+		print "INFO: Connection is not initialized"
+
 	self.main.on_exit()
 	ecore.main_loop_quit()
 #----------------------------------------------------------------------------#

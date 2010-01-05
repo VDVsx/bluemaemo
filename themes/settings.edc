@@ -238,8 +238,8 @@ parts {
              }
 	}
 
-	CLICK_ANIMATION("auto_connect_option",0.47,0.66,0.52,0.62);
-	
+	//CLICK_ANIMATION("auto_connect_option",0.47,0.66,0.52,0.62);
+	/*
 	part {
 		
                 name: "auto_connect";
@@ -289,7 +289,7 @@ parts {
                         align: 0.0 0.0;
                     }
              }
-	}
+	}*/
 
 	part {								
             name: "current_device";						
@@ -392,7 +392,7 @@ parts {
 	//CLICK_ANIMATION_PROG("fullscreen_option");
 	CLICK_ANIMATION_PROG("scroll_left_icon"); 
 	CLICK_ANIMATION_PROG("scroll_right_icon");
-	CLICK_ANIMATION_PROG("auto_connect_option");
+	//CLICK_ANIMATION_PROG("auto_connect_option");
 	ACTIVATE("back");
 	ACTIVATE("task_switcher");
 	ACTIVATE("current_device");

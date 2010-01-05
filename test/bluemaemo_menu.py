@@ -114,6 +114,10 @@ class menu(edje_group):
 		elif source == "games":
 			
 			self.main.transition_to("games")
+		
+		elif source == "ps3":
+			
+			self.main.transition_to("ps3_control")
 
 
 		elif source == "connection":
@@ -135,6 +139,6 @@ class menu(edje_group):
 
 			self.main.transition_to("settings")			
 		else:
-			
+			print source
 			print "feature not implemented yet :) "
 

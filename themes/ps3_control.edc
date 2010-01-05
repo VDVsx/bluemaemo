@@ -1,0 +1,447 @@
+/*
+*
+*      ps3_control.edc
+*
+*      Copyright 2009 	Valerio Valerio <vdv100@gmail.com>
+*						
+*
+*      This program is free software; you can redistribute it and/or modify
+*      it under the terms of the GNU General Public License as published by
+*      the Free Software Foundation; either version 2 of the License, or
+*      (at your option) any later version.
+*
+*      This program is distributed in the hope that it will be useful,
+*      but WITHOUT ANY WARRANTY; without even the implied warranty of
+*      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*      GNU General Public License for more details.
+*
+*      You should have received a copy of the GNU General Public License
+*      along with this program; if not, write to the Free Software
+*      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+*/
+
+parts {
+
+	   SWALLOWCLIP();
+		
+	   BACKGROUND(0);
+
+           TOP_BAR();
+           BACK();
+	   TASK_SWITCHER();
+	   BOTTOM_BAR();
+	   SETTINGS();
+
+	part {                                                      
+                name: "up";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 159 76;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 244 202;                                   
+                    }                                                    
+                    image { normal: "games_arrow_up.png"; }                                             
+                    fill { smooth: 0; }                                        
+                                                                        
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_arrow_up_pressed.png";}   
+		    fill { smooth: 0; }   
+                           
+                }                                                        
+            }    							
+	                                                      		 
+	part {                                                      
+                name: "left";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 38 197;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 164 282;                                   
+                        to: "swallow_clip";                              
+                    }                                                    
+                    image {normal: "games_arrow_left.png";}                                            
+                    fill { smooth: 0; }
+                                                                        
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_arrow_left_pressed.png";} 
+		    fill { smooth: 0; }     
+                }                                                        
+            }    							
+	                                                      		
+	part {                                                      
+                name: "down";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 159 279;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 244 403;                                   
+                    }                                                    
+                    image {normal: "games_arrow_down.png";}        
+		    fill { smooth: 0; }                                               
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_arrow_down_pressed.png";}    
+		    fill { smooth: 0; }       
+                }                                                        
+            }    							
+	                                                      		
+            
+	
+	part {                                                      
+                name: "right";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 239 197;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 365 282;                                   
+                    }                                                    
+                    image {normal: "games_arrow_right.png";}   
+		    fill { smooth: 0; }                                                      
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "games_arrow_right_pressed.png";}      
+		    fill { smooth: 0; }     
+                }                                                        
+            }
+
+	part {                                                      
+                name: "select";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 302 76;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 394 120;                                   
+                    }                                                    
+                    image {normal: "select_ps3_released.png";}
+	            fill { smooth: 0; }                                                
+                                  
+                                                                       
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "select_ps3_pressed.png";}     
+		    fill { smooth: 0; }      
+                }                                                        
+            }    
+
+	part {                                                      
+                name: "start";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 404 76;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 496 120;                                   
+                    }                                                    
+                    image {normal: "start_ps3_released.png";}
+	            fill { smooth: 0; }                                                
+                                  
+                                                                       
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "start_ps3_pressed.png";}     
+		    fill { smooth: 0; }      
+                }                                                        
+            }    	  	    							
+	                                                      		
+
+	part {                                                      
+                name: "triangle";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 556 76;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 642 161;                                   
+                    }                                                    
+                    image {normal: "triangle_released.png";}
+	            fill { smooth: 0; }                                                
+                                  
+                                                                       
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "triangle_pressed.png";}     
+		    fill { smooth: 0; }      
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "square";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 435 197;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 521 282;                                   
+                    }                                                    
+                    image {normal: "square_released.png";}                                              
+                    fill { smooth: 0; }                                                                     
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "square_pressed.png";}  
+		    fill { smooth: 0; }      
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "circle";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 667 197;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 753 282;                                   
+                    }                                                    
+                    image {  normal: "circle_released.png"; }                                            
+                    fill { smooth: 0; }                        
+                                                                        
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "circle_pressed.png";}  
+		    fill { smooth: 0; }     
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "menu";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 356 318;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 442  403;                                   
+                    }                                                    
+                    image { normal: "menu_released.png";}                                             
+                    fill { smooth: 0; }                                                                                
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "menu_pressed.png";} 
+		    fill { smooth: 0; }          
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "cross";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 556 318;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 642 403;                                   
+                    }                                                    
+                    image { normal: "cross_released.png"; }                                             
+                    fill { smooth: 0; }                                                                    
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "cross_pressed.png";}    
+		    fill { smooth: 0; }            
+                }                                                        
+            }    													
+
+	part {                                                      
+                name: "L1";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 0 76;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 73 120;                                   
+                    }                                                    
+                    image {normal: "L1_released.png"; }      
+		    fill { smooth: 0; }                                                          
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "L1_pressed.png";}    
+		    fill { smooth: 0; }  
+                }                                                        
+            }    
+
+	part {                                                      
+                name: "L2";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 0 359;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 73 403;                                   
+                    }                                                    
+                    image {normal: "L2_released.png"; }      
+		    fill { smooth: 0; }                                                          
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "L2_pressed.png";}    
+		    fill { smooth: 0; }  
+                }                                                        
+            }    	
+
+	part {                                                      
+                name: "R1";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 727 76;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 800 120;                                   
+                    }                                                    
+                    image {normal: "R1_released.png"; }      
+		    fill { smooth: 0; }                                                          
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "R1_pressed.png";}    
+		    fill { smooth: 0; }  
+                }                                                        
+            }    
+
+	part {                                                      
+                name: "R2";                                	 
+                mouse_events: 1;                                         
+                type: IMAGE;                                             
+                description {                                            
+                    state: "default" 0.0;                                
+                    rel1 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 727 359;                                     
+                    }                                                    
+                    rel2 {                                               
+                        relative: 0.0 0.0;     
+                        offset: 800 403;                                   
+                    }                                                    
+                    image {normal: "R2_released.png"; }      
+		    fill { smooth: 0; }                                                          
+                }                                                        
+                description {                                            
+                    state: "clicked" 0.0;                                
+                    inherit: "default" 0.0;                              
+                    image {normal: "R2_pressed.png";}    
+		    fill { smooth: 0; }  
+                }                                                        
+            }    						   													
+	                                                                		                                      		
+          
+	
+    }
+    programs {
+	ACTIVATE("back");
+	ACTIVATE("task_switcher");
+	ACTIVATE("settings");
+	ACTIVATE("left");
+	ACTIVATE("right");
+	ACTIVATE("up");
+	ACTIVATE("down");
+	ACTIVATE("select");
+	ACTIVATE("start");
+	ACTIVATE("triangle");
+	ACTIVATE("square");
+	ACTIVATE("circle");
+	ACTIVATE("menu");
+	ACTIVATE("cross");
+	ACTIVATE("L1");
+	ACTIVATE("L2");
+	ACTIVATE("R1");
+	ACTIVATE("R2");
+    	TRANSITION();
+    }

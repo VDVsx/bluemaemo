@@ -89,7 +89,6 @@ images {
   image: "about_icon.png" COMP;
   image: "conf_icon.png" COMP;
   image: "maemo_logo.png" COMP;
-  image: "error.png" COMP;
   image: "next_icon.png" COMP;
   image: "previous_icon.png" COMP;
   image: "fullscreen_icon.png" COMP;
@@ -156,6 +155,30 @@ images {
   image: "red_yes.png" COMP;
   image: "red_released_yes.png" COMP;
   image: "disconnected_dialog.png" COMP;
+  image: "L1_released.png" COMP;
+  image: "L1_pressed.png" COMP;
+  image: "L2_released.png" COMP;
+  image: "L2_pressed.png" COMP;
+  image: "circle_released.png" COMP;
+  image: "circle_pressed.png" COMP;
+  image: "cross_released.png" COMP;
+  image: "cross_pressed.png" COMP;
+  image: "square_released.png" COMP;
+  image: "square_pressed.png" COMP;
+  image: "triangle_released.png" COMP;
+  image: "triangle_pressed.png" COMP;
+  image: "start_ps3_released.png" COMP;
+  image: "start_ps3_pressed.png" COMP;
+  image: "select_ps3_released.png" COMP;
+  image: "select_ps3_pressed.png" COMP;
+  image: "menu_released.png" COMP;
+  image: "menu_pressed.png" COMP;
+  image: "R1_released.png" COMP;
+  image: "R1_pressed.png" COMP;
+  image: "R2_released.png" COMP;
+  image: "R2_pressed.png" COMP;
+
+
 
 
 }
@@ -2284,6 +2307,14 @@ group {
 	 group {
 		name: "games";
 		#include "games.edc"
+	 }
+	 group {
+		name: "ps3_control";
+		#include "ps3_control.edc"
+	 }
+	 group {
+		name: "ps3_control_conf";
+		#include "ps3_control_conf.edc"
 	 }
 	 group {
 		name: "games_conf";
