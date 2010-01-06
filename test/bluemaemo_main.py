@@ -105,7 +105,10 @@ class main(edje_group):
 			if self.main.paired_devices[name] == address:
 
 				self.main.current_adapter_addr = address
-				self.main.current_adapter_name = name
+				if name == "":
+					self.main.current_adapter_name = "PlayStation 3"
+				else:
+					self.main.current_adapter_name = name
 				self.main.transition_to("confirm_conn")
 		
 		#if device is paired, connect, if not wait for device created (look at process conn)
@@ -115,7 +118,10 @@ class main(edje_group):
 		print "Info: New Device paired"
 		device = dbus.Interface(self.bus.get_object("org.bluez", device_path),"org.bluez.Device")
 		properties = device.GetProperties()
-		self.main.current_adapter_name = properties["Name"]
+		if properties["Name"] == "":
+			self.main.current_adapter_name = "PlayStation 3"
+		else:
+			self.main.current_adapter_name = properties["Name"]
 		self.main.current_adapter_addr =  properties["Address"]
 		self.main.transition_to("confirm_conn")
 		#try to connect here

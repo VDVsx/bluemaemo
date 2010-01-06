@@ -867,7 +867,10 @@ class GUI(object):
 			properties = device.GetProperties()
 			client_name = properties["Name"].encode('utf8')
 			client_addr =  properties["Address"]
-			self.paired_devices[str(client_name)] = str(client_addr)
+			if str(client_name) == "":
+				self.paired_devices["PlayStation 3"] = str(client_addr)
+			else:
+				self.paired_devices[str(client_name)] = str(client_addr)
 
     def update_paired_devices(self):
 
@@ -883,7 +886,12 @@ class GUI(object):
 		properties = device.GetProperties()
 		client_name = properties["Name"].encode('utf8')
 		client_addr =  properties["Address"]
-		self.paired_devices[str(client_name)] = str(client_addr)
+		if str(client_name) == "":
+			self.paired_devices["PlayStation 3"] = str(client_addr)
+		else:
+			self.paired_devices[str(client_name)] = str(client_addr)
+	print "devices list updated"
+
 
     def check_first_time(self):
 

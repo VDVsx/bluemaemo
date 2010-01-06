@@ -59,27 +59,23 @@ class reconnect_list(edje_group):
 			
 	def onShow( self ):
 		self.focus = True
-		self.main.update_paired_devices
-
-		if self.constructed:
-			self.li.go()
-			self.li.show()
-		else:
-			self.li = elementary.List(self)
-		    	self.li.size_hint_weight_set(1.0, 1.0)
-		    	self.li.size_hint_align_set(-1.0, -1.0)
-			self.li.geometry_set(0,54, 800,372)
-			self.li.show()
-	
-			labels_sorted = self.main.paired_devices.keys()
-			labels_sorted.sort()
-			for item in labels_sorted:
-
-				item_list = self.li.item_append(item, None, None , self.list_item_cb)
-				
+		self.main.update_paired_devices()
 		
-		    	self.li.go()
-			self.constructed = True
+		self.li = elementary.List(self)
+	    	self.li.size_hint_weight_set(1.0, 1.0)
+	    	self.li.size_hint_align_set(-1.0, -1.0)
+		self.li.geometry_set(0,54, 800,372)
+		self.li.show()
+
+		labels_sorted = self.main.paired_devices.keys()
+		labels_sorted.sort()
+		for item in labels_sorted:
+
+			item_list = self.li.item_append(item, None, None , self.list_item_cb)
+			
+	
+	    	self.li.go()
+
 
     	def onHide( self ):
 		self.focus = False
