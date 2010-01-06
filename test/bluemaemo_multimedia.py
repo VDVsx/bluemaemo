@@ -147,7 +147,6 @@ class multimedia(edje_group):
 
 	elif source == "previous":
 
-
 		key = self.main.previous_key_m
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)

@@ -1086,7 +1086,7 @@ class GUI(object):
 
 	elif button_name == "Rewind":
 
-		self.backward_key = key
+		self.rewind_key = key
 		self.bluemaemo_conf.set_option("multimedia","rewind_key",key)
 
 	elif button_name == "Volume +":
@@ -1101,7 +1101,7 @@ class GUI(object):
 
 	elif button_name == "Mute":
 
-		self.volume_m_key = key
+		self.mute_key = key
 		self.bluemaemo_conf.set_option("multimedia","mute_key",key)
 	
 	
@@ -1117,12 +1117,12 @@ class GUI(object):
 
 	elif button_name == "Previous" and profile == "multimedia":
 
-		self.previous_key = key
+		self.previous_key_m = key
 		self.bluemaemo_conf.set_option("multimedia","previous_key_m",key)
 
 	elif button_name == "Next" and profile == "multimedia":
 
-		self.next_key = key
+		self.next_key_m = key
 		self.bluemaemo_conf.set_option("multimedia","next_key_m",key)
 
 	elif button_name == "Up":
