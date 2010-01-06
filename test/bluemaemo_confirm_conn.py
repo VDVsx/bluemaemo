@@ -66,7 +66,7 @@ class confirm_conn(edje_group):
 
 	if source == "back":
 
-		self.main.transition_to("reconnect_list")
+		self.main.transition_to("main")
 
 	elif source == "task_switcher":
 
@@ -74,7 +74,7 @@ class confirm_conn(edje_group):
 
 	elif source == "no_option":
 		
-		self.main.transition_to("reconnect_list")
+		self.main.transition_to("main")
 
 	elif source == "yes_option":
 	

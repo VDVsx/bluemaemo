@@ -54,7 +54,7 @@ class reconnect_list(edje_group):
 		client_addr = self.main.paired_devices[label]
 		self.main.current_adapter_addr = client_addr
 		self.main.current_adapter_name = label
-		self.main.transition_to("confirm_conn")
+		self.main.transition_to("process_conn")
 		self.obj.selected_set(0)
 			
 	def onShow( self ):
@@ -70,7 +70,6 @@ class reconnect_list(edje_group):
 		    	self.li.size_hint_align_set(-1.0, -1.0)
 			self.li.geometry_set(0,54, 800,372)
 			self.li.show()
-			print "cenas"
 	
 			labels_sorted = self.main.paired_devices.keys()
 			labels_sorted.sort()

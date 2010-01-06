@@ -29,7 +29,7 @@ import ecore
 import ecore.x
 import ecore.evas
 from bluemaemo_edje_group import *
-#from bluemaemo_server import *
+from bluemaemo_server import *
 
 #----------------------------------------------------------------------------#
 class main(edje_group):
@@ -45,7 +45,7 @@ class main(edje_group):
 	self.part_text_set( "reconnect_text", "Reconnect")
 	self.main = main
 	
-	ecore.timer_add(1.0,self.main.transition_to,"menu")
+	#ecore.timer_add(1.0,self.main.transition_to,"menu")
     
     def onShow( self ):
 	self.main.new_device = False

@@ -39,7 +39,7 @@ from dbus import SystemBus, Interface
 from dbus.exceptions import DBusException
 from optparse import OptionParser
 
-#from bluemaemo_server import *
+from bluemaemo_server import *
 from bluemaemo_main import *
 from bluemaemo_key_mapper import *
 from bluemaemo_conf import *
@@ -697,8 +697,8 @@ class GUI(object):
 	
 	self.bluemaemo_conf = bluemaemo_conf()
 	self.load_local_confs()
-	opt_fullscreen = False
-	#opt_fullscreen = True
+	#opt_fullscreen = False
+	opt_fullscreen = True
         edje.frametime_set(1.0 / options.fps)
         self.evas_canvas = EvasCanvas(
             fullscreen = opt_fullscreen,
@@ -754,11 +754,11 @@ class GUI(object):
 	self.pairable = False
 	self.new_device = False
 	self.paired_devices = {}
-	#self.initialize_dbus()
-	#self.check_bluez_version()
-	#self.check_bt_status()
-	#self.check_autoconnect()
-	#self.export_session_bus()
+	self.initialize_dbus()
+	self.check_bluez_version()
+	self.check_bt_status()
+	self.check_autoconnect()
+	self.export_session_bus()
 
     def check_bluez_version(self):
 
@@ -865,7 +865,7 @@ class GUI(object):
 			
 			device = dbus.Interface(self.bus.get_object("org.bluez", item),"org.bluez.Device")
 			properties = device.GetProperties()
-			client_name = properties["Name"]
+			client_name = properties["Name"].encode('utf8')
 			client_addr =  properties["Address"]
 			self.paired_devices[str(client_name)] = str(client_addr)
 
@@ -881,7 +881,7 @@ class GUI(object):
 		
 		device = dbus.Interface(self.bus.get_object("org.bluez", item),"org.bluez.Device")
 		properties = device.GetProperties()
-		client_name = properties["Name"]
+		client_name = properties["Name"].encode('utf8')
 		client_addr =  properties["Address"]
 		self.paired_devices[str(client_name)] = str(client_addr)
 
