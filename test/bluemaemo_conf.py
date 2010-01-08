@@ -36,6 +36,10 @@ class bluemaemo_conf:
 		try:
 			self.config.readfp(open(defaultsfile))
 			version = self.config.get("version", "version")
+			if version != "0.3.10":
+				os.system("cp /root/test/bluemaemo.cfg /etc/bluemaemo/")
+				print "new config file moved"
+				#os.system("cp /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/")
 
 		except:
 			os.system("mkdir /etc/bluemaemo/")
@@ -77,6 +81,22 @@ class bluemaemo_conf:
 			self.z_key = self.config.get("games", "z_key")
 			self.one_key = self.config.get("games", "one_key")
 			self.two_key = self.config.get("games", "two_key")
+			#PS3 profile
+			self.up_p_key = self.config.get("ps3","up_p_key")
+			self.down_p_key = self.config.get("ps3","down_p_key")
+			self.right_p_key = self.config.get("ps3","right_p_key")
+			self.left_p_key = self.config.get("ps3","left_p_key")
+			self.select_key = self.config.get("ps3","select_key")
+			self.start_key = self.config.get("ps3","start_key")
+			self.triangle_key = self.config.get("ps3","triangle_key")
+			self.square_key = self.config.get("ps3","square_key")
+			self.circle_key = self.config.get("ps3","circle_key")
+			self.cross_key = self.config.get("ps3","cross_key")
+			self.menu_key = self.config.get("ps3","menu_key")
+			self.l1_key = self.config.get("ps3","l1_key")
+			self.l2_key = self.config.get("ps3","l2_key")
+			self.r1_key = self.config.get("ps3","r1_key")
+			self.r2_key = self.config.get("ps3","r2_key")
 			#autoconnect options
 			self.name = self.config.get("autoconnect","name")
 			self.addr = self.config.get("autoconnect", "addr")

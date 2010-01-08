@@ -68,7 +68,9 @@ def key_dec(self,key):
 	self.sp = False
 	self.modif = ""
 	self.val = ""
-	if len(key) < 4:
+	if key == "win":
+		return "08", "00"
+	elif len(key) < 4:
 		value = self.main.key_mapper.mapper[str(key)]
 		return "00", value
 

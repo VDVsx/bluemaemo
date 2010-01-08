@@ -1037,6 +1037,22 @@ class GUI(object):
 	self.z_key = self.bluemaemo_conf.z_key
 	self.one_key = self.bluemaemo_conf.one_key
 	self.two_key = self.bluemaemo_conf.two_key
+	#ps3 profile
+	self.up_p_key = self.bluemaemo_conf.up_p_key
+	self.down_p_key = self.bluemaemo_conf.down_p_key
+	self.right_p_key = self.bluemaemo_conf.right_p_key
+	self.left_p_key = self.bluemaemo_conf.left_p_key
+	self.select_key = self.bluemaemo_conf.select_key 
+	self.start_key = self.bluemaemo_conf.start_key
+	self.triangle_key = self.bluemaemo_conf.triangle_key
+	self.square_key = self.bluemaemo_conf.square_key
+	self.circle_key = self.bluemaemo_conf.circle_key
+	self.cross_key = self.bluemaemo_conf.cross_key
+	self.menu_key = self.bluemaemo_conf.menu_key
+	self.l1_key = self.bluemaemo_conf.l1_key
+	self.l2_key = self.bluemaemo_conf.l2_key
+	self.r1_key = self.bluemaemo_conf.r1_key
+	self.r2_key = self.bluemaemo_conf.r2_key
 	#autoconnect options
 	self.auto_name = self.bluemaemo_conf.name
 	self.auto_addr = self.bluemaemo_conf.addr
@@ -1184,6 +1200,81 @@ class GUI(object):
 
 		self.two_key = key
 		self.bluemaemo_conf.set_option("games","two_key",key)
+
+	elif button_name == "Up" and profile == "ps3_control":
+
+		self.up_p_key = key
+		self.bluemaemo_conf.set_option("ps3","up_p_key",key)
+
+	elif button_name == "Down" and profile == "ps3_control":
+
+		self.down_p_key = key
+		self.bluemaemo_conf.set_option("ps3","down_p_key",key)
+
+	elif button_name == "Right" and profile == "ps3_control":
+
+		self.right_p_key = key
+		self.bluemaemo_conf.set_option("ps3","right_p_key",key)
+
+	elif button_name == "Left" and profile == "ps3_control":
+
+		self.left_p_key = key
+		self.bluemaemo_conf.set_option("ps3","left_p_key",key)
+
+	elif button_name == "Select":
+
+		self.select_key = key
+		self.bluemaemo_conf.set_option("ps3","select_key",key)
+
+	elif button_name == "Start":
+
+		self.start_key = key
+		self.bluemaemo_conf.set_option("ps3","start_key",key)
+
+	elif button_name == "Triangle":
+
+		self.triangle_key = key
+		self.bluemaemo_conf.set_option("ps3","triangle_key",key)
+
+	elif button_name == "Square":
+
+		self.square_key = key
+		self.bluemaemo_conf.set_option("ps3","square_key",key)
+
+	elif button_name == "Circle":
+
+		self.circle_key = key
+		self.bluemaemo_conf.set_option("ps3","circle_key",key)
+
+	elif button_name == "Menu":
+
+		self.menu_key = key
+		self.bluemaemo_conf.set_option("ps3","menu_key",key)
+
+	elif button_name == "Cross":
+
+		self.cross_key = key
+		self.bluemaemo_conf.set_option("ps3","cross_key",key)
+
+	elif button_name == "L1":
+
+		self.l1_key = key
+		self.bluemaemo_conf.set_option("ps3","l1_key",key)
+
+	elif button_name == "L2":
+
+		self.l2_key = key
+		self.bluemaemo_conf.set_option("ps3","l2_key",key)
+
+	elif button_name == "R1":
+
+		self.r1_key = key
+		self.bluemaemo_conf.set_option("ps3","r1_key",key)
+
+	elif button_name == "R2":
+
+		self.r2_key = key
+		self.bluemaemo_conf.set_option("ps3","r2_key",key)
 
 
     def task_switcher(self):

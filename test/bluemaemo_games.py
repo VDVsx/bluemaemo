@@ -251,7 +251,7 @@ class games_conf(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
         edje_group.__init__(self, main, "games_conf")
-	self.part_text_set( "menu_title", "Multimedia settings" )
+	self.part_text_set( "menu_title", "Games settings" )
 	count = 0
 	self.key_value = ""    
 	self.constructed = False
