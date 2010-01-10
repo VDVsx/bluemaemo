@@ -59,6 +59,7 @@ class unable_conn(edje_group):
 
 	if source == "quit":
 
+		self.main.on_exit()
 		ecore.main_loop_quit()
 
 	elif source == "ok_option":

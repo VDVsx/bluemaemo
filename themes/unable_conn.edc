@@ -27,7 +27,6 @@ parts {
 	   BACKGROUND(0);
 	   TOP_BAR();
 	   TASK_SWITCHER();
-  	   BACK();
 
 	   BOTTOM_BAR_CENTERED();
 
@@ -129,8 +128,6 @@ parts {
                     }
              }
 	}		
-
-
 	
 	QUIT();
 	

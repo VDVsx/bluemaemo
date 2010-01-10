@@ -1,7 +1,7 @@
 #
-#      bluemaemo_games.py
+#      bluemaemo_ps3_control.py
 #
-#      Copyright 2008 -2009 	Valerio Valerio <vdv100@gmail.com>
+#      Copyright 2009 Valerio Valerio <vdv100@gmail.com>
 #						
 #
 #      This program is free software; you can redistribute it and/or modify
@@ -35,23 +35,15 @@ from bluemaemo_edje_group import *
 
 
 #----------------------------------------------------------------------------#
-class games(edje_group):
+class ps3_control(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
-        edje_group.__init__(self, main, "games")
-	self.part_text_set( "menu_title", "Gamepad" )
-	self.key_pressed = False
-	self.current_key= ""
-	self.current_modif= ""
-	self.press = False
-	self.first_time = True
-
-	self.accel = Read_accelerometer(self)
+        edje_group.__init__(self, main, "ps3_control")
+	self.part_text_set( "menu_title", "PS3 Control" )	
 
     def onShow( self ):
 	self.focus = True
     
-
     def onHide( self ):
 	self.focus = False
 
@@ -80,138 +72,97 @@ class games(edje_group):
 	
 	if source == "up":
 
-
 		key = self.main.up_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val  #check if this is in use
-		self.current_modif= modif
 
 	elif source == "down":
-
 
 		key = self.main.down_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
-
+		
 	elif source == "left":
 
 
 		key = self.main.left_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.current_key= val
-		self.current_modif= modif
-
+		
 	elif source == "right":
+
 
 		key = self.main.right_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
 
-	elif source == "A":
-			
-		key = self.main.a_key
+	elif source == "select":
+
+		key = self.main.select_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
 	
-	elif source == "B":
+	elif source == "start":
 
-		
-		key = self.main.b_key
+		key = self.main.start_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
 
-	elif source == "C":
+	elif source == "triangle":
 
-
-		key = self.main.c_key
+		key = self.main.triangle_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif, val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
+		
+	elif source == "square":
 
-	elif source == "X":
-
-
-		key = self.main.x_key
+		key = self.main.square_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
+	
+	elif source == "circle":
 
-	elif source == "Y":
-
-
-		key = self.main.y_key
+		key = self.main.circle_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif, val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
-	
-	elif source == "Z":
+		
+	elif source == "menu":
 
 
-		key = self.main.z_key
+		key = self.main.menu_key
 		modif, val = key_dec(self,key)
 		self.main.connection.send_keyboard_event(modif,val)
-		self.key_pressed = True
-		self.current_key= val
-		self.current_modif= modif
-
-	elif source == "one":
 		
-		if self.accel.accel_on:
-			 self.accel.accel_on = False
-			 self.signal_emit("deactivate_accelerometer","")
-		else:
-			self.accel.accel_on = True
-			#self.signal_emit("activate_accelerometer","")
-			self.accel.read_dir(self.main)
-
-		#key = self.main.one_key
-		#modif, val = key_dec(self,key)
-		#self.main.connection.send_keyboard_event(modif, val)
-		#self.key_pressed = True
-		#self.current_key= val
-		#self.current_modif= modif
+	elif source == "cross":
 
 
-	elif source == "two":
-		
-		if not self.press:
-			self.press = True
-			self.accel.air_mouse(self.main)
-			self.first_time = False
+		key = self.main.cross_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif, val)
 
-		else:
-			self.press = False
-			self.first_time = True
-			self.signal_emit("deactivate_air_mouse","")
+	elif source == "L1":
 
-		#key = self.main.two_key
-		#modif, val = key_dec(self,key)
-		#self.main.connection.send_keyboard_event('0','40')
-		#self.key_pressed = True
-		#self.current_key= val
-		#self.current_modif= modif
+		key = self.main.l1_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
 
+	elif source == "L2":
+
+		key = self.main.l2_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
+
+	elif source == "R1":
+
+		key = self.main.r1_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
+
+	elif source == "R2":
+
+		key = self.main.r2_key
+		modif, val = key_dec(self,key)
+		self.main.connection.send_keyboard_event(modif,val)
 
     @edje.decorators.signal_callback("mouse,up,1", "*")
     def on_edje_signal_button_released(self, emission, source):
@@ -225,49 +176,54 @@ class games(edje_group):
 
 	elif source == "settings":
 
-		self.main.transition_to("games_conf")
+		self.main.transition_to("ps3_control_conf")
 
 	else:
 		self.main.connection.release_keyboard_event()
 		self.key_pressed = False
 
 #----------------------------------------------------------------------------#
-class games_conf(edje_group):
+class ps3_control_conf(edje_group):
 #----------------------------------------------------------------------------#
     def __init__(self, main):
-        edje_group.__init__(self, main, "games_conf")
-	self.part_text_set( "menu_title", "Games settings" )
+        edje_group.__init__(self, main, "ps3_control_conf")
+	self.part_text_set( "menu_title", "PS3 Control settings" )
 	count = 0
 	self.key_value = ""    
 	self.constructed = False
-	self.up_key = ""
-	self.down_key = ""
-	self.right_key = ""
-	self.left_key = ""
-	self.a_key = ""
-	self.b_key = ""
-	self.c_key = ""
-	self.x_key = ""
-	self.y_key = ""
-	self.z_key = ""
-	self.one_key = ""
-	self.two_key = ""
+	self.up_p_key = ""
+	self.down_p_key = ""
+	self.right_p_key = ""
+	self.left_p_key = ""
+	self.select_key = ""
+	self.start_key = ""
+	self.triangle_key = ""
+	self.square_key = ""
+	self.circle_key = ""
+	self.cross_key = ""
+	self.menu_key = ""
+	self.l1_key = ""
+	self.l2_key = ""
+	self.r1_key = ""
+	self.r2_key = ""
 
-	self.up_key_lb = elementary.Label(self)
-	self.down_key_lb = elementary.Label(self)
-	self.right_key_lb = elementary.Label(self)
-	self.left_key_lb = elementary.Label(self)
-	self.a_key_lb = elementary.Label(self)
-	self.b_key_lb = elementary.Label(self)
-	self.c_key_lb = elementary.Label(self)
-	self.x_key_lb = elementary.Label(self)
-	self.y_key_lb = elementary.Label(self)
-	self.z_key_lb = elementary.Label(self)
-	self.one_key_lb = elementary.Label(self)
-	self.two_key_lb = elementary.Label(self)
-	
+	self.up_p_key_lb = elementary.Label(self)
+	self.down_p_key_lb = elementary.Label(self)
+	self.right_p_key_lb = elementary.Label(self)
+	self.left_p_key_lb = elementary.Label(self)
+	self.select_key_lb = elementary.Label(self)
+	self.start_key_lb = elementary.Label(self)
+	self.triangle_key_lb = elementary.Label(self)
+	self.square_key_lb = elementary.Label(self)
+	self.circle_key_lb = elementary.Label(self)
+	self.cross_key_lb = elementary.Label(self)
+	self.menu_key_lb = elementary.Label(self)
+	self.l1_key_lb = elementary.Label(self)
+	self.l2_key_lb = elementary.Label(self)
+	self.r1_key_lb = elementary.Label(self)
+	self.r2_key_lb = elementary.Label(self)
 
-	for i in (self.main.up_key,self.main.down_key,self.main.right_key,self.main.left_key,self.main.a_key,self.main.b_key, self.main.c_key, self.main.x_key, self.main.y_key, self.main.z_key, self.main.one_key, self.main.two_key ):
+	for i in (self.main.up_p_key,self.main.down_p_key,self.main.right_p_key,self.main.left_p_key,self.main.select_key,self.main.start_key, self.main.triangle_key, self.main.square_key, self.main.circle_key, self.main.cross_key, self.main.menu_key, self.main.l1_key, self.main.l2_key, self.main.r1_key, self.main.r1_key ):
 
 		if len(i) > 6 and i[0] == "s":
 			#shift translation
@@ -287,75 +243,90 @@ class games_conf(edje_group):
 			text_value = i
 			count +=1
 		if count == 1:
-			self.up_key = text_value
+			self.up_p_key = text_value
 		elif count == 2:
-			self.down_key = text_value
+			self.down_p_key = text_value
 		elif count == 3:
-			self.right_key = text_value
+			self.right_p_key = text_value
 		elif count == 4:
-			self.left_key = text_value
+			self.left_p_key = text_value
 		elif count == 5:
-			self.a_key = text_value
+			self.select_key = text_value
 		elif count == 6:
-			self.b_key = text_value
+			self.start_key = text_value
 		elif count == 7:
-			self.c_key = text_value
+			self.triangle_key = text_value
 		elif count == 8:
-			self.x_key = text_value
+			self.square_key = text_value
 		elif count == 9:
-			self.y_key = text_value
+			self.circle_key = text_value
 		elif count == 10:
-			self.z_key = text_value
+			self.cross_key = text_value
 		elif count == 11:
-			self.one_key = text_value
+			self.menu_key = text_value
 		elif count == 12:
-			self.two_key = text_value
-				
-	self.up_key_lb.label_set(self.up_key)
-	self.down_key_lb.label_set(self.down_key)
-	self.right_key_lb.label_set(self.right_key)
-	self.left_key_lb.label_set(self.left_key)
-	self.a_key_lb.label_set(self.a_key)
-	self.b_key_lb.label_set(self.b_key)
-	self.c_key_lb.label_set(self.c_key)
-	self.x_key_lb.label_set(self.x_key) 
-	self.y_key_lb.label_set(self.y_key) 
-	self.z_key_lb.label_set(self.z_key) 
-	self.one_key_lb.label_set(self.one_key) 
-	self.two_key_lb.label_set(self.two_key) 
-	
-	self.labels = {"Up":self.up_key_lb,
-		"Down":self.down_key_lb,
-		"Right":self.right_key_lb,
-		"Left":self.left_key_lb,
-		"A":self.a_key_lb,
-		"B":self.b_key_lb,
-		"C":self.c_key_lb,
-		"X":self.x_key_lb,
-		"Y":self.y_key_lb,
-		"Z":self.z_key_lb,
-		"1":self.one_key_lb,
-		"2":self.two_key_lb}
+			self.l1_key = text_value
+		elif count == 13:
+			self.l2_key = text_value
+		elif count == 14:
+			self.r1_key = text_value
+		elif count == 15:
+			self.r2_key = text_value
 
-	self.items = {"Up":self.up_key,
-		"Down":self.down_key,
-		"Right":self.right_key,
-		"Left":self.left_key,
-		"A":self.a_key,
-		"B":self.b_key,
-		"C":self.c_key,
-		"X":self.x_key,
-		"Y":self.y_key,
-		"Z":self.z_key,
-		"1":self.one_key,
-		"2":self.two_key}
+	self.up_p_key_lb.label_set(self.up_p_key)
+	self.down_p_key_lb.label_set(self.down_p_key)
+	self.right_p_key_lb.label_set(self.right_p_key)
+	self.left_p_key_lb.label_set(self.left_p_key)
+	self.select_key_lb.label_set(self.select_key)
+	self.start_key_lb.label_set(self.start_key)
+	self.triangle_key_lb.label_set(self.triangle_key)
+	self.square_key_lb.label_set(self.square_key)
+	self.circle_key_lb.label_set(self.circle_key)
+	self.cross_key_lb.label_set(self.cross_key)
+	self.menu_key_lb.label_set(self.menu_key)
+	self.l1_key_lb.label_set(self.l1_key)
+	self.l2_key_lb.label_set(self.l2_key)
+	self.r1_key_lb.label_set(self.r1_key)
+	self.r2_key_lb.label_set(self.r2_key)
+	
+	self.labels = {"Up":self.up_p_key_lb,
+		"Down":self.down_p_key_lb,
+		"Right":self.right_p_key_lb,
+		"Left":self.left_p_key_lb,
+		"Select":self.select_key_lb,
+		"Start":self.start_key_lb,
+		"Triangle":self.triangle_key_lb,
+		"Square":self.square_key_lb,
+		"Circle":self.circle_key_lb,
+		"Cross":self.cross_key_lb,
+		"Menu":self.menu_key_lb,
+		"L1":self.l1_key_lb,
+		"L2":self.l2_key_lb,
+		"R1":self.r1_key_lb,
+		"R2":self.r2_key_lb}
+
+	self.items = {"Up":self.up_p_key,
+		"Down":self.down_p_key,
+		"Right":self.right_p_key,
+		"Left":self.left_p_key,
+		"Select":self.select_key,
+		"Start":self.start_key,
+		"Triangle":self.triangle_key,
+		"Square":self.square_key,
+		"Circle":self.circle_key,
+		"Cross":self.cross_key,
+		"Menu":self.menu_key,
+		"L1":self.l1_key,
+		"L2":self.l2_key,
+		"R1":self.r1_key,
+		"R2":self.r2_key,}
 
     def list_item_cb(self,obj, event, data):
 	self.obj = obj
 	label = obj.label_get()
 	label_obj = self.labels[label]
 	current_conf = self.items[label]
-	self.main.current_conf_screen = "games"
+	self.main.current_conf_screen = "ps3_control"
 	self.main.current_source = label_obj
 	self.main.current_label = label
 	self.main.groups["conf_keys"].part_text_set("value","  "+current_conf + "  ")
@@ -396,7 +367,7 @@ class games_conf(edje_group):
 	if source == "back":
 
 		self.main.bluemaemo_conf.save_options()
-		self.main.transition_to("games")
+		self.main.transition_to("ps3_control")
 
 	elif source == "task_switcher":
 
@@ -404,7 +375,7 @@ class games_conf(edje_group):
 	
 	else:
 
-		self.main.current_conf_screen = "games"
+		self.main.current_conf_screen = "ps3_control"
 		self.main.current_source = source
 		self.main.groups["conf_keys"].part_text_set("value","  "+self.key_value + "  ")
 		self.main.transition_to("conf_keys")	

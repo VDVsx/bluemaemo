@@ -360,7 +360,36 @@ parts {
 	ACTIVATE("X");
 	ACTIVATE("Y");
 	ACTIVATE("Z");
-	ACTIVATE("one");
-	ACTIVATE("two");
+	//ACTIVATE("one");
+	//ACTIVATE("two");
+
+   program {                                                           
+        name: "activate_accelerometer";                                     
+        signal: "mouse,down,1";                                         
+        source: "one";                                       	
+        action: STATE_SET "clicked" 0.0;                                
+        target: "one";                                              
+    }                                                                   
+    program {                                                           
+        name: "deactivate_accelerometer";                                   
+        signal: "deactivate_accelerometer";                                           
+        action: STATE_SET "default" 0.0;                                
+        target: "one";                                              
+    }     
+
+    program {                                                           
+        name: "activate_air_mouse";                                     
+        signal: "mouse,down,1";                                         
+        source: "two";                                       	
+        action: STATE_SET "clicked" 0.0;                                
+        target: "two";                                              
+    }                                                                   
+    program {                                                           
+        name: "deactivate_air_mouse";                                   
+        signal: "deactivate_air_mouse";                                           
+        action: STATE_SET "default" 0.0;                                
+        target: "two";                                              
+    }     
+
     	TRANSITION();
     }
