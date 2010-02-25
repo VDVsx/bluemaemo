@@ -46,4 +46,11 @@ case "$1" in
         ;;
 esac
 
+cp /opt/bluemaemo/__init__.py /usr/lib/python2.5/site-packages/elementary/ 
+rm /opt/bluemaemo/__init__.py
+
+ln -s /usr/lib/libelementary-ver-pre-svn-04.so.0 /usr/lib/libelementary-ver-pre-svn-02.so.0
+
+echo "Elementary bindings updated"
+
 exit 0

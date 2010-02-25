@@ -70,7 +70,7 @@ WM_CLASS = "bluemaemo"
 
 elementary.init()
 
-elementary_paths = "/home/valerio/bluemaemo/trunk/test/elementary_theme.edj  /root/test/elementary_theme.edj".split()
+elementary_paths = "/opt/bluemaemo/themes/elementary_theme.edj /home/valerio/bluemaemo/trunk/test/elementary_theme.edj  /root/test/elementary_theme.edj".split()
 
 for i in elementary_paths:
     if os.path.exists( i ):

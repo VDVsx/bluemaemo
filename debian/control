@@ -1,5 +1,5 @@
 Source: bluemaemo
-Section: user/multimedia
+Section: user/system
 Priority: extra
 Maintainer: Valerio Valerio <vdv100@gmail.com>
 Build-Depends: debhelper (>= 5), libbluetooth3-dev
@@ -8,11 +8,13 @@ Standards-Version: 3.7.2
 Package: bluemaemo
 Architecture: armel
 Replaces: bluemaemo
-Depends: libbluetooth3, efl-core, python2.5-edbus, python2.5-efl-core, python2.5-ecore, python2.5-evas, python2.5-edje, python-configobj
+Depends: libbluetooth3, efl-core, python2.5-edbus, python2.5-efl-core, python2.5-ecore, python2.5-evas, python2.5-edje, python-configobj, python2.5-elementary
 Description: bluetooth HID mouse & keyboard
  Turns your internet tablet into a mixed Bluetooth keyboard-and-mouse device through the HID Bluetooth profile.
  .
  Home page: http://www.valeriovalerio.org/bluemaemo
+Xsbc-Bugtracker: https://bugs.maemo.org/enter_bug.cgi?product=BlueMaemo
+XB-Maemo-Display-Name: BlueMaemo
 XB-Maemo-Icon-26:
  iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAKTWlDQ1BQaG90
  b3Nob3AgSUNDIHByb2ZpbGUAAHjanVN3WJP3Fj7f92UPVkLY8LGXbIEAIiOs

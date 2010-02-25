@@ -33,7 +33,7 @@ import ecore.evas
 import os
 
 
-edjepaths = "bluemaemo.edj themes/bluemaemo.edj /usr/share/bluemaemo/themes/bluemaemo.edj".split()
+edjepaths = "/opt/bluemaemo/themes/bluemaemo.edj bluemaemo.edj themes/bluemaemo.edj /usr/share/bluemaemo/themes/bluemaemo.edj".split()
 
 for i in edjepaths:
     if os.path.exists( i ):

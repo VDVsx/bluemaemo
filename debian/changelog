@@ -1,3 +1,26 @@
+bluemaemo (0.3-10) unstable; urgency=low
+
+  * Accelerometer test code
+  * Fix bug 7534 - Can not save settings on BlueMaemo Media controler
+  * Fix bug 7501 - PS3 Name/address doesn't appear in the "connected to" screen
+  * Fix bug 7510 - Wrong behavior when pairing a device with a apostrophe (') in the name
+  * Remove reconnect confirmation
+  * PS3 controller UI
+
+ -- Valerio Valerio <vdv100@gmail.com>  Sun, 10 Jan 2010 01:03:29 +0000
+
+bluemaemo (0.3-9) unstable; urgency=low
+
+  * Fremantle test version - fix pyElementary sym link
+
+ -- Valerio Valerio <vdv100@gmail.com>  Fri, 20 Nov 2009 23:10:20 +0000
+
+bluemaemo (0.3-8) unstable; urgency=low
+
+  * Fremantle test version - new connection methods
+
+ -- Valerio Valerio <vdv100@gmail.com>  Wed, 18 Nov 2009 22:54:34 +0000
+
 bluemaemo (0.3-7) unstable; urgency=low
 
   * Fremantle test version - fixed d-bus call

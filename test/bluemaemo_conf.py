@@ -39,6 +39,7 @@ class bluemaemo_conf:
 			if version != "0.3.10":
 				os.system("cp /root/test/bluemaemo.cfg /etc/bluemaemo/")
 				print "new config file moved"
+				self.config.readfp(open(defaultsfile))
 				#os.system("cp /usr/share/bluemaemo/data/bluemaemo.cfg /etc/bluemaemo/")
 
 		except:

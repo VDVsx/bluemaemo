@@ -65,10 +65,6 @@ class Read_accelerometer:
 		else:
 			self.main.connection.release_keyboard_event()
 		self.send_event = False
-		key = self.main.a_key
-		modif, val = key_dec(self,key)
-
-		self.main.connection.send_keyboard_event(modif,val)
 		if self.profile.key_pressed:
 			self.main.connection.send_keyboard_event(self.profile.current_modif,self.profile.current_key)
 		

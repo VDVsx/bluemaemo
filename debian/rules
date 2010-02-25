@@ -58,50 +58,38 @@ install: build
 	# Add here commands to install the package into debian/bluemaemo.
 	#$(MAKE) DESTDIR=$(CURDIR)/debian/bluemaemo install
 	
-	mkdir -p $(CURDIR)/debian/bluemaemo/etc/sudoers.d/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/bin/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/applications/hildon/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/scalable/hildon/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/48x48/hildon/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/26x26/hildon/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/themes/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/images/
-	mkdir -p $(CURDIR)/debian/bluemaemo/usr/lib/python2.5/site-packages/
-	
-	#copy sudoers ruls
+	#copy sudoers rules
 	cp bluemaemo.sudoers  $(CURDIR)/debian/bluemaemo/etc/sudoers.d/
 	
 	#copy data files
-	cp service_record.xml  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
-	cp bluemaemo.cfg  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/data/
+	cp service_record.xml  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/data/
+	cp bluemaemo.cfg  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/data/
 
 	#copy theme files
 	
-	cp bluemaemo.edj  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/themes/
-
-	#copy image files
+	cp bluemaemo.edj  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/themes/
+	cp elementary_theme.edj $(CURDIR)/debian/bluemaemo/opt/bluemaemo/themes/
 	
-	cp connection_icon.png $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/images/
-
 	#copy libs files
 
-	cp *.py  $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
-	cp bluemaemo $(CURDIR)/debian/bluemaemo/usr/share/bluemaemo/
+	cp *.py  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/
+	cp bluemaemo $(CURDIR)/debian/bluemaemo/opt/bluemaemo/
 	cp hidserver.so  $(CURDIR)/debian/bluemaemo/usr/lib/python2.5/site-packages/
-
 
 	#copy desktop files
 
 	cp bluemaemo.desktop  $(CURDIR)/debian/bluemaemo/usr/share/applications/hildon/
 	cp icons/64/bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/scalable/hildon/
 	cp icons/48/bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/48x48/hildon/
-	cp icons/26/bluemaemo.png $(CURDIR)/debian/bluemaemo/usr/share/icons/hicolor/26x26/hildon/
 	
 	#copy bash file
 
 	cp scripts/bluemaemo $(CURDIR)/debian/bluemaemo/usr/bin/
+
+	#copy copyright files (changeme)
+	cp changelog  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/
+	cp copyright  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/
+	cp CREDITS  $(CURDIR)/debian/bluemaemo/opt/bluemaemo/
 
 
 # Build architecture-independent files here.

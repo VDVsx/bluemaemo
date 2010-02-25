@@ -47,7 +47,7 @@ class Connect:
 		
 		# Read record file
 		file_read = open('service_record.xml','r')
-		#file_read = open('/usr/share/bluemaemo/data/service_record.xml','r')
+		file_read = open('/opt/bluemaemo/data/service_record.xml','r')
 		xml = file_read.read()
 
 		self.bus = dbus.SystemBus()
